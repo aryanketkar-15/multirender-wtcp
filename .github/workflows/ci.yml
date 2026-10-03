@@ -107,13 +107,18 @@ jobs:
       DB_TEST_NAME: mra_test
       DB_USER: root
       DB_PASS: root
+      # Throwaway, test-only values. They protect nothing: the CI database is created and destroyed per run.
+      APP_ENCRYPTION_KEY: 00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
+      BLIND_INDEX_PEPPER: ffeeddccbbaa99887766554433221100ffeeddccbbaa99887766554433221100
+      MRA_SERVER_SK: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      MRA_KEY_ID: ci-k1
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
       - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: pdo_mysql, sodium, mbstring
+          extensions: pdo_mysql, sodium, mbstring, openssl
           coverage: pcov
           tools: composer
       - name: Cache Composer

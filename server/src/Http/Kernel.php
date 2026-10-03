@@ -6,6 +6,7 @@ namespace Mra\Http;
 
 use Mra\App;
 use Mra\Controller\AdminController;
+use Mra\Controller\AttestationController;
 use Mra\Controller\AuthController;
 use Mra\Controller\BundleController;
 use Mra\Controller\KeyController;
@@ -92,12 +93,7 @@ final class Kernel
         $this->router->add('GET', '/api/admin/consent', [$adminController, 'show'], [$session, $auth, $admin]);
         $this->router->add('POST', '/api/admin/consent', [$adminController, 'update'], [$session, $csrf, $auth, $admin]);
 
-        // Attestation endpoint: guarded now so no later milestone can forget the guard. Implemented in Phase 4.
-        $this->router->add(
-            'POST',
-            '/api/attestation',
-            static fn (Request $r): Response => Response::error(501, 'not_implemented', 'Not implemented yet.'),
-            [$session, $csrf, $auth, $verified]
-        );
+        $attestation = new AttestationController($app->attestationValidator, $app->security, $app->audit);
+        $this->router->add('POST', '/api/attest', [$attestation, 'submit'], [$session, $csrf, $auth, $verified]);
     }
 }
