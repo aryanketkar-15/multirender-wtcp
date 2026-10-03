@@ -32,8 +32,14 @@ final class SessionRepository extends BaseRepository
             $row['user_id'] === null ? null : (int) $row['user_id'],
             (string) $row['csrf_token'],
             new DateTimeImmutable((string) $row['created_at'], $utc),
-            new DateTimeImmutable((string) $row['last_seen_at'], $utc)
+            new DateTimeImmutable((string) $row['last_seen_at'], $utc),
+            $row['client_pubkey_fpr'] === null ? null : (string) $row['client_pubkey_fpr']
         );
+    }
+
+    public function setClientKey(string $idHash, string $fingerprint): void
+    {
+        $this->run('UPDATE sessions SET client_pubkey_fpr = ? WHERE id = ?', [$fingerprint, $idHash]);
     }
 
     public function touch(string $idHash, DateTimeImmutable $now): void

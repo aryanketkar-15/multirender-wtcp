@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Mra\Http;
 
 use Mra\App;
+use Mra\Controller\AdminController;
 use Mra\Controller\AuthController;
+use Mra\Controller\BundleController;
 use Mra\Controller\KeyController;
 use Mra\Controller\OtpController;
 use Mra\Controller\PackController;
 use Mra\Controller\PasswordController;
 use Mra\Controller\RegistrationController;
+use Mra\Middleware\AdminMiddleware;
 use Mra\Middleware\AuthMiddleware;
 use Mra\Middleware\AuthorizationMiddleware;
 use Mra\Middleware\CsrfMiddleware;
@@ -71,6 +74,23 @@ final class Kernel
         $packs = new PackController();
         $this->router->add('GET', '/api/pack/{id}', [$packs, 'show'], [$session, $auth, $owns]);
         $this->router->add('GET', '/api/pack/{id}/download', [$packs, 'show'], [$session, $auth, $owns]);
+
+        $bundle = new BundleController(
+            $app->consentSettings,
+            $app->consentBundles,
+            $app->bundles,
+            $app->nonces,
+            $app->commitments,
+            $app->sessions,
+            $app->audit
+        );
+        $this->router->add('POST', '/api/client-key', [$bundle, 'registerKey'], [$session, $csrf, $auth, $verified]);
+        $this->router->add('GET', '/api/bundle', [$bundle, 'show'], [$session, $auth, $verified]);
+
+        $admin = new AdminMiddleware($app->security);
+        $adminController = new AdminController($app->consentSettings, $app->audit);
+        $this->router->add('GET', '/api/admin/consent', [$adminController, 'show'], [$session, $auth, $admin]);
+        $this->router->add('POST', '/api/admin/consent', [$adminController, 'update'], [$session, $csrf, $auth, $admin]);
 
         // Attestation endpoint: guarded now so no later milestone can forget the guard. Implemented in Phase 4.
         $this->router->add(

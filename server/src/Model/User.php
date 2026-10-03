@@ -12,7 +12,8 @@ final class User
         public readonly string $name,
         public readonly string $passwordHash,
         public readonly ?string $verifiedAt,
-        public readonly string $createdAt
+        public readonly string $createdAt,
+        public readonly bool $isAdmin = false
     ) {
     }
 
