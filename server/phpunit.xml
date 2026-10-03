@@ -14,10 +14,4 @@
   <source>
     <include><directory>src</directory></include>
   </source>
-  <coverage>
-    <report>
-      <text outputFile="php://stdout" showUncoveredFiles="false"/>
-      <clover outputFile="coverage/clover.xml"/>
-    </report>
-  </coverage>
 </phpunit>
