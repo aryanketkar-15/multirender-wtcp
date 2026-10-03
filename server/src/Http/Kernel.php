@@ -7,8 +7,11 @@ namespace Mra\Http;
 use Mra\App;
 use Mra\Controller\AuthController;
 use Mra\Controller\OtpController;
+use Mra\Controller\PackController;
+use Mra\Controller\PasswordController;
 use Mra\Controller\RegistrationController;
 use Mra\Middleware\AuthMiddleware;
+use Mra\Middleware\AuthorizationMiddleware;
 use Mra\Middleware\CsrfMiddleware;
 use Mra\Middleware\SessionMiddleware;
 use Mra\Middleware\VerifiedMiddleware;
@@ -55,6 +58,16 @@ final class Kernel
         $this->router->add('GET', '/api/session', [$authController, 'session'], [$session]);
         $this->router->add('POST', '/api/login', [$authController, 'login'], [$session, $csrf]);
         $this->router->add('POST', '/api/logout', [$authController, 'logout'], [$session, $csrf, $auth]);
+
+        $password = new PasswordController($app->passwordReset);
+        $this->router->add('POST', '/api/password/forgot', [$password, 'forgot']);
+        $this->router->add('POST', '/api/password/reset', [$password, 'reset']);
+
+        // Evidence packs: every route sits behind ownership authorization (stubs until a later phase).
+        $owns = new AuthorizationMiddleware($app->security, fn (string $id): ?int => $app->packs->ownerOf($id));
+        $packs = new PackController();
+        $this->router->add('GET', '/api/pack/{id}', [$packs, 'show'], [$session, $auth, $owns]);
+        $this->router->add('GET', '/api/pack/{id}/download', [$packs, 'show'], [$session, $auth, $owns]);
 
         // Attestation endpoint: guarded now so no later milestone can forget the guard. Implemented in Phase 4.
         $this->router->add(
