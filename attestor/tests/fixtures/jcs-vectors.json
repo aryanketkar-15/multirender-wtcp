@@ -1,0 +1,77 @@
+[
+  {
+    "name": "member order",
+    "json": "{\"b\":1,\"a\":2,\"c\":{\"z\":1,\"y\":2}}",
+    "canonical": "{\"a\":2,\"b\":1,\"c\":{\"y\":2,\"z\":1}}"
+  },
+  {
+    "name": "array order is preserved",
+    "json": "[3,1,2,{\"b\":0,\"a\":0}]",
+    "canonical": "[3,1,2,{\"a\":0,\"b\":0}]"
+  },
+  {
+    "name": "empty containers",
+    "json": "{\"a\":[],\"b\":{}}",
+    "canonical": "{\"a\":[],\"b\":{}}"
+  },
+  {
+    "name": "literals",
+    "json": "[null,true,false]",
+    "canonical": "[null,true,false]"
+  },
+  {
+    "name": "plain numbers",
+    "json": "[1,1.0,1e2,0.1,1E-7,0.000001,-12,0.5]",
+    "canonical": "[1,1,100,0.1,1e-7,0.000001,-12,0.5]"
+  },
+  {
+    "name": "negative zero",
+    "json": "[-0,0,0.0]",
+    "canonical": "[0,0,0]"
+  },
+  {
+    "name": "rfc 8785 numbers",
+    "json": "[333333333.33333329,1E30,4.50,2e-3,0.000000000000000000000000001]",
+    "canonical": "[333333333.3333333,1e+30,4.5,0.002,1e-27]"
+  },
+  {
+    "name": "large and small doubles",
+    "json": "[9007199254740992,-9007199254740992,295147905179352830000,5e-324,1.7976931348623157e308]",
+    "canonical": "[9007199254740992,-9007199254740992,295147905179352830000,5e-324,1.7976931348623157e+308]"
+  },
+  {
+    "name": "exponent boundaries",
+    "json": "[1e21,1e-6,1e-7,999999999999999700000,1e23,9.999999999999997e22]",
+    "canonical": "[1e+21,0.000001,1e-7,999999999999999700000,1e+23,9.999999999999997e+22]"
+  },
+  {
+    "name": "string escapes",
+    "json": "\"\\u0000\\u001f\\b\\f\\n\\r\\t\\\"\\\\/\"",
+    "canonical": "\"\\u0000\\u001f\\b\\f\\n\\r\\t\\\"\\\\/\""
+  },
+  {
+    "name": "non-ascii is emitted raw",
+    "json": "\"\\u00e9\\u4e16\\ud83d\\ude00\"",
+    "canonical": "\"\u00e9\u4e16\ud83d\ude00\""
+  },
+  {
+    "name": "sorting by utf-16 code units",
+    "json": "{\"\\u20ac\":1,\"\\r\":2,\"\\ufb33\":3,\"1\":4,\"\\ud83d\\ude00\":5,\"\\u0080\":6,\"\\u00f6\":7}",
+    "canonical": "{\"\\r\":2,\"1\":4,\"\u0080\":6,\"\u00f6\":7,\"\u20ac\":1,\"\ud83d\ude00\":5,\"\ufb33\":3}"
+  },
+  {
+    "name": "numeric-looking keys sort as strings",
+    "json": "{\"10\":1,\"9\":2,\"2\":3,\"1\":4}",
+    "canonical": "{\"1\":4,\"10\":1,\"2\":3,\"9\":2}"
+  },
+  {
+    "name": "rfc 8785 section 3.2.4",
+    "json": "{\"numbers\":[333333333.33333329,1E30,4.50,2e-3,0.000000000000000000000000001],\"string\":\"\\u20ac$\\u000F\\u000aA'\\u0042\\u0022\\u005c\\\\\\\"\\/\",\"literals\":[null,true,false]}",
+    "canonical": "{\"literals\":[null,true,false],\"numbers\":[333333333.3333333,1e+30,4.5,0.002,1e-27],\"string\":\"\u20ac$\\u000f\\nA'B\\\"\\\\\\\\\\\"/\"}"
+  },
+  {
+    "name": "a semantic-representation shaped object",
+    "json": "{\"v\":\"srd/1.0\",\"policy\":\"consent/v1\",\"nodes\":[{\"role\":\"button\",\"i\":0,\"name\":\"reject\",\"visible\":true,\"style\":{\"weight\":\"normal\",\"size\":\"base\"}}]}",
+    "canonical": "{\"nodes\":[{\"i\":0,\"name\":\"reject\",\"role\":\"button\",\"style\":{\"size\":\"base\",\"weight\":\"normal\"},\"visible\":true}],\"policy\":\"consent/v1\",\"v\":\"srd/1.0\"}"
+  }
+]

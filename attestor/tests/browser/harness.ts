@@ -1,4 +1,3 @@
-import { buildSync } from 'esbuild';
 import { existsSync, readFileSync } from 'fs';
 import { join } from 'path';
 import { chromium } from 'playwright';
@@ -13,16 +12,13 @@ export const describeBrowser = browserAvailable ? describe : describe.skip;
 
 let bundle: string | null = null;
 
-/** The attestor exactly as shipped, built into a classic script exposing `window.MRAttestor`. */
+/** The attestor as shipped (unminified for readable failures): a classic script exposing `window.MRAttestor`. */
 export function attestorBundle(): string {
-  bundle ??= buildSync({
-    entryPoints: [join(__dirname, '../../src/index.ts')],
-    bundle: true,
-    format: 'iife',
-    globalName: 'MRAttestor',
-    target: 'es2020',
-    write: false,
-  }).outputFiles[0].text;
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { buildAttestor } = require('../../scripts/build-lib.cjs') as {
+    buildAttestor: (o: { minify: boolean }) => { code: string };
+  };
+  bundle ??= buildAttestor({ minify: false }).code;
   return bundle;
 }
 
@@ -61,7 +57,11 @@ export class Lab {
   ): Promise<{ page: Page; close: () => Promise<void> }> {
     const ctx = await this.context(opts);
     const page = await ctx.newPage();
-    await page.setContent(html);
+    // Served from http://localhost so the page is a secure context: WebCrypto and workers need one.
+    await page.route('http://localhost/**', (route) =>
+      route.fulfill({ contentType: 'text/html', body: html }),
+    );
+    await page.goto('http://localhost/fixture.html');
     await page.addScriptTag({ content: attestorBundle() });
     return { page, close: () => ctx.close() };
   }
