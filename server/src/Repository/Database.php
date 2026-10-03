@@ -47,6 +47,7 @@ final class Database
                 // and injection protection is weaker than it appears.
                 PDO::ATTR_EMULATE_PREPARES => false,
                 PDO::ATTR_STRINGIFY_FETCHES => false,
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET time_zone = '+00:00', sql_mode = 'STRICT_ALL_TABLES'",
             ]);
         } catch (PDOException $e) {
             // Deliberately not chained: the driver message can echo the user name and host.
