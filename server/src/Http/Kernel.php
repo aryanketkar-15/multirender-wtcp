@@ -6,6 +6,7 @@ namespace Mra\Http;
 
 use Mra\App;
 use Mra\Controller\AuthController;
+use Mra\Controller\KeyController;
 use Mra\Controller\OtpController;
 use Mra\Controller\PackController;
 use Mra\Controller\PasswordController;
@@ -58,6 +59,8 @@ final class Kernel
         $this->router->add('GET', '/api/session', [$authController, 'session'], [$session]);
         $this->router->add('POST', '/api/login', [$authController, 'login'], [$session, $csrf]);
         $this->router->add('POST', '/api/logout', [$authController, 'logout'], [$session, $csrf, $auth]);
+
+        $this->router->add('GET', '/.well-known/mra-key', [new KeyController($app->keys), 'show']);
 
         $password = new PasswordController($app->passwordReset);
         $this->router->add('POST', '/api/password/forgot', [$password, 'forgot']);

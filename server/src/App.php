@@ -9,12 +9,15 @@ use Mra\Config\Env;
 use Mra\Crypto\BlindIndex;
 use Mra\Crypto\CryptoFactory;
 use Mra\Crypto\FieldEncryptor;
+use Mra\Crypto\KeyStore;
+use Mra\Crypto\Signer;
 use Mra\Log\AuditLogger;
 use Mra\Log\SecurityLogger;
 use Mra\Mail\DeferredMailer;
 use Mra\Mail\MailerInterface;
 use Mra\Mail\OutboxMailer;
 use Mra\Mail\SmtpMailer;
+use Mra\Repository\CommitmentRepository;
 use Mra\Repository\Database;
 use Mra\Repository\OtpRepository;
 use Mra\Repository\PackRepository;
@@ -22,6 +25,7 @@ use Mra\Repository\PasswordResetRepository;
 use Mra\Repository\SessionRepository;
 use Mra\Repository\UserRepository;
 use Mra\Service\AuthService;
+use Mra\Service\CommitmentService;
 use Mra\Service\OtpService;
 use Mra\Service\PasswordResetService;
 use Mra\Service\RegistrationService;
@@ -44,6 +48,7 @@ final class App
     public readonly SessionService $sessions;
     public readonly AuthService $auth;
     public readonly PackRepository $packs;
+    public readonly CommitmentService $commitments;
     public readonly PasswordResetService $passwordReset;
 
     public function __construct(
@@ -51,7 +56,8 @@ final class App
         public readonly FieldEncryptor $cipher,
         public readonly BlindIndex $index,
         public readonly Clock $clock,
-        public readonly MailerInterface $mailer
+        public readonly MailerInterface $mailer,
+        public readonly KeyStore $keys
     ) {
         $this->users = new UserRepository($pdo, $cipher, $index);
         $this->audit = new AuditLogger($pdo, $cipher);
@@ -78,6 +84,7 @@ final class App
             $clock
         );
         $this->packs = new PackRepository($pdo);
+        $this->commitments = new CommitmentService(new Signer($keys), new CommitmentRepository($pdo), $clock);
         $this->passwordReset = new PasswordResetService(
             $this->users,
             new PasswordResetRepository($pdo),
@@ -99,7 +106,8 @@ final class App
             $crypto['cipher'],
             $crypto['index'],
             new SystemClock(),
-            self::mailerFromEnv()
+            self::mailerFromEnv(),
+            KeyStore::fromEnv()
         );
     }
 
