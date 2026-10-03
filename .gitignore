@@ -1,0 +1,30 @@
+# secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+server/config/local.php
+
+# dependencies and build output
+node_modules/
+vendor/
+client/dist/
+attestor/dist/
+composer.phar
+
+# research artefacts
+research/corpus/*
+!research/corpus/.gitkeep
+research/results/*.raw.json
+
+# tooling output
+coverage/
+test-results/
+playwright-report/
+.phpunit.cache/
+.phpunit.result.cache
+*.log
+.idea/
+.vscode/
+.DS_Store
