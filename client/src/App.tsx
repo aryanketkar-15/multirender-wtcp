@@ -1,6 +1,9 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import { RequireAuth } from './components/RequireAuth';
 import { AuthProvider, useAuth } from './lib/auth';
+import { AdminConsent } from './pages/AdminConsent';
+import { Consent } from './pages/Consent';
 import { ForgotPassword } from './pages/ForgotPassword';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -17,7 +20,17 @@ function Home() {
           Evidence of what a consent screen showed, committed by the server before you act and
           attested by your browser when you do.
         </p>
-        {user ? <p>Signed in as {user.email}.</p> : null}
+        {user ? (
+          <p>
+            Signed in as {user.email}. <Link to="/consent">Open the consent page</Link>
+            {user.admin ? (
+              <>
+                {' · '}
+                <Link to="/admin/consent">Edit consent text</Link>
+              </>
+            ) : null}
+          </p>
+        ) : null}
       </div>
     </Layout>
   );
@@ -29,6 +42,22 @@ export function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route
+            path="/consent"
+            element={
+              <RequireAuth>
+                <Consent />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/admin/consent"
+            element={
+              <RequireAuth>
+                <AdminConsent />
+              </RequireAuth>
+            }
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/verify" element={<VerifyEmail />} />
           <Route path="/login" element={<Login />} />

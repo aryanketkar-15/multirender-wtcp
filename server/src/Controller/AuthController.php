@@ -80,9 +80,15 @@ final class AuthController
         return Response::error(401, 'invalid_credentials', 'Email or password is incorrect.');
     }
 
-    /** @return array{id:int,email:string,name:string,verified:bool} */
+    /** @return array{id:int,email:string,name:string,verified:bool,admin:bool} */
     private static function present(User $user): array
     {
-        return ['id' => $user->id, 'email' => $user->email, 'name' => $user->name, 'verified' => $user->isVerified()];
+        return [
+            'id' => $user->id,
+            'email' => $user->email,
+            'name' => $user->name,
+            'verified' => $user->isVerified(),
+            'admin' => $user->isAdmin,
+        ];
     }
 }
