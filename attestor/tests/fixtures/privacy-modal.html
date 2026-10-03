@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    <style>
+      body {
+        margin: 0;
+        font:
+          16px/1.4 system-ui,
+          sans-serif;
+        color: #14202b;
+        background: #fff;
+      }
+      #consent-region {
+        max-width: 32rem;
+        padding: 16px;
+      }
+      button {
+        font: inherit;
+        min-height: 44px;
+        padding: 0 20px;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="consent-region">
+      <div class="wrapper">
+        <div class="icon" aria-hidden="true">LOCK</div>
+        <section>
+          <div>Your privacy matters to us.</div>
+          <div>We never sell personal data.<span aria-hidden="true"> decorative</span></div>
+        </section>
+        <div role="presentation"><button id="btn-agree" type="button">OK</button></div>
+      </div>
+    </div>
+  </body>
+</html>
