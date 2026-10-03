@@ -8,6 +8,7 @@ use Mra\App;
 use Mra\Config\DatabaseConfig;
 use Mra\Crypto\BlindIndex;
 use Mra\Crypto\FieldCipher;
+use Mra\Crypto\KeyStore;
 use Mra\Http\Kernel;
 use Mra\Http\Request;
 use Mra\Http\Response;
@@ -52,7 +53,8 @@ abstract class TestCase extends BaseTestCase
             new FieldCipher(str_repeat("\x61", 32)),
             new BlindIndex(str_repeat("\x62", 32)),
             $this->clock,
-            $this->mailer
+            $this->mailer,
+            new KeyStore('test-k1', str_repeat("\x07", 32))
         );
     }
 
