@@ -2,6 +2,12 @@
 <ruleset name="mra">
   <description>PSR-12 for the MRA server</description>
   <rule ref="PSR12"/>
+  <rule ref="Generic.Files.LineLength">
+    <properties>
+      <property name="lineLimit" value="140"/>
+      <property name="absoluteLineLimit" value="0"/>
+    </properties>
+  </rule>
   <file>src</file>
   <file>bin</file>
   <file>public</file>
