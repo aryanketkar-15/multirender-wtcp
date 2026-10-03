@@ -85,6 +85,11 @@ function toNode(n: RawNode, base: number, prominence: StyleBuckets['prominence']
 
   if (!STATE_ROLES.includes(n.role)) {
     const style = measureStyle(n.el, base);
+    // A disabled control's text colour is the browser's default greyed-out styling, which differs
+    // between engines (found by the cross-browser comparison: Chromium greys it, Firefox does not).
+    // That is not author intent, and the disabled state itself is already in the digest, so the
+    // contrast of a disabled control is not measured.
+    if (n.disabled === true) delete style.contrast;
     if (n.role === 'button' && prominence !== undefined) style.prominence = prominence;
     out.style = style;
   }

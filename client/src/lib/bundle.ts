@@ -14,6 +14,8 @@ export interface Commitment {
   [key: string]: unknown;
 }
 
+import type { AttestorInfo } from './loadAttestor';
+
 export interface BundlePayload {
   bundle: BundleData;
   bundle_hash: string;
@@ -21,6 +23,8 @@ export interface BundlePayload {
   commitment_hash: string;
   signature: string;
   nonce: string;
+  /** The attestation module to load, or null when none is registered. */
+  attestor?: AttestorInfo | null;
 }
 
 export interface BundleData {

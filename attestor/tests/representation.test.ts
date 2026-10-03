@@ -104,6 +104,16 @@ describeBrowser('semantic representation (srd/1.0)', () => {
     expect(ticked.nodes.find((n) => n.role === 'checkbox')?.checked).toBe(true);
   });
 
+  it('does not measure contrast on a disabled control: engines grey it differently', async () => {
+    const rep = await represent('loan-terms.html');
+    const decline = rep.nodes.find((n) => n.role === 'button' && n.name === 'decline');
+    expect(decline?.disabled).toBe(true);
+    expect(decline?.style).toBeDefined();
+    expect(decline?.style).not.toHaveProperty('contrast');
+    const enabled = rep.nodes.find((n) => n.role === 'button' && n.name === 'sign the agreement');
+    expect(enabled?.style?.contrast).toBe('high');
+  });
+
   it('exposes no environment inside the representation', async () => {
     const json = JSON.stringify(await represent('minimal.html'));
     for (const word of ['viewport', 'dpr', 'engine', 'forced_colors']) {

@@ -17,6 +17,7 @@ use Mra\Mail\DeferredMailer;
 use Mra\Mail\MailerInterface;
 use Mra\Mail\OutboxMailer;
 use Mra\Mail\SmtpMailer;
+use Mra\Repository\AttestorRegistry;
 use Mra\Repository\BundleRepository;
 use Mra\Repository\CommitmentRepository;
 use Mra\Repository\ConsentSettingsRepository;
@@ -58,6 +59,7 @@ final class App
     public readonly BundleRepository $bundles;
     public readonly ConsentSettingsRepository $consentSettings;
     public readonly ConsentBundleFactory $consentBundles;
+    public readonly AttestorRegistry $attestors;
     public readonly PasswordResetService $passwordReset;
 
     public function __construct(
@@ -97,11 +99,11 @@ final class App
         $this->nonces = new NonceService($pdo, $clock);
         $this->bundles = new BundleRepository($pdo);
         $this->consentSettings = new ConsentSettingsRepository($pdo);
-        // The Attestor Module does not exist until Phase 3; its hash is a clearly marked placeholder until then.
+        $this->attestors = new AttestorRegistry($pdo);
         $this->consentBundles = new ConsentBundleFactory(
             new BundleBuilder(),
-            Env::get('ATTESTOR_HASH', 'sha256:' . hash('sha256', 'attestor-pending')) ?? '',
-            Env::get('ATTESTOR_VERSION', '0.0.0-pending') ?? '0.0.0-pending'
+            $this->attestors,
+            Env::get('ATTESTOR_BASE_URL', '') ?? ''
         );
         $this->passwordReset = new PasswordResetService(
             $this->users,
