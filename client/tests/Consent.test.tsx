@@ -62,7 +62,11 @@ async function setup(payload?: BundlePayload, bundleStatus = 200, prepare?: () =
   prepare?.();
   const post = jest
     .spyOn(apiModule.api, 'post')
-    .mockResolvedValue({ ok: true, status: 200, data: {} });
+    .mockImplementation(async (path: string) =>
+      path === '/api/attest'
+        ? { ok: true, status: 201, data: { attestation_hash: 'sha256:' + 'e'.repeat(64) } }
+        : { ok: true, status: 200, data: {} },
+    );
   const body = payload ?? (await goodPayload());
   jest.spyOn(apiModule.api, 'get').mockResolvedValue({
     ok: bundleStatus === 200,
@@ -131,16 +135,16 @@ describe('Consent page', () => {
     await user.click(await screen.findByRole('checkbox'));
     const accept = screen.getByRole('button', { name: 'Accept' });
     await user.dblClick(accept);
-    const status = await screen.findByText(/was captured on this device/);
+    const status = await screen.findByText(/was recorded as signed evidence/);
     expect(status).toHaveTextContent('accept');
-    expect(screen.getAllByText(/was captured on this device/)).toHaveLength(1);
+    expect(screen.getAllByText(/was recorded as signed evidence/)).toHaveLength(1);
     expect(accept).toBeDisabled();
   });
 
   it('captures a rejection without needing the box ticked', async () => {
     const { user } = await setup();
     await user.click(await screen.findByRole('button', { name: 'Reject' }));
-    expect(await screen.findByText(/was captured on this device/)).toHaveTextContent('reject');
+    expect(await screen.findByText(/was recorded as signed evidence/)).toHaveTextContent('reject');
     expect(screen.getByRole('button', { name: 'Reject' })).toBeDisabled();
   });
 
@@ -156,7 +160,7 @@ describe('Consent page', () => {
     await user.tab();
     expect(document.activeElement).toHaveAttribute('id', 'btn-agree');
     await user.keyboard('{Enter}');
-    expect(await screen.findByText(/was captured on this device/)).toHaveTextContent('accept');
+    expect(await screen.findByText(/was recorded as signed evidence/)).toHaveTextContent('accept');
   });
 
   it('keeps every focusable control reachable in a sensible order', async () => {
