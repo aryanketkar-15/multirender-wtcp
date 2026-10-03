@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true,
+    "outDir": "dist",
+    "declaration": true,
+    "types": ["jest", "node"]
+  },
+  "include": ["src", "tests", "jest.config.ts"]
+}
