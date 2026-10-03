@@ -27,7 +27,7 @@
  * zero-width space/non-joiner/joiner, LRM/RLM, bidi embeddings and overrides (202A-202E),
  * word joiner and invisible operators (2060-2064), bidi isolates (2066-2069), BOM / ZWNBSP.
  */
-// eslint-disable-next-line no-misleading-character-class -- the class is a deliberate list of single code points
+/* eslint-disable no-misleading-character-class -- a deliberate list of single code points */
 const INVISIBLES =
   /[\u00AD\u034F\u061C\u180E\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u2069\uFEFF]/g;
 
