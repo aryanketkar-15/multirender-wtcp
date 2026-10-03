@@ -17,9 +17,12 @@ use Mra\Mail\OutboxMailer;
 use Mra\Mail\SmtpMailer;
 use Mra\Repository\Database;
 use Mra\Repository\OtpRepository;
+use Mra\Repository\SessionRepository;
 use Mra\Repository\UserRepository;
+use Mra\Service\AuthService;
 use Mra\Service\OtpService;
 use Mra\Service\RegistrationService;
+use Mra\Service\SessionService;
 use Mra\Service\ThrottleService;
 use Mra\Support\Clock;
 use Mra\Support\SystemClock;
@@ -35,6 +38,8 @@ final class App
     public readonly OtpRepository $otps;
     public readonly OtpService $otp;
     public readonly RegistrationService $registration;
+    public readonly SessionService $sessions;
+    public readonly AuthService $auth;
 
     public function __construct(
         public readonly PDO $pdo,
@@ -58,6 +63,15 @@ final class App
             $clock
         );
         $this->registration = new RegistrationService($this->users, $this->throttle, $this->audit, $this->security);
+        $this->sessions = new SessionService(new SessionRepository($pdo), $clock);
+        $this->auth = new AuthService(
+            $this->users,
+            $this->sessions,
+            $this->throttle,
+            $this->audit,
+            $this->security,
+            $clock
+        );
     }
 
     public static function fromEnv(): self

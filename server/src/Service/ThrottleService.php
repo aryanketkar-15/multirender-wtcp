@@ -61,6 +61,17 @@ final class ThrottleService extends BaseRepository
         return max(1, $expires->getTimestamp() - $this->clock->now()->getTimestamp());
     }
 
+    /** Time of the most recent in-window event, or null. */
+    public function latest(string $bucket, string $subject, int $windowSeconds): ?\DateTimeImmutable
+    {
+        $since = $this->clock->now()->modify("-{$windowSeconds} seconds");
+        $at = $this->run(
+            'SELECT MAX(created_at) FROM throttle_event WHERE bucket = ? AND subject = ? AND created_at > ?',
+            [$bucket, $this->key($bucket, $subject), SystemClock::db($since)]
+        )->fetchColumn();
+        return ($at === false || $at === null) ? null : new \DateTimeImmutable((string) $at, new \DateTimeZone('UTC'));
+    }
+
     public function clear(string $bucket, string $subject): void
     {
         $this->run('DELETE FROM throttle_event WHERE bucket = ? AND subject = ?', [$bucket, $this->key($bucket, $subject)]);
