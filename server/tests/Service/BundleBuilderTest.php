@@ -158,6 +158,8 @@ final class BundleBuilderTest extends TestCase
             'css import' => [['css' => '@import "https://evil.example/a.css";']],
             'css remote url' => [['css' => 'p{background:url(https://evil.example/a.png)}']],
             'script' => [['markup' => '<script>alert(1)</script>']],
+            'inline handler' => [['markup' => '<img src="data:," onerror="alert(1)">']],
+            'javascript url' => [['markup' => '<a href="javascript:alert(1)">x</a>']],
         ];
     }
 

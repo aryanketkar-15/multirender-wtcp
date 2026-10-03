@@ -7,6 +7,7 @@ export interface User {
   email: string;
   name: string;
   verified: boolean;
+  admin?: boolean;
 }
 
 interface SessionPayload {

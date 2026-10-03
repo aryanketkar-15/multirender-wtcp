@@ -97,6 +97,9 @@ final class BundleBuilder
         if (preg_match('#@import|url\(\s*[\'"]?\s*(?:https?:|//|ftp:)#i', $css) === 1) {
             throw new InvalidArgumentException('CSS references an external resource.');
         }
+        if (preg_match('~<[^>]*\son[a-z]+=|javascript:~i', $markup) === 1) {
+            throw new InvalidArgumentException('Sealed markup must not contain inline event handlers.');
+        }
         if (stripos($markup, '<script') !== false) {
             throw new InvalidArgumentException('Sealed markup must not contain scripts.');
         }

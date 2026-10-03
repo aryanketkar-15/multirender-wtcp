@@ -1,0 +1,40 @@
+{
+  "bundle": {
+    "v": "mra/1.0",
+    "bundle_id": "bnd_fixture_0001",
+    "markup": "<section id=\"consent-region\"><h1>Data sharing</h1><p id=\"disclosure\">We share your usage data with our partners for advertising.</p><label><input id=\"agree\" type=\"checkbox\"/>I agree</label><button id=\"btn-agree\" type=\"button\">Accept</button><button id=\"btn-reject\" type=\"button\">Reject</button></section>",
+    "css": "#consent-region{max-width:32rem}button{padding:8px 16px}",
+    "assets": [
+      {
+        "path": "fonts/inter.woff2",
+        "sha256": "sha256:a446817d40e4dc37c526fb5e30859fe0dd7bb0a7d5b3c0c56f7a0626d0019307"
+      },
+      {
+        "path": "img/logo.svg",
+        "sha256": "sha256:d4dc56669143034f31aa309635d4113d9ad76a02b1739da22c965ed2049be9e6"
+      }
+    ],
+    "fonts": [
+      {
+        "family": "Inter",
+        "sha256": "sha256:cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd"
+      }
+    ],
+    "critical_region": "#consent-region",
+    "region_policy": "consent/v1",
+    "attestor_hash": "sha256:abababababababababababababababababababababababababababababababab"
+  },
+  "bundle_hash": "sha256:ffcdc29f7d6bbf09dcdc7f546f3b7f5f0f9b502d1f8d09801df73291fe729c22",
+  "canonical": "{\"assets\":[{\"path\":\"fonts/inter.woff2\",\"sha256\":\"sha256:a446817d40e4dc37c526fb5e30859fe0dd7bb0a7d5b3c0c56f7a0626d0019307\"},{\"path\":\"img/logo.svg\",\"sha256\":\"sha256:d4dc56669143034f31aa309635d4113d9ad76a02b1739da22c965ed2049be9e6\"}],\"attestor_hash\":\"sha256:abababababababababababababababababababababababababababababababab\",\"bundle_id\":\"bnd_fixture_0001\",\"critical_region\":\"#consent-region\",\"css\":\"#consent-region{max-width:32rem}button{padding:8px 16px}\",\"fonts\":[{\"family\":\"Inter\",\"sha256\":\"sha256:cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd\"}],\"markup\":\"<section id=\\\"consent-region\\\"><h1>Data sharing</h1><p id=\\\"disclosure\\\">We share your usage data with our partners for advertising.</p><label><input id=\\\"agree\\\" type=\\\"checkbox\\\"/>I agree</label><button id=\\\"btn-agree\\\" type=\\\"button\\\">Accept</button><button id=\\\"btn-reject\\\" type=\\\"button\\\">Reject</button></section>\",\"region_policy\":\"consent/v1\",\"v\":\"mra/1.0\"}",
+  "commitment": {
+    "v": "mra/1.0",
+    "type": "server_commitment",
+    "bundle_hash": "sha256:ffcdc29f7d6bbf09dcdc7f546f3b7f5f0f9b502d1f8d09801df73291fe729c22",
+    "nonce": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "expires_at": "2026-10-03T12:15:00Z",
+    "float": 0.5,
+    "int": 7,
+    "uni": "é😀"
+  },
+  "commitment_canonical": "{\"bundle_hash\":\"sha256:ffcdc29f7d6bbf09dcdc7f546f3b7f5f0f9b502d1f8d09801df73291fe729c22\",\"expires_at\":\"2026-10-03T12:15:00Z\",\"float\":0.5,\"int\":7,\"nonce\":\"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\",\"type\":\"server_commitment\",\"uni\":\"é😀\",\"v\":\"mra/1.0\"}"
+}
