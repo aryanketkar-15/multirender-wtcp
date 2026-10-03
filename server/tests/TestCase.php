@@ -13,6 +13,7 @@ use Mra\Http\Request;
 use Mra\Http\Response;
 use Mra\Repository\Database;
 use Mra\Tests\Support\FakeClock;
+use Mra\Tests\Support\FakeMailer;
 use PDO;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
@@ -24,6 +25,7 @@ abstract class TestCase extends BaseTestCase
 {
     protected PDO $pdo;
     protected FakeClock $clock;
+    protected FakeMailer $mailer;
 
     protected function setUp(): void
     {
@@ -31,6 +33,7 @@ abstract class TestCase extends BaseTestCase
         $this->pdo = Database::connection(DatabaseConfig::fromEnv(true));
         $this->pdo->beginTransaction();
         $this->clock = new FakeClock();
+        $this->mailer = new FakeMailer();
     }
 
     protected function tearDown(): void
@@ -48,7 +51,8 @@ abstract class TestCase extends BaseTestCase
             $this->pdo,
             new FieldCipher(str_repeat("\x61", 32)),
             new BlindIndex(str_repeat("\x62", 32)),
-            $this->clock
+            $this->clock,
+            $this->mailer
         );
     }
 

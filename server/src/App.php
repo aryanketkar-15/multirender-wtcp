@@ -11,8 +11,15 @@ use Mra\Crypto\CryptoFactory;
 use Mra\Crypto\FieldEncryptor;
 use Mra\Log\AuditLogger;
 use Mra\Log\SecurityLogger;
+use Mra\Mail\DeferredMailer;
+use Mra\Mail\MailerInterface;
+use Mra\Mail\OutboxMailer;
+use Mra\Mail\SmtpMailer;
 use Mra\Repository\Database;
+use Mra\Repository\OtpRepository;
 use Mra\Repository\UserRepository;
+use Mra\Service\OtpService;
+use Mra\Service\RegistrationService;
 use Mra\Service\ThrottleService;
 use Mra\Support\Clock;
 use Mra\Support\SystemClock;
@@ -25,17 +32,32 @@ final class App
     public readonly AuditLogger $audit;
     public readonly SecurityLogger $security;
     public readonly ThrottleService $throttle;
+    public readonly OtpRepository $otps;
+    public readonly OtpService $otp;
+    public readonly RegistrationService $registration;
 
     public function __construct(
         public readonly PDO $pdo,
         public readonly FieldEncryptor $cipher,
         public readonly BlindIndex $index,
-        public readonly Clock $clock
+        public readonly Clock $clock,
+        public readonly MailerInterface $mailer
     ) {
         $this->users = new UserRepository($pdo, $cipher, $index);
         $this->audit = new AuditLogger($pdo, $cipher);
         $this->security = new SecurityLogger($pdo, $cipher);
         $this->throttle = new ThrottleService($pdo, $index, $clock);
+        $this->otps = new OtpRepository($pdo);
+        $this->otp = new OtpService(
+            $this->users,
+            $this->otps,
+            $this->throttle,
+            $mailer,
+            $this->audit,
+            $this->security,
+            $clock
+        );
+        $this->registration = new RegistrationService($this->users, $this->throttle, $this->audit, $this->security);
     }
 
     public static function fromEnv(): self
@@ -45,7 +67,24 @@ final class App
             Database::connection(DatabaseConfig::fromEnv(Env::get('APP_ENV') === 'test')),
             $crypto['cipher'],
             $crypto['index'],
-            new SystemClock()
+            new SystemClock(),
+            self::mailerFromEnv()
         );
+    }
+
+    /** SMTP when configured, otherwise a development outbox. Delivery is deferred past the response. */
+    public static function mailerFromEnv(): DeferredMailer
+    {
+        $host = Env::get('SMTP_HOST');
+        $inner = $host === null
+            ? new OutboxMailer(dirname(__DIR__) . '/var/outbox')
+            : new SmtpMailer(
+                $host,
+                (int) (Env::get('SMTP_PORT', '587') ?? '587'),
+                Env::require('SMTP_USER'),
+                Env::require('SMTP_PASSWORD'),
+                Env::get('SMTP_FROM', 'no-reply@localhost') ?? 'no-reply@localhost'
+            );
+        return new DeferredMailer($inner);
     }
 }

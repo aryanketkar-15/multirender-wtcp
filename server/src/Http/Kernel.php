@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Mra\Http;
 
 use Mra\App;
+use Mra\Controller\OtpController;
 use Mra\Controller\RegistrationController;
-use Mra\Service\RegistrationService;
 use Throwable;
 
 /** Routes a Request to a controller and turns any failure into a safe, generic response. */
@@ -33,9 +33,12 @@ final class Kernel
     private function routes(): void
     {
         $app = $this->app;
-        $registration = new RegistrationController(
-            new RegistrationService($app->users, $app->throttle, $app->audit, $app->security)
-        );
+
+        $registration = new RegistrationController($app->registration);
         $this->router->add('POST', '/api/register', [$registration, 'register']);
+
+        $otp = new OtpController($app->otp);
+        $this->router->add('POST', '/api/otp/request', [$otp, 'request']);
+        $this->router->add('POST', '/api/otp/verify', [$otp, 'verify']);
     }
 }
