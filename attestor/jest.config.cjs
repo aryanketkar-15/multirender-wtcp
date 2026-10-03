@@ -13,6 +13,7 @@ module.exports = {
           target: 'ES2022',
           lib: ['ES2022', 'DOM', 'DOM.Iterable'],
           esModuleInterop: true,
+          resolveJsonModule: true,
           strict: true,
           skipLibCheck: true,
         },
