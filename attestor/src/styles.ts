@@ -12,7 +12,8 @@ import { elementContrast } from './contrast';
 export interface StyleBuckets {
   size: SizeBucket;
   weight: WeightBucket;
-  contrast: ContrastBucket;
+  /** absent for disabled controls, whose default colours are engine-specific */
+  contrast?: ContrastBucket;
   /** only for buttons */
   prominence?: ProminenceBucket;
 }

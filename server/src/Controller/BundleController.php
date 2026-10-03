@@ -81,6 +81,7 @@ final class BundleController
             'commitment_hash' => $issued['commitment_hash'],
             'signature' => $issued['signature'],
             'nonce' => $nonce,
+            'attestor' => $this->factory->attestorInfo(),
         ])->withHeader(CommitmentService::HEADER, $issued['header']);
     }
 }

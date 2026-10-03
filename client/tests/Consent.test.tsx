@@ -7,6 +7,26 @@ import * as apiModule from '../src/lib/api';
 import { jcs, sha256Hex } from '../src/lib/bundle';
 import type { BundlePayload } from '../src/lib/bundle';
 import { resetClientKeyForTests } from '../src/lib/clientKey';
+import * as loader from '../src/lib/loadAttestor';
+
+jest.mock('../src/lib/loadAttestor', () => ({
+  ...jest.requireActual('../src/lib/loadAttestor'),
+  loadAttestor: jest.fn(),
+}));
+
+const ATTESTOR_HASH = 'sha256:' + 'c'.repeat(64);
+const evidence = {
+  critical_region_digest: 'sha256:' + '1'.repeat(64),
+  context_digest: 'sha256:' + '2'.repeat(64),
+  env: {},
+  attestor_version: '1.0.0',
+  region_nodes: 5,
+  context_nodes: 6,
+};
+const fakeModule = {
+  ATTESTOR_VERSION: '1.0.0',
+  attest: jest.fn().mockResolvedValue(evidence),
+};
 
 async function goodPayload(): Promise<BundlePayload> {
   const bundle = JSON.parse(JSON.stringify(fixture.bundle)) as BundlePayload['bundle'];
@@ -16,6 +36,7 @@ async function goodPayload(): Promise<BundlePayload> {
     bundle_hash: fixture.bundle_hash,
     nonce: 'n'.repeat(64),
     expires_at: '2026-10-03T12:15:00Z',
+    attestor_hash: ATTESTOR_HASH,
   };
   return {
     bundle,
@@ -24,11 +45,21 @@ async function goodPayload(): Promise<BundlePayload> {
     commitment_hash: 'sha256:' + (await sha256Hex(jcs(commitment))),
     signature: 'sig',
     nonce: commitment.nonce,
+    attestor: {
+      url: 'http://attestor.test/mra-attestor-1.0.0.js',
+      version: '1.0.0',
+      integrity: 'sha384-x',
+      hash: ATTESTOR_HASH,
+    },
   };
 }
 
-async function setup(payload?: BundlePayload, bundleStatus = 200) {
+async function setup(payload?: BundlePayload, bundleStatus = 200, prepare?: () => void) {
   resetClientKeyForTests();
+  jest.mocked(loader.loadAttestor).mockClear();
+  jest.mocked(loader.loadAttestor).mockResolvedValue(fakeModule);
+  fakeModule.attest.mockResolvedValue(evidence);
+  prepare?.();
   const post = jest
     .spyOn(apiModule.api, 'post')
     .mockResolvedValue({ ok: true, status: 200, data: {} });
@@ -146,6 +177,59 @@ describe('Consent page', () => {
   ])('shows an error state when the bundle request fails with %i', async (status, pattern) => {
     await setup(undefined, status);
     expect(await screen.findByRole('alert')).toHaveTextContent(pattern);
+  });
+
+  describe('the attestation module is part of the evidence (T3.5.3, T3.5.8)', () => {
+    it('shows both digests produced by the loaded module', async () => {
+      await setup();
+      await screen.findByText(/We share your usage data/);
+      expect(await screen.findByText(evidence.critical_region_digest)).toBeInTheDocument();
+      expect(screen.getByText(evidence.context_digest)).toBeInTheDocument();
+      expect(fakeModule.attest).toHaveBeenCalledWith({ regionSelector: '#consent-region' });
+    });
+
+    it('loads the module the server named, checked against the commitment', async () => {
+      await setup();
+      await screen.findByText(/We share your usage data/);
+      expect(loader.loadAttestor).toHaveBeenCalledWith(
+        expect.objectContaining({ hash: ATTESTOR_HASH, version: '1.0.0' }),
+        ATTESTOR_HASH,
+      );
+    });
+
+    function expectNoConsentScreen() {
+      expect(screen.getByRole('alert')).toHaveTextContent('No consent was recorded');
+      expect(screen.queryByRole('button', { name: 'Accept' })).not.toBeInTheDocument();
+      expect(screen.queryByRole('button', { name: 'Reject' })).not.toBeInTheDocument();
+      expect(screen.queryByText(/We share your usage data/)).not.toBeInTheDocument();
+    }
+
+    it('shows an error and no actions when the module fails to load, with no fallback', async () => {
+      await setup(undefined, 200, () =>
+        jest
+          .mocked(loader.loadAttestor)
+          .mockRejectedValue(new loader.AttestorLoadError('Host unreachable.')),
+      );
+      expect(await screen.findByRole('alert')).toHaveTextContent('Host unreachable.');
+      expectNoConsentScreen();
+    });
+
+    it('shows no consent screen when no attestor is registered', async () => {
+      const p = await goodPayload();
+      p.attestor = null;
+      await setup(p);
+      await screen.findByRole('alert');
+      expectNoConsentScreen();
+      expect(loader.loadAttestor).not.toHaveBeenCalled();
+    });
+
+    it('withdraws the consent screen if the page cannot be measured', async () => {
+      await setup(undefined, 200, () =>
+        fakeModule.attest.mockRejectedValue(new Error('layout failed')),
+      );
+      expect(await screen.findByRole('alert')).toHaveTextContent('could not be measured');
+      expectNoConsentScreen();
+    });
   });
 
   it('shows an error state when the client key cannot be registered', async () => {
