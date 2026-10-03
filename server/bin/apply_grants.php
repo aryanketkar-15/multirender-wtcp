@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-/**
- * Applies table-level grants for the application account. The two operational log tables are
- * INSERT-only: the application can append but never read back, alter or delete its own trail.
- * Run with an administrative account (DB_ADMIN_USER / DB_ADMIN_PASS); never with the app account.
- */
+// Applies table-level grants for the application account. The two operational log tables are
+// INSERT-only: the application can append but never read back, alter or delete its own trail.
+// Run with an administrative account (DB_ADMIN_USER / DB_ADMIN_PASS); never with the app account.
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

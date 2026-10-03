@@ -1,0 +1,5 @@
+ALTER TABLE audit_log
+    MODIFY ip_enc VARBINARY(512) NULL,
+    MODIFY ua_enc VARBINARY(1024) NULL;
+ALTER TABLE security_log
+    MODIFY ip_enc VARBINARY(512) NULL;

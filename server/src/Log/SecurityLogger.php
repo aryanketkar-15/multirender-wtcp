@@ -41,7 +41,9 @@ final class SecurityLogger extends BaseRepository
                     $eventType,
                     $actorId,
                     $detail === [] ? null : json_encode(Redactor::redact($detail), JSON_UNESCAPED_UNICODE),
-                    ($ip === null || $this->encryptor === null) ? null : $this->encryptor->encrypt($ip),
+                    ($ip === null || $this->encryptor === null)
+                        ? null
+                        : $this->encryptor->encrypt($ip, 'security_log.ip_enc'),
                     $severity,
                 ]
             );

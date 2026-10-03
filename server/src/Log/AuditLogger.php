@@ -48,8 +48,8 @@ final class AuditLogger extends BaseRepository
                     $targetId,
                     $outcome,
                     $detail === [] ? null : json_encode(Redactor::redact($detail), JSON_UNESCAPED_UNICODE),
-                    $this->seal($ip),
-                    $this->seal($userAgent),
+                    $this->seal($ip, 'audit_log.ip_enc'),
+                    $this->seal($userAgent, 'audit_log.ua_enc'),
                 ]
             );
             return (int) $this->pdo->lastInsertId();
@@ -59,8 +59,8 @@ final class AuditLogger extends BaseRepository
     }
 
     /** IP and user agent are personal data: encrypted, or stored null. Never plaintext. */
-    private function seal(?string $value): ?string
+    private function seal(?string $value, string $context): ?string
     {
-        return ($value === null || $this->encryptor === null) ? null : $this->encryptor->encrypt($value);
+        return ($value === null || $this->encryptor === null) ? null : $this->encryptor->encrypt($value, $context);
     }
 }

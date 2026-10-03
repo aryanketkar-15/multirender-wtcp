@@ -297,3 +297,23 @@ The team has agreed on the following conventions.
 - Entries have been appended rather than edited. A reversal has been recorded as a new superseding entry.
 - The late-changes table has been updated whenever a settled phase has been reopened.
 - Checklist items have been ticked only once verified, not once attempted.
+
+---
+
+## 10. Encryption at rest — column classification (milestone 1.1, 2026-10-03)
+
+Recorded at the time the `users` table has been created. Encrypted columns use XChaCha20-Poly1305
+(libsodium) with the column name bound as associated data, so a ciphertext copied into another
+column fails authentication. The key (`APP_ENCRYPTION_KEY`) and the blind-index pepper
+(`BLIND_INDEX_PEPPER`) are distinct values held in the environment outside the web root; the
+prototype has no KMS and the report states this as a limitation.
+
+| Column | Treatment | Reason |
+|---|---|---|
+| `users.email_enc` | **Encrypted** | Personal data |
+| `users.name_enc` | **Encrypted** | Personal data |
+| `users.email_bidx` | HMAC-SHA256 blind index, peppered | Makes the encrypted email searchable without deterministic encryption (D-14) |
+| `users.password_hash` | Not encrypted | Already one-way (Argon2id); D-15 |
+| `audit_log.ip_enc`, `audit_log.ua_enc`, `security_log.ip_enc` | **Encrypted**; stored null when no cipher is configured, never plaintext | IP address and user agent are personal data |
+| `audit_log.detail`, `security_log.detail` | Not encrypted; passed through the structural redactor first | Operational detail; secret-bearing keys are replaced before write |
+| Digests, signatures, public keys, Merkle leaf hashes (later phases) | **Never encrypted** | A verifier holding none of our keys must be able to recompute and compare them; D-15 |
