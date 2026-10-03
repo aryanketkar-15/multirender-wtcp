@@ -23,6 +23,51 @@ const check = (name, ok, detail = '') => {
   console.log(`${ok ? 'PASS' : 'FAIL'}  ${name}${detail ? '  ' + detail : ''}`);
 };
 
+// --- An independent (JavaScript) verifier for the evidence log: RFC 9162 inclusion proofs and the
+// --- Ed25519 signature on the tree head. Shares no code with the PHP that produced them.
+const crypto = require('crypto');
+const { spawnSync } = require('child_process');
+const sha = (b) => crypto.createHash('sha256').update(b).digest();
+const nodeHash = (l, r) => sha(Buffer.concat([Buffer.from([1]), l, r]));
+function verifyInclusion(proof, rootHex) {
+  let fn = proof.leaf_index;
+  let sn = proof.tree_size - 1;
+  let r = Buffer.from(proof.leaf_hash, 'hex');
+  for (const hex of proof.path) {
+    const p = Buffer.from(hex, 'hex');
+    if (sn === 0) return false;
+    if ((fn & 1) === 1 || fn === sn) {
+      r = nodeHash(p, r);
+      if ((fn & 1) === 0)
+        while ((fn & 1) === 0 && fn !== 0) {
+          fn >>= 1;
+          sn >>= 1;
+        }
+    } else {
+      r = nodeHash(r, p);
+    }
+    fn >>= 1;
+    sn >>= 1;
+  }
+  return sn === 0 && r.toString('hex') === rootHex;
+}
+const jcsText = (v) =>
+  v === null || typeof v !== 'object'
+    ? JSON.stringify(v)
+    : Array.isArray(v)
+      ? '[' + v.map(jcsText).join(',') + ']'
+      : '{' +
+        Object.keys(v)
+          .sort()
+          .map((k) => JSON.stringify(k) + ':' + jcsText(v[k]))
+          .join(',') +
+        '}';
+function verifyHeadSignature(record, signature, publicKeyHex) {
+  const x = Buffer.from(publicKeyHex, 'hex').toString('base64url');
+  const key = crypto.createPublicKey({ key: { kty: 'OKP', crv: 'Ed25519', x }, format: 'jwk' });
+  return crypto.verify(null, Buffer.from(jcsText(record)), key, Buffer.from(signature, 'base64url'));
+}
+
 const children = [];
 function start(cmd, args, cwd, label) {
   const p = spawn(cmd, args, { cwd, shell: process.platform === 'win32', stdio: 'ignore' });
@@ -147,6 +192,49 @@ async function post(p, body) {
     a.env.engine === 'Blink' && ['small', 'medium', 'large'].includes(a.env.viewport_bucket),
     JSON.stringify(a.env),
   );
+
+  // The log: two leaves, in order, provable by an independent verifier.
+  check(
+    'attestation response names both log leaves',
+    typeof replies[0].body.log_leaf_index === 'number',
+    JSON.stringify([replies[0].body.commitment_leaf_index, replies[0].body.log_leaf_index]),
+  );
+  check(
+    'commitment leaf precedes attestation leaf',
+    replies[0].body.commitment_leaf_index < replies[0].body.log_leaf_index,
+  );
+  const phpFlags2 = (process.env.MRA_PHP_FLAGS || '').split(' ').filter(Boolean);
+  const signed = spawnSync(process.env.MRA_PHP || 'php', [...phpFlags2, 'bin/sign_sth.php'], {
+    cwd: path.join(ROOT, 'server'),
+    encoding: 'utf8',
+    shell: false,
+  });
+  check('a tree head was signed', signed.status === 0, (signed.stdout || signed.stderr || '').trim());
+  const keyDoc = await (await fetch(API + '/.well-known/mra-key')).json();
+  const head = await (await fetch(API + '/api/log/head')).json();
+  check(
+    'tree head signature verifies in node:crypto (Ed25519)',
+    verifyHeadSignature(head.record, head.signature, keyDoc.keys[0].public_key),
+  );
+  for (const [label, index] of [
+    ['commitment', replies[0].body.commitment_leaf_index],
+    ['attestation', replies[0].body.log_leaf_index],
+  ]) {
+    const res = await (await fetch(API + '/api/log/proof/' + index)).json();
+    const sameSize = res.proof.tree_size === head.record.tree_size;
+    check(
+      label + ' leaf: inclusion proof verifies in JavaScript against the signed root',
+      sameSize && verifyInclusion(res.proof, head.record.root_hash.slice(7)),
+      'path of ' + res.proof.path.length,
+    );
+    const recomputed = sha(Buffer.concat([Buffer.from([0]), Buffer.from(jcsText(res.leaf.record))])).toString(
+      'hex',
+    );
+    check(
+      label + ' leaf: JavaScript recomputes the same leaf hash from the logged record',
+      recomputed === res.proof.leaf_hash,
+    );
+  }
 
   // Replay: the same signed attestation again.
   const csrf = await page.evaluate(async () => (await (await fetch('/api/session')).json()).csrf_token);

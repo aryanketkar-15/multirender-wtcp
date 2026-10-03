@@ -178,7 +178,7 @@ Recorded for the patent background section and the paper's related-work section.
 | Phase 0 | Account layer, validation, OTP, encryption at rest, logging, test scaffold | **Implemented** (playbook phases 0 and 1; SMTP delivery against a real provider not yet exercised) |
 | Phase 1 | Sealed bundle, commitment signing, session and nonce | **Implemented** (playbook phase 2; second-machine determinism check outstanding) |
 | Phase 2 | Attestor Module, semantic digest, stability harness | **Implemented** (playbook phase 3; thresholds provisional, stability harness is an informal seed only) |
-| Phase 3 | Client signing, Merkle log, inclusion proofs | Not started |
+| Phase 3 | Client signing, Merkle log, inclusion proofs | **Implemented** (playbook phase 4; WebAuthn tier not built; external witness mechanism built and tested locally, no real remote or schedule) |
 | Phase 4 | Verifier, evidence pack, product polish, demonstration | Not started |
 
 ---
@@ -218,7 +218,7 @@ Changes arriving after a phase has been considered settled. Maintained separatel
 
 ### 8.1 Mandatory course requirements
 
-- [ ] Session management implemented and bound to attestation
+- [x] Session management implemented and bound to attestation
 - [x] Secure, HttpOnly, SameSite cookie configuration verified
 - [x] Database connection via PDO with prepared statements throughout
 - [x] Encryption of personal data at rest, with blind index for email
@@ -249,10 +249,10 @@ Changes arriving after a phase has been considered settled. Maintained separatel
 - [x] Normalisation applies NFKC, case folding, whitespace collapse and zero-width stripping
 - [x] Critical region digest and context digest both computed
 - [ ] Client key non-extractable; WebAuthn tier available where an account exists
-- [ ] Attestation binds to the commitment hash, not the bundle hash
-- [ ] Merkle commitment leaf appended at issue time
-- [ ] Merkle attestation leaf appended at finalisation, referencing the commitment leaf
-- [ ] Inclusion proofs generated and verified
+- [x] Attestation binds to the commitment hash, not the bundle hash
+- [x] Merkle commitment leaf appended at issue time
+- [x] Merkle attestation leaf appended at finalisation, referencing the commitment leaf
+- [x] Inclusion proofs generated and verified
 - [ ] Signed tree heads published externally on a schedule
 - [ ] Evidence pack exports as a self-contained archive
 - [ ] Only the session subject may download their own pack
@@ -433,3 +433,59 @@ Every bucket interval is half-open at its lower bound: a value exactly on a thre
 | O-09 | Second-machine reproducibility check: run `attestor/scripts/release.sh` on the other developer's machine and compare the `attestor_hash`. | Release `attestor-v1.0.0` |
 | O-10 | Safari/WebKit and non-Windows engines are unmeasured. | Phase 6 stability study |
 | O-11 | The verifier does not yet reject unrecognised attestor hashes (the registry exists; the verifier is Phase 5). | Phase 5 |
+
+
+---
+
+## 13. Build record — playbook phase 4: client attestation and Merkle log (2026-10-03)
+
+### 13.1 Decisions
+
+- **D-28 Strict attestation contract.** The attestation schema rejects unknown members at every level, so the set of signed fields is unambiguous and nothing can ride along unauthenticated. The signature is ECDSA P-256 over the RFC 8785 canonical text, carried as the 64-byte IEEE P1363 form that WebCrypto produces; the server converts it to DER for OpenSSL.
+- **D-29 The commitment signs its own log index.** The log append runs a caller-supplied closure inside the append lock and the transaction. The closure receives the index the leaf will occupy, builds and signs the commitment with `log_leaf_index` inside it, and the commitment row and the leaf commit together. The commitment therefore names its own slot, and a forged index breaks its signature.
+- **D-30 Validation order and codes.** Cheapest first: schema (422 `SCHEMA_INVALID`), signature (401 `CLIENT_SIGNATURE_INVALID`), then database checks: commitment known (`COMMITMENT_UNKNOWN`), session (403 `SESSION_MISMATCH`), key binding (401 `KEY_BINDING_INVALID`), nonce and attestor match (`NONCE_MISMATCH`, `ATTESTOR_MISMATCH`), replay (409 `REPLAY_DETECTED`), expiry (422 `COMMITMENT_EXPIRED`), attestor registry (`ATTESTOR_UNRECOGNISED`), action/target agreement (`ACTION_TARGET_INVALID`), region policy (`REGION_POLICY_VIOLATION`). The nonce is consumed last, by one atomic UPDATE inside the same transaction as the write, so a rejected attempt never spends it. Every rejection writes a security-log entry; replay uses its own event type.
+- **D-31 Region policy `consent/v1`** is checked against the bundle the *server committed to*: disclosure text, an accept control (`#btn-agree`) and a reject control (`#btn-reject`), none hidden by attribute, inline style or the bundle stylesheet. The browser attests only digests, so the server cannot inspect the client's rendering; the check stops a server committing to a bundle that omits its own reject control.
+- **D-32 A proof's tree size comes from the signed head.** A bare inclusion proof cannot tell some neighbouring tree sizes apart (found by a test whose premise was wrong). `MerkleProof::verifyAgainstHead` therefore requires the proof's size to equal the signed head's and checks the root.
+- **D-33 The grant policy is code.** `GrantPolicy` gives the application account SELECT and INSERT only on the evidence tables (bundle, commitment, attestation, leaf, node, signed heads, publications), INSERT only on the two operational logs, and ordinary DML elsewhere. It is applied by `bin/apply_grants.php` and exercised against a real restricted account.
+- **D-34 Key scope.** The browser key is scoped to a hash of the session's CSRF token, which changes whenever the session is regenerated; each session gets its own key, the previous one is deleted when the next is stored, and logout deletes all of them.
+- **D-35 The log is publicly readable** (`/api/log/head`, `/api/log/proof/{index}`, `/api/log/consistency`). It holds digests and signed records only, and the contents were checked to contain no personal data.
+
+### 13.2 Measurements (inputs to Phase 6)
+
+| Measurement | Result | Context |
+|---|---|---|
+| Inclusion proof, 100,000 leaves | median 6.7 ms, worst 12.8 ms, 17 hashes | MariaDB on the development machine, PHP 8.2; target was under 100 ms |
+| Inclusion proof, 10,000 leaves | 14 hashes for most leaves (8 for the last) | target was about 14 |
+| Bulk load, 100,000 leaves | 9.4 s | test helper, not the production append path |
+| Race: 3 simultaneous submissions of one attestation | exactly one 201 and two 409, in 4 of 4 rounds | real OS processes, committed rows |
+| Race: 3 simultaneous consumptions of one nonce | exactly one winner, in 5 of 5 rounds | |
+
+### 13.3 What was verified, and how
+
+- The database-backed log was checked against a separate naive in-memory RFC 6962 implementation: roots for every size up to 40, inclusion paths for every leaf at every size up to 21, and consistency proofs for every pair up to 24, all identical.
+- The grant tests create a real restricted account and attempt `UPDATE`, `DELETE`, `TRUNCATE`, `DROP` and `ALTER` on every evidence table; the database refuses each with error 1142 while `INSERT` and `SELECT` succeed on the same tables. The same refusals were reproduced against the real development schema as `mra_app`.
+- End to end in a real browser (`e2e/full-stack.cjs`, 20 checks, run **as the restricted account**): a WebCrypto signature is accepted by PHP/OpenSSL; a post-load DOM change alters the posted digest; replay and post-signing alteration are refused; the signing key is gone from IndexedDB after logout; and Node's own crypto verifies the Ed25519 head signature and the log's inclusion proofs, so three implementations (PHP, TypeScript client, Node) agree.
+- Signed tree heads were published to a real git repository (a bare local remote standing in for the witness) and the two published heads were shown to be provably one append-only history.
+
+### 13.4 Deviations and limits, stated plainly
+
+| Item | Playbook | Built | Note |
+|---|---|---|---|
+| WebAuthn tier | feature-flagged stretch | **not built** | The WebCrypto tier only. The report must present one tier, not two. |
+| External tree-head witness | a second GitHub repository written on a schedule | a `GitWitness` publisher and `bin/publish_sth.php`, tested against a local bare git remote | **No real remote exists and nothing is scheduled.** Until a real `mra-sth-witness` repository receives heads on a schedule, the "externally witnessed" claim is not met in deployment. |
+| Migration numbers | 013–016 | 018–021 | Numbered in build order. |
+| Ordering of 4.2 and 4.3 | 4.2 then 4.3 | 4.3 committed first | The server contract existed before the client was written against it. |
+| Attestation leaf index | assigned at validation | assigned in the same transaction as the nonce spend and the attestation row | A failed attestation adds nothing to the log (tested). |
+| Deprecated attestor builds | not specified | rejected for **new** attestations, accepted only for historical verification | |
+
+Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to generate keys (verification does not); `escapeshellarg` mangles `%` on Windows, so process arguments are passed as arrays; the first run of the restricted-account end-to-end check surfaced no application code that needed more than the granted privileges.
+
+### 13.5 Open items after phase 4
+
+| ID | Item | Blocks |
+|---|---|---|
+| O-02 | Create the real `mra-sth-witness` repository, give the publisher push access through the clone's own credentials, and schedule `bin/publish_sth.php`. | The externally witnessed claim |
+| O-08 | Context digest still covers the application chrome; unresolved (section 12.3, finding 6). | Phase 5 |
+| O-12 | The verifier does not yet re-render the committed bundle or compare digests; the server cannot see the client's region, only its digest. Region policy is enforced on the committed bundle only. | Phase 5 |
+| O-13 | The logged attestation proves what the *client reported*. Whether that matches a faithful re-render of the committed bundle is the verifier's job. | Phase 5 |
+| O-14 | Key management for the witness push credentials and the server signing key remains environment-variable only (prototype limitation). | Report |

@@ -39,13 +39,14 @@ final class AttestationValidator
         private readonly AttestationRepository $attestations,
         private readonly CommitmentService $commitmentService,
         private readonly SessionService $sessions,
+        private readonly MerkleLog $log,
         private readonly Clock $clock
     ) {
     }
 
     /**
      * @param array<string,mixed> $body
-     * @return array{id:int,attestation_hash:string,commitment_hash:string}
+     * @return array{id:int,attestation_hash:string,commitment_hash:string,log_leaf_index:int,commitment_leaf_index:?int}
      * @throws AttestationRejected
      */
     public function validate(array $body, Session $session, User $user): array
@@ -112,7 +113,8 @@ final class AttestationValidator
         $this->assertRegionPolicy($commitment);
 
         // 7. Spend the nonce and write, atomically.
-        return $this->persist($a, $canonical, (string) $body['signature'], $fingerprint, $user, $session->id);
+        $leafOfCommitment = isset($commitment['log_leaf_index']) ? (int) $commitment['log_leaf_index'] : null;
+        return $this->persist($a, $canonical, (string) $body['signature'], $fingerprint, $user, $session->id, $leafOfCommitment);
     }
 
     /** @param array<string,mixed> $commitment */
@@ -141,10 +143,17 @@ final class AttestationValidator
 
     /**
      * @param array<string,mixed> $a
-     * @return array{id:int,attestation_hash:string,commitment_hash:string}
+     * @return array{id:int,attestation_hash:string,commitment_hash:string,log_leaf_index:int,commitment_leaf_index:?int}
      */
-    private function persist(array $a, string $canonical, string $signature, string $fingerprint, User $user, string $sessionId): array
-    {
+    private function persist(
+        array $a,
+        string $canonical,
+        string $signature,
+        string $fingerprint,
+        User $user,
+        string $sessionId,
+        ?int $commitmentLeaf
+    ): array {
         $owns = !$this->pdo->inTransaction();
         if ($owns) {
             $this->pdo->beginTransaction();
@@ -154,6 +163,15 @@ final class AttestationValidator
                 throw new AttestationRejected(AttestationRejected::REPLAY_DETECTED, 409, 'This commitment has already been attested.');
             }
             $hash = 'sha256:' . hash('sha256', $canonical);
+            // Second leaf (decision D-07): written now, after the commitment leaf, and referencing it.
+            $leaf = $this->log->append(static fn (int $index): array => [
+                'v' => 'mra/1.0',
+                'kind' => 'attestation',
+                'ref_hash' => $hash,
+                'attestation' => $a,
+                'signature' => $signature,
+                'commitment_leaf_index' => $commitmentLeaf,
+            ]);
             $id = $this->attestations->save(
                 $hash,
                 (string) $a['commitment_hash'],
@@ -162,13 +180,19 @@ final class AttestationValidator
                 $canonical,
                 $signature,
                 $fingerprint,
-                null,
+                $leaf['index'],
                 $this->clock->now()
             );
             if ($owns) {
                 $this->pdo->commit();
             }
-            return ['id' => $id, 'attestation_hash' => $hash, 'commitment_hash' => (string) $a['commitment_hash']];
+            return [
+                'id' => $id,
+                'attestation_hash' => $hash,
+                'commitment_hash' => (string) $a['commitment_hash'],
+                'log_leaf_index' => $leaf['index'],
+                'commitment_leaf_index' => $commitmentLeaf,
+            ];
         } catch (\Throwable $e) {
             if ($owns && $this->pdo->inTransaction()) {
                 $this->pdo->rollBack();

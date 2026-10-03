@@ -29,3 +29,11 @@ Two operational logs (`audit_log`, `security_log`) are distinct from the Merkle 
 in a later phase. `php bin/apply_grants.php` makes both INSERT-only for the application account;
 `php bin/rotate_logs.php` (run with `DB_MAINT_*` credentials) archives rows past
 `LOG_RETENTION_DAYS` into dated tables and alerts above `LOG_MAX_ROWS`.
+
+## Evidence log
+
+Commitments and attestations are appended to an RFC 6962 Merkle log (`mra_leaf`, `mra_node`). The
+application account is granted `SELECT` and `INSERT` only on the evidence tables (`php bin/apply_grants.php`,
+policy in `src/Repository/GrantPolicy.php`). `php bin/sign_sth.php` signs the current tree head;
+`php bin/publish_sth.php` signs it and commits it to the witness repository (`STH_WITNESS_DIR`).
+Read-only proofs are served at `/api/log/head`, `/api/log/proof/{index}` and `/api/log/consistency`.

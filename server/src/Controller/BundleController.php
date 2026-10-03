@@ -12,6 +12,7 @@ use Mra\Model\User;
 use Mra\Repository\BundleRepository;
 use Mra\Repository\ConsentSettingsRepository;
 use Mra\Service\CommitmentService;
+use Mra\Service\MerkleLog;
 use Mra\Service\ConsentBundleFactory;
 use Mra\Service\NonceService;
 use Mra\Service\SessionService;
@@ -25,7 +26,8 @@ final class BundleController
         private readonly NonceService $nonces,
         private readonly CommitmentService $commitments,
         private readonly SessionService $sessions,
-        private readonly AuditLogger $audit
+        private readonly AuditLogger $audit,
+        private readonly MerkleLog $log
     ) {
     }
 
@@ -65,13 +67,26 @@ final class BundleController
         $bundle = $this->factory->build($settings);
         $this->bundles->save($bundle);
         $nonce = $this->nonces->issue($session->id, $user->id, $fpr, $bundle->bundleId);
-        $issued = $this->commitments->issue($bundle, [
-            'session_id' => substr($session->id, 0, 16),
-            'nonce' => $nonce,
-            'attestor_version' => $this->factory->attestorVersion(),
-            'client_pubkey_fpr' => $fpr,
-            'validity_minutes' => $settings['validity_minutes'],
-        ]);
+        // The commitment goes into the log at issue time, before any interaction is possible, and
+        // carries the index it will occupy inside its own signature (decision D-07).
+        $issued = null;
+        $this->log->append(function (int $index) use (&$issued, $bundle, $session, $nonce, $fpr, $settings): array {
+            $issued = $this->commitments->issue($bundle, [
+                'session_id' => substr($session->id, 0, 16),
+                'nonce' => $nonce,
+                'attestor_version' => $this->factory->attestorVersion(),
+                'client_pubkey_fpr' => $fpr,
+                'validity_minutes' => $settings['validity_minutes'],
+                'log_leaf_index' => $index,
+            ]);
+            return [
+                'v' => 'mra/1.0',
+                'kind' => 'commitment',
+                'ref_hash' => $issued['commitment_hash'],
+                'commitment' => $issued['commitment'],
+                'signature' => $issued['signature'],
+            ];
+        });
         $this->audit->record('bundle.issued', 'success', $user->id, 'bundle', $bundle->bundleId, [], $request->ip, $request->userAgent);
 
         return Response::json([
