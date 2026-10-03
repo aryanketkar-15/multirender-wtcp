@@ -1,22 +1,36 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { CriticalRegion } from '../components/CriticalRegion';
 import type { ConsentAction } from '../components/CriticalRegion';
 import { EvidencePanel } from '../components/EvidencePanel';
 import { Layout } from '../components/Layout';
 import { api } from '../lib/api';
+import { createAttestation, submitAttestation } from '../lib/attestation';
+import type { SignedAttestation } from '../lib/attestation';
 import { verifyBundle } from '../lib/bundle';
 import type { BundlePayload } from '../lib/bundle';
 import { fingerprint, getClientKey } from '../lib/clientKey';
 import { AttestorLoadError, loadAttestor } from '../lib/loadAttestor';
 import type { AttestorModule } from '../lib/loadAttestor';
 
+interface Loaded {
+  payload: BundlePayload;
+  attestor: AttestorModule;
+}
+
 type State =
   | { kind: 'loading' }
   | { kind: 'error'; message: string }
   | { kind: 'refused'; reason: string }
   | { kind: 'no-attestor'; reason: string }
-  | { kind: 'ready'; payload: BundlePayload; attestor: AttestorModule }
-  | { kind: 'done'; payload: BundlePayload; attestor: AttestorModule; action: ConsentAction };
+  | ({ kind: 'ready' } & Loaded)
+  | ({ kind: 'submitting'; action: ConsentAction } & Loaded)
+  | ({ kind: 'recorded'; action: ConsentAction; attestationHash: string } & Loaded)
+  | ({
+      kind: 'failed';
+      action: ConsentAction;
+      message: string;
+      retryable: boolean;
+    } & Loaded);
 
 function describe(status: number): string {
   if (status === 401) return 'Your session has ended. Please sign in again.';
@@ -26,6 +40,12 @@ function describe(status: number): string {
 
 export function Consent() {
   const [state, setState] = useState<State>({ kind: 'loading' });
+  const loaded = useRef<Loaded | null>(null);
+  const pending = useRef<{
+    action: ConsentAction;
+    target: string;
+    signed: SignedAttestation | null;
+  } | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -56,7 +76,9 @@ export function Consent() {
           return;
         }
         const attestor = await loadAttestor(info, String(res.data.commitment.attestor_hash));
-        if (!cancelled) setState({ kind: 'ready', payload: res.data, attestor });
+        if (cancelled) return;
+        loaded.current = { payload: res.data, attestor };
+        setState({ kind: 'ready', payload: res.data, attestor });
       } catch (failure) {
         if (cancelled) return;
         if (failure instanceof AttestorLoadError) {
@@ -74,13 +96,83 @@ export function Consent() {
     };
   }, []);
 
-  const record = useCallback((action: ConsentAction) => {
-    setState((s) => (s.kind === 'ready' ? { ...s, kind: 'done', action } : s));
+  /** Posts the signed attestation, then moves to recorded or failed. Safe to call again to retry. */
+  const deliver = useCallback(async (signed: SignedAttestation, action: ConsentAction) => {
+    const ctx = loaded.current;
+    if (!ctx) return;
+    setState({ kind: 'submitting', action, ...ctx });
+    const result = await submitAttestation(signed);
+    if (result.ok) {
+      setState({ kind: 'recorded', action, attestationHash: result.attestationHash, ...ctx });
+    } else {
+      setState({
+        kind: 'failed',
+        action,
+        message: result.message,
+        retryable: result.retryable,
+        ...ctx,
+      });
+    }
   }, []);
+
+  /**
+   * The user acted. The digests are measured now, at the moment of the action, never at page
+   * load: a digest taken on load would miss anything done to the page after it rendered.
+   */
+  const act = useCallback(
+    async (action: ConsentAction, target: string) => {
+      const ctx = loaded.current;
+      if (!ctx) return;
+      pending.current = { action, target, signed: null };
+      setState({ kind: 'submitting', action, ...ctx });
+      try {
+        const evidence = await ctx.attestor.attest({ regionSelector: '#consent-region' });
+        const pair = await getClientKey();
+        const signed = await createAttestation({
+          commitment: {
+            session_id: String(ctx.payload.commitment.session_id),
+            nonce: ctx.payload.commitment.nonce,
+            attestor_hash: String(ctx.payload.commitment.attestor_hash),
+          },
+          commitmentHash: ctx.payload.commitment_hash,
+          action,
+          actionTarget: target,
+          evidence,
+          pair,
+        });
+        pending.current = { action, target, signed };
+        await deliver(signed, action);
+      } catch {
+        setState({
+          kind: 'failed',
+          action,
+          message: 'Your choice could not be measured and signed, so nothing was recorded.',
+          retryable: true,
+          ...ctx,
+        });
+      }
+    },
+    [deliver],
+  );
+
+  const retry = useCallback(() => {
+    const p = pending.current;
+    if (!p) return;
+    // A signed payload that never reached the server is re-sent unchanged; otherwise start again.
+    void (p.signed ? deliver(p.signed, p.action) : act(p.action, p.target));
+  }, [act, deliver]);
 
   const attestationFailed = useCallback((reason: string) => {
     setState({ kind: 'no-attestor', reason });
   }, []);
+
+  const regionState =
+    state.kind === 'ready' ||
+    state.kind === 'submitting' ||
+    state.kind === 'recorded' ||
+    state.kind === 'failed'
+      ? state
+      : null;
 
   return (
     <Layout>
@@ -106,19 +198,41 @@ export function Consent() {
           no action is possible.
         </div>
       ) : null}
-      {state.kind === 'ready' || state.kind === 'done' ? (
+      {regionState ? (
         <>
           <CriticalRegion
-            markup={state.payload.bundle.markup}
-            css={state.payload.bundle.css}
-            onAction={record}
-            locked={state.kind === 'done'}
+            markup={regionState.payload.bundle.markup}
+            css={regionState.payload.bundle.css}
+            onAction={act}
+            locked={regionState.kind !== 'ready'}
           />
-          <EvidencePanel attestor={state.attestor} onFailure={attestationFailed} />
-          {state.kind === 'done' ? (
+          <EvidencePanel attestor={regionState.attestor} onFailure={attestationFailed} />
+          {regionState.kind === 'submitting' ? (
+            <div className="banner warn" role="status">
+              <span className="spinner" aria-hidden="true" /> Recording your choice…
+            </div>
+          ) : null}
+          {regionState.kind === 'recorded' ? (
             <div className="banner ok" role="status">
-              Your choice (<strong>{state.action}</strong>) was captured on this device. Signing it
-              as evidence is added in the next build phase.
+              Your choice (<strong>{regionState.action}</strong>) was recorded as signed evidence.
+              <br />
+              <small>
+                Reference: <code>{regionState.attestationHash}</code>
+              </small>
+            </div>
+          ) : null}
+          {regionState.kind === 'failed' ? (
+            <div className="banner error" role="alert">
+              {regionState.message}{' '}
+              {regionState.retryable ? (
+                <button type="button" className="btn secondary" onClick={retry}>
+                  Try again
+                </button>
+              ) : (
+                <button type="button" className="btn secondary" onClick={() => location.reload()}>
+                  Reload
+                </button>
+              )}
             </div>
           ) : null}
         </>
