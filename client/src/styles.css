@@ -1,1 +1,255 @@
-/* design tokens and base styles are added in milestone 1.2 */
+/* MRA design system — hand-coded, no external assets. Tokens first, components after. */
+:root {
+  --ink: #14202b;
+  --ink-soft: #46586a;
+  --paper: #f6f4ef;
+  --card: #ffffff;
+  --line: #d9d4c8;
+  --brand: #0b5c6b;
+  --brand-ink: #ffffff;
+  --brand-soft: #dcecef;
+  --danger: #a4262c;
+  --danger-soft: #fbe9ea;
+  --ok: #1b6b3a;
+  --ok-soft: #e4f3ea;
+  --warn-soft: #fdf3dc;
+  --radius: 10px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.5;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--card);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.app-nav {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.app-nav a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+main.page {
+  max-width: 480px;
+  margin: var(--space-5) auto;
+  padding: 0 var(--space-3);
+}
+
+main.page.wide {
+  max-width: 760px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin: 0 0 var(--space-2);
+}
+
+.lede {
+  color: var(--ink-soft);
+  margin: 0 0 var(--space-4);
+}
+
+.field {
+  margin-bottom: var(--space-3);
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.field input[type='text'],
+.field input[type='email'],
+.field input[type='password'],
+.field input[type='number'],
+.field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: inherit;
+  background: var(--card);
+  border: 1.5px solid var(--line);
+  border-radius: 8px;
+}
+
+.field input[aria-invalid='true'] {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.field-error {
+  color: var(--danger);
+  font-size: 0.9rem;
+  margin: var(--space-1) 0 0;
+}
+
+.hint {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: var(--space-1) 0 0;
+}
+
+.check {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.check input {
+  margin-top: 5px;
+  width: 18px;
+  height: 18px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-weight: 700;
+  color: var(--brand-ink);
+  background: var(--brand);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn.secondary {
+  color: var(--brand);
+  background: var(--brand-soft);
+}
+
+.btn.block {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.banner {
+  padding: var(--space-3);
+  border-radius: 8px;
+  margin-bottom: var(--space-3);
+}
+
+.banner.error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.banner.ok {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.banner.warn {
+  background: var(--warn-soft);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 3s;
+  }
+}
+
+.empty {
+  text-align: center;
+  color: var(--ink-soft);
+  padding: var(--space-5) var(--space-3);
+}
+
+.links {
+  margin-top: var(--space-3);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+a {
+  color: var(--brand);
+}
+
+@media (max-width: 480px) {
+  main.page {
+    margin: var(--space-4) auto;
+  }
+
+  .card {
+    padding: var(--space-3);
+  }
+
+  .app-header {
+    padding: var(--space-3);
+  }
+}

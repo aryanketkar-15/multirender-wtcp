@@ -29,6 +29,16 @@ final class BlindIndex
         return new self($bin);
     }
 
+    /**
+     * Keyed, domain-separated hash for non-email subjects (throttle keys, token lookups).
+     *
+     * @return string 32 raw bytes
+     */
+    public function forValue(string $domain, string $value): string
+    {
+        return hash_hmac('sha256', $domain . "\0" . $value, $this->pepper, true);
+    }
+
     /** @return string 32 raw bytes */
     public function forEmail(string $email): string
     {
