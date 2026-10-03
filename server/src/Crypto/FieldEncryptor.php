@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Mra\Crypto;
 
-/** Seam for encryption at rest. Implemented by FieldCipher (milestone 1.1). */
+/** Seam for encryption at rest. Implemented by FieldCipher. */
 interface FieldEncryptor
 {
-    public function encrypt(string $plaintext): string;
+    /** @param string $context binds the ciphertext to its column so values cannot be swapped between columns */
+    public function encrypt(string $plaintext, string $context = ''): string;
 
-    public function decrypt(string $ciphertext): string;
+    /** @throws DecryptionException on any authentication failure */
+    public function decrypt(string $ciphertext, string $context = ''): string;
 }
