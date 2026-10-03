@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    <style>
+      body {
+        margin: 0;
+        font:
+          16px/1.4 system-ui,
+          sans-serif;
+        color: #14202b;
+        background: #fff;
+      }
+      #consent-region {
+        max-width: 32rem;
+        padding: 16px;
+      }
+      button {
+        font: inherit;
+        min-height: 44px;
+        padding: 0 20px;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="consent-region">
+      <fieldset>
+        <legend>Share my data with partners</legend>
+        <label><input type="radio" name="share" id="yes" value="yes" /> Yes, share</label
+        ><label
+          ><input type="radio" name="share" id="no" value="no" checked /> No, do not share</label
+        >
+      </fieldset>
+      <input type="submit" id="btn-agree" value="Save choice" />
+    </div>
+  </body>
+</html>

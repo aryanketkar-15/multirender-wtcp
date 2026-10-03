@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    <style>
+      body {
+        margin: 0;
+        font:
+          16px/1.4 system-ui,
+          sans-serif;
+        color: #14202b;
+        background: #fff;
+      }
+      #consent-region {
+        max-width: 32rem;
+        padding: 16px;
+      }
+      button {
+        font: inherit;
+        min-height: 44px;
+        padding: 0 20px;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="consent-region">
+      <h1>Loan agreement</h1>
+      <h3>Fees</h3>
+      <p>An early repayment fee of 2% applies.</p>
+      <p>Interest is variable.</p>
+      <label><input type="checkbox" id="agree" required /> I accept the fees</label
+      ><button id="btn-agree" type="button" aria-label="Sign the agreement">Go</button
+      ><button id="btn-reject" type="button" disabled>Decline</button>
+    </div>
+  </body>
+</html>

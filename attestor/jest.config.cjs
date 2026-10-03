@@ -11,6 +11,7 @@ module.exports = {
           module: 'commonjs',
           moduleResolution: 'node',
           target: 'ES2022',
+          lib: ['ES2022', 'DOM', 'DOM.Iterable'],
           esModuleInterop: true,
           strict: true,
           skipLibCheck: true,

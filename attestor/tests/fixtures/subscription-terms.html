@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    <style>
+      body {
+        margin: 0;
+        font:
+          16px/1.4 system-ui,
+          sans-serif;
+        color: #14202b;
+        background: #fff;
+      }
+      #consent-region {
+        max-width: 32rem;
+        padding: 16px;
+      }
+      button {
+        font: inherit;
+        min-height: 44px;
+        padding: 0 20px;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="consent-region">
+      <h2>Subscription terms</h2>
+      <p>No automatic renewal will be applied.</p>
+      <label><input type="checkbox" id="agree" /> I agree to the terms</label>
+      <div>
+        <button id="btn-reject" type="button">Reject</button
+        ><button id="btn-agree" type="button">Agree</button>
+      </div>
+    </div>
+  </body>
+</html>

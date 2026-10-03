@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>fixture</title>
+    <style>
+      body {
+        margin: 0;
+        font:
+          16px/1.4 system-ui,
+          sans-serif;
+        color: #14202b;
+        background: #fff;
+      }
+      #consent-region {
+        max-width: 32rem;
+        padding: 16px;
+      }
+      button {
+        font: inherit;
+        min-height: 44px;
+        padding: 0 20px;
+        margin-right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="consent-region">
+      <h2>Preferences</h2>
+      <div role="switch" aria-checked="true" tabindex="0" id="sw-analytics">Analytics</div>
+      <div role="switch" aria-checked="false" tabindex="0" id="sw-ads">Advertising</div>
+      <button id="btn-agree" type="button">Save</button>
+    </div>
+  </body>
+</html>
