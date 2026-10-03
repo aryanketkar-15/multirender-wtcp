@@ -11,36 +11,61 @@ jobs:
     defaults: { run: { working-directory: client } }
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: client/package-lock.json }
       - run: npm ci
       - run: npm run lint
       - run: npm run build
       - run: npm test
+      - name: Coverage gate (changed files, 70% lines)
+        run: |
+          npm run test:ci 2>&1 | tee test-ci.log
+          { echo '### client coverage'; echo '```'; grep -A6 'Coverage summary' test-ci.log || true; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
   attestor:
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: attestor } }
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: attestor/package-lock.json }
       - run: npm ci
       - run: npm run lint
       - run: npm run build
       - run: npm test
+      - name: Coverage gate (changed files, 70% lines)
+        run: |
+          npm run test:ci 2>&1 | tee test-ci.log
+          { echo '### attestor coverage'; echo '```'; grep -A6 'Coverage summary' test-ci.log || true; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
   verifier:
     runs-on: ubuntu-latest
     defaults: { run: { working-directory: verifier } }
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm, cache-dependency-path: verifier/package-lock.json }
       - run: npm ci
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('verifier/package-lock.json') }}
+      - run: npx playwright install --with-deps chromium
+        if: steps.pw-cache.outputs.cache-hit != 'true'
+      - run: npx playwright install-deps chromium
+        if: steps.pw-cache.outputs.cache-hit == 'true'
       - run: npm run lint
       - run: npm run build
       - run: npm test
+      - name: Coverage gate (changed files, 70% lines)
+        run: |
+          npm run test:ci 2>&1 | tee test-ci.log
+          { echo '### verifier coverage'; echo '```'; grep -A6 'Coverage summary' test-ci.log || true; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
   server:
     runs-on: ubuntu-latest
@@ -64,8 +89,25 @@ jobs:
       DB_PASS: root
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: shivammathur/setup-php@v2
-        with: { php-version: '8.2', extensions: 'pdo_mysql, sodium, mbstring', tools: composer }
+        with:
+          php-version: '8.2'
+          extensions: pdo_mysql, sodium, mbstring
+          coverage: pcov
+          tools: composer
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('server/composer.lock') }}
       - run: composer install --no-interaction --prefer-dist
       - run: composer lint
-      - run: composer test
+      - name: Tests (run twice to prove isolation)
+        run: |
+          vendor/bin/phpunit --coverage-clover coverage/clover.xml --coverage-text | tee test.log
+          vendor/bin/phpunit
+          { echo '### server coverage'; echo '```'; grep -E 'Lines:|Classes:' test.log || true; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+      - name: Coverage gate (changed files, 70% lines)
+        working-directory: .
+        run: php scripts/php-coverage-gate.php server/coverage/clover.xml origin/main 70

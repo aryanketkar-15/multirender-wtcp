@@ -18,7 +18,7 @@
   "autoload-dev": { "psr-4": { "Mra\\Tests\\": "tests/" } },
   "scripts": {
     "lint": "phpcs",
-    "test": "phpunit --do-not-fail-on-empty-test-suite"
+    "test": "phpunit"
   },
   "config": { "sort-packages": true, "platform-check": true }
 }
