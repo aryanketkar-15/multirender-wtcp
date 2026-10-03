@@ -10,6 +10,7 @@ use Mra\Controller\AttestationController;
 use Mra\Controller\AuthController;
 use Mra\Controller\BundleController;
 use Mra\Controller\KeyController;
+use Mra\Controller\LogController;
 use Mra\Controller\OtpController;
 use Mra\Controller\PackController;
 use Mra\Controller\PasswordController;
@@ -83,7 +84,8 @@ final class Kernel
             $app->nonces,
             $app->commitments,
             $app->sessions,
-            $app->audit
+            $app->audit,
+            $app->log
         );
         $this->router->add('POST', '/api/client-key', [$bundle, 'registerKey'], [$session, $csrf, $auth, $verified]);
         $this->router->add('GET', '/api/bundle', [$bundle, 'show'], [$session, $auth, $verified]);
@@ -92,6 +94,11 @@ final class Kernel
         $adminController = new AdminController($app->consentSettings, $app->audit);
         $this->router->add('GET', '/api/admin/consent', [$adminController, 'show'], [$session, $auth, $admin]);
         $this->router->add('POST', '/api/admin/consent', [$adminController, 'update'], [$session, $csrf, $auth, $admin]);
+
+        $logController = new LogController($app->log, $app->sth);
+        $this->router->add('GET', '/api/log/head', [$logController, 'head']);
+        $this->router->add('GET', '/api/log/proof/{index}', [$logController, 'proof']);
+        $this->router->add('GET', '/api/log/consistency', [$logController, 'consistency']);
 
         $attestation = new AttestationController($app->attestationValidator, $app->security, $app->audit);
         $this->router->add('POST', '/api/attest', [$attestation, 'submit'], [$session, $csrf, $auth, $verified]);

@@ -107,6 +107,8 @@ jobs:
       DB_TEST_NAME: mra_test
       DB_USER: root
       DB_PASS: root
+      DB_ADMIN_USER: root
+      DB_ADMIN_PASS: root
       # Throwaway, test-only values. They protect nothing: the CI database is created and destroyed per run.
       APP_ENCRYPTION_KEY: 00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff
       BLIND_INDEX_PEPPER: ffeeddccbbaa99887766554433221100ffeeddccbbaa99887766554433221100

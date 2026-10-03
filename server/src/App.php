@@ -33,10 +33,12 @@ use Mra\Service\AuthService;
 use Mra\Service\BundleBuilder;
 use Mra\Service\CommitmentService;
 use Mra\Service\ConsentBundleFactory;
+use Mra\Service\MerkleLog;
 use Mra\Service\NonceService;
 use Mra\Service\OtpService;
 use Mra\Service\PasswordResetService;
 use Mra\Service\RegistrationService;
+use Mra\Service\SthService;
 use Mra\Service\SessionService;
 use Mra\Service\ThrottleService;
 use Mra\Support\Clock;
@@ -62,6 +64,8 @@ final class App
     public readonly ConsentSettingsRepository $consentSettings;
     public readonly ConsentBundleFactory $consentBundles;
     public readonly AttestorRegistry $attestors;
+    public readonly MerkleLog $log;
+    public readonly SthService $sth;
     public readonly AttestationRepository $attestations;
     public readonly AttestationValidator $attestationValidator;
     public readonly PasswordResetService $passwordReset;
@@ -104,6 +108,8 @@ final class App
         $this->bundles = new BundleRepository($pdo);
         $this->consentSettings = new ConsentSettingsRepository($pdo);
         $this->attestors = new AttestorRegistry($pdo);
+        $this->log = new MerkleLog($pdo, $clock);
+        $this->sth = new SthService($pdo, $this->log, new Signer($keys), $clock);
         $this->attestations = new AttestationRepository($pdo);
         $this->attestationValidator = new AttestationValidator(
             $pdo,
@@ -114,6 +120,7 @@ final class App
             $this->attestations,
             $this->commitments,
             $this->sessions,
+            $this->log,
             $clock
         );
         $this->consentBundles = new ConsentBundleFactory(

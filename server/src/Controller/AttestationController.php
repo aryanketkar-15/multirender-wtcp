@@ -67,6 +67,8 @@ final class AttestationController
             'attestation_id' => $result['id'],
             'attestation_hash' => $result['attestation_hash'],
             'commitment_hash' => $result['commitment_hash'],
+            'log_leaf_index' => $result['log_leaf_index'],
+            'commitment_leaf_index' => $result['commitment_leaf_index'],
         ], 201);
     }
 }

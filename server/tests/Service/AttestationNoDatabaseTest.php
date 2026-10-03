@@ -17,6 +17,7 @@ use Mra\Repository\SessionRepository;
 use Mra\Service\AttestationRejected;
 use Mra\Service\AttestationValidator;
 use Mra\Service\CommitmentService;
+use Mra\Service\MerkleLog;
 use Mra\Service\NonceService;
 use Mra\Service\SessionService;
 use Mra\Tests\Support\BrokenPdo;
@@ -52,6 +53,7 @@ final class AttestationNoDatabaseTest extends TestCase
             new AttestationRepository($pdo),
             new CommitmentService(new Signer(new KeyStore('k', str_repeat("\x03", 32))), $commitments, $clock),
             new SessionService(new SessionRepository($pdo), $clock),
+            new MerkleLog($pdo, $clock),
             $clock
         );
         $now = new DateTimeImmutable();
