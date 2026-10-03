@@ -11,6 +11,7 @@ node_modules/
 vendor/
 client/dist/
 attestor/dist/
+verifier/dist/
 composer.phar
 
 # research artefacts
