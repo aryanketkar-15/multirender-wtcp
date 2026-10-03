@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import { api, setCsrfToken } from './api';
+import { discardClientKeys } from './clientKey';
 
 export interface User {
   id: number;
@@ -82,6 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = useCallback(async () => {
     await api.post('/api/logout');
+    await discardClientKeys(); // the signing key does not outlive the session
     setUser(null);
     await refresh(); // a fresh anonymous session and CSRF token for the next sign-in
   }, [refresh]);

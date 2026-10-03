@@ -10,6 +10,10 @@ export function setCsrfToken(token: string | null): void {
   csrfToken = token;
 }
 
+export function getCsrfToken(): string | null {
+  return csrfToken;
+}
+
 /**
  * JSON POST/GET against the PHP server. Cookies travel same-origin only (the session cookie is
  * HttpOnly and SameSite=Strict, so scripts never see it). Network failures resolve to a
