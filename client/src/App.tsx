@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Register } from './pages/Register';
+import { VerifyEmail } from './pages/VerifyEmail';
 
 function Home() {
   return (
@@ -22,6 +23,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/verify" element={<VerifyEmail />} />
       </Routes>
     </BrowserRouter>
   );
