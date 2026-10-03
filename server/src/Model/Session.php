@@ -13,7 +13,8 @@ final class Session
         public readonly ?int $userId,
         public readonly string $csrfToken,
         public readonly DateTimeImmutable $createdAt,
-        public readonly DateTimeImmutable $lastSeenAt
+        public readonly DateTimeImmutable $lastSeenAt,
+        public readonly ?string $clientPubkeyFpr = null
     ) {
     }
 

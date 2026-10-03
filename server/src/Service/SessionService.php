@@ -33,6 +33,12 @@ final class SessionService
         return ['token' => $token, 'session' => $this->repo->find(self::hash($token)) ?? throw new \RuntimeException('session')];
     }
 
+    /** Reloads a session by its stored id without touching idle time (used within one request). */
+    public function resolveById(string $idHash): ?Session
+    {
+        return $this->repo->find($idHash);
+    }
+
     public function resolve(?string $token): ?Session
     {
         if ($token === null || !preg_match('/^[a-f0-9]{64}$/', $token)) {
@@ -64,6 +70,12 @@ final class SessionService
         $new = $this->create($userId);
         $this->repo->delete($old->id);
         return $new;
+    }
+
+    /** Registers the browser's public-key fingerprint; attestation commitments bind to it. */
+    public function registerClientKey(Session $session, string $fingerprint): void
+    {
+        $this->repo->setClientKey($session->id, $fingerprint);
     }
 
     public function destroy(Session $session): void

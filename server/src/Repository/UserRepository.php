@@ -61,6 +61,11 @@ final class UserRepository extends BaseRepository
         $this->run('UPDATE users SET verified_at = UTC_TIMESTAMP(6) WHERE id = ? AND verified_at IS NULL', [$id]);
     }
 
+    public function setAdmin(int $id, bool $admin): void
+    {
+        $this->run('UPDATE users SET is_admin = ? WHERE id = ?', [$admin ? 1 : 0, $id]);
+    }
+
     public function updatePasswordHash(int $id, string $hash): void
     {
         $this->run('UPDATE users SET password_hash = ? WHERE id = ?', [$hash, $id]);
@@ -70,7 +75,7 @@ final class UserRepository extends BaseRepository
     private function fetchOne(string $where, array $params): ?User
     {
         $row = $this->run(
-            'SELECT id, email_enc, name_enc, password_hash, verified_at, created_at FROM users ' . $where,
+            'SELECT id, email_enc, name_enc, password_hash, verified_at, created_at, is_admin FROM users ' . $where,
             $params
         )->fetch();
         if ($row === false) {
@@ -82,7 +87,8 @@ final class UserRepository extends BaseRepository
             $this->cipher->decrypt($row['name_enc'], self::CTX_NAME),
             $row['password_hash'],
             $row['verified_at'],
-            $row['created_at']
+            $row['created_at'],
+            (bool) $row['is_admin']
         );
     }
 }

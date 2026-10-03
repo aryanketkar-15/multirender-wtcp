@@ -17,7 +17,9 @@ use Mra\Mail\DeferredMailer;
 use Mra\Mail\MailerInterface;
 use Mra\Mail\OutboxMailer;
 use Mra\Mail\SmtpMailer;
+use Mra\Repository\BundleRepository;
 use Mra\Repository\CommitmentRepository;
+use Mra\Repository\ConsentSettingsRepository;
 use Mra\Repository\Database;
 use Mra\Repository\OtpRepository;
 use Mra\Repository\PackRepository;
@@ -25,7 +27,10 @@ use Mra\Repository\PasswordResetRepository;
 use Mra\Repository\SessionRepository;
 use Mra\Repository\UserRepository;
 use Mra\Service\AuthService;
+use Mra\Service\BundleBuilder;
 use Mra\Service\CommitmentService;
+use Mra\Service\ConsentBundleFactory;
+use Mra\Service\NonceService;
 use Mra\Service\OtpService;
 use Mra\Service\PasswordResetService;
 use Mra\Service\RegistrationService;
@@ -49,6 +54,10 @@ final class App
     public readonly AuthService $auth;
     public readonly PackRepository $packs;
     public readonly CommitmentService $commitments;
+    public readonly NonceService $nonces;
+    public readonly BundleRepository $bundles;
+    public readonly ConsentSettingsRepository $consentSettings;
+    public readonly ConsentBundleFactory $consentBundles;
     public readonly PasswordResetService $passwordReset;
 
     public function __construct(
@@ -85,6 +94,15 @@ final class App
         );
         $this->packs = new PackRepository($pdo);
         $this->commitments = new CommitmentService(new Signer($keys), new CommitmentRepository($pdo), $clock);
+        $this->nonces = new NonceService($pdo, $clock);
+        $this->bundles = new BundleRepository($pdo);
+        $this->consentSettings = new ConsentSettingsRepository($pdo);
+        // The Attestor Module does not exist until Phase 3; its hash is a clearly marked placeholder until then.
+        $this->consentBundles = new ConsentBundleFactory(
+            new BundleBuilder(),
+            Env::get('ATTESTOR_HASH', 'sha256:' . hash('sha256', 'attestor-pending')) ?? '',
+            Env::get('ATTESTOR_VERSION', '0.0.0-pending') ?? '0.0.0-pending'
+        );
         $this->passwordReset = new PasswordResetService(
             $this->users,
             new PasswordResetRepository($pdo),
