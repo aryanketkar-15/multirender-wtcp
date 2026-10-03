@@ -17,10 +17,13 @@ use Mra\Mail\OutboxMailer;
 use Mra\Mail\SmtpMailer;
 use Mra\Repository\Database;
 use Mra\Repository\OtpRepository;
+use Mra\Repository\PackRepository;
+use Mra\Repository\PasswordResetRepository;
 use Mra\Repository\SessionRepository;
 use Mra\Repository\UserRepository;
 use Mra\Service\AuthService;
 use Mra\Service\OtpService;
+use Mra\Service\PasswordResetService;
 use Mra\Service\RegistrationService;
 use Mra\Service\SessionService;
 use Mra\Service\ThrottleService;
@@ -40,6 +43,8 @@ final class App
     public readonly RegistrationService $registration;
     public readonly SessionService $sessions;
     public readonly AuthService $auth;
+    public readonly PackRepository $packs;
+    public readonly PasswordResetService $passwordReset;
 
     public function __construct(
         public readonly PDO $pdo,
@@ -71,6 +76,18 @@ final class App
             $this->audit,
             $this->security,
             $clock
+        );
+        $this->packs = new PackRepository($pdo);
+        $this->passwordReset = new PasswordResetService(
+            $this->users,
+            new PasswordResetRepository($pdo),
+            $this->sessions,
+            $this->throttle,
+            $mailer,
+            $this->audit,
+            $this->security,
+            $clock,
+            Env::get('APP_URL', 'http://localhost:5173') ?? 'http://localhost:5173'
         );
     }
 
