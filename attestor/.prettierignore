@@ -1,3 +1,5 @@
 dist
 coverage
 package-lock.json
+tests/fixtures/*.json
+tests/fixtures/*.html
