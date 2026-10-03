@@ -1,9 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
+import { AuthProvider, useAuth } from './lib/auth';
+import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { VerifyEmail } from './pages/VerifyEmail';
 
 function Home() {
+  const { user } = useAuth();
   return (
     <Layout>
       <div className="card">
@@ -12,6 +15,7 @@ function Home() {
           Evidence of what a consent screen showed, committed by the server before you act and
           attested by your browser when you do.
         </p>
+        {user ? <p>Signed in as {user.email}.</p> : null}
       </div>
     </Layout>
   );
@@ -20,11 +24,14 @@ function Home() {
 export function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/verify" element={<VerifyEmail />} />
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/verify" element={<VerifyEmail />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

@@ -25,7 +25,7 @@ final class OtpService
     public const REQUEST_WINDOW = 3600;
 
     /** A valid bcrypt hash of a random value, used to equalise work on the "no such code" paths. */
-    private readonly string $decoyHash;
+    private ?string $decoyHash = null;
 
     public function __construct(
         private readonly UserRepository $users,
@@ -36,7 +36,6 @@ final class OtpService
         private readonly SecurityLogger $security,
         private readonly Clock $clock
     ) {
-        $this->decoyHash = password_hash(bin2hex(random_bytes(8)), PASSWORD_BCRYPT);
     }
 
     /**
@@ -71,6 +70,11 @@ final class OtpService
         $this->audit->record('otp.issued', 'success', $user->id, 'user', (string) $user->id, [], $ip);
     }
 
+    private function decoy(): string
+    {
+        return $this->decoyHash ??= password_hash(bin2hex(random_bytes(8)), PASSWORD_BCRYPT);
+    }
+
     /** Returns true on success. Wrong, expired, locked and unknown-user cases are indistinguishable. */
     public function verify(string $email, string $code, string $ip): bool
     {
@@ -83,7 +87,7 @@ final class OtpService
             && new DateTimeImmutable($row['expires_at'], new \DateTimeZone('UTC')) > $now;
 
         // Always run one password_verify so response time does not reveal which case applied.
-        $matches = password_verify($code, $live && $row !== null ? $row['code_hash'] : $this->decoyHash);
+        $matches = password_verify($code, $live && $row !== null ? $row['code_hash'] : $this->decoy());
 
         if ($user === null || $row === null) {
             return false;

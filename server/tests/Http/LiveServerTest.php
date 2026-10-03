@@ -58,7 +58,7 @@ final class LiveServerTest extends TestCase
     /** The live server commits on its own connection, so its rows must be removed explicitly. */
     private function cleanCommittedRows(): void
     {
-        foreach (['throttle_event', 'security_log', 'audit_log'] as $table) {
+        foreach (['sessions', 'throttle_event', 'security_log', 'audit_log'] as $table) {
             $this->pdo->exec("DELETE FROM {$table}");
         }
     }
@@ -80,6 +80,25 @@ final class LiveServerTest extends TestCase
         $headers = $http_response_header ?? [];
         preg_match('#HTTP/\S+ (\d{3})#', $headers[0] ?? '', $m);
         return ['status' => (int) ($m[1] ?? 0), 'headers' => $headers, 'body' => $text];
+    }
+
+    public function testLiveSetCookieHeaderCarriesAllThreeHardeningAttributes(): void // T1.4.2 (live header)
+    {
+        $text = (string) file_get_contents("http://127.0.0.1:{$this->port}/api/session", false, stream_context_create([
+            'http' => ['ignore_errors' => true, 'timeout' => 10],
+        ]));
+        $this->assertArrayHasKey('csrf_token', json_decode($text, true));
+        $cookie = '';
+        foreach ($http_response_header ?? [] as $header) {
+            if (stripos($header, 'Set-Cookie:') === 0) {
+                $cookie = $header;
+            }
+        }
+        $this->assertStringStartsWith('Set-Cookie: mra_sid=', $cookie);
+        foreach (['Secure', 'HttpOnly', 'SameSite=Strict', 'Path=/'] as $attribute) {
+            $this->assertStringContainsString('; ' . $attribute, $cookie);
+        }
+        $this->assertStringNotContainsString('Domain', $cookie);
     }
 
     public function testServerEnforcesValidationWithoutTheBrowser(): void // T1.2.6

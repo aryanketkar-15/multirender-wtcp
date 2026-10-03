@@ -6,8 +6,10 @@ namespace Mra\Controller;
 
 use Mra\Http\Request;
 use Mra\Http\Response;
+use Mra\Model\Session;
 use Mra\Service\OtpService;
 use Mra\Service\RateLimitedException;
+use Mra\Service\SessionService;
 use Mra\Validation\Rules\Email;
 use Mra\Validation\Schemas;
 use Mra\Validation\Validator;
@@ -16,7 +18,7 @@ final class OtpController
 {
     public const FAILURE = 'That code is incorrect or has expired';
 
-    public function __construct(private readonly OtpService $otp)
+    public function __construct(private readonly OtpService $otp, private readonly SessionService $sessions)
     {
     }
 
@@ -28,7 +30,10 @@ final class OtpController
         }
         $email = $request->body['email'] ?? null;
         if (!(new Email())->passes($email, [])) {
-            return Response::json(['error' => 'validation_failed', 'fields' => ['email' => 'Enter a valid email address']], 422);
+            return Response::json(
+                ['error' => 'validation_failed', 'fields' => ['email' => 'Enter a valid email address']],
+                422
+            );
         }
         try {
             $this->otp->request((string) $email, $request->ip);
@@ -50,8 +55,16 @@ final class OtpController
             return Response::json(['error' => 'invalid_code', 'message' => self::FAILURE], 422);
         }
         $ok = $this->otp->verify((string) $request->body['email'], (string) $request->body['code'], $request->ip);
-        return $ok
-            ? Response::json(['status' => 'verified'])
-            : Response::json(['error' => 'invalid_code', 'message' => self::FAILURE], 422);
+        if (!$ok) {
+            return Response::json(['error' => 'invalid_code', 'message' => self::FAILURE], 422);
+        }
+        $res = Response::json(['status' => 'verified']);
+        // A privilege change: if the caller holds a session, replace its identifier (fixation defence).
+        $session = $request->attribute('session');
+        if ($session instanceof Session) {
+            $new = $this->sessions->regenerate($session, $session->userId);
+            $res = $res->withCookie(SessionService::cookie($new['token']));
+        }
+        return $res;
     }
 }
