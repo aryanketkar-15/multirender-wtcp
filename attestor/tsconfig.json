@@ -11,5 +11,5 @@
     "declaration": true,
     "types": ["jest", "node"]
   },
-  "include": ["src", "tests", "jest.config.ts"]
+  "include": ["src", "tests"]
 }

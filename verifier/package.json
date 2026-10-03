@@ -7,8 +7,9 @@
     "build": "tsc -p tsconfig.build.json",
     "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
-    "test": "jest --passWithNoTests",
-    "test:coverage": "jest --coverage --passWithNoTests"
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest -c jest.ci.cjs --changedSince=origin/main --passWithNoTests"
   },
   "dependencies": {
     "playwright": "^1.48.2"
