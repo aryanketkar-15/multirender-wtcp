@@ -50,6 +50,28 @@ final class NonceService extends BaseRepository
         return $nonce;
     }
 
+    /**
+     * The state of a nonce without changing it.
+     *
+     * @return array{session_id:string,consumed:bool,expired:bool,bundle_id:string}|null
+     */
+    public function inspect(string $nonce): ?array
+    {
+        $row = $this->run(
+            'SELECT session_id, bundle_id, consumed_at, expires_at FROM mra_nonce WHERE nonce = ?',
+            [$nonce]
+        )->fetch();
+        if ($row === false) {
+            return null;
+        }
+        return [
+            'session_id' => (string) $row['session_id'],
+            'bundle_id' => (string) $row['bundle_id'],
+            'consumed' => $row['consumed_at'] !== null,
+            'expired' => (string) $row['expires_at'] <= SystemClock::db($this->clock->now()),
+        ];
+    }
+
     /** True for exactly one caller; false for replay, wrong session, expiry or unknown nonce. */
     public function consume(string $nonce, string $sessionId): bool
     {

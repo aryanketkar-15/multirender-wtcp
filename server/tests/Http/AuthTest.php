@@ -328,7 +328,7 @@ final class AuthTest extends TestCase
         $res = $this->call(
             $this->kernel,
             'POST',
-            '/api/attestation',
+            '/api/attest',
             [],
             '198.51.100.10',
             ['x-csrf-token' => $made['session']->csrfToken],
@@ -344,13 +344,13 @@ final class AuthTest extends TestCase
         $res = $this->call(
             $this->kernel,
             'POST',
-            '/api/attestation',
+            '/api/attest',
             [],
             '198.51.100.10',
             ['x-csrf-token' => $s['csrf']],
             [SessionService::COOKIE => $s['token']]
         );
-        $this->assertSame(501, $res->status, 'guards pass; the endpoint itself arrives in Phase 4');
+        $this->assertSame(422, $res->status, 'the guards pass and the real endpoint rejects an empty body');
     }
 
     public function testAnonymousCallerCannotReachAttestation(): void
@@ -359,7 +359,7 @@ final class AuthTest extends TestCase
         $res = $this->call(
             $this->kernel,
             'POST',
-            '/api/attestation',
+            '/api/attest',
             [],
             '198.51.100.10',
             ['x-csrf-token' => $s['csrf']],

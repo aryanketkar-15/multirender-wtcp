@@ -17,6 +17,7 @@ use Mra\Mail\DeferredMailer;
 use Mra\Mail\MailerInterface;
 use Mra\Mail\OutboxMailer;
 use Mra\Mail\SmtpMailer;
+use Mra\Repository\AttestationRepository;
 use Mra\Repository\AttestorRegistry;
 use Mra\Repository\BundleRepository;
 use Mra\Repository\CommitmentRepository;
@@ -27,6 +28,7 @@ use Mra\Repository\PackRepository;
 use Mra\Repository\PasswordResetRepository;
 use Mra\Repository\SessionRepository;
 use Mra\Repository\UserRepository;
+use Mra\Service\AttestationValidator;
 use Mra\Service\AuthService;
 use Mra\Service\BundleBuilder;
 use Mra\Service\CommitmentService;
@@ -60,6 +62,8 @@ final class App
     public readonly ConsentSettingsRepository $consentSettings;
     public readonly ConsentBundleFactory $consentBundles;
     public readonly AttestorRegistry $attestors;
+    public readonly AttestationRepository $attestations;
+    public readonly AttestationValidator $attestationValidator;
     public readonly PasswordResetService $passwordReset;
 
     public function __construct(
@@ -100,6 +104,18 @@ final class App
         $this->bundles = new BundleRepository($pdo);
         $this->consentSettings = new ConsentSettingsRepository($pdo);
         $this->attestors = new AttestorRegistry($pdo);
+        $this->attestations = new AttestationRepository($pdo);
+        $this->attestationValidator = new AttestationValidator(
+            $pdo,
+            new CommitmentRepository($pdo),
+            $this->bundles,
+            $this->nonces,
+            $this->attestors,
+            $this->attestations,
+            $this->commitments,
+            $this->sessions,
+            $clock
+        );
         $this->consentBundles = new ConsentBundleFactory(
             new BundleBuilder(),
             $this->attestors,
