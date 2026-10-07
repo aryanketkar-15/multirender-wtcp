@@ -2,28 +2,45 @@
 
 Everything below was run during development. The automatic check at the end is the safest fallback.
 
-## 0. One-time setup
+## 0. Setup and starting the servers (Windows PowerShell)
 
-- Node 22, PHP 8.2 with `sodium`, `openssl`, `pdo_mysql`, `mbstring`, Composer, MariaDB or MySQL, Chromium (`npx playwright install chromium` inside `client/`).
-- Create databases `mra` and `mra_test`, a user with rights on both (and on `mra\_%`), then copy `server/.env.example` to `server/.env` and fill every value. Generate the keys with `php -r "echo bin2hex(random_bytes(32));"` (three different values: `APP_ENCRYPTION_KEY`, `BLIND_INDEX_PEPPER`, `MRA_SERVER_SK`). Set `ATTESTOR_BASE_URL=http://127.0.0.1:8090`.
-- Install and build:
+Windows PowerShell 5.1 has no `&&`: run one command per line. XAMPP's PHP is not on the PATH and needs
+the sodium extension, so define this in every PowerShell window you use:
 
-```bash
-cd server && composer install && php bin/migrate.php up && cd ..
-cd client && npm ci && cd ..
-cd attestor && npm ci && npm run build && cd ..
-php server/bin/register_attestor.php attestor/dist/manifest.json
+```powershell
+function php { & C:\xampp\php\php.exe -d extension=sodium -d extension=zip @args }
 ```
 
-## 1. Start the three servers (three terminals)
+**Already set up on the development machine** (the folder has `vendor`, `node_modules`, the built attestor, the
+migrated database and `server\.env`): skip straight to the servers below. On a new machine you need Node 22,
+PHP 8.2 (`sodium`, `openssl`, `pdo_mysql`, `mbstring`), Composer, MariaDB/MySQL and Chromium; create databases
+`mra` and `mra_test`, fill `server\.env` from `.env.example` (three different 64-hex keys for
+`APP_ENCRYPTION_KEY`, `BLIND_INDEX_PEPPER`, `MRA_SERVER_SK`; `ATTESTOR_BASE_URL=http://127.0.0.1:8090`), then:
 
-```bash
-php -S 127.0.0.1:8080 -t server/public server/dev-router.php   # the consent server (API)
-node attestor/scripts/serve.cjs 8090                            # the independent attestor host
-cd client && npx vite --port 5173 --host 127.0.0.1               # the web app
+```powershell
+Set-Location server; composer install; php bin\migrate.php up; Set-Location ..
+Set-Location client; npm ci; Set-Location ..
+Set-Location attestor; npm ci; npm run build; Set-Location ..
+php server\bin\register_attestor.php attestor\dist\manifest.json
 ```
 
-Open `http://127.0.0.1:5173`. Verification emails appear as text files in `server/var/outbox/` (development has no real SMTP).
+The database must be running (the development instance listens on port 3307; see `server\.env`).
+
+## 1. Start the three servers (three PowerShell windows)
+
+```powershell
+Set-Location server; php -S 127.0.0.1:8080 -t public dev-router.php
+```
+
+```powershell
+Set-Location attestor; node scripts\serve.cjs 8090
+```
+
+```powershell
+Set-Location client; npx vite --port 5173 --host 127.0.0.1
+```
+
+Open `http://127.0.0.1:5173`. Verification emails appear as text files in `server\var\outbox` (no real SMTP in development).
 
 ## 2. Live demo script (about 6 minutes)
 
@@ -44,11 +61,11 @@ What you **cannot** show yet: the independent verifier turning a mismatch into a
 
 With the database up and the attestor registered:
 
-```bash
-MRA_PHP="php" node e2e/full-stack.cjs
+```powershell
+$env:MRA_PHP="C:\xampp\php\php.exe"; $env:MRA_PHP_FLAGS="-d extension=sodium"; $env:OPENSSL_CONF="C:\xampp\apache\conf\openssl.cnf"; node e2e\full-stack.cjs
 ```
 
-It starts the three servers itself, drives a real browser through register, OTP, login, consent, post-load tampering, replay and forgery, and prints 20 PASS lines, including a JavaScript verification of the log's Merkle proofs and the Ed25519 head signature. On Windows with XAMPP, set `MRA_PHP` to the full `php.exe` path and `MRA_PHP_FLAGS="-d extension=sodium"`.
+It starts the three servers itself, drives a real browser through register, OTP, login, consent, post-load tampering, replay and forgery, and prints 20 PASS lines, including a JavaScript verification of the log's Merkle proofs and the Ed25519 head signature. Do not run it while the three servers above are already running (it starts its own).
 
 ## 4. Showing the tests
 
