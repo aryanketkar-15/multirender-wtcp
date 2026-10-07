@@ -200,6 +200,17 @@ final class LogIntegrationTest extends TestCase
         $this->assertSame($att['attestation_hash'], 'sha256:' . hash('sha256', Jcs::encode($res['leaf']['record']['attestation'])));
     }
 
+    public function testAnAcceptedAttestationIsCoveredByASignedHeadAtOnce(): void
+    {
+        $b = $this->bundle();
+        $att = $this->send('POST', '/api/attest', $this->client->body($b))->data();
+        $head = $this->publicGet('/api/log/head');
+        $this->assertSame(200, $head->status, 'no manual signing step is needed');
+        $this->assertSame($att['log_leaf_index'] + 1, $head->data()['record']['tree_size']);
+        $res = $this->publicGet('/api/log/proof/' . $att['log_leaf_index'])->data();
+        $this->assertTrue(MerkleProof::verifyAgainstHead($res['proof'], $res['tree_head']['record']));
+    }
+
     public function testProofsBeyondTheLatestHeadAreNotYetAvailable(): void
     {
         $this->bundle();

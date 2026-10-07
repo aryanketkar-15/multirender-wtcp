@@ -95,11 +95,18 @@ export async function createAttestation(input: AttestationInput): Promise<Signed
 }
 
 export type SubmitResult =
-  | { ok: true; attestationHash: string }
+  | {
+      ok: true;
+      attestationHash: string;
+      logLeafIndex: number | null;
+      commitmentLeafIndex: number | null;
+    }
   | { ok: false; code: string; message: string; retryable: boolean };
 
 interface SubmitBody {
   attestation_hash?: string;
+  log_leaf_index?: number;
+  commitment_leaf_index?: number | null;
   error?: string;
   message?: string;
 }
@@ -118,7 +125,12 @@ const MESSAGES: Record<string, string> = {
 export async function submitAttestation(signed: SignedAttestation): Promise<SubmitResult> {
   const res = await api.post<SubmitBody>('/api/attest', signed);
   if (res.status === 201 && res.data.attestation_hash) {
-    return { ok: true, attestationHash: res.data.attestation_hash };
+    return {
+      ok: true,
+      attestationHash: res.data.attestation_hash,
+      logLeafIndex: res.data.log_leaf_index ?? null,
+      commitmentLeafIndex: res.data.commitment_leaf_index ?? null,
+    };
   }
   if (res.status === 0 || res.status >= 500) {
     return {
