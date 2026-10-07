@@ -68,13 +68,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = useCallback(
     async (email: string, password: string): Promise<LoginOutcome> => {
-      const res = await api.post<SessionPayload>('/api/login', { email, password });
+      let res = await api.post<SessionPayload & { error?: string }>('/api/login', {
+        email,
+        password,
+      });
+      if (res.status === 403 && res.data.error === 'csrf_rejected') {
+        // The session was replaced behind our back (for example by email verification), so the
+        // CSRF token we hold is stale. Fetch the current one and try once more.
+        await refresh();
+        res = await api.post<SessionPayload & { error?: string }>('/api/login', {
+          email,
+          password,
+        });
+      }
       if (res.ok) {
         apply(res.data);
         return { kind: 'ok' };
       }
       if (res.status === 401) return { kind: 'invalid' };
-      if (res.status === 403) return { kind: 'unverified' };
+      if (res.status === 403 && res.data.error === 'email_not_verified')
+        return { kind: 'unverified' };
+      if (res.status === 403) return { kind: 'error' };
       if (res.status === 429) return { kind: 'throttled', retryAfter: null };
       return { kind: 'error' };
     },
