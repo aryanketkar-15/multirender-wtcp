@@ -42,6 +42,8 @@ export function Register() {
     setSubmitting(false);
 
     if (res.status === 201) {
+      // Send the verification code now; the verify page counts down from this request.
+      await api.post('/api/otp/request', { email: email.trim() });
       // Router state, not the URL: an email address must not end up in history or logs.
       navigate('/verify', { state: { email: email.trim() } });
     } else if (res.status === 422 && res.data.fields) {
