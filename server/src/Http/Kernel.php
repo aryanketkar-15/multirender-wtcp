@@ -100,7 +100,7 @@ final class Kernel
         $this->router->add('GET', '/api/log/proof/{index}', [$logController, 'proof']);
         $this->router->add('GET', '/api/log/consistency', [$logController, 'consistency']);
 
-        $attestation = new AttestationController($app->attestationValidator, $app->security, $app->audit);
+        $attestation = new AttestationController($app->attestationValidator, $app->security, $app->audit, $app->sth);
         $this->router->add('POST', '/api/attest', [$attestation, 'submit'], [$session, $csrf, $auth, $verified]);
     }
 }

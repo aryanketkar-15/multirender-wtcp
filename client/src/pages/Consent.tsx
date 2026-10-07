@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { CriticalRegion } from '../components/CriticalRegion';
 import type { ConsentAction } from '../components/CriticalRegion';
 import { EvidencePanel } from '../components/EvidencePanel';
+import { RecordedPanel } from '../components/RecordedPanel';
 import { Layout } from '../components/Layout';
 import { api } from '../lib/api';
 import { createAttestation, submitAttestation } from '../lib/attestation';
@@ -24,7 +25,13 @@ type State =
   | { kind: 'no-attestor'; reason: string }
   | ({ kind: 'ready' } & Loaded)
   | ({ kind: 'submitting'; action: ConsentAction } & Loaded)
-  | ({ kind: 'recorded'; action: ConsentAction; attestationHash: string } & Loaded)
+  | ({
+      kind: 'recorded';
+      action: ConsentAction;
+      attestationHash: string;
+      logLeafIndex: number | null;
+      commitmentLeafIndex: number | null;
+    } & Loaded)
   | ({
       kind: 'failed';
       action: ConsentAction;
@@ -103,7 +110,14 @@ export function Consent() {
     setState({ kind: 'submitting', action, ...ctx });
     const result = await submitAttestation(signed);
     if (result.ok) {
-      setState({ kind: 'recorded', action, attestationHash: result.attestationHash, ...ctx });
+      setState({
+        kind: 'recorded',
+        action,
+        attestationHash: result.attestationHash,
+        logLeafIndex: result.logLeafIndex,
+        commitmentLeafIndex: result.commitmentLeafIndex,
+        ...ctx,
+      });
     } else {
       setState({
         kind: 'failed',
@@ -213,13 +227,12 @@ export function Consent() {
             </div>
           ) : null}
           {regionState.kind === 'recorded' ? (
-            <div className="banner ok" role="status">
-              Your choice (<strong>{regionState.action}</strong>) was recorded as signed evidence.
-              <br />
-              <small>
-                Reference: <code>{regionState.attestationHash}</code>
-              </small>
-            </div>
+            <RecordedPanel
+              action={regionState.action}
+              attestationHash={regionState.attestationHash}
+              logLeafIndex={regionState.logLeafIndex}
+              commitmentLeafIndex={regionState.commitmentLeafIndex}
+            />
           ) : null}
           {regionState.kind === 'failed' ? (
             <div className="banner error" role="alert">

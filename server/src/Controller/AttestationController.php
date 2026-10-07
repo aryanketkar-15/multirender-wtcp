@@ -12,13 +12,15 @@ use Mra\Model\Session;
 use Mra\Model\User;
 use Mra\Service\AttestationRejected;
 use Mra\Service\AttestationValidator;
+use Mra\Service\SthService;
 
 final class AttestationController
 {
     public function __construct(
         private readonly AttestationValidator $validator,
         private readonly SecurityLogger $security,
-        private readonly AuditLogger $audit
+        private readonly AuditLogger $audit,
+        private readonly SthService $sth
     ) {
     }
 
@@ -63,6 +65,13 @@ final class AttestationController
             $request->ip,
             $request->userAgent
         );
+        // Cover the new entries with a signed tree head straight away, so a proof can be checked at
+        // once. The attestation is already committed; failing to sign a head must not undo it.
+        try {
+            $this->sth->sign();
+        } catch (\Throwable) {
+            error_log('tree head could not be signed after an attestation');
+        }
         return Response::json([
             'attestation_id' => $result['id'],
             'attestation_hash' => $result['attestation_hash'],
