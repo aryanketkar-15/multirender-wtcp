@@ -70,6 +70,19 @@ describe('Register page', () => {
     });
   });
 
+  it('requests the verification code as soon as the account is created', async () => {
+    const post = jest
+      .spyOn(apiModule.api, 'post')
+      .mockResolvedValue({ ok: true, status: 201, data: {} });
+    const user = setup();
+    await fillValid(user);
+    await user.click(screen.getByRole('button', { name: 'Create account' }));
+    await screen.findByText('verify page for asha@example.com');
+    expect(post).toHaveBeenCalledWith('/api/otp/request', { email: 'asha@example.com' });
+    const paths = post.mock.calls.map(([path]) => path);
+    expect(paths.indexOf('/api/register')).toBeLessThan(paths.indexOf('/api/otp/request'));
+  });
+
   it('renders field errors returned by the server', async () => {
     jest.spyOn(apiModule.api, 'post').mockResolvedValue({
       ok: false,
