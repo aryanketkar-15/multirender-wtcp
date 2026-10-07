@@ -178,11 +178,36 @@ describe('Login page', () => {
   it('points an unverified user to the verification page', async () => {
     const post = jest
       .spyOn(apiModule.api, 'post')
-      .mockResolvedValue({ ok: false, status: 403, data: {} });
+      .mockResolvedValue({ ok: false, status: 403, data: { error: 'email_not_verified' } });
     const { user } = renderLogin(post);
     await submit(user);
     await user.click(await screen.findByRole('link', { name: 'Enter your code' }));
     expect(screen.getByText('verify page')).toBeInTheDocument();
+  });
+
+  it('refreshes a stale CSRF token and retries once, instead of blaming verification', async () => {
+    const post = jest.spyOn(apiModule.api, 'post');
+    post.mockResolvedValueOnce({ ok: false, status: 403, data: { error: 'csrf_rejected' } });
+    post.mockResolvedValueOnce({
+      ok: true,
+      status: 200,
+      data: { authenticated: true, user: alice, csrf_token: 'fresh' },
+    });
+    const { user } = renderLogin(post);
+    await submit(user);
+    expect(await screen.findByText('home page')).toBeInTheDocument();
+    expect(post).toHaveBeenCalledTimes(2);
+    expect(apiModule.api.get).toHaveBeenCalledTimes(2); // load, then the refresh
+  });
+
+  it('does not call a plain 403 an unverified email', async () => {
+    const post = jest
+      .spyOn(apiModule.api, 'post')
+      .mockResolvedValue({ ok: false, status: 403, data: {} });
+    const { user } = renderLogin(post);
+    await submit(user);
+    expect(await screen.findByText(/something went wrong/i)).toBeInTheDocument();
+    expect(screen.queryByText(/verify your email/i)).not.toBeInTheDocument();
   });
 
   it.each([

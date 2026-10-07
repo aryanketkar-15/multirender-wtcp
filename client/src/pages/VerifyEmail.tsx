@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FormField } from '../components/FormField';
 import { Layout } from '../components/Layout';
 import { api } from '../lib/api';
+import { useAuth } from '../lib/auth';
 import { validateOtp } from '../lib/validation';
 import type { Errors } from '../lib/validation';
 
@@ -18,6 +19,7 @@ export function formatCountdown(seconds: number): string {
 
 export function VerifyEmail() {
   const location = useLocation();
+  const { refresh } = useAuth();
   const stateEmail = (location.state as { email?: string } | null)?.email ?? '';
   const [email, setEmail] = useState(stateEmail);
   const [code, setCode] = useState('');
@@ -70,6 +72,7 @@ export function VerifyEmail() {
     const res = await api.post('/api/otp/verify', { email, code });
     setVerifying(false);
     if (res.ok) {
+      await refresh(); // verification replaces the session, so pick up the new CSRF token
       setVerified(true);
     } else if (res.status === 422) {
       // One message for wrong, expired and locked codes: the server never says which.
