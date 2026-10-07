@@ -43,3 +43,4 @@ reviewed by the other developer.
 - [`PROJECT_LOG.md`](PROJECT_LOG.md): decisions, rejected alternatives, late changes, findings, measurements, open items, and the verified checklists.
 - [`docs/BUILD_PLAYBOOK.md`](docs/BUILD_PLAYBOOK.md): the build playbook with task boxes, per-test-case status (✅ / ◐ / ☐) and phase checkpoints (commit hashes) maintained as work lands.
 - [`docs/attestor-release.md`](docs/attestor-release.md): how to release the Attestor Module.
+- [`docs/FACULTY_BRIEFING.md`](docs/FACULTY_BRIEFING.md) and [`docs/DEMO.md`](docs/DEMO.md): the project explained, progress, honest limits, and the demonstration runbook.
