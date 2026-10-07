@@ -37,3 +37,9 @@ test for all four modules.
 
 `main` is protected. One branch per milestone, `feat/<milestone-id>-<slug>`, merged by pull request
 reviewed by the other developer.
+
+## Project documents kept current in this repository
+
+- [`PROJECT_LOG.md`](PROJECT_LOG.md): decisions, rejected alternatives, late changes, findings, measurements, open items, and the verified checklists.
+- [`docs/BUILD_PLAYBOOK.md`](docs/BUILD_PLAYBOOK.md): the build playbook with task boxes, per-test-case status (✅ / ◐ / ☐) and phase checkpoints (commit hashes) maintained as work lands.
+- [`docs/attestor-release.md`](docs/attestor-release.md): how to release the Attestor Module.
