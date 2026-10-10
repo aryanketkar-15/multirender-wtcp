@@ -8,4 +8,6 @@ export * from './checks/regionPolicy';
 export * from './checks/registry';
 export * from './checks/unpack';
 export * from './checks/verify';
+export * from './diff';
+export * from './render';
 export * from './server';

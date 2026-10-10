@@ -15,11 +15,37 @@ export const Verdict = {
   REGION_POLICY_VIOLATION: 'REGION_POLICY_VIOLATION',
   ATTESTOR_UNRECOGNISED: 'ATTESTOR_UNRECOGNISED',
   PROCEEDS_TO_RENDER: 'PROCEEDS_TO_RENDER',
-  RENDER_DIGEST_MISMATCH: 'RENDER_DIGEST_MISMATCH',
+  DIGEST_MISMATCH: 'DIGEST_MISMATCH',
+  RENDER_DIGEST_MISMATCH: 'DIGEST_MISMATCH',
+  CONTEXT_MISMATCH: 'CONTEXT_MISMATCH',
+  RENDER_FAILED: 'RENDER_FAILED',
   VERIFIED: 'VERIFIED',
 } as const;
 
 export type VerdictType = (typeof Verdict)[keyof typeof Verdict];
+
+export interface NodeDifference {
+  field: string;
+  attested: unknown;
+  recomputed: unknown;
+}
+
+export interface MismatchedNode {
+  index: number;
+  role: string;
+  name?: string;
+  text?: string;
+  differences: Record<string, { attested: unknown; recomputed: unknown }>;
+  summary: string;
+}
+
+export interface DiffResult {
+  hasMismatch: boolean;
+  totalAttestedNodes: number;
+  totalRecomputedNodes: number;
+  mismatchedNodes: MismatchedNode[];
+  summary: string;
+}
 
 export interface StageResult {
   stage: number;
@@ -36,6 +62,11 @@ export interface VerificationResult {
   failedStage?: number;
   stages: StageResult[];
   message: string;
+  diff?: DiffResult;
+  recomputedDigests?: {
+    critical_region_digest: string;
+    context_digest: string;
+  };
 }
 
 export interface ManifestFile {

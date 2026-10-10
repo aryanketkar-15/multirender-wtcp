@@ -1606,13 +1606,13 @@ git push origin feat/5.2-verifier-checks
 **2. Objective.** Perform the one step neither party performs — the step that makes the evidence mutual.
 
 **3. Tasks to complete.**
-- [ ] Playwright **headed under Xvfb**, not headless
-- [ ] Viewport, device scale factor, forced-colors and reduced-motion set from the attestation's env vector
-- [ ] Font stack pinned in the container
-- [ ] Load the attestor module at the version named in the commitment
-- [ ] Recompute both digests; compare
-- [ ] Node-level diff on mismatch: index, role, attested vs recomputed field values
-- [ ] Dockerfile pinning browser and font versions
+- [x] Playwright **headed under Xvfb**, not headless
+- [x] Viewport, device scale factor, forced-colors and reduced-motion set from the attestation's env vector
+- [x] Font stack pinned in the container
+- [x] Load the attestor module at the version named in the commitment
+- [x] Recompute both digests; compare
+- [x] Node-level diff on mismatch: index, role, attested vs recomputed field values
+- [x] Dockerfile pinning browser and font versions
 
 **4. Files / modules affected.** `verifier/src/render.ts`, `verifier/src/diff.ts`, `verifier/Dockerfile`, `verifier/tests/render.test.ts`.
 
@@ -1626,22 +1626,22 @@ The diff is what makes the output usable. A bare hash mismatch is useless in a d
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T5.3.1 | **Honest pack verifies** | Honest pack | Verify | `VERIFIED`; digests match | ☐ |
-| T5.3.2 | **Text change detected** | Server altered disclosure | Verify original pack | `DIGEST_MISMATCH`; node named | ☐ |
-| T5.3.3 | **Prominence change detected** | Reject shrunk and greyed, text identical | Verify | `DIGEST_MISMATCH` on the reject node; buckets shown | ☐ |
-| T5.3.4 | Pre-tick detected | Checkbox pre-ticked | Verify | `DIGEST_MISMATCH` on the checkbox | ☐ |
-| T5.3.5 | Context mismatch | Overlay outside the region | Verify | `CONTEXT_MISMATCH` | ☐ |
-| T5.3.6 | Env profile applied | Pack with `narrow`/`2x` | Verify | Render uses those settings | ☐ |
-| T5.3.7 | Render failure handled | Malformed bundle | Verify | `RENDER_FAILED`, not a crash | ☐ |
-| T5.3.8 | Diff names the node | Mismatch produced | Inspect output | Index, role, attested and recomputed values present | ☐ |
-| T5.3.9 | **Repeatable** | Honest pack | Verify 20 times | Same verdict every time | ☐ |
-| T5.3.10 | Container reproducible | Image built twice | Verify the same pack | Identical digests | ☐ |
+| T5.3.1 | **Honest pack verifies** | Honest pack | Verify | `VERIFIED`; digests match | ✅ |
+| T5.3.2 | **Text change detected** | Server altered disclosure | Verify original pack | `DIGEST_MISMATCH`; node named | ✅ |
+| T5.3.3 | **Prominence change detected** | Reject shrunk and greyed, text identical | Verify | `DIGEST_MISMATCH` on the reject node; buckets shown | ✅ |
+| T5.3.4 | Pre-tick detected | Checkbox pre-ticked | Verify | `DIGEST_MISMATCH` on the checkbox | ✅ |
+| T5.3.5 | Context mismatch | Overlay outside the region | Verify | `CONTEXT_MISMATCH` | ✅ |
+| T5.3.6 | Env profile applied | Pack with `narrow`/`2x` | Verify | Render uses those settings | ✅ |
+| T5.3.7 | Render failure handled | Malformed bundle | Verify | `RENDER_FAILED`, not a crash | ✅ |
+| T5.3.8 | Diff names the node | Mismatch produced | Inspect output | Index, role, attested and recomputed values present | ✅ |
+| T5.3.9 | **Repeatable** | Honest pack | Verify 20 times | Same verdict every time | ✅ |
+| T5.3.10 | Container reproducible | Image built twice | Verify the same pack | Identical digests | ✅ |
 
 **7. Verification checklist.**
-- [ ] Honest pack verifies 20 consecutive times with no flake
-- [ ] All three demo attacks produce correct verdicts
-- [ ] Diff names the diverging node and its fields
-- [ ] Container pins browser and fonts; two builds agree
+- [x] Honest pack verifies 20 consecutive times with no flake
+- [x] All three demo attacks produce correct verdicts
+- [x] Diff names the diverging node and its fields
+- [x] Container pins browser and fonts; two builds agree
 
 **8. Completion criteria.** Re-rendering reproduces digests reliably, all attack cases are detected with node-level diffs, and results are repeatable.
 
