@@ -4,7 +4,7 @@ Read this first. It is written for an AI agent or developer joining the project 
 
 ## 1. The project in one paragraph
 
-**PS-3 Mutual Render Attestation** (Group TY-A9, VIT Pune, Web Technologies, faculty Prof. Vidya Gaikwad). When a user clicks "I agree", the company's record of what the screen showed is one-sided. Our system produces evidence neither side can forge alone: (1) before interaction the server signs a **commitment** to a sealed, hashed render bundle (Ed25519); (2) at the moment of the click the user's browser computes a **semantic digest** of the real page (via an independently hosted **Attestor Module**) and signs it with a non-extractable ECDSA P-256 key; (3) both go into an **append-only RFC 6962 Merkle log** whose signed heads are published externally; (4) an **independent verifier** (NOT BUILT YET) re-renders the committed bundle and compares digests. Reasons, rejected alternatives and prior art are in `PROJECT_LOG.md` (decisions D-01..D-35).
+**PS-3 Mutual Render Attestation** (Group TY-A9, VIT Pune, Web Technologies, faculty Prof. Rahul Diwate). When a user clicks "I agree", the company's record of what the screen showed is one-sided. Our system produces evidence neither side can forge alone: (1) before interaction the server signs a **commitment** to a sealed, hashed render bundle (Ed25519); (2) at the moment of the click the user's browser computes a **semantic digest** of the real page (via an independently hosted **Attestor Module**) and signs it with a non-extractable ECDSA P-256 key; (3) both go into an **append-only RFC 6962 Merkle log** whose signed heads are published externally; (4) an **independent verifier** (NOT BUILT YET) re-renders the committed bundle and compares digests. Reasons, rejected alternatives and prior art are in `PROJECT_LOG.md` (decisions D-01..D-35).
 
 ## 2. Source-of-truth documents (all in this repo)
 
@@ -64,7 +64,7 @@ Latest counts: 415 PHP tests, 159 client tests, 234 attestor tests, verifier 2 s
 - **O-02:** no real `mra-sth-witness` repo or schedule; `GitWitness` + `bin/publish_sth.php` tested only against a local bare git remote.
 - WebAuthn tier not built. Real SMTP delivery never exercised (dev uses a file outbox in `server/var/outbox`). CI never run. Second-machine checks (T2.1.1 bundle hash, T3.5.1 attestor hash, O-09) not done.
 - **O-03:** the 20-mutation suite must be fixed BEFORE thresholds are finalised (thresholds are provisional).
-- **O-01:** ask Prof. Gaikwad whether syllabus units III/IV must be demonstrated; if yes the verifier is Spring Boot, not Node. Decide before Phase 5.
+- **O-01:** ask Prof. Diwate whether syllabus units III/IV must be demonstrated; if yes the verifier is Spring Boot, not Node. Decide before Phase 5.
 - Cross-browser: 30/30 cells agree across Chromium, Chrome, Edge, Firefox on one OS, small sample, no Safari.
 - Attestor host is a separate origin on the same machine, not independently operated.
 - Known findings (PROJECT_LOG 12.3): zero-width injection leaves the semantic digest unchanged (caught by the bundle hash); one large button makes siblings read `suppressed`; pointer-events:none overlays are invisible to occlusion; `aria-hidden` visible content is skipped.
