@@ -71,11 +71,13 @@ final class Kernel
         $this->router->add('POST', '/api/password/forgot', [$password, 'forgot']);
         $this->router->add('POST', '/api/password/reset', [$password, 'reset']);
 
-        // Evidence packs: every route sits behind ownership authorization (stubs until a later phase).
+        // Evidence packs: every route sits behind ownership authorization.
         $owns = new AuthorizationMiddleware($app->security, fn (string $id): ?int => $app->packs->ownerOf($id));
-        $packs = new PackController();
+        $packs = new PackController($app->packs, $app->packBuilder, $app->audit);
+        $this->router->add('GET', '/api/pack', [$packs, 'index'], [$session, $auth]);
+        $this->router->add('GET', '/api/packs', [$packs, 'index'], [$session, $auth]);
         $this->router->add('GET', '/api/pack/{id}', [$packs, 'show'], [$session, $auth, $owns]);
-        $this->router->add('GET', '/api/pack/{id}/download', [$packs, 'show'], [$session, $auth, $owns]);
+        $this->router->add('GET', '/api/pack/{id}/download', [$packs, 'download'], [$session, $auth, $owns]);
 
         $bundle = new BundleController(
             $app->consentSettings,
@@ -100,7 +102,7 @@ final class Kernel
         $this->router->add('GET', '/api/log/proof/{index}', [$logController, 'proof']);
         $this->router->add('GET', '/api/log/consistency', [$logController, 'consistency']);
 
-        $attestation = new AttestationController($app->attestationValidator, $app->security, $app->audit, $app->sth);
+        $attestation = new AttestationController($app->attestationValidator, $app->security, $app->audit, $app->sth, $app->packs);
         $this->router->add('POST', '/api/attest', [$attestation, 'submit'], [$session, $csrf, $auth, $verified]);
     }
 }

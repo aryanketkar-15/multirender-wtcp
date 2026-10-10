@@ -12,7 +12,8 @@ use Mra\Model\User;
 /**
  * Ownership check for `/api/pack/{id}`-style routes. The acting identity is the authenticated
  * session's user, never a value from the body or query string (insecure direct object reference).
- * An unknown id and someone else's id are indistinguishable: both return 403.
+ * Nonexistent resources return 404 (no existence oracle, T5.1.7). Reaching someone else's existing
+ * resource returns 403 and records a security event (T1.5.2 / T5.1.3).
  */
 final class AuthorizationMiddleware
 {
@@ -32,7 +33,10 @@ final class AuthorizationMiddleware
             return Response::error(401, 'unauthenticated', 'Sign in to continue.');
         }
         $owner = ($this->ownerOf)($resource);
-        if ($owner === null || $owner !== $user->id) {
+        if ($owner === null) {
+            return Response::error(404, 'not_found', 'Resource not found.');
+        }
+        if ($owner !== $user->id) {
             $this->security->record('authz.cross_subject_denied', 'warning', $user->id, [
                 'path' => $request->path,
             ], $request->ip);

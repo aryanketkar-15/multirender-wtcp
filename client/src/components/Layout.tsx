@@ -15,6 +15,8 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
         <nav className="app-nav" aria-label="Primary">
           {user ? (
             <>
+              <Link to="/consent">Consent</Link>
+              <Link to="/packs">Evidence Packs</Link>
               <span aria-label="Signed in as">{user.name}</span>
               <button type="button" className="btn secondary" onClick={() => void logout()}>
                 Sign out

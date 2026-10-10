@@ -100,6 +100,7 @@ export type SubmitResult =
       attestationHash: string;
       logLeafIndex: number | null;
       commitmentLeafIndex: number | null;
+      packId?: string | null;
     }
   | { ok: false; code: string; message: string; retryable: boolean };
 
@@ -107,6 +108,7 @@ interface SubmitBody {
   attestation_hash?: string;
   log_leaf_index?: number;
   commitment_leaf_index?: number | null;
+  pack_id?: string;
   error?: string;
   message?: string;
 }
@@ -130,6 +132,7 @@ export async function submitAttestation(signed: SignedAttestation): Promise<Subm
       attestationHash: res.data.attestation_hash,
       logLeafIndex: res.data.log_leaf_index ?? null,
       commitmentLeafIndex: res.data.commitment_leaf_index ?? null,
+      packId: res.data.pack_id ?? null,
     };
   }
   if (res.status === 0 || res.status >= 500) {

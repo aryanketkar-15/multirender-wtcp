@@ -61,12 +61,10 @@ final class AuthorizationTest extends TestCase
         $this->assertSame(2, $this->denials());
     }
 
-    public function testUnknownPackIsIndistinguishableFromSomeoneElsesPack(): void
+    public function testNonexistentPackReturns404(): void // T5.1.7
     {
-        $other = $this->get('/api/pack/pack-bob', $this->alice);
         $unknown = $this->get('/api/pack/pack-does-not-exist', $this->alice);
-        $this->assertSame($other->status, $unknown->status);
-        $this->assertSame($other->body, $unknown->body);
+        $this->assertSame(404, $unknown->status);
     }
 
     public function testUnauthenticatedRequestsAreDenied(): void // T1.5.3
