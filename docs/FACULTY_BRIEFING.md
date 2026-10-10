@@ -1,6 +1,6 @@
 # PS-3 Mutual Render Attestation: progress briefing
 
-Group TY-A9, Department of Computer Engineering, VIT Pune · Web Technologies · Faculty: Prof. Vidya Gaikwad
+Group TY-A9, Department of Computer Engineering, VIT Pune · Web Technologies · Faculty: Prof. Rahul Diwate
 
 ## 1. What the project is (30 seconds)
 

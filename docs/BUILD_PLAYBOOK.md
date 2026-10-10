@@ -19,7 +19,7 @@ These have been defaulted so the playbook is usable today. Three are low-risk; o
 
 | ID | Item | Default taken | Risk if wrong |
 |---|---|---|---|
-| O-01 | Verifier runtime: Node.js or Spring Boot | **Node.js + Playwright**, per the current design | Architectural. Confined to Phase 5 by design so the swap costs ~2 days, not a rewrite. Ask Prof. Gaikwad before Milestone 5.2 |
+| O-01 | Verifier runtime: Node.js or Spring Boot | **Node.js + Playwright**, per the current design | Architectural. Confined to Phase 5 by design so the swap costs ~2 days, not a rewrite. Ask Prof. Diwate before Milestone 5.2 |
 | O-02 | Where signed tree heads are published externally | A second GitHub repository (`mra-sth-witness`), written by CI | Low — one module, swappable |
 | O-03 | SMTP provider for OTP delivery | Gmail app password in development; Brevo free tier for the demo | Low — config only |
 | O-04 | Project deadline | None given; milestones sized in half-days of one person's work | Sequencing is dependency-driven, not date-driven. Add dates once known |
@@ -1541,7 +1541,7 @@ git push origin feat/5.1-evidence-pack
 
 **1. Milestone name.** Independent verifier service performing all non-render validation.
 
-**⚠ Decision gate:** resolve **O-01** (Node.js or Spring Boot) with Prof. Gaikwad before starting. The checks below are runtime-independent; only the implementation language changes, and the swap costs roughly two days if decided now rather than at Phase 7.
+**⚠ Decision gate:** resolve **O-01** (Node.js or Spring Boot) with Prof. Diwate before starting. The checks below are runtime-independent; only the implementation language changes, and the swap costs roughly two days if decided now rather than at Phase 7.
 
 **2. Objective.** Implement verifier stages 1–10, which run before the expensive render.
 

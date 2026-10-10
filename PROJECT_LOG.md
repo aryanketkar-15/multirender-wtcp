@@ -2,7 +2,7 @@
 
 **Maintained by:** Group TY-A9, Department of Computer Engineering, Vishwakarma Institute of Technology, Pune
 **Course:** Web Technologies
-**Faculty:** Prof. Vidya Gaikwad
+**Faculty:** Prof. Rahul Diwate
 **Document opened:** 2026-09-29
 **Last updated:** 2026-10-03 (build playbook phases 0–2 implemented)
 
@@ -202,7 +202,7 @@ Changes arriving after a phase has been considered settled. Maintained separatel
 
 | ID | Item | Decision needed from | Blocks |
 |---|---|---|---|
-| O-01 | Whether syllabus units III and IV must be demonstrated; if so the verifier moves from Node.js to Spring Boot | Prof. Gaikwad | Phase 4 |
+| O-01 | Whether syllabus units III and IV must be demonstrated; if so the verifier moves from Node.js to Spring Boot | Prof. Diwate | Phase 4 |
 | O-02 | Where signed tree heads will be published externally | Team | Phase 3 |
 | O-03 | The fixed list of 20 adversarial mutations, to be settled before digest thresholds are implemented | Team | Phase 2 |
 | O-04 | The end-to-end workflow in the design document does not yet include registration, OTP verification and login | Team | Report drafting |
