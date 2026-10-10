@@ -31,6 +31,7 @@ type State =
       attestationHash: string;
       logLeafIndex: number | null;
       commitmentLeafIndex: number | null;
+      packId?: string | null;
     } & Loaded)
   | ({
       kind: 'failed';
@@ -116,6 +117,7 @@ export function Consent() {
         attestationHash: result.attestationHash,
         logLeafIndex: result.logLeafIndex,
         commitmentLeafIndex: result.commitmentLeafIndex,
+        packId: result.packId,
         ...ctx,
       });
     } else {
@@ -232,6 +234,7 @@ export function Consent() {
               attestationHash={regionState.attestationHash}
               logLeafIndex={regionState.logLeafIndex}
               commitmentLeafIndex={regionState.commitmentLeafIndex}
+              packId={regionState.packId}
             />
           ) : null}
           {regionState.kind === 'failed' ? (

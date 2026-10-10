@@ -7,6 +7,7 @@ interface Props {
   attestationHash: string;
   logLeafIndex: number | null;
   commitmentLeafIndex: number | null;
+  packId?: string | null;
 }
 
 /** What happens after consent is recorded: the reference, a log check anyone can run, and a restart. */
@@ -15,6 +16,7 @@ export function RecordedPanel({
   attestationHash,
   logLeafIndex,
   commitmentLeafIndex,
+  packId,
 }: Props) {
   const [check, setCheck] = useState<LogCheck | 'running' | null>(null);
 
@@ -56,6 +58,19 @@ export function RecordedPanel({
             {check === 'running' ? 'Checking…' : 'Check this record in the log'}
           </button>
         ) : null}
+        {packId ? (
+          <a
+            href={`/api/pack/${packId}/download`}
+            download={`evidence-pack-${packId}.zip`}
+            className="btn secondary"
+          >
+            Download evidence pack (.zip)
+          </a>
+        ) : (
+          <a href="/packs" className="btn secondary">
+            My evidence packs
+          </a>
+        )}
         <button type="button" className="btn secondary" onClick={() => location.reload()}>
           Start over
         </button>

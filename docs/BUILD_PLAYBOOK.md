@@ -1492,11 +1492,11 @@ git push origin feat/4.4-merkle-log
 **2. Objective.** Give the user a portable witness the server cannot retract.
 
 **3. Tasks to complete.**
-- [ ] Assemble: sealed bundle, commitment, server signature, attestation, client signature, both inclusion proofs, signed tree head, client public key
-- [ ] Documented ZIP structure with a `manifest.json` carrying a schema version
-- [ ] `GET /api/pack/{id}` behind the 1.5 authorization middleware
-- [ ] Audit log on download; security log on cross-subject attempt
-- [ ] React pack list and download UI
+- [x] Assemble: sealed bundle, commitment, server signature, attestation, client signature, both inclusion proofs, signed tree head, client public key
+- [x] Documented ZIP structure with a `manifest.json` carrying a schema version
+- [x] `GET /api/pack/{id}` behind the 1.5 authorization middleware
+- [x] Audit log on download; security log on cross-subject attempt
+- [x] React pack list and download UI
 
 **4. Files / modules affected.** `server/src/Service/EvidencePackBuilder.php`, `server/src/Controller/PackController.php`, `client/src/pages/MyPacks.tsx`, `docs/evidence-pack-format.md`, tests.
 
@@ -1508,19 +1508,19 @@ Version the manifest schema from the first release. Unversioned formats become u
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T5.1.1 | Pack downloads | Attestation complete | Download | Valid ZIP with all components | ☐ |
-| T5.1.2 | **Self-contained** | Pack downloaded | Inspect offline | All components present; no external reference | ☐ |
-| T5.1.3 | **Cross-subject denied** | A logged in | Request B's pack | 403; security log entry | ☐ |
-| T5.1.4 | Unauthenticated denied | No session | Request a pack | 401 | ☐ |
-| T5.1.5 | Manifest versioned | Pack downloaded | Inspect `manifest.json` | Schema version present | ☐ |
-| T5.1.6 | Download audited | Pack downloaded | Check audit log | Entry with actor and pack id | ☐ |
-| T5.1.7 | Nonexistent pack | Logged in | Request an unknown id | 404, not 403 — no existence oracle | ☐ |
+| T5.1.1 | Pack downloads | Attestation complete | Download | Valid ZIP with all components | ✅ |
+| T5.1.2 | **Self-contained** | Pack downloaded | Inspect offline | All components present; no external reference | ✅ |
+| T5.1.3 | **Cross-subject denied** | A logged in | Request B's pack | 403; security log entry | ✅ |
+| T5.1.4 | Unauthenticated denied | No session | Request a pack | 401 | ✅ |
+| T5.1.5 | Manifest versioned | Pack downloaded | Inspect `manifest.json` | Schema version present | ✅ |
+| T5.1.6 | Download audited | Pack downloaded | Check audit log | Entry with actor and pack id | ✅ |
+| T5.1.7 | Nonexistent pack | Logged in | Request an unknown id | 404, not 403 — no existence oracle | ✅ |
 
 **7. Verification checklist.**
-- [ ] Pack opens and parses with no network access
-- [ ] Cross-subject download denied and logged
-- [ ] Manifest carries a schema version
-- [ ] Format documented well enough to implement a verifier against
+- [x] Pack opens and parses with no network access
+- [x] Cross-subject download denied and logged
+- [x] Manifest carries a schema version
+- [x] Format documented well enough to implement a verifier against
 
 **8. Completion criteria.** Packs export completely, verify offline, and are reachable only by their subject.
 

@@ -33,6 +33,7 @@ use Mra\Service\AuthService;
 use Mra\Service\BundleBuilder;
 use Mra\Service\CommitmentService;
 use Mra\Service\ConsentBundleFactory;
+use Mra\Service\EvidencePackBuilder;
 use Mra\Service\MerkleLog;
 use Mra\Service\NonceService;
 use Mra\Service\OtpService;
@@ -69,6 +70,7 @@ final class App
     public readonly AttestationRepository $attestations;
     public readonly AttestationValidator $attestationValidator;
     public readonly PasswordResetService $passwordReset;
+    public readonly EvidencePackBuilder $packBuilder;
 
     public function __construct(
         public readonly PDO $pdo,
@@ -138,6 +140,15 @@ final class App
             $this->security,
             $clock,
             Env::get('APP_URL', 'http://localhost:5173') ?? 'http://localhost:5173'
+        );
+        $this->packBuilder = new EvidencePackBuilder(
+            $pdo,
+            $this->bundles,
+            new CommitmentRepository($pdo),
+            $this->attestations,
+            $this->packs,
+            $this->log,
+            $this->sth
         );
     }
 

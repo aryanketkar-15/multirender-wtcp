@@ -6,6 +6,7 @@ import { AdminConsent } from './pages/AdminConsent';
 import { Consent } from './pages/Consent';
 import { ForgotPassword } from './pages/ForgotPassword';
 import { Login } from './pages/Login';
+import { MyPacks } from './pages/MyPacks';
 import { Register } from './pages/Register';
 import { ResetPassword } from './pages/ResetPassword';
 import { VerifyEmail } from './pages/VerifyEmail';
@@ -23,6 +24,8 @@ function Home() {
         {user ? (
           <p>
             Signed in as {user.email}. <Link to="/consent">Open the consent page</Link>
+            {' · '}
+            <Link to="/packs">My evidence packs</Link>
             {user.admin ? (
               <>
                 {' · '}
@@ -47,6 +50,14 @@ export function App() {
             element={
               <RequireAuth>
                 <Consent />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/packs"
+            element={
+              <RequireAuth>
+                <MyPacks />
               </RequireAuth>
             }
           />

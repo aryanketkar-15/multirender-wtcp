@@ -489,3 +489,20 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 | O-12 | The verifier does not yet re-render the committed bundle or compare digests; the server cannot see the client's region, only its digest. Region policy is enforced on the committed bundle only. | Phase 5 |
 | O-13 | The logged attestation proves what the *client reported*. Whether that matches a faithful re-render of the committed bundle is the verifier's job. | Phase 5 |
 | O-14 | Key management for the witness push credentials and the server signing key remains environment-variable only (prototype limitation). | Report |
+
+---
+
+## 14. Build record — playbook phase 5, milestone 5.1: evidence pack export (2026-10-10)
+
+### 14.1 Decisions
+
+- **D-36 Evidence pack self-containment, manifest schema, and 404 nonexistent oracle handling.** The evidence pack is assembled as a single self-contained ZIP archive containing all 8 offline-verifiable witness components: sealed bundle (`bundle.json`), server commitment (`commitment.json`), client attestation (`attestation.json`), client public key in SPKI PEM (`client_pubkey.pem`), Merkle inclusion proofs for commitment and attestation (`inclusion_proof_commitment.json`, `inclusion_proof_attestation.json`), signed tree head (`signed_tree_head.json`), and versioned manifest (`manifest.json` with `schema_version: "1.0"`). Unknown pack IDs return 404 rather than 403 to prevent pack existence oracles (per T5.1.7). Cross-subject download attempts return 403 and log `cross_subject_pack_denied` in `security_log`. Downloads by authorized subjects log `pack.downloaded` in `audit_log`. The archive format and full 11-stage verification algorithm are formally documented in `docs/evidence-pack-format.md`.
+
+### 14.2 What was verified, and how
+
+- Full ZIP archive assembly was verified offline using `ZipArchive` extraction in isolation: all 8 files parse as valid JSON / PEM with SHA-256 integrity hashes matching the manifest.
+- Nonexistent pack ID requests return HTTP 404 (T5.1.7) avoiding existence disclosure. Cross-subject attempts return HTTP 403 and write to `security_log` (T5.1.3). Unauthenticated requests return HTTP 401 (T5.1.4).
+- Successful pack downloads write to `audit_log` with actor user ID and pack ID (T5.1.6).
+- React client UI for My Evidence Packs (`/packs`) implements empty state (T7.2.1), skeleton loader (T7.2.2), pack card list, and direct `.zip` download links, verified via 4/4 passing Jest tests in `client/tests/MyPacks.test.tsx` and all 154 passing client test suite assertions.
+- Complete backend test suite in PHPUnit passes (424 tests, 12638 assertions).
+

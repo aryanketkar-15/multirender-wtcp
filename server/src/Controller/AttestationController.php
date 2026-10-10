@@ -12,6 +12,7 @@ use Mra\Model\Session;
 use Mra\Model\User;
 use Mra\Service\AttestationRejected;
 use Mra\Service\AttestationValidator;
+use Mra\Repository\PackRepository;
 use Mra\Service\SthService;
 
 final class AttestationController
@@ -20,7 +21,8 @@ final class AttestationController
         private readonly AttestationValidator $validator,
         private readonly SecurityLogger $security,
         private readonly AuditLogger $audit,
-        private readonly SthService $sth
+        private readonly SthService $sth,
+        private readonly PackRepository $packs
     ) {
     }
 
@@ -72,12 +74,15 @@ final class AttestationController
         } catch (\Throwable) {
             error_log('tree head could not be signed after an attestation');
         }
+        $packId = 'pack-' . bin2hex(random_bytes(16));
+        $this->packs->create($packId, $user->id, (int) $result['id']);
         return Response::json([
             'attestation_id' => $result['id'],
             'attestation_hash' => $result['attestation_hash'],
             'commitment_hash' => $result['commitment_hash'],
             'log_leaf_index' => $result['log_leaf_index'],
             'commitment_leaf_index' => $result['commitment_leaf_index'],
+            'pack_id' => $packId,
         ], 201);
     }
 }
