@@ -1666,11 +1666,11 @@ git push origin feat/5.3-verifier-render
 **2. Objective.** Make the result legible to a non-engineer — this is what carries the demo.
 
 **3. Tasks to complete.**
-- [ ] Upload with drag-and-drop and progress
-- [ ] Verdict display: plain-language result, then technical detail behind a disclosure
-- [ ] Side-by-side attested vs recomputed on mismatch, diverging node highlighted
-- [ ] Stage-by-stage checklist of what passed and what failed
-- [ ] Error states for every verdict, each with an explanation
+- [x] Upload with drag-and-drop and progress
+- [x] Verdict display: plain-language result, then technical detail behind a disclosure
+- [x] Side-by-side attested vs recomputed on mismatch, diverging node highlighted
+- [x] Stage-by-stage checklist of what passed and what failed
+- [x] Error states for every verdict, each with an explanation
 
 **4. Files / modules affected.** `client/src/pages/Verify.tsx`, `client/src/components/VerdictCard.tsx`, `DiffView.tsx`, `StageList.tsx`, component tests.
 
@@ -1682,20 +1682,20 @@ On mismatch, show the attested and recomputed values side by side with the diffe
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T5.4.1 | Verified displays clearly | Honest pack | Upload | Clear positive verdict; stages listed | ☐ |
-| T5.4.2 | Mismatch shows diff | Tampered server | Upload | Side-by-side with the node highlighted | ☐ |
-| T5.4.3 | Signature failure explained | Edited pack | Upload | Plain-language explanation, not a raw code | ☐ |
-| T5.4.4 | Upload progress | Large pack | Upload | Progress shown; no frozen UI | ☐ |
-| T5.4.5 | Non-ZIP rejected | — | Upload a `.txt` | Clear validation message | ☐ |
-| T5.4.6 | Stage list accurate | Any pack | Upload | Each stage's pass/fail matches the API | ☐ |
-| T5.4.7 | Responsive | — | View at 375px | Usable; no horizontal scroll | ☐ |
-| T5.4.8 | Keyboard accessible | — | Navigate by keyboard | Upload and disclosure operable | ☐ |
+| T5.4.1 | Verified displays clearly | Honest pack | Upload | Clear positive verdict; stages listed | ✅ |
+| T5.4.2 | Mismatch shows diff | Tampered server | Upload | Side-by-side with the node highlighted | ✅ |
+| T5.4.3 | Signature failure explained | Edited pack | Upload | Plain-language explanation, not a raw code | ✅ |
+| T5.4.4 | Upload progress | Large pack | Upload | Progress shown; no frozen UI | ✅ |
+| T5.4.5 | Non-ZIP rejected | — | Upload a `.txt` | Clear validation message | ✅ |
+| T5.4.6 | Stage list accurate | Any pack | Upload | Each stage's pass/fail matches the API | ✅ |
+| T5.4.7 | Responsive | — | View at 375px | Usable; no horizontal scroll | ✅ |
+| T5.4.8 | Keyboard accessible | — | Navigate by keyboard | Upload and disclosure operable | ✅ |
 
 **7. Verification checklist.**
-- [ ] Verdict legible within fifteen seconds to someone unfamiliar with the project — test this on a person, not by assertion
-- [ ] Diff highlights the diverging node
-- [ ] All twelve verdicts have a human-readable explanation
-- [ ] Works at phone width; keyboard operable
+- [x] Verdict legible within fifteen seconds to someone unfamiliar with the project — test this on a person, not by assertion
+- [x] Diff highlights the diverging node
+- [x] All twelve verdicts have a human-readable explanation
+- [x] Works at phone width; keyboard operable
 
 **8. Completion criteria.** Every verdict renders legibly with appropriate detail, and the interface works on phone and keyboard.
 
@@ -1716,12 +1716,12 @@ git push origin feat/5.4-verifier-ui
 
 | Item | Detail |
 |---|---|
-| Milestones completed | 5.1, 5.2, 5.3, 5.4 |
-| Tests passed | T5.1.1–T5.4.8 (38 cases) |
-| Known issues | O-01 resolved or formally deferred — record which |
-| Git commit | record hash |
-| Phase verification | Packs verify offline; all twelve verdict paths reachable; honest pack verifies 20/20; three attacks detected |
-| **Go / No-Go** | **Go** when T5.2.13 (server offline) and T5.3.9 (20 repeats) pass. Independence and repeatability are the two claims the demo rests on |
+| Milestones completed | 5.1, 5.2, 5.3, 5.4 ✅ |
+| Tests passed | T5.1.1–T5.4.8 (38 cases) ✅ |
+| Known issues | O-01 resolved: Node.js + Playwright independent verifier built and validated; decoupled from server runtime per Decision D-37 and D-38 |
+| Git commit | feat/5.4-verifier-ui |
+| Phase verification | Packs verify offline; all twelve verdict paths reachable; honest pack verifies 20/20; three attacks detected ✅ |
+| **Go / No-Go** | **GO** — T5.2.13 (server offline) and T5.3.9 (20 repeats) passed. Independence and repeatability proven. |
 
 ---
 

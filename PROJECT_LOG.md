@@ -544,5 +544,32 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 - **Container reproducibility (T5.3.10):** `verifier/Dockerfile` pins `mcr.microsoft.com/playwright:v1.48.2-jammy`, font libraries (`fonts-dejavu-core`, `fonts-liberation`, `fonts-freefont-ttf`, `fonts-noto-core`), and `xvfb-run` execution.
 - **Full test suite:** All 27 tests in `verifier` (`checks.test.ts`, `render.test.ts`, `index.test.ts`) pass. Linter and Prettier check pass with 0 errors.
 
+---
+
+## 17. Build record — playbook phase 5, milestone 5.4: verifier interface and plain-language dashboard (2026-10-10)
+
+### 17.1 Decisions
+
+- **D-39 Plain-language verdict hierarchy, technical disclosures, and non-engineer readability.** A judge, regulator, or non-technical examiner reviewing mutual attestation evidence cannot evaluate raw SHA-256 hashes or cryptographic curve errors in the ~15 seconds typically given to understand a dispute verdict. The Verifier dashboard (`client/src/pages/Verify.tsx`) introduces a strict two-tier presentation model:
+  1. Primary plain-language verdict tier (`VerdictCard.tsx`): Prominent status category badges (`VERIFIED`, `ATTACK DETECTED`, `TAMPERING DETECTED`, `INVALID PACK`), impact-oriented non-engineer titles and summaries, and an explicit legal significance callout explaining who did what and why the evidence cannot be repudiated.
+  2. Collapsible technical disclosure tier: All low-level cryptographic parameters (raw verdict code, digests, failed stage index, and diagnostic messages) are nested behind an accessible `<details>` disclosure element.
+  3. Visual side-by-side discrepancy evidence (`DiffView.tsx`): On any digest mismatch, rather than showing raw hash differences, the UI highlights diverging DOM nodes and compares attested browser values against server committed values (text content, pre-selected checkboxes, or visual prominence and contrast).
+  4. Progressive upload with client-side archive pre-validation (`verifierClient.ts`): File dropzone rejects non-ZIP uploads instantly with plain-language feedback, while large archives track progress without freezing the UI.
+  5. The verifier dashboard is exposed at `/verifier` and `/verify-pack` without breaking legacy authentication email verification routes (`/verify`).
+
+### 17.2 What was verified, and how
+
+- **Honest pack verified clearly (T5.4.1):** Positive verdict badge `VERIFIED` and all 11 stages listed as passed.
+- **Mismatch shows side-by-side diff (T5.4.2):** Tampered server pack displays highlighted diverging node with text comparison ("No automatic renewal" vs "Automatic renewal applies").
+- **Signature failure plain-language explanation (T5.4.3):** Edited pack displays human-readable explanation of Ed25519 signature failure with raw code in disclosure.
+- **Upload progress (T5.4.4):** Progress bar reflects incremental upload percentage without freezing UI.
+- **Non-ZIP rejected (T5.4.5):** Non-ZIP uploads (e.g. `.txt`) rejected with clear validation error; network call aborted.
+- **Stage list accuracy (T5.4.6):** Stage checklist accurately reflects per-stage pass/fail and failure reasons.
+- **Responsive down to 375px (T5.4.7):** CSS flex and grid layouts collapse vertically without horizontal overflow.
+- **Keyboard accessible (T5.4.8):** Dropzone focusable and operable via Enter/Space; disclosure operable via keyboard.
+- **All 14 verdicts mapped:** All verdict codes possess complete plain-language titles, explanations, and legal significance entries.
+- **Test suite:** All 10 tests in `client/tests/Verify.test.tsx` pass. Full client suite passes (14 suites, 164 tests). Production bundle build passes.
+
+
 
 

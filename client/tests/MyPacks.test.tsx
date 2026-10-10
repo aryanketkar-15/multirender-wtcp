@@ -68,7 +68,9 @@ describe('MyPacks page', () => {
     });
 
     expect(screen.getByText('accept')).toBeInTheDocument();
-    const downloadLink = screen.getByRole('link', { name: /download evidence pack pack-test-12345/i });
+    const downloadLink = screen.getByRole('link', {
+      name: /download evidence pack pack-test-12345/i,
+    });
     expect(downloadLink).toBeInTheDocument();
     expect(downloadLink).toHaveAttribute('href', '/api/pack/pack-test-12345/download');
   });

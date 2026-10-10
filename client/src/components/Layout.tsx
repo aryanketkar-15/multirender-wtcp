@@ -17,6 +17,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
             <>
               <Link to="/consent">Consent</Link>
               <Link to="/packs">Evidence Packs</Link>
+              <Link to="/verifier">Verifier</Link>
               <span aria-label="Signed in as">{user.name}</span>
               <button type="button" className="btn secondary" onClick={() => void logout()}>
                 Sign out
@@ -24,6 +25,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
             </>
           ) : (
             <>
+              <Link to="/verifier">Verifier</Link>
               <Link to="/login">Sign in</Link>
               <Link to="/register">Register</Link>
             </>
