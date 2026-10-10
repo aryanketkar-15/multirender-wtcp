@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest -c jest.config.cjs",
     "generate:manifest": "tsx corpus/generate-manifest.ts",
-    "stability": "tsx harness/stability.ts",
-    "report": "tsx harness/report.ts"
+    "stability": "tsx harness/run-stability.ts",
+    "report": "tsx harness/report.ts",
+    "sensitivity": "tsx harness/run-sensitivity.ts"
   }
 }

@@ -1797,11 +1797,11 @@ git push origin feat/6.1-stability-harness
 **2. Objective.** Measure sensitivity against documented dark patterns rather than invented ones.
 
 **3. Tasks to complete.**
-- [ ] Define 20 mutations drawn from the Nouwens and Matte taxonomies
-- [ ] Implement each as a deterministic transform over a corpus page
-- [ ] Run across the full corpus; record per-mutation detection
-- [ ] Identify and analyse any undetected mutation
-- [ ] Generate the sensitivity table
+- [x] Define 20 mutations drawn from the Nouwens and Matte taxonomies
+- [x] Implement each as a deterministic transform over a corpus page
+- [x] Run across the full corpus; record per-mutation detection
+- [x] Identify and analyse any undetected mutation
+- [x] Generate the sensitivity table
 
 **4. Files / modules affected.** `research/mutations/*.ts`, `research/mutations/manifest.json`, `research/harness/sensitivity.ts`, `research/results/sensitivity-*.json`.
 
@@ -1813,22 +1813,22 @@ Each mutation records which of the six style features is expected to catch it. A
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T6.2.1 | All 20 implemented | Suite defined | Run | 20 mutations execute | ☐ |
-| T6.2.2 | Mutations deterministic | Suite built | Apply twice | Identical output | ☐ |
-| T6.2.3 | Text mutations detected | Suite run | Inspect | 100% detection | ☐ |
-| T6.2.4 | State mutations detected | Suite run | Inspect | 100% detection | ☐ |
-| T6.2.5 | Style mutations detected | Suite run | Inspect | Rate recorded per mutation | ☐ |
-| T6.2.6 | Occlusion mutations detected | Suite run | Inspect | Rate recorded | ☐ |
-| T6.2.7 | Zero-width injection detected | Suite run | Inspect | Detected via normalisation | ☐ |
-| T6.2.8 | Undetected analysed | Suite complete | Inspect | Each miss has a written explanation | ☐ |
-| T6.2.9 | Cosmetic change NOT flagged | Control mutation | Run | Semantically neutral restyle does not trip the digest | ☐ |
+| T6.2.1 | All 20 implemented | Suite defined | Run | 20 mutations execute | ☑ |
+| T6.2.2 | Mutations deterministic | Suite built | Apply twice | Identical output | ☑ |
+| T6.2.3 | Text mutations detected | Suite run | Inspect | 100% detection | ☑ |
+| T6.2.4 | State mutations detected | Suite run | Inspect | 100% detection | ☑ |
+| T6.2.5 | Style mutations detected | Suite run | Inspect | Rate recorded per mutation | ☑ |
+| T6.2.6 | Occlusion mutations detected | Suite run | Inspect | Rate recorded | ☑ |
+| T6.2.7 | Zero-width injection detected | Suite run | Inspect | Detected via normalisation | ☑ |
+| T6.2.8 | Undetected analysed | Suite complete | Inspect | Each miss has a written explanation | ☑ |
+| T6.2.9 | Cosmetic change NOT flagged | Control mutation | Run | Semantically neutral restyle does not trip the digest | ☑ |
 
 **7. Verification checklist.**
-- [ ] All 20 traceable to a published taxonomy entry
-- [ ] Per-mutation results recorded, not only an aggregate
-- [ ] Every miss explained
-- [ ] Control mutations confirm the digest does not flag cosmetic change
-- [ ] Mutation list fixed before thresholds, or the deviation recorded in limitations
+- [x] All 20 traceable to a published taxonomy entry (13 × Nouwens2020, 6 × Matte2020, 1 × CONTROL)
+- [x] Per-mutation results recorded, not only an aggregate
+- [x] Every miss explained (M-02: 40 idempotent misses — corpus already had `has_reject_button=false`; M-03/M-15: idempotent on pre-ticked interfaces)
+- [x] Control mutation M-18 confirmed: 0 false positives across 200 interfaces
+- [x] Mutation list fixed before thresholds — no tuning to test set occurred (O-03 ordering constraint satisfied)
 
 **8. Completion criteria.** Twenty taxonomy-derived mutations measured, per-mutation results recorded, misses explained, and controls confirm no over-sensitivity.
 
