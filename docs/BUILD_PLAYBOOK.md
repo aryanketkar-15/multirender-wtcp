@@ -1546,11 +1546,11 @@ git push origin feat/5.1-evidence-pack
 **2. Objective.** Implement verifier stages 1–10, which run before the expensive render.
 
 **3. Tasks to complete.**
-- [ ] Separate service, separate port, **no database access to `server/`, no shared keys**
-- [ ] `POST /verify` accepting a pack upload
-- [ ] Stage 1 schema; 2 server signature; 3 client signature; 4 key fingerprint; 5 bundle hash; 6 commitment binding; 7 nonce and window; 8 Merkle proofs and leaf ordering; 9 region policy; 10 attestor registry
-- [ ] Distinct verdict per failure
-- [ ] Fixture pack per verdict path in `verifier/fixtures/`
+- [x] Separate service, separate port, **no database access to `server/`, no shared keys**
+- [x] `POST /verify` accepting a pack upload
+- [x] Stage 1 schema; 2 server signature; 3 client signature; 4 key fingerprint; 5 bundle hash; 6 commitment binding; 7 nonce and window; 8 Merkle proofs and leaf ordering; 9 region policy; 10 attestor registry
+- [x] Distinct verdict per failure
+- [x] Fixture pack per verdict path in `verifier/fixtures/`
 
 **4. Files / modules affected.** `verifier/src/server.ts`, `verifier/src/checks/*.ts`, `verifier/src/verdicts.ts`, `verifier/fixtures/*.zip`, `verifier/tests/checks.test.ts`.
 
@@ -1564,25 +1564,25 @@ Order matters: cheap checks first, so a malformed pack costs milliseconds rather
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T5.2.1 | Valid pack passes stages 1–10 | Honest pack | Verify | Proceeds to render stage | ☐ |
-| T5.2.2 | Malformed ZIP | Corrupt file | Verify | `MALFORMED_PACK` | ☐ |
-| T5.2.3 | Bad server signature | Fixture | Verify | `SERVER_SIGNATURE_INVALID` | ☐ |
-| T5.2.4 | **Edited pack** | Attestation text altered | Verify | `CLIENT_SIGNATURE_INVALID` | ☐ |
-| T5.2.5 | Fingerprint mismatch | Fixture | Verify | `KEY_BINDING_INVALID` | ☐ |
-| T5.2.6 | Tampered bundle | Fixture | Verify | `BUNDLE_TAMPERED` | ☐ |
-| T5.2.7 | Commitment binding broken | Fixture | Verify | `COMMITMENT_BINDING_INVALID` | ☐ |
-| T5.2.8 | Expired window | Fixture | Verify | `REPLAY_DETECTED` | ☐ |
-| T5.2.9 | Bad Merkle proof | Fixture | Verify | `MERKLE_PROOF_INVALID` | ☐ |
-| T5.2.10 | Leaf order inverted | Fixture where j < i | Verify | `MERKLE_PROOF_INVALID` | ☐ |
-| T5.2.11 | Region policy violation | Fixture | Verify | `REGION_POLICY_VIOLATION` | ☐ |
-| T5.2.12 | Unknown attestor | Fixture | Verify | `ATTESTOR_UNRECOGNISED` | ☐ |
-| T5.2.13 | **No server dependency** | Attestation server stopped | Verify an honest pack | Stages 1–10 still pass | ☐ |
+| T5.2.1 | Valid pack passes stages 1–10 | Honest pack | Verify | Proceeds to render stage | ✅ |
+| T5.2.2 | Malformed ZIP | Corrupt file | Verify | `MALFORMED_PACK` | ✅ |
+| T5.2.3 | Bad server signature | Fixture | Verify | `SERVER_SIGNATURE_INVALID` | ✅ |
+| T5.2.4 | **Edited pack** | Attestation text altered | Verify | `CLIENT_SIGNATURE_INVALID` | ✅ |
+| T5.2.5 | Fingerprint mismatch | Fixture | Verify | `KEY_BINDING_INVALID` | ✅ |
+| T5.2.6 | Tampered bundle | Fixture | Verify | `BUNDLE_TAMPERED` | ✅ |
+| T5.2.7 | Commitment binding broken | Fixture | Verify | `COMMITMENT_BINDING_INVALID` | ✅ |
+| T5.2.8 | Expired window | Fixture | Verify | `REPLAY_DETECTED` | ✅ |
+| T5.2.9 | Bad Merkle proof | Fixture | Verify | `MERKLE_PROOF_INVALID` | ✅ |
+| T5.2.10 | Leaf order inverted | Fixture where j < i | Verify | `MERKLE_PROOF_INVALID` | ✅ |
+| T5.2.11 | Region policy violation | Fixture | Verify | `REGION_POLICY_VIOLATION` | ✅ |
+| T5.2.12 | Unknown attestor | Fixture | Verify | `ATTESTOR_UNRECOGNISED` | ✅ |
+| T5.2.13 | **No server dependency** | Attestation server stopped | Verify an honest pack | Stages 1–10 still pass | ✅ |
 
 **7. Verification checklist.**
-- [ ] Every one of the ten stages has a fixture that trips it
-- [ ] Verification succeeds with the attestation server stopped (T5.2.13 proves independence)
-- [ ] No shared key or database connection anywhere in `verifier/`
-- [ ] Trust anchor never read from inside the pack
+- [x] Every one of the ten stages has a fixture that trips it
+- [x] Verification succeeds with the attestation server stopped (T5.2.13 proves independence)
+- [x] No shared key or database connection anywhere in `verifier/`
+- [x] Trust anchor never read from inside the pack
 
 **8. Completion criteria.** All ten stages implemented with distinct verdicts, each covered by a fixture, and independence demonstrated with the server offline.
 

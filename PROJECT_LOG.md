@@ -506,3 +506,20 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 - React client UI for My Evidence Packs (`/packs`) implements empty state (T7.2.1), skeleton loader (T7.2.2), pack card list, and direct `.zip` download links, verified via 4/4 passing Jest tests in `client/tests/MyPacks.test.tsx` and all 154 passing client test suite assertions.
 - Complete backend test suite in PHPUnit passes (424 tests, 12638 assertions).
 
+---
+
+## 15. Build record — playbook phase 5, milestone 5.2: verifier skeleton and cheap checks (2026-10-10)
+
+### 15.1 Decisions
+
+- **D-37 Verifier runtime, cheap-checks pipeline order, and trust anchor independence.** The independent verifier is implemented in Node.js + TypeScript as a separate service on port 8095 with zero database connection to `server/` and no shared secret keys. The 10 cheap-check stages run in strict order of computational cost before expensive browser launch: Stage 1 Schema & Unpack (`MALFORMED_PACK`), Stage 2 Server Ed25519 Signature (`SERVER_SIGNATURE_INVALID`), Stage 3 Client ECDSA P-256 Signature (`CLIENT_SIGNATURE_INVALID`), Stage 4 Key Binding (`KEY_BINDING_INVALID`), Stage 5 Bundle Hash (`BUNDLE_TAMPERED`), Stage 6 Commitment Binding (`COMMITMENT_BINDING_INVALID`), Stage 7 Nonce & Window (`REPLAY_DETECTED`), Stage 8 Merkle Proofs & STH (`MERKLE_PROOF_INVALID`), Stage 9 Region Policy (`REGION_POLICY_VIOLATION`), and Stage 10 Attestor Registry (`ATTESTOR_UNRECOGNISED`). The server's Ed25519 public key is never trusted from within the pack; it is supplied out-of-band via environment variable or resolved from `/.well-known/mra-key`. When all 10 stages pass, the verifier issues `PROCEEDS_TO_RENDER`.
+
+### 15.2 What was verified, and how
+
+- All 10 verification stages implemented with distinct verdict paths.
+- Fixture pack for every failure path generated into `verifier/fixtures/`: `honest_pack.zip`, `malformed.zip`, `bad_server_signature.zip`, `edited_attestation.zip`, `fingerprint_mismatch.zip`, `tampered_bundle.zip`, `commitment_binding_broken.zip`, `expired_window.zip`, `bad_merkle_proof.zip`, `leaf_order_inverted.zip`, `region_policy_violation.zip`, `unknown_attestor.zip`.
+- All 13 test cases (T5.2.1 through T5.2.13) pass in `verifier/tests/checks.test.ts` (16 total tests including HTTP `POST /verify` and `GET /health` tests).
+- Offline independence proven: verified with attestation server stopped and zero database connection (T5.2.13).
+- Code formatting and linting clean (`eslint . && prettier --check .` passes with zero errors).
+
+

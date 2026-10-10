@@ -12,6 +12,8 @@
     "test:ci": "jest -c jest.ci.cjs --changedSince=origin/main --passWithNoTests"
   },
   "dependencies": {
+    "@types/adm-zip": "^0.5.8",
+    "adm-zip": "^0.6.1",
     "playwright": "^1.48.2"
   },
   "devDependencies": {
