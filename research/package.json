@@ -1,0 +1,12 @@
+{
+  "name": "mra-research",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "jest -c jest.config.cjs",
+    "generate:manifest": "tsx corpus/generate-manifest.ts",
+    "stability": "tsx harness/stability.ts",
+    "report": "tsx harness/report.ts"
+  }
+}

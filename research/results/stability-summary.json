@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-10-10T12:00:00Z",
+  "total_interfaces": 200,
+  "total_evaluations": 24000,
+  "render_failures": 25,
+  "matched_env_evaluations": 11530,
+  "matched_env_agreements": 11085,
+  "matched_env_agreement_rate_pct": 96.14,
+  "cross_viewport_evaluations": 12470,
+  "cross_viewport_agreements": 0,
+  "cross_viewport_agreement_rate_pct": 0,
+  "cross_browser_agreement_rate_pct": 99.13,
+  "cross_dpr_agreement_rate_pct": 99.94,
+  "font_fallback_agreement_rate_pct": 97.47,
+  "global_matrix_agreement_rate_pct": 46.19,
+  "disagreements_count": 12915,
+  "disagreements_by_cause": {
+    "NONE": 11085,
+    "BREAKPOINT_RELAYOUT": 12470,
+    "FONT_METRIC_DRIFT": 288,
+    "DPR_SUBPIXEL_ROUNDING": 0,
+    "BROWSER_DEFAULT_STYLES": 132,
+    "COLOR_SCHEME_FORCED": 0,
+    "OCCLUSION_DIFFERENCE": 0,
+    "RENDER_FAILURE": 25
+  },
+  "by_browser": {
+    "chromium": {
+      "evaluations": 6000,
+      "agreements": 2808,
+      "agreement_rate_pct": 46.800000000000004
+    },
+    "firefox": {
+      "evaluations": 6000,
+      "agreements": 2712,
+      "agreement_rate_pct": 45.2
+    },
+    "webkit": {
+      "evaluations": 6000,
+      "agreements": 2757,
+      "agreement_rate_pct": 45.95
+    },
+    "edge": {
+      "evaluations": 6000,
+      "agreements": 2808,
+      "agreement_rate_pct": 46.800000000000004
+    }
+  }
+}

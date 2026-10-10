@@ -1,0 +1,2762 @@
+[
+  {
+    "interface_id": "corpus-001",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:6b23f6f3ab5bbeec5d63a9c381828aa168d0839e48bb9bde994b8d49959f601f",
+    "mobile_digest": "sha256:52d45c977ca51829565e469741b12474eaedac2a85884edeea69d6e6347111ba",
+    "tablet_digest": "sha256:6b23f6f3ab5bbeec5d63a9c381828aa168d0839e48bb9bde994b8d49959f601f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-002",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:fc14697340e78bb4e99b0602c0eb664c17918d4ebaf1010b3e3b7d760d9d5e7a",
+    "mobile_digest": "sha256:21d7b302f76e3487c026b97e053ce0f93abc0487f6cfd2a64d1c2c161ee8d9ae",
+    "tablet_digest": "sha256:fc14697340e78bb4e99b0602c0eb664c17918d4ebaf1010b3e3b7d760d9d5e7a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-003",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:a3828a8ca47f9b3e6abc59e98c455e2f5bfda1e6e7fcfa879506c5d119837c5e",
+    "mobile_digest": "sha256:71c4932b43d3f768da68441f23bb2a0adcda51f5396f97540e174e1e6dcbe251",
+    "tablet_digest": "sha256:7b5671853a04f2295106386a5e966106c915c1ac8ba5612b9571d9a7adbb7bd3",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-004",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:9decd1a59b961e1c5b60b226804c861a7bd133b4013630d37dd154369eb6e4f9",
+    "mobile_digest": "sha256:b6ff5c70ec4369ed54d1c8900562f7058a89e497a723caa17b7480e7000674c1",
+    "tablet_digest": "sha256:d88bfb485f50fd582f34bdd9b71764661449988bb98df766359214dec74f6994",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-005",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:788e6017993aa168a61504b250d2bdf2382f556704ecaa2e047c3bae75d0e113",
+    "mobile_digest": "sha256:f97e9b547c139132d17046590a57383e90556cc3575f729d5e80bbb3920929c4",
+    "tablet_digest": "sha256:ce7f687796a21a004bf1bb20054d5f6342f53b607ecb2e76827ba7fe4ce99e26",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-006",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:dead2f783379dcaed198dfd8d5a70b8efe5f7239d9079dc8fcf2a5d870fa31da",
+    "mobile_digest": "sha256:4ff1a3dac2279f9b86e7d3ff5ad79ec045b4457997f9cd5fe436f26398595f76",
+    "tablet_digest": "sha256:dead2f783379dcaed198dfd8d5a70b8efe5f7239d9079dc8fcf2a5d870fa31da",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-007",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:13875a1f26db4b8560b43ef12e651abef32b168ce6d971dbca88fc8628257da1",
+    "mobile_digest": "sha256:b95a57570364730a5f3eb4a79ccaf964c348d966bcaea291629d24fb01afbede",
+    "tablet_digest": "sha256:13875a1f26db4b8560b43ef12e651abef32b168ce6d971dbca88fc8628257da1",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-008",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:b23d59c8d0d28d39ceace2b64f4050d63cced16394c9a0b2d58037026bd803ef",
+    "mobile_digest": "sha256:ee8ea2e64b3ff3e3f47ef74c94d31986d9473141b8a4de77067155936359164e",
+    "tablet_digest": "sha256:047f896584807d5afe719a2451e01a6f1d8df81d362f4bf8e0af2c51dd1e7f4f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-009",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:0eaf3859164f90949479eff603cfe766146d0ccbf8bb20a1455d3a74cb0bf8c7",
+    "mobile_digest": "sha256:cb9fb8290888c45cfb03d19eea0e1fdeab5a181488a2db9d71e655b0d640a5e2",
+    "tablet_digest": "sha256:c52f28312fc9ca29408054482ba9ae3ff77de2a1b992bd0a82d2995fb475684f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-010",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:2e08177afa5e956e190368fa97918cf00ecb7c7b6f12d4c7de0317fc3b659517",
+    "mobile_digest": "sha256:48de09ee6034e2274a0a6044d97152ceed4b21677b57356b18d2831819c1295a",
+    "tablet_digest": "sha256:da506d1d700256179b5e1d58d87c3bab3bb66484fee372a232a088a18e3cadb5",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-011",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:947a560a817d2b88e0854f48189f842026ba3b74169c21058feaf5268bcffc14",
+    "mobile_digest": "sha256:af70d8d402d8d4a53184b619ac0244394a09579792c29d803a3cd290b88fb3f1",
+    "tablet_digest": "sha256:947a560a817d2b88e0854f48189f842026ba3b74169c21058feaf5268bcffc14",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-012",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:754514ace0b896db858cbd1889b38fafcd261cc7e6a33494f3f47718982941ca",
+    "mobile_digest": "sha256:319f900c364ae91823ae8de5319d53cb9dd45d931aaf30cfb0daff909942d81e",
+    "tablet_digest": "sha256:754514ace0b896db858cbd1889b38fafcd261cc7e6a33494f3f47718982941ca",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-013",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:64a31e46b1280feaeec06c5cb8e000f1c39febb448be8188d315ec7eabdd6366",
+    "mobile_digest": "sha256:d446e45d46c17bf02cab7b7c7ffc6ff9dd20948f4a1997b3347cb168b19509c1",
+    "tablet_digest": "sha256:d54c88f638f0952325fda352bfa4c2ed3f73389afe0d4e8fd0ae7e173080a02e",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-014",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:f5beaee7ac9d289593aa05f9db9286feffb334547766058ea5a6fcd637e20b0e",
+    "mobile_digest": "sha256:7d80f1b5c01902a4b0d6bcbf55485fa37a0defdecb39588be519f622cd76e6c0",
+    "tablet_digest": "sha256:07e6af2639ca910c7abe66634acdb53c122cb135aaf35bcb3c4ab18d005b6a7d",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-015",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:06999815b91de55fafcca4e602a9dd400ff902325d36ede949c8cbaaefb26e52",
+    "mobile_digest": "sha256:e51e0b39eb2cbf1716ac46ffe1764ccb27794059caa3ad0ed0d81a8656b3c521",
+    "tablet_digest": "sha256:dc332cf9539ccf689a4cb6cc4cb32bc1d8d7d4f2a553dcc66d7d08ab99b7740b",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-016",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:1a2231327c381cebcdb0b8de600ad5ccdbf7f3983cace7079c1b47f8e6c7e2a2",
+    "mobile_digest": "sha256:29bc40cc96d3de309f2f0a5d576e8078ef0d13aa56f506b883f5468c578a9dbc",
+    "tablet_digest": "sha256:1a2231327c381cebcdb0b8de600ad5ccdbf7f3983cace7079c1b47f8e6c7e2a2",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-017",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:e37b403727ca048c306a7c36e2c2b04fdfb8d64d4022036e30602e63470cd35c",
+    "mobile_digest": "sha256:85166ee0f383122e317462da7ac4de025ce159a0ec03d53959329ac9065e9829",
+    "tablet_digest": "sha256:e37b403727ca048c306a7c36e2c2b04fdfb8d64d4022036e30602e63470cd35c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-018",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:b7a2f85a62746732462e543b294a65a3cb2dc9a82760f9edb3141016690fc5f1",
+    "mobile_digest": "sha256:403406090dda390a4c4eb2cf05150f828c5a512754e6a74c2cbe13a84a7555c5",
+    "tablet_digest": "sha256:a2186bb6ccc79e4efc44de29271c2e81037d90b3a4ef9199d2454b5aac9b96af",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-019",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:6f3cb24d95601fc68854d567a85895ff811fa00aeda8dfd09b63164fa8d506e6",
+    "mobile_digest": "sha256:98e2e9ff0bd3b48da3df8bf8bd4fcea8fae3332378d2d173cdae197410cf3c9b",
+    "tablet_digest": "sha256:1d484da73f6d848a48d8373c7824f769f3cd210635256c574e0a8086140de600",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-020",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:d6f7834df4f6b8c138b052adf6fe13eebd1fed74d8232f991005b87bcf3c3539",
+    "mobile_digest": "sha256:64188fbe54f72c8849a39602e338cec324fd8010ffe8b6560062dbd0582ee288",
+    "tablet_digest": "sha256:97721ba1362e0586aced27a0c63cbf299e89b7224d3b7a9ee499de6c7d4cb1f1",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-021",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:0b5a545cb20a643c9fe090bee447a4c60292beca5b3ebdcdb5c5fab3d55e798e",
+    "mobile_digest": "sha256:41d46ed123681b3a808764a4aae7908ef78ae57d3277469c5b18288cd98ed0e5",
+    "tablet_digest": "sha256:0b5a545cb20a643c9fe090bee447a4c60292beca5b3ebdcdb5c5fab3d55e798e",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-022",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:9d0632425345a285a4c0535ecd854ea11e9b9842eb14d702c5463c49e23e19a5",
+    "mobile_digest": "sha256:f2ffcce5b24e06a6a5f15c52908a9bb84fcd535cbe7ade9949a1e26de5f6a3eb",
+    "tablet_digest": "sha256:9d0632425345a285a4c0535ecd854ea11e9b9842eb14d702c5463c49e23e19a5",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-023",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:b5fd909ec62dfe6ee07fcdf0310b5f0fd7c89878b4bc3a61022f8615ca0772dd",
+    "mobile_digest": "sha256:7394c18538d1ccb8118e35a9887fbc57b9ef730d252450473c7b448f1226000c",
+    "tablet_digest": "sha256:70e10aa3326b5c1359c852537a8815859b7cc90a5c0ce95abeb9f5964f21836d",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-024",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:587b60177a7939181c540186ed13302540f9bdaa2c217ddfa7db6067abe2ed1a",
+    "mobile_digest": "sha256:0f0888f7823532cfa8f3f0027d825366ce45264933994c5fbbeb776049eba4b7",
+    "tablet_digest": "sha256:99733e0c70151f2b0ce7e415fa4d776d0b8ebf20f4ed7099c2631ad60b075ecb",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-025",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:20b29f1408bdc805ed56d35df87b38d68684a6da6330ab31fae79284c8620e55",
+    "mobile_digest": "sha256:75cbb4c7ec1acaef026a7fe74641eec76f0c9a647dc2d9ec77afb7658b698bd2",
+    "tablet_digest": "sha256:d915cb0be23931a4349fea178c5406f3caec663dd52a6d628e5c4d9e7f43d6e6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-026",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:b4ad555a89f96ab636f1d068717319d1fd51e112b0667a4d2788816ef6830622",
+    "mobile_digest": "sha256:96a2c7a6ea35ef39bf703a27106cbf62b2b2c3050144d16b0d392b5ca3c589e2",
+    "tablet_digest": "sha256:b4ad555a89f96ab636f1d068717319d1fd51e112b0667a4d2788816ef6830622",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-027",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:3e584adeed592f8835a45614864eef0cf10108c86d856d7f2a0313ae4bdec2b8",
+    "mobile_digest": "sha256:0975522cf6afaddcb6e98f1f21b40d3ec3032bd3123ba6fbddabc91efc70f503",
+    "tablet_digest": "sha256:3e584adeed592f8835a45614864eef0cf10108c86d856d7f2a0313ae4bdec2b8",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-028",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:ef9b9aa7ebf51f0c935fdbec9f10cf5de92e1b4fddc63a088d38f7031d1fd9c2",
+    "mobile_digest": "sha256:cb69818241f4a605d35c838eab1b09125ee3555cace6e42a586a63df49f4d854",
+    "tablet_digest": "sha256:2077eb441f0f14499bc8470c537a6430988e5649b979f9ce1c237827c32a1ecf",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-029",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:82e344a67c7c43a9fd69bc472c9f7c2f18403e0c9363ce2a8b9666e92e867619",
+    "mobile_digest": "sha256:f3720a248460a0149b7444a2d820abb007452865b0874dab8a898422197c84b2",
+    "tablet_digest": "sha256:228b795b344430e4dd399adc825fe76cd4e92cff6a75411e984167be6b1e6ef5",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-030",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:f7b89d073d7e38bce75d1a0308de10a5de53f0c73c24190650c45193539fe852",
+    "mobile_digest": "sha256:886e547f3936e6d5592ca1f89e94ae016c5c0f9f39ac60ff9fa0728083b78943",
+    "tablet_digest": "sha256:779e40aff62d31625c72aea1ca7173246b564732dabcd118363cd6febec0eea5",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-031",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:98f2b7751db414f06c1bfd98aaa6aa9d2b9ad076bff398d21de50414ecd7b06e",
+    "mobile_digest": "sha256:ecc60e762e8816e05ff8169d5eebf6af8cce1436f9e93dee2caf636d43e666ab",
+    "tablet_digest": "sha256:98f2b7751db414f06c1bfd98aaa6aa9d2b9ad076bff398d21de50414ecd7b06e",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-032",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:8287642e6d3e7813db0135f82cda28636897bad754a7a2ba6d7b2a57981d9247",
+    "mobile_digest": "sha256:cc928519c94bf1d740ebe18eacc7242e1b2ddafdfc63299f8ac735cbe9076762",
+    "tablet_digest": "sha256:8287642e6d3e7813db0135f82cda28636897bad754a7a2ba6d7b2a57981d9247",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-033",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:6df6d7792c663af27e03178058be32063ecdd228bd9b3656b378caa8fc4c2ad0",
+    "mobile_digest": "sha256:45f42c8be679b6c4653627e2c90be40e6cce801f411cac71dac0a549feadf192",
+    "tablet_digest": "sha256:6a73578f2510208453965d900adb9963a2cc22b97351d82ba338d4d0ec538d6c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-034",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:85423f3e711dcc4e3385be8b0a86f6c67f619045fa232cc23d4b38fbb64a1dc5",
+    "mobile_digest": "sha256:07a798b5392580fd09dede93ad4208c8471a87591e81eb60a9ba275d7d22b5f9",
+    "tablet_digest": "sha256:9d5797223f82e22041c3daa453f8a39d389fab2db0e173525f3ac6cd5383694d",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-035",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:f983045de910bb9853d34faecccf4500c2143e8c697742ea7e4e64c74059cc24",
+    "mobile_digest": "sha256:c801b9f79ce78ef30caf21d7ff8dcc8c96bd17f9904473f7d5b981a48cd3964a",
+    "tablet_digest": "sha256:bd64e5fdf644299ea3bd669b4657ea7b58c6bbab27a2ed26426dd776171ee7ce",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-036",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:fbf7e2978baa29abc5b52cba55d54f8397a8391d36ae19ffed10e42fc89e9ed2",
+    "mobile_digest": "sha256:1a62c88c19d054dd3ee32270b7557419b3c6cd153eb9eb6f1c57c64c58eb7079",
+    "tablet_digest": "sha256:fbf7e2978baa29abc5b52cba55d54f8397a8391d36ae19ffed10e42fc89e9ed2",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-037",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:a77e3e6d14b257ca517afcd5d78582b6923083626ecb14e49679c5049b886993",
+    "mobile_digest": "sha256:7fa13e871ee5cdbf4385579b052ab1a959670ce0c9ea0e8e003cf88988cf86dd",
+    "tablet_digest": "sha256:a77e3e6d14b257ca517afcd5d78582b6923083626ecb14e49679c5049b886993",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-038",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:8d3dad9d077cd005369fbb41e68944eae64dd3a5e18cfb62f67c42baf2a3c50f",
+    "mobile_digest": "sha256:cd18c28e70d013772d0c803b31d875ceeef9d84d441984fe5901719d6d4db8f3",
+    "tablet_digest": "sha256:d9fd67838a2fef3fdb4fa8a8cf149c533a5b41453fcbd79b53481b9d9d7b61d6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-039",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:b1536e1739b4a4272f46760863c8930ca93c5ae1b948d0d8195ae735c2478253",
+    "mobile_digest": "sha256:fd47cdc475299e77e1f717b7f7916a898e330e75a6bdd64f3985671baec1c40c",
+    "tablet_digest": "sha256:a5ca6e8a6aa659640225843ff6a398edb19a44936c214791f7652efe5389f331",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-040",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:853dfbad5bba4deb2e84601aeb467a963b80a5f6788a88bde503f9a37e3ff0bc",
+    "mobile_digest": "sha256:2f046a57ecb0dc70b4ab1af8a5dc90f17c9ed3fb072c7204c265df57a9cf12fd",
+    "tablet_digest": "sha256:2b74a7f0779523ef31954e750b0af4105eba5ad2da42d8a53d7d940b57ca3456",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-041",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:e0b42e50327c25f9fd522d1e85efe3233ce0956233c9e02908f01e9c0a25a07f",
+    "mobile_digest": "sha256:74af70dafb7652bac507324a25df20f54258584709c4d6c3c132566d549ced0f",
+    "tablet_digest": "sha256:e0b42e50327c25f9fd522d1e85efe3233ce0956233c9e02908f01e9c0a25a07f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-042",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:665496984a207164e50cedf1af75ac29df287e28911a5f002575d0d5e2d16fca",
+    "mobile_digest": "sha256:258b6dc2c6ab9f59c2af547faa30a4c1ba9abb2eff7f33084e425e73e28a05e0",
+    "tablet_digest": "sha256:665496984a207164e50cedf1af75ac29df287e28911a5f002575d0d5e2d16fca",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-043",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:9b3e793a5d13c58a9e73bda7e5e57fb738b53fc3a9a09d15fb7107410fee2157",
+    "mobile_digest": "sha256:99a7b166c07c4e14802a8b5e7cca22b901c5c7b4b0d603877e34a9dd1eeef96d",
+    "tablet_digest": "sha256:e36d041f5a735c73959cfef5c95a58bc47f1f55d86b6ac336ccc2a8635980003",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-044",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:0aa564fa374230057017afad6bfa5a59ebeadb225e355cb8f47a4e2e999519e6",
+    "mobile_digest": "sha256:b8ae1748fecfd68516810124b3eca9e8834a593335dd6552a4b247b13286d253",
+    "tablet_digest": "sha256:5e1e6eaf51527f980d647d90d38ac8b4eacb88c11d70c6f490f104cf1ec23323",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-045",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:bfa20f95c14a657f4a4186fba0d05773c415c5d1f12e3a95a928c011c0126235",
+    "mobile_digest": "sha256:cb4ef87f785625c0ab4d0c547a6038ac1983e330b87b3a2421d1a519b99d2356",
+    "tablet_digest": "sha256:534a5d3bcaa903bdeed80916cba9f55b4e96d0df45c18ee8bdf4e152dbd9d40f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-046",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:d522ae683682b87050c0e86be4d16e423be603eb95c10fa81ae30758de3274f0",
+    "mobile_digest": "sha256:81d387d9e3afaaf8f194a83d90eaf09e427890de8827fe2e59d28af69240232d",
+    "tablet_digest": "sha256:d522ae683682b87050c0e86be4d16e423be603eb95c10fa81ae30758de3274f0",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-047",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:51b6856df81f0efc03c70d75a3e650c007613e9dfdcff6658431fe1f28580014",
+    "mobile_digest": "sha256:3a0078c8231370ef478d0b144834f2aac4c5dccd5ff1af4df5543f8044ad663e",
+    "tablet_digest": "sha256:51b6856df81f0efc03c70d75a3e650c007613e9dfdcff6658431fe1f28580014",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-048",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:7d616258bab80e4cddafd8039f000ba08b64882d93da0f6139f772a9e35de648",
+    "mobile_digest": "sha256:c8cd1e63bd9c1e75c441d21d23c3d16dbec74daf3d51cf50228c3182b7231acf",
+    "tablet_digest": "sha256:fabf1c064c81b7904acaadad867492891b6d99efc4923c647f9f35856eaa5a31",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-049",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:2cbca3602f33b81997159de2229c03dd81ecec2450c0e8e07f9261a92f6362e6",
+    "mobile_digest": "sha256:695a716f151f76619282c58d040da782434f23be7189ce660b2284a2f52c3c4b",
+    "tablet_digest": "sha256:a26f05e2112a9d968d9efbffcc3da50173846b10fca6263cedcd9c522780cbd9",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-050",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:758669541d5d08d2b980154651d32719cf17062690f33fbc5a467a66454f0600",
+    "mobile_digest": "sha256:9b1ad29b375fee116ad2d80cedd2f472f14b6156c0bc3cb9bbef3c301f34f925",
+    "tablet_digest": "sha256:c775d9476bde843c1c91d8b9d2be472b144b28ceb0e86a6cd441e4310b4c129c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-051",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:8d66c53b9dad26dbe8d760d86fe5180c6b4d434d9f80897d5b128ba2cf534a3f",
+    "mobile_digest": "sha256:3bea1760502445d12c8801e76643e32f95869e0798651c07dd72457b57eb4575",
+    "tablet_digest": "sha256:8d66c53b9dad26dbe8d760d86fe5180c6b4d434d9f80897d5b128ba2cf534a3f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-052",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:c7d6c53fd57e4154ed2667603461c5f711b065da3f565c41b4c8c8d9e49685e0",
+    "mobile_digest": "sha256:be66778e3af908ab03f5f0920d3e3a2164985df74b57d1537a9130aa88a0cbd8",
+    "tablet_digest": "sha256:c7d6c53fd57e4154ed2667603461c5f711b065da3f565c41b4c8c8d9e49685e0",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-053",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:ff209aeddfc7a523434ca7d028c0b79206ad75ba774fe80a40a6c2cb4fa24e31",
+    "mobile_digest": "sha256:724921ba91a381486673df09748e7ccfcb754bb4f43f1edf6a221a5917d143e0",
+    "tablet_digest": "sha256:4f9d668736986185407d9d511e5bc2318f6ac24a52ff2aacab88966e7ed81689",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-054",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:f037ed477a06d0744491a69a727bb979d4609f3c6c7f84aa62b140792fb97b3c",
+    "mobile_digest": "sha256:fac6c76809a2ecb211cb0493a7e3419757202999fb3baa16059b84a94406fc8a",
+    "tablet_digest": "sha256:ddf648ef6ab5010838d890f29fd8e48a120e6880c3e9c872c9bae0e03bc569b7",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-055",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:b92349a092b2d83198b7058fa5e71f63d04636c1d72bcf6995cb2dcbbe12688a",
+    "mobile_digest": "sha256:2e25dd4817e9c4ab3c4df92c55e1199ac6e5b4093742b99f5141fdcb1a32bf13",
+    "tablet_digest": "sha256:62caec5dc5ca3a73840aa9d30266d8d5c666f5a874f8fca1590f7cbcb891d219",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-056",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:6af1558ea4fc1788069d30ac436fe6ebdf746de8fb91292c4260229b7248cf82",
+    "mobile_digest": "sha256:356f6fedf93aa9fb4ca986e3679547fab276e862cbf8a54631b72b79a4c4dc92",
+    "tablet_digest": "sha256:6af1558ea4fc1788069d30ac436fe6ebdf746de8fb91292c4260229b7248cf82",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-057",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:2f28bd7ef47d854158ee360e781eb1623aedd805074c8ec6dfe2667cff2b8683",
+    "mobile_digest": "sha256:3570542492de11cd1afecd2a6af35703d9c2f9e36ffeb82dc0f287b401ddd7b0",
+    "tablet_digest": "sha256:2f28bd7ef47d854158ee360e781eb1623aedd805074c8ec6dfe2667cff2b8683",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-058",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:7ac82255a0b6d8119a30b1227cb6bbb6ff61f8dce7b434e315959d96b582426a",
+    "mobile_digest": "sha256:c886db279f552a363872f809dc7a52d68c9d932eab706f2fc9b0125a37d32066",
+    "tablet_digest": "sha256:db3c4b5554095e74cf20e423437551ba1565567640678cd02fffae5f154ca45b",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-059",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:e2c19d9647aa85288b05a3d50b12f513cb3b2f1221073bb8cd378bf2cd849d8b",
+    "mobile_digest": "sha256:58c9408129a1def47064eaadc3d9cd94806ffdb7222365ccfb22234f9a6c3453",
+    "tablet_digest": "sha256:4aa55aa85b00d1bb0490fd9cc000f2bd6267266c191a91f1c94672f3c8036bc8",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-060",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:a2561354d89690996d4f09862dd708be98bdc21153b48c1315ff7f2a2f1047d9",
+    "mobile_digest": "sha256:e57006cf55882fcbcb7beac427d165ccbc77c5795922bf880ecab1991f8228a5",
+    "tablet_digest": "sha256:44b8a15e29f4b43abf5ed36684f151538891c1a8ffed15645c25e1d7a05a7dc5",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-061",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:dd1fccdbde2acb4f0386354bf137248a281f6f288f8e87d45bd08471c80a4cb6",
+    "mobile_digest": "sha256:b328931db04739dedfea96b791383d038789cdfcf77fcbbce29c9d83b861830a",
+    "tablet_digest": "sha256:dd1fccdbde2acb4f0386354bf137248a281f6f288f8e87d45bd08471c80a4cb6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-062",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:97c6c1b7d7cd91c5ff2d5ac9824d15a7fb4a8092e55750178c07fefc57ea2952",
+    "mobile_digest": "sha256:0bf8651794869f39924c1d8531468ebb2481711105136268f8ceebf20912cbd9",
+    "tablet_digest": "sha256:97c6c1b7d7cd91c5ff2d5ac9824d15a7fb4a8092e55750178c07fefc57ea2952",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-063",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:8d57c38c2a4d51dcc3551ee4e93a1d290e60ab340a68b53ad01dd5be0a69392c",
+    "mobile_digest": "sha256:1a2aeabeafdef0bcf5f5fc1b4b3e92fc89e3f130b0e66468bf276023d5a05a64",
+    "tablet_digest": "sha256:64f30eac0a0182e786d6c845b90b909d33892a3a05bf66220cc2eb6d1978d373",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-064",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:e0e254c1c97f3b7add4514a5aebfbd5ccf3466e159735e8e11502c6074da6bcc",
+    "mobile_digest": "sha256:343ce457567868417002c57b02bbb49f8e06e044e80ab9f2bc3dfaf86dc61c2f",
+    "tablet_digest": "sha256:fa3614b1b25799071414ba386448794797b81b53f2b487e170e23e5863fbbe6f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-065",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:62648c51c44e5ab098ff6ab7a99edd0164c31dbefd006b1124fa0cf2baca4a65",
+    "mobile_digest": "sha256:06ed7f1d6e28c5044680c482045c0706e1c0ef9f2ec55254ad2f54b6197f3d66",
+    "tablet_digest": "sha256:b550c7cdea27e67875163bd2fa4b2cc0901be995e4aed5c642ebcf5deeebb656",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-066",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:f0a5a39635cb09ef506aec85c4600915200d2b37e45bd9b3042c0f04f37e5776",
+    "mobile_digest": "sha256:8eb56722c25b5f1f147f508281839b587b2a2af81c7d066c72d8d3fee02ec81d",
+    "tablet_digest": "sha256:f0a5a39635cb09ef506aec85c4600915200d2b37e45bd9b3042c0f04f37e5776",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-067",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:0c044aa5b5cf74739d10d55ebd6399d162df72dab49dcb0d11f38cbb0cbdae9d",
+    "mobile_digest": "sha256:05e97bf8ec3ad2fa36f43e0179fcbca346fcc096520bfb82788b3346d15ad15a",
+    "tablet_digest": "sha256:0c044aa5b5cf74739d10d55ebd6399d162df72dab49dcb0d11f38cbb0cbdae9d",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-068",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:b1dfbbaee269d7327afed1dd444411ee283e7916c1bdd46345ef1bc8e441fa3a",
+    "mobile_digest": "sha256:6b40da179c7545da65cf797d7a40d809f13d68c4a4c59a8dd14b328a40d9f047",
+    "tablet_digest": "sha256:ce42d4d5ef7b968b090701ba46c4cc49aad25d2a728b92bfb3a55d078444aa68",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-069",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:60675438b99e0119af3d7994242e54a2d010520d85fcdffb40369a46dbbb743a",
+    "mobile_digest": "sha256:d23c7771df4637b1520adf0b92cb15eae5646decf49e0ff3d6580526ec019778",
+    "tablet_digest": "sha256:c17a20509352511bb9d1e499c83abecdddcb770ad9b9e070fbc3e743b51c53e2",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-070",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:c1d50f7f83ca7747a391185ea02e912bb90cfb1fb2d43b0760a690e54b859fa1",
+    "mobile_digest": "sha256:8f17400db50b2dbdb200d6e35800f35801d510d8294757a34b35c99f12c7a4cb",
+    "tablet_digest": "sha256:d7cf7ab15faff5a957142b381a835c18b2644ffdd22cb4b551d7948f7ddd240d",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-071",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:39e017a46dd1d9f1bfececd9f97e458a8a730f77943b4069ef495f6db4b76ea8",
+    "mobile_digest": "sha256:6c3c535b6a92287d13ee5accfb3a55c45c8c2ddb42b149e17998c3c956093bd5",
+    "tablet_digest": "sha256:39e017a46dd1d9f1bfececd9f97e458a8a730f77943b4069ef495f6db4b76ea8",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-072",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:bfd5b24befff8cf81937fc422e6d924cacd8c74383cca3c35f576693b966f5fe",
+    "mobile_digest": "sha256:6a197d5f41c68a27a2276439bdacb65f9d16eb31cdad0a9d2a4c2b25a9da8dbc",
+    "tablet_digest": "sha256:bfd5b24befff8cf81937fc422e6d924cacd8c74383cca3c35f576693b966f5fe",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-073",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:b3aa6bce55d02974970f74e89a6aca150b13aaa484abac296daaeb742634750e",
+    "mobile_digest": "sha256:4831d4858269188e3ed6e295bb71fa4cb714ec0fbe0c6035b87b123414f05d10",
+    "tablet_digest": "sha256:a8160efe36fa062b2747b030d7cbea09636dff161c12fcfd50fd1dea3d9ac76a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-074",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:f901c639bc534fc79effc00a4cf0eea4d11614843214114ec8bb1e64a787f3be",
+    "mobile_digest": "sha256:b008f90522031317d0d8dc89c8d4c48196833c55ef93992391cb64fbb5fcf66b",
+    "tablet_digest": "sha256:1b9b77b95b776341f08c283ef3281bd836c7c8a6d106b10e56afb817601ba6f2",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-075",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:836790c27143d6e22374a2f96efb83fd0847c1affb3066c6280301a2d884da39",
+    "mobile_digest": "sha256:9241b5670d1e20c528289da7959974a2018e66d2d876d41e0bb46492970f3d82",
+    "tablet_digest": "sha256:e45f7ff27abc5575b40060cd6a0ae6ebb2d2197e1e1ab22236157aedbc7ca5fa",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-076",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:ee60aefaa9f3dafa15c89bb054a42d2b2dcdd46803f6f8cd942e0a075ad4bfe8",
+    "mobile_digest": "sha256:e7d5b2549f811b37e7460969bbe3087089113d2be3e010b40c241648d22f88f9",
+    "tablet_digest": "sha256:ee60aefaa9f3dafa15c89bb054a42d2b2dcdd46803f6f8cd942e0a075ad4bfe8",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-077",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:61eb520d8fabf6fad327f7c6ec693fa28e2505fc1d75c8912df66151ae180582",
+    "mobile_digest": "sha256:6cdaa50688574a2ad1b36214330e0cb65c2986f8781f216c7099afa3fa158ad0",
+    "tablet_digest": "sha256:61eb520d8fabf6fad327f7c6ec693fa28e2505fc1d75c8912df66151ae180582",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-078",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:9267c24bcc26eb55d79a0ea4d1d249c510a45a6d8f9ea296b9caf3ebc7c92337",
+    "mobile_digest": "sha256:3159ce96ecf966d0ba9b34883b8f2e339ea939a92df41108a6f70468b58be478",
+    "tablet_digest": "sha256:1d172ff15b55320db752989a3fb222d3416e1ebf30365b1a44198a6303e25e93",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-079",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:11a53366fae401edf88605c6ca3132b4769699f2403fc5e31360768045094f86",
+    "mobile_digest": "sha256:1c6dcda4ca79a33f691cf2425d4b75cdb73ada87dc5262601dd0d5c2972bfc82",
+    "tablet_digest": "sha256:d588864c80571f79164d87d196bfdd7dbc1530ac3c35815cd768d170f96a486b",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-080",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:5b75492b5e9c6475f97b5bda8022874c6af90a480dc2c680db0fe967cce11d44",
+    "mobile_digest": "sha256:109386c917beed17457f2016be435ade8c68e1320256d697cc20dc797b104914",
+    "tablet_digest": "sha256:ecd55b43fb99a63f39a83c1a3321ea5f3f113d0aa2d0509e8e7b7fe9cbb7e6e1",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-081",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:80bccdedcd40f4400454b5fa85c291d59e1eb6a11ee4b1d8041ab0ad04e7d120",
+    "mobile_digest": "sha256:a44b7a39b4bcf5f8c89720af2798617abbf6fcfb775c62d58267fe31fa5b7443",
+    "tablet_digest": "sha256:80bccdedcd40f4400454b5fa85c291d59e1eb6a11ee4b1d8041ab0ad04e7d120",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-082",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:f8d3bf74a36920224825525f3febedd3f171fd09508a1bc66ba2d09154e45dfc",
+    "mobile_digest": "sha256:b574f06c0c1b66c83da5cc74d880dcc7ad5c37d40756a47494652e945ab3381e",
+    "tablet_digest": "sha256:f8d3bf74a36920224825525f3febedd3f171fd09508a1bc66ba2d09154e45dfc",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-083",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:648038bc84c11c48b3de60f82a247ae69633fe5aeb909472ea78771cbc9d428a",
+    "mobile_digest": "sha256:7fcf70de8ed5639cd3184ec35a4e22ac53f1c8905ebb60b4d050608f1be0c6de",
+    "tablet_digest": "sha256:03bf64f0963b63cf46520ec60f54718af37dc4353f216d377d82c31ebf3ea8cd",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-084",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:2a310307358d208f06459f0d57bce9bda4e1122ec8a39cef308cd3eec3d1f6d3",
+    "mobile_digest": "sha256:e3b4b87ceadd0a7422808b1150a777dc3f93ade73b650e95b5ef000b1e9940a4",
+    "tablet_digest": "sha256:cf553e49175fd19434e2363c16ec27e0cb2379c56e79499a154ffb89623b9c38",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-085",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:01c55e2a6b41b3b99a23b7fcca4e35b33c79252d2749d3372b2f215c2a35cad6",
+    "mobile_digest": "sha256:bf28a6d6a7d4ba4c531c0501ab0194c4a7448d1bcedf491d563d73af09867036",
+    "tablet_digest": "sha256:842bba89e5efc273fec9ce7a2c0d9af35d43f4173d959dd2052f89ea787e58d3",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-086",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:fe2ba8a0f9b3afb0c08caa4c21b5b34375abdeaa932b3460643249516df5168e",
+    "mobile_digest": "sha256:d39053211d132e603048e75c6697c8a8fb4c90130c051ee39bf4102a97ff232f",
+    "tablet_digest": "sha256:fe2ba8a0f9b3afb0c08caa4c21b5b34375abdeaa932b3460643249516df5168e",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-087",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:4aba73c1a7d95131030bee1aee0f4d9af8ebbe69e921ae42dbf08796a0dcc73c",
+    "mobile_digest": "sha256:483e42d6bb1008efb8fa10fc3253de47c9876f15a9a0db1e5f3ed4f4a3856f28",
+    "tablet_digest": "sha256:4aba73c1a7d95131030bee1aee0f4d9af8ebbe69e921ae42dbf08796a0dcc73c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-088",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:ab36d78d346581bfce787dd224f7c0dad9a46d5d4557d52a65286916c681e440",
+    "mobile_digest": "sha256:bc9c6fe8357006d419d3eb831ca2ef82d42b78563e439a802ea7feed5fb0460e",
+    "tablet_digest": "sha256:4ff1a715d263011d72fa2009e78131be8b37b7abb266292e2099b34112a0f67c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-089",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:7d64eb526e9829a73daf01fb7107dc551e605a200be67cefca4a31ac62274150",
+    "mobile_digest": "sha256:497ffde69696cb90d4c07e5c5050d99e8ce9cfa3dcb26f37932f9b70ec635ebb",
+    "tablet_digest": "sha256:c027d84117134315517fff5bf224d4fc9ca21f89a74b2ce993517c4d13ad29d7",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-090",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:37412fd920f3b65d325fad2d58a7f3328371b6932d7e8adee2df11a99452fbb2",
+    "mobile_digest": "sha256:478970628b532b2638cc719e5c7ee6200f013e813de7c7481482e1d89a367529",
+    "tablet_digest": "sha256:c4738baef90fa1e1b0c29b928ec0a7a30b39d553b63466fac96773affea65628",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-091",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:8bf421e5f499232057454534fb21f715186a336de263dc11b880aa048b3cf252",
+    "mobile_digest": "sha256:5ebeaf76fb041144326ed423976510ed1c9fae234ca01b8e829e92b8066213d9",
+    "tablet_digest": "sha256:8bf421e5f499232057454534fb21f715186a336de263dc11b880aa048b3cf252",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-092",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:ddb1db5ee5d7f8e25ea787e5a3803b4e206e1c1f8c9d12e932394f51c25ecb6c",
+    "mobile_digest": "sha256:bd28e9c415bab428e647e8a54cca20d6555a2cbeace3c602746e7bf2124d6bd6",
+    "tablet_digest": "sha256:ddb1db5ee5d7f8e25ea787e5a3803b4e206e1c1f8c9d12e932394f51c25ecb6c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-093",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:d47a6e3a89ac893046c79068f382242449f9bc318fe3e611ff17a3f5201c0134",
+    "mobile_digest": "sha256:0dc527a2d07f06bf232de7539db4fc9be74d6a01803775251ac7a1614cc0bbfa",
+    "tablet_digest": "sha256:6d9cfc48ea4218f3f760cb3e5091d704ef475d6060608954d162dcc5aba38346",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-094",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:ee74edfcab2d28d7b2ae678893d3cbcd3669836d6bb41392ea871c329983221f",
+    "mobile_digest": "sha256:0b1c2e67034f47ab37d23ca301e4b1170e9bd82c0b32418ac6bf2e20104ab002",
+    "tablet_digest": "sha256:39cf2d69b692c893ae182207d39c96c3e1dfd8da70a5e29537c16ee5d72d4f1d",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-095",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:6e60b755a29ba0a8b7e675278dbf5fb08de74b2cb3b35e5b40be7a7e05ef05a2",
+    "mobile_digest": "sha256:baf98229d5c34c9275eaf6b44b2dff5c9d1369c06277628621dd8e395b4d1070",
+    "tablet_digest": "sha256:6889f2c6a2974180c50ec55d2ec390cd2eceabf9ef45ad9d84a47eb7d28f6992",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-096",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:6d2b4df362353198ec30f76972bb23df834df5a447508cc2f61b8dc492f25dbd",
+    "mobile_digest": "sha256:83fc969cb852acffb54d609f84036e13d7e70c5ac151c36ee7622f617bcdd725",
+    "tablet_digest": "sha256:6d2b4df362353198ec30f76972bb23df834df5a447508cc2f61b8dc492f25dbd",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-097",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:1914ebd36a9009469725846c4c941cada904fe0168ba83bcd27c21f45ffaadd2",
+    "mobile_digest": "sha256:66bceac0068f51077e4d209a1c98f8f09c399179886cac08675c2daf7a53e952",
+    "tablet_digest": "sha256:1914ebd36a9009469725846c4c941cada904fe0168ba83bcd27c21f45ffaadd2",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-098",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:5ac75102125529683fea481b3f6eab3ba0838ecb7600d1ffd1c4e2b47c1dbec0",
+    "mobile_digest": "sha256:6eba5890e13db48ac3b2ef70302c3ba00b0f83ce89ac4e354f096f513ebf8598",
+    "tablet_digest": "sha256:352cd28aeea9c6b62bacba606d1b86f6907facb49f163b681ae9b1b07a286b2a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-099",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:dd0bd81db41368cc40984c3adc798235ab3e10c3c93d9cc75220dae5468d531d",
+    "mobile_digest": "sha256:5341a4ce43b8f6e5b5178e83bc3bd36304c2ddf8565ff4273a11ef7884a6278d",
+    "tablet_digest": "sha256:7ecc8faa86a3ff5d83c7da5df34a59cae96a287a26a46c4d7640ffd1e33f0fc4",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-100",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:4062f2617fe24ce0a71cd3da8453c9e41b8215b04b91306450852851df5d0526",
+    "mobile_digest": "sha256:258b57ce69f73a697526944367ac4f38b0325a128c3937a5943840cad903089d",
+    "tablet_digest": "sha256:0513b4ad0c4f31a99a11974bea75d40b70173295b32d45c519876920922ec796",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-101",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:4527c74eef33ae3b82213bf7bea1444890a50cd1ed96f8587c244fe8c9955b38",
+    "mobile_digest": "sha256:4e4d8e160396aad117521b1ebf3d29db80a890c9832479a865eefa2560e02291",
+    "tablet_digest": "sha256:4527c74eef33ae3b82213bf7bea1444890a50cd1ed96f8587c244fe8c9955b38",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-102",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:e981d642416efe8983c52a0ba83e8538c3ded3168796cb78ca235718dc10ce11",
+    "mobile_digest": "sha256:5370cbae776e7a23eeb78ecb30ab9b2256568c510891a16e18b1235c03803b5c",
+    "tablet_digest": "sha256:e981d642416efe8983c52a0ba83e8538c3ded3168796cb78ca235718dc10ce11",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-103",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:c86e59009c922336a35ca9ee751cb268bae06d05be226574fef949c8985e3632",
+    "mobile_digest": "sha256:32b097e8b208db1da3c3f86c671b68cce077b2f8bc4eb5b81ff851845ddf07c6",
+    "tablet_digest": "sha256:2e74d64067a0e6a81c0af61b9e5c09d694dc7dd75dc6cc8aa96c3dd99d1d7a41",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-104",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:1c37afc03cf61f084fd0769f66ba62946d3a1faf89ce1baf2c4a24b3c48a8c27",
+    "mobile_digest": "sha256:2a24ff1f7f3b0fdee7af90a63e2f4a2b90fa8e14543865888f42cb01a48f41e7",
+    "tablet_digest": "sha256:fe220ca5f3d42a0828a75c066e02b3209e3ff014448ad945ff2be8690d04e802",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-105",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:57957a89302cb5e2bae70a89bd45e4b25b3eac50321513ab86696858d3f47e8f",
+    "mobile_digest": "sha256:2334bcc4d97d88a70b4c35853fa471e4b7e36daffd6fa1fae505a9dfc8be657a",
+    "tablet_digest": "sha256:38137d720f1a3d00a9ab480460ad9da8117739a16197cd94a72d24d0e8047ad6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-106",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:448b1d7eee07b497d043437faeadca6469035a8c7e1b88d0931b45645ce5c3d4",
+    "mobile_digest": "sha256:81bc023f97d3d1372eee8d4c029f4f1015ff81fde2ef77f72649a4b7c9d7944b",
+    "tablet_digest": "sha256:448b1d7eee07b497d043437faeadca6469035a8c7e1b88d0931b45645ce5c3d4",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-107",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:19d79276fca46c700718b7bdb916e2fa91cfc18e8bee75d33d84bc7fb49cc71a",
+    "mobile_digest": "sha256:da87b20e40b787fc7aabfb07207597e077784e3d1553c2b90e98d6050b47e5c4",
+    "tablet_digest": "sha256:19d79276fca46c700718b7bdb916e2fa91cfc18e8bee75d33d84bc7fb49cc71a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-108",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:799ebf457167dc6b0a373623aff688c1d5474954d8781daa764b4ce9eea4f5df",
+    "mobile_digest": "sha256:a4208f30c12a89517901cd63cb386424a004deb1254bab409efd6419a1e371e8",
+    "tablet_digest": "sha256:800a83c859d9c35bf9a5b43ce38dd54aed414e7cb303dbe6c802bf43eb1fb885",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-109",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:152c7a3a3efd22ff6b1bbf863d0302d3012210206c3297e58f4441ee702b1e90",
+    "mobile_digest": "sha256:90854a894f90150bbc0a92521438dff4a3e47a2475df5c50c56b2eb411a04496",
+    "tablet_digest": "sha256:7aebea84fc3ed57e465f0bf2c74fefcdcce3d2cfdd7575de7c116ec828ad180a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-110",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:31bb797355b52002c06212b74a60632c1fadd6e5cb9974dda686f61343de62ef",
+    "mobile_digest": "sha256:ea76b3ecbfd0b40372e9b4cafe20d0fa18733bd4509e9f623ba08174185f19ae",
+    "tablet_digest": "sha256:da128ea89a9f60a7b2ddf227443c08ba73d550506c887fe9a0ee0f13c390dde9",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-111",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:3736f806c86a0d8e06d2b9bdc5ee021922ee50d37ccd434748f52190bf38cb1e",
+    "mobile_digest": "sha256:dee73ba34b096a792db908ae816f5926251c848d086f5ab5d103dca92432c2c3",
+    "tablet_digest": "sha256:3736f806c86a0d8e06d2b9bdc5ee021922ee50d37ccd434748f52190bf38cb1e",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-112",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:319434afc7b1ea990c874d6197421d62f9d84cd18faffbd67b4f75b953432c1c",
+    "mobile_digest": "sha256:3f52ccb2f33397f32280277a47f17967fb2a9bb8a7b5d3acae88426850e358d7",
+    "tablet_digest": "sha256:319434afc7b1ea990c874d6197421d62f9d84cd18faffbd67b4f75b953432c1c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-113",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:3d97082c1e5889ada3a0c910fd1000c3df036a1bb965a47b93fcb86c56b7ca66",
+    "mobile_digest": "sha256:6b183718ad8c24243b9d888c4a28fcf986a6b9f0021868adacc8a79409622567",
+    "tablet_digest": "sha256:6eada661072ef9143b78fda082180b605b86c28b39518fc2ea15f3a770a2d930",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-114",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:7499a3ac936205b5edf8a61e09ae20d702bee7695794d48be58567b4098936ee",
+    "mobile_digest": "sha256:728a87f700eb4910db198957d2fe89144f7a6195321f4ac65eaa20daae0bcd94",
+    "tablet_digest": "sha256:2a50c08dd5de6c25fa2bb546f62791834c4264b256f00578feedbc9a69e384fe",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-115",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:f0b6b7d0d113fbad50227338934ff0ee05b6b3e1ee51999f1d64313ac5536898",
+    "mobile_digest": "sha256:314c20365e18876740cb35d16022754ef28e8a9245cd7a5ec641585ab16db72a",
+    "tablet_digest": "sha256:18f55a649bfd13807932ce909528ff9d77f8131a5b0abb90766d1f7f8f1345c0",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-116",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:008e566c7ebd32eb1a768afb5413102a3520e73ad331a46cf75cd385d63c4904",
+    "mobile_digest": "sha256:6dc9fcf9d23aef9b435f120d1c83081bd37720a8b18e9d8accb47f5013bc2b0a",
+    "tablet_digest": "sha256:008e566c7ebd32eb1a768afb5413102a3520e73ad331a46cf75cd385d63c4904",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-117",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:2eee91d2bccdff829ce73289976fae7e1508980b0e7c62ea6e0c35487983a516",
+    "mobile_digest": "sha256:7505d962d7ae1c9b473ba21b9eabe9aa0781c79d9d12bad723726ec62855d87d",
+    "tablet_digest": "sha256:2eee91d2bccdff829ce73289976fae7e1508980b0e7c62ea6e0c35487983a516",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-118",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:7e6a8f7f8c7e9b3ad2146324483eae75e5fa04f11a5b21726b6206f30a1270c9",
+    "mobile_digest": "sha256:9ce4afc7982cf9332d2805c0e008d2a5666dd1b5c75422cef18a79df1bba8e4c",
+    "tablet_digest": "sha256:f7f064211cc2c4f04257555ca126d0ed7e44817f5dee347a6dcb4a3236fc7c29",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-119",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:16a00751b1f805e502a2d031777ccb4f98de93f2984e367e7c2e693b8591431a",
+    "mobile_digest": "sha256:28358821672cadb90c5a09db0efdf343f3c9a1409b323278afd3329985c3e34d",
+    "tablet_digest": "sha256:4210a05a15358d54432dbca4fcf2a589f5c534a68ce5577dfe0e65d85c284f8f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-120",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:586622bcaabcb1792abecc0fcf4d000c686e3696579b6093d3af5d1f3173e052",
+    "mobile_digest": "sha256:8c8b40f98365edf8bd0e7b831f077153a53ade92d20382a1bd0a7b1e941b86fb",
+    "tablet_digest": "sha256:ae3bffc28ebf8e700d36a5ef42f36cce0ef16a423632e0fc6104b901dbee966a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-121",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:aa8533e746fb407857b42c8ac8743613e337b1591d6fd7772b6844f347028f67",
+    "mobile_digest": "sha256:3f71e188ca1f304e30c1d26951c9a30d3a39e8ae94ba3dace62f93633a6fe687",
+    "tablet_digest": "sha256:aa8533e746fb407857b42c8ac8743613e337b1591d6fd7772b6844f347028f67",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-122",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:bceba02a515d061901a672e776573fe67e344358e6d24b2ce8ef114b1fff2d8a",
+    "mobile_digest": "sha256:67fcabab77129fa6c3b0762fe776c426a3abb3aad8f1427a45a2f1b282890571",
+    "tablet_digest": "sha256:bceba02a515d061901a672e776573fe67e344358e6d24b2ce8ef114b1fff2d8a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-123",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:b8223e11980a4cd2c94a795d6dfdf09b9dcd82f74f11e9b8b265da56cd6f0dcc",
+    "mobile_digest": "sha256:f6ef5a60db23cf0d08ad5b30c3f68a9aa3fb0c7ede043be8eacb68d06e799573",
+    "tablet_digest": "sha256:f0e59db8581ccb23c1202f1d714a03f687e8249bda8220d2a54d531ec92f0577",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-124",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:ef757794509a38f623b9f096d0174f3a38e02da242d361db2213a5160947324b",
+    "mobile_digest": "sha256:989bc0848ce056e451a8cabf662ec1f688ee016b877a85ee8d83258dd2ad746f",
+    "tablet_digest": "sha256:6441d4a48df02c6b96acc279ea10a4682447c1db620b7203a884c151b675d55a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-125",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:650ff5748dfb0a09fba3ba0294886d9c59e3b5f6612d6489ecd8cc3ad9bc2c47",
+    "mobile_digest": "sha256:81acd50065974313aa33ffdcbddf5aa7114e55265efe2174ac726bbcf1e563b5",
+    "tablet_digest": "sha256:7fb6320e0dfa4e75700b24a8a8ab0bc686e0af939dff5882bf362e35dc6ec4e9",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-126",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:38be9ef759a4be28ae095eccde20c9c7546e51e17138d6960e82208b22a04639",
+    "mobile_digest": "sha256:c8b91e34a339a33cc792641d51f9fa0afe7111daa8fa86693db24ecb4259ea51",
+    "tablet_digest": "sha256:38be9ef759a4be28ae095eccde20c9c7546e51e17138d6960e82208b22a04639",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-127",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:9f81a8696cb83ff046fc5d11e89e43fed2c91935cff4b041325308985317ece6",
+    "mobile_digest": "sha256:f04df38a9176f585ecc0455d71d70cbb9d7ab56d2e16611c4f0275a5fec9a441",
+    "tablet_digest": "sha256:9f81a8696cb83ff046fc5d11e89e43fed2c91935cff4b041325308985317ece6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-128",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:56f810061b9a246515ffcbcfb680cf0de1d75fa9e26814c03359134e11c0166e",
+    "mobile_digest": "sha256:eeca051c1e15373df317a045449fc2a69c87edb25b5e5d6b2eefeb47c008488d",
+    "tablet_digest": "sha256:0216e2dd75270eb7f37c0ead290c61c844588c3aceb1f22e0c2fc23a0376a2d4",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-129",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:69dcfd95cdb7b327827573b5ee4c71763f64d9379a86c30af541f9c18d13bf08",
+    "mobile_digest": "sha256:b8ef65b536ae2debbc010b4e20fe59cd6f6b859e7e3c567873cce46322001065",
+    "tablet_digest": "sha256:db505b4e31832509f4c53b4411c4fd011d706d21d6c939ddef71b4dbcbc6b8b1",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-130",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:c32d2a51bb2ab5af37daf8ec6c1ee2a1ff4f2ee8cddf469d186f7780224c7e3c",
+    "mobile_digest": "sha256:2bd0ddd386a3b9a8e846803bba128f80eb3d671662751fdac025de88fa2258e0",
+    "tablet_digest": "sha256:4252a089cf29d131a41cab66c83df1d979af6f88c0d51e9a3634b65a9b789b9f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-131",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:328c87c85050658b1f4863e19ebafa3b5b38863b6d152b5bc69c73385d16d89a",
+    "mobile_digest": "sha256:5f2e3fc7972daad564c1f9beaab65c481d7e6ec502f86a7e5dfedc7775b27afd",
+    "tablet_digest": "sha256:328c87c85050658b1f4863e19ebafa3b5b38863b6d152b5bc69c73385d16d89a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-132",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:a20ba685470e2e88ce139ea030b210ec8616fbc546ab86e231eb5e0f7208f096",
+    "mobile_digest": "sha256:25493419256dc5ddb5ca862f1423f18abdc8ab818eb6c5c8af39b1f1ba23c2a5",
+    "tablet_digest": "sha256:a20ba685470e2e88ce139ea030b210ec8616fbc546ab86e231eb5e0f7208f096",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-133",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:fe14fc499d586c11e274b15646a3965a3dea52d8487334d5dca5d2e127d3c103",
+    "mobile_digest": "sha256:0625d390ce4a143669b749558ec76318349ea42b9cbdccecc7141608db6992bc",
+    "tablet_digest": "sha256:eb1d15afd8460114f6228764b61704f042ffb44c4609e7ceff1d5aba645e64ac",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-134",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:13deb22e8d38136d497a0a22eab1bcfe6b9d9d5e38a5b88ccf5244982faddf5d",
+    "mobile_digest": "sha256:ec56fae9f5317de07b30ad45aea17d422883223472fffc6171ee125141715d6c",
+    "tablet_digest": "sha256:e2a8c69df611466474f351bc2322f4b41846e2ad13687690545abbd95fd39a81",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-135",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:fb67dab00dc6ea530088f266d4d06cb1cc5ca4682bfc801db9ddeccde67b43a0",
+    "mobile_digest": "sha256:3ebcb90bcebe5638b5350e154b73dff489510ab7c6851f4b2b5fd0dd56a22978",
+    "tablet_digest": "sha256:cb73ba10e8b765e78066a186e9121ee2bda3e64ab65d528d125859e6bab96a52",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-136",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:3511bfc33b41bbb3224bd4aa61aab90136067fccb5a65601b976d44a5ef7d825",
+    "mobile_digest": "sha256:322349b7b61b903b71c0267d913da8262fe2388c3efb972f0cca851fa2c2ac80",
+    "tablet_digest": "sha256:3511bfc33b41bbb3224bd4aa61aab90136067fccb5a65601b976d44a5ef7d825",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-137",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:25d20ff72339216be47fb7c9608d9938ee4030b56171537060e8de546fd2a318",
+    "mobile_digest": "sha256:0c9b79483994fd1127f14f28204b13104cbf38300f66b7a2b55279a8b17f7d5d",
+    "tablet_digest": "sha256:25d20ff72339216be47fb7c9608d9938ee4030b56171537060e8de546fd2a318",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-138",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:3ba3f9d55c97849f23a081b2293f63cfb8679897e90e624b95f492227bd6373e",
+    "mobile_digest": "sha256:aaca9e2cfeb74b01744d721f69c0c560943742ba4bac4e344eaa69b0e4cf7eb5",
+    "tablet_digest": "sha256:317f7304a6dd3c4d8da98cde52de3a460b8902232064f5f3263734a60f84969e",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-139",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:107338f4325e78b590e32aacf8c3fd3e256db8fed3a1bd7a136fff47f4a6a321",
+    "mobile_digest": "sha256:90bdaa7402e647b6609a15807ba72af185f647ea0d4320674da8a2117c30b8d5",
+    "tablet_digest": "sha256:bdd42c5df8c7d514a51e80a3afb2b66f3407b1d97a628759422e3119a38b8f83",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-140",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:5ff73b7f30406b85f2ca9672987d7c22e52d86087b4f8dc4765d3b4203f5b5e4",
+    "mobile_digest": "sha256:2cec057934b8021b331bf74b2a7f69dfb6dd496afc59f1501bdc047500a91574",
+    "tablet_digest": "sha256:5c767af967fe43f597194d5a6eeadcd7b44e4e95ae80c2c4d69c2c37f4574bdf",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-141",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:6d768955743c0cd4de3f9a260566907bad8835e61058f1a15013f252140ba141",
+    "mobile_digest": "sha256:76abe70865c99e51429b72c6519e6bed5ad118452cb725de0cffdca66cd789f5",
+    "tablet_digest": "sha256:6d768955743c0cd4de3f9a260566907bad8835e61058f1a15013f252140ba141",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-142",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:2ab594ef19f419de139ffa93cc371530274fd5656a762f5160dc286707893a54",
+    "mobile_digest": "sha256:ac219e01b91e80b5335ddd62e52827b3930aa9c4c0b18b21ce7f022c76c31caa",
+    "tablet_digest": "sha256:2ab594ef19f419de139ffa93cc371530274fd5656a762f5160dc286707893a54",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-143",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:976dd5f84e57d05a469736df637ec2574182514fc866ddb41142c9ceb022b144",
+    "mobile_digest": "sha256:ee58221f7fa8b011b91c315a3b806d9e3101a91d5061a823f5ee4f78ce3e840c",
+    "tablet_digest": "sha256:c81de761322c57cd7b87971903e220cb67d0ce4e90955790537c66bcb9e7a46c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-144",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:c3e5d604ae93b0b3f849f879a4570818472d11b48a4de6e36dfa0f748eb59248",
+    "mobile_digest": "sha256:d74e1b744a5e4c0ef09d135bbae43cd25971815deeba10328a80fc4e89df61c7",
+    "tablet_digest": "sha256:79b7e79a4f472f6294fab01867bb1f21ca0ebc628a7889479df5010b6f57a2c6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-145",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:be04b678830fb9519c8fe752dc20edb9da96cbabaa243ef8833975a8fcbe8f99",
+    "mobile_digest": "sha256:efd23238d02af5c3c6451dce7a58b87ef31bfe00a8e43417f332cb8562c92675",
+    "tablet_digest": "sha256:404a2253e9b394fe2a88099586efc6ce87061534ab7e45f8c2284000dde3841e",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-146",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:8c8e71bb0fd21b71db9a0256795ef32ece95e0dc87c766d44886214870c63d10",
+    "mobile_digest": "sha256:2808632616402c44639033a6c73837c04f5a2d9994ef531eb96408d7daaa808c",
+    "tablet_digest": "sha256:8c8e71bb0fd21b71db9a0256795ef32ece95e0dc87c766d44886214870c63d10",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-147",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:60a350730eb82169d0b4e38ff861bec2c715e1486f507cea40a45ee86fe6ab38",
+    "mobile_digest": "sha256:12d6688b6630db9361372c9c7222e02867ddd64f1175796a135fead30815b830",
+    "tablet_digest": "sha256:60a350730eb82169d0b4e38ff861bec2c715e1486f507cea40a45ee86fe6ab38",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-148",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:0508c8840dd6940e885ef64bf976dae4165230556f738ceb3ac7d472b0b1a8c8",
+    "mobile_digest": "sha256:6c3ca9040a248fe6182bc88ec92f9f6148fc40f5998ef13c93e3bb346846e480",
+    "tablet_digest": "sha256:39442cb01438ff307e90064a76e2a1a3e0d649c54129373681770e7586e1d9cb",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-149",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:02a7fc4cd03335ece00f771e72c09b9a2700f5d3ff45d3b1715f4338389704b5",
+    "mobile_digest": "sha256:60c1f4a0c3308698eb09bb35d26d35198a663d9e306bf7e36364b9ae293350f1",
+    "tablet_digest": "sha256:03041516f2400df65e6c9c9313048b6170600ef700fcb8327e0cdf5c8a0fb8f8",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-150",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:b23f271fa92c1d9dcdc9dbca1c56dd4e4a64b05f05b35a93d522368af2d7d53a",
+    "mobile_digest": "sha256:8dbdb1533c09583f99567dadfb00af723c55b0772d106a592dcd754f725f709c",
+    "tablet_digest": "sha256:54f439c4259c05b9a1fd0507383cefdd8654d7d0c3b7d64bd96ae383143c317b",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-151",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:686223f75c3f3fb7d1f85e2e984d5e16c25d82b634958cb2eb19747d2a05bc68",
+    "mobile_digest": "sha256:becc682390ce23a0a24c2de89ec90ab1c8b0c0f31f692e26f76f3c7b945d1945",
+    "tablet_digest": "sha256:686223f75c3f3fb7d1f85e2e984d5e16c25d82b634958cb2eb19747d2a05bc68",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-152",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:598050b29fb7f318a0f511fbaec659f1b776301e604afff2ec9f3e2079381cd7",
+    "mobile_digest": "sha256:927bd21258d44f6bbe7408cd48abae3601dedb727b9bebdce05c73abc1fe9ee5",
+    "tablet_digest": "sha256:598050b29fb7f318a0f511fbaec659f1b776301e604afff2ec9f3e2079381cd7",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-153",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:d3add63eb43029fae28d1b3f97a8af71c87d4267bf3ff4e2fe1f45c5bc1e43ee",
+    "mobile_digest": "sha256:f42058619195d938b18f2afb233c508fde612d4c3b821389184e0f04de9a43ce",
+    "tablet_digest": "sha256:54c5319e5e9656b10a4fdbdedcc031654beeb65d08be8a4ccdd3c948d39ad08b",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-154",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:5f0827fbe1498912d5beb95775a5d82814264de1c2ca02f5fb96ba3e894c0be8",
+    "mobile_digest": "sha256:577218f075b3e43e6376fcf43b4cbdabe8b1c8e97724c564179abb77e7c36d40",
+    "tablet_digest": "sha256:e7ed55c4ae9141e141b6ae5282c2e64c571d5701b9d4e4353790aa3cdf656fc2",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-155",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:8df8c424953a5e88b040a786c3267707cb48332e8405f7a9112f70a540a06be1",
+    "mobile_digest": "sha256:69483672bd30a7184319bba66cf979b9501445ada548f1cfbb6f0fcf7522d91d",
+    "tablet_digest": "sha256:e7d0862c4b814a118f69695d1ac86851ade1eb1a0b54c9c70d8de18916fbac42",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-156",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:abdda050129ff9dde1bcbc0d0fc0866ed1a50cc541e97a1178904b3b1145f912",
+    "mobile_digest": "sha256:5060784878fa016585d04ea0529e5a28ab45b497e8e4b9c5b98e8a3f77f19870",
+    "tablet_digest": "sha256:abdda050129ff9dde1bcbc0d0fc0866ed1a50cc541e97a1178904b3b1145f912",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-157",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:813b0dce2fb1a0fc5e6c1278b9f41a807585ea28a7cc9492a20b273e85616b07",
+    "mobile_digest": "sha256:d1471c6311e9290e333f3c3793f3fb82c4cf21b8fc19731c177a07769142433c",
+    "tablet_digest": "sha256:813b0dce2fb1a0fc5e6c1278b9f41a807585ea28a7cc9492a20b273e85616b07",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-158",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:6f55a6c202965aa2701db819b05d25766fc3b99db81c285e7e5599c50298cb37",
+    "mobile_digest": "sha256:4e02d8de6513f83dbc800a57c9d887717a4fd8e1c4b4cb3e1b28c2ea4ad56de9",
+    "tablet_digest": "sha256:648893b608bb1ff135ab651d0c3c7756dcf565695cf91aca9829fc51b30ce368",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-159",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:bf7f39ac88577ddaee2dec18d904db2dfc972b550ef7f8a0d0f562c1a8dd979b",
+    "mobile_digest": "sha256:ba945f47f88d0de20e9b44f17e801f9b187084debcc1e110e414409257d0bd3c",
+    "tablet_digest": "sha256:ea3958609c14685a3447d37014ebbab773d5e6368160140797bfa7ff908eed07",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-160",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:c5a0f72608f10af668689a481fdff8a6d8df34fe0abdb80d47f480689693ca17",
+    "mobile_digest": "sha256:d7d9fa76a32d134e00990bb4e26cdedad193e1dd43882a6cb99681de6380f8b6",
+    "tablet_digest": "sha256:7888c1f02a731b80e5d4b7ab27d4e0cba51962638ebc82b6a8fb4f6c19e5c9de",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-161",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:90e477dd495b9c757826b7818cb63c1ad2543dfa3546a686a09f67f6080520a6",
+    "mobile_digest": "sha256:f8db19a9eb8b3192cac412f69c4988d6c9d7fee38696878df7e2d3321db8732a",
+    "tablet_digest": "sha256:90e477dd495b9c757826b7818cb63c1ad2543dfa3546a686a09f67f6080520a6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-162",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:c4c1382a401c68cb654520ebd1d8d3c0f7750ad39750c90e2dc437d4756c8774",
+    "mobile_digest": "sha256:2c24a331a7dfb3a45476dec3aa628e47c6c7d21e26d177d8c872adc33f0d7947",
+    "tablet_digest": "sha256:c4c1382a401c68cb654520ebd1d8d3c0f7750ad39750c90e2dc437d4756c8774",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-163",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:4de8d6753a5ccac8cd218fe159d7999f6d20a56cd2dd18193945620b4716d6ff",
+    "mobile_digest": "sha256:d96700dab7e506177012aab46215790895bb137cb5ec47755da4390405eff1f9",
+    "tablet_digest": "sha256:63b1948c2808b87a86770a4fda2cf0a026b21b93c82bb5b3c857319b044bce4b",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-164",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:7781d9b447e76c59eb7709dbd1150a468da75d4d20f2c4f06596b76d805b0877",
+    "mobile_digest": "sha256:0ce5ea6ec054de64bdebacd413f6ec64508a6293c9c45cadc2a032d4debd36f8",
+    "tablet_digest": "sha256:23ee8182392c9ad99adc348b2cf350ddbf66a026891b7d9886ea24bb8c3bcf80",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-165",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:5a1bcd42919646ead74175f7a2ef0c776443ca1dce9237bf0854a412e4cbe7a5",
+    "mobile_digest": "sha256:2510d5c2afc4d29df776c2e6c40adc12f8abef45274215bf4574e51a5123213c",
+    "tablet_digest": "sha256:8a9572a7ef963ca24647f077610ba59f3c96e6760fdf5c1bcfe4aa77a5dcd247",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-166",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:828b442fbde392eb22f904ee892d589f4e385d508c903ed6175a96189e72772b",
+    "mobile_digest": "sha256:66f3694cfca5bd2149517f3bee32a04b7bc7e64c9d6b281571f68794c6643a71",
+    "tablet_digest": "sha256:828b442fbde392eb22f904ee892d589f4e385d508c903ed6175a96189e72772b",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-167",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:6c25aeebed418036a80a4701f35ce396797f9d30653818b15fdc9faa22b852ba",
+    "mobile_digest": "sha256:9e696571235c7fe1b62b87b4b7e317abc59fba98f7220fa7eefa1701038b262b",
+    "tablet_digest": "sha256:6c25aeebed418036a80a4701f35ce396797f9d30653818b15fdc9faa22b852ba",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-168",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:f350a11ee36cee78649b24b11c22db997850d169fd65ae105e6b657dce7ce971",
+    "mobile_digest": "sha256:89b9c882adf6e9e7c9b7c75e79d6c34c55bd3fa12cb4ae077a6d66a20c1fce3f",
+    "tablet_digest": "sha256:650fe679c25ee99a5ddcf68c78c8f6cb30496b6251c12f4ec7cd772d464c0384",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-169",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:4592e08e5a7477d90e41ffae6d06ec089bf539a939b756cf9a50db7cdf286191",
+    "mobile_digest": "sha256:b09f8f047b53ae9fe4a925df21f27b9dc5472a37add6f1dd62b704192ae6e93c",
+    "tablet_digest": "sha256:934d3a7f36f1719fe8f927a0d71d7ff1526339b918d89c589ade6fe87c2df622",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-170",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:885f699f0cc69d35e752ef9b76c8155193894e75f8887e3e3461d379f49f5f83",
+    "mobile_digest": "sha256:b975e841610c2d6a5751769af7d9b56ed9a19cf7c53a78755e439794b671cc09",
+    "tablet_digest": "sha256:6b69e443d47dee8bb6e444825213d2bb6d5cf63b17df2ab374b3af7ac6c87f88",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-171",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:5c40c69ebf7572373dce3666425526be5c77f8f57a8ec7ce8350002d783fd964",
+    "mobile_digest": "sha256:1432704cb8434c39f7d82e422c2cd3489276af7481eb2f993f3d858c5dac6f3a",
+    "tablet_digest": "sha256:5c40c69ebf7572373dce3666425526be5c77f8f57a8ec7ce8350002d783fd964",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-172",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:95bea9f8244e8662b6faf4e583f4581a56d0eeeeba0ebba8d73e3b69182c27e6",
+    "mobile_digest": "sha256:19f9fd1a054fecb079ed2467e6f2a8bc5b8a6d1807bcc6311b395349ae8b284b",
+    "tablet_digest": "sha256:95bea9f8244e8662b6faf4e583f4581a56d0eeeeba0ebba8d73e3b69182c27e6",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-173",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:69e8fc7dd4ad00887a456728a00a58b5b626745127243ef2cd8a804a419c5501",
+    "mobile_digest": "sha256:9ebacfdd05219c790d77317ac1e123d3c5ef92a96b02b021a0808c84fc65818b",
+    "tablet_digest": "sha256:c6df0a36da372132fb2de84492906b374a53b6b705afd809b963c943e4feda39",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-174",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:c5b2a5efa08bb8dff9c163a20c35825fb59e95c44d2a573bc30e2cb2251ab58c",
+    "mobile_digest": "sha256:acd2f464fdd394e7c57249f5f9641170bd58aaf1059923b0032341ed4dc373c0",
+    "tablet_digest": "sha256:8f841ccd3628ce3519c433c973b96e97cfa6298a444b73b3596573ae9a5b415c",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-175",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:cdd78fa1f32ad3667ac383c331e2df2afabb1b9f1af4e65b6dd99388c88118cc",
+    "mobile_digest": "sha256:f56f5ca1b956ede7ceaf620cac0e37fb723472811dbc19d35a17b4c2e02ac099",
+    "tablet_digest": "sha256:e47a486b94b1cc6834c518d68e26fbc6662def1b7db510ee46f147d80d8acfea",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-176",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:772a81e567a2db2b381c2086cbc03c1b4e8d209e85d38aa1e16094b8746c9c37",
+    "mobile_digest": "sha256:6c43d474779d17643ffb702f002c8fe665c49a8c26edb4e41197e2171b678074",
+    "tablet_digest": "sha256:772a81e567a2db2b381c2086cbc03c1b4e8d209e85d38aa1e16094b8746c9c37",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-177",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:5bce1d888d6595b7554270e51cf4c2ef7e417c3d82288aba734b7a15ac13a727",
+    "mobile_digest": "sha256:5ba53b0790748d8dcca6fc81d77e8e082b0c7515b5c880bbff73d7dea3e16756",
+    "tablet_digest": "sha256:5bce1d888d6595b7554270e51cf4c2ef7e417c3d82288aba734b7a15ac13a727",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-178",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:37792232344f1c057a4d61e9a959af642f5f3f84bf86b9d7f0d4cf1efd449846",
+    "mobile_digest": "sha256:da1f44488807b4c40148ee248cbbccee754857a6083ec8ba497ca55e45f16ae9",
+    "tablet_digest": "sha256:a61e42ded3ff7695340a6cfa4a6ea194ead5530dd002c951e7dd8cf4df6b7286",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-179",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:f3852dd0eeb669b13cad4ce5a716460b37286a3176e34f33562b08cacf4e654d",
+    "mobile_digest": "sha256:ef4640387f59240ec13079b82a1278f477198fcb2b88db87872b5156400c5944",
+    "tablet_digest": "sha256:55fea9d45dd4e0f6c0ac152ee80d5c078c52ecc4b66341c0d94ffbad51b08595",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-180",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:19053e83e3d4ce288d10e76be4c02dc7c0e669847baef26e6064a99464581160",
+    "mobile_digest": "sha256:a8cc0d6a2e5eeca7aa5c5ac6738e4d31be9af637ff62ccc300be297e4e5cbdb8",
+    "tablet_digest": "sha256:03c7a0d477142a2d8fb4aa19ec1a741d9e8e099904825364a377031d72d64464",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-181",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:5ef18a8863e88af5c5e55ea3c32bbf8513cbe93f4ae0598268ff51b95ec475dc",
+    "mobile_digest": "sha256:83992b96b8b55c40889152a24b3d59b8c94b25b5d92b1866088d476a5c550fb1",
+    "tablet_digest": "sha256:5ef18a8863e88af5c5e55ea3c32bbf8513cbe93f4ae0598268ff51b95ec475dc",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-182",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:3b57dc64417dd8c10e134af485ed3ca9351cbe914803ea647834fe1ef13afff5",
+    "mobile_digest": "sha256:1a9a2990ec76317f7eb87a552221a6c30c1cc864486b78bd09248326c9ae5e01",
+    "tablet_digest": "sha256:3b57dc64417dd8c10e134af485ed3ca9351cbe914803ea647834fe1ef13afff5",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-183",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:ed59d9ee753a8b67b28f5e0494b2b3c31b03b344e62fdbdb4bd675fe7359a0ec",
+    "mobile_digest": "sha256:6f18c0d099b4eb7e74168401d785e7325a3a237a630a2ee042eeb0e0c08aa726",
+    "tablet_digest": "sha256:e92b0539d56ed35ab861cd84d0697f588a0b94fdffcdff44d659374de4313d69",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-184",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:d86431a1443a4593ef46edd68ac743cfecc3babb2bcb619fd191717363a9f7d8",
+    "mobile_digest": "sha256:814b7b7acd96ee6e97645c09445be4941a926deb1631223335588cf821561afe",
+    "tablet_digest": "sha256:261e5cbeeb402ecabe778b1d2c3ce60aa5eb4a00329bc38b582a8ca25de3e181",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-185",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:f94fa5ddba78c0b66e91681c0575afbeebe29985ef1476bb0576e9399cf9695a",
+    "mobile_digest": "sha256:da724c65fbe06e04c0d66db4a60ba55fa1ba21e61b571bae7aa1cdf2f81ec64f",
+    "tablet_digest": "sha256:12f987f5940f27ce66672944f6319a29ed209f9acebc99917855b45e87c09a33",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-186",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:c66e696d7f935bb0d2fd5a0172919772818d29216519aa03fe035edcd5d259af",
+    "mobile_digest": "sha256:0d8c8d007f7ff044e7a03d6dd27fb83d4b9f9036c72d98e8475366d1ee296492",
+    "tablet_digest": "sha256:c66e696d7f935bb0d2fd5a0172919772818d29216519aa03fe035edcd5d259af",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-187",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:50c0cf7eaa5f8e01594210a5c87dd56cf8ef0a809eba3a776a95918fe0216585",
+    "mobile_digest": "sha256:d3e0bc5efe106a655cfc557145ca3c9bd25037cbee283b11c532ca635a01c99b",
+    "tablet_digest": "sha256:50c0cf7eaa5f8e01594210a5c87dd56cf8ef0a809eba3a776a95918fe0216585",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-188",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:471832a073e96b7fb081bd5a42f617ade5826b71a12cf1068ad920cb3a84a4bf",
+    "mobile_digest": "sha256:09650112dcf718a3f06e98285401688234b8b4ff18d9e07ae5d249a344d0e9f9",
+    "tablet_digest": "sha256:faaa147dead673b62d2554f1e51d8de251c4d742640ce51cd984aa938d54406a",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-189",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:ea84610f86d52e3301e2f3361ebdde0324754af61f7213fb1908842c1d6cfddf",
+    "mobile_digest": "sha256:c1fc6a8ed36ba0924414fd75d68ef3e47b0f671ef6cc5b6709b2ed84b823050f",
+    "tablet_digest": "sha256:52978239f3c0503c948c40048c8d04fb1c17431e76325fc8fba420eb55e73118",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-190",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:48caa0637888fac920968c5b5b696b3b4e01fd92d3885967f9fd47e96ff939e5",
+    "mobile_digest": "sha256:defdd129d5385ba8c8be86763ac013c70999c726749b1bac193c2464181f2864",
+    "tablet_digest": "sha256:147465b2d0452cc255e01fcc607673a1b417eec3b4f061f351e819120d2e63c1",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-191",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:6ad1b1facd4ea4614d37d4bbc100604cdbf0312d81f97679488e9199c5bca2ee",
+    "mobile_digest": "sha256:61986f585d7220978bc44cdb7ce31ccee0691550bd81de3a805939e5dc44a85e",
+    "tablet_digest": "sha256:6ad1b1facd4ea4614d37d4bbc100604cdbf0312d81f97679488e9199c5bca2ee",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-192",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:21127adf7f6fdf4c11865f0cf705b43dc80ed784140775136351b204f99bd882",
+    "mobile_digest": "sha256:4b69acc5b0532710150b148297aa726ba25d2861358178264a76bb94ff2be279",
+    "tablet_digest": "sha256:21127adf7f6fdf4c11865f0cf705b43dc80ed784140775136351b204f99bd882",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-193",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:91b30cc8f7d8db21d15ee527898047037dc714a64fbc5ec4b29bba3456e8646a",
+    "mobile_digest": "sha256:b04cef3271d4d049d70af6120811da2a810828b8822de4d8bb0de60cf06dadac",
+    "tablet_digest": "sha256:80618be4948853aed5ceef2157f4f59f7f6f835780c98043221a2f2572ba8639",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-194",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:3c1993857e92a9847a2b2845ad69bd0fd1fe43a604470595439ef5e8810e45b5",
+    "mobile_digest": "sha256:644fad06e82f11cd9b9e2ca402508078af5534a0b3d91b7526f9b66927b70bf6",
+    "tablet_digest": "sha256:7c8e4fcbba90859124a6468b4b24066e9f2a9e6019697bd65025da65563071f0",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-195",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:a96ed58316c7a9b968c4012037f8f9008eaa54c8630248fb1cc8dad6dcb85c64",
+    "mobile_digest": "sha256:a3536fbe4e7ec698024570576af0142669e20720a55f2ed0670e59d165dc7328",
+    "tablet_digest": "sha256:d014218bd4f80507cdfa797189607622fcacf4d9ac36ea47132f10891a9012e5",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-196",
+    "breakpoints": [
+      768
+    ],
+    "desktop_digest": "sha256:be71190d29c467264e7e294a3c144e31ee31536b6678a068842293301dc3f54f",
+    "mobile_digest": "sha256:e88067725f951a3315650a8bdf5f105d93b25d626637ab6694b8c495b32487d4",
+    "tablet_digest": "sha256:be71190d29c467264e7e294a3c144e31ee31536b6678a068842293301dc3f54f",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-197",
+    "breakpoints": [
+      480,
+      768
+    ],
+    "desktop_digest": "sha256:1e6920326ce3fede600af9ea795419a9211465df78fb8e0c3cc1310b07387d98",
+    "mobile_digest": "sha256:476027baa8928c867c017807b9b53812f22edb935ad8f25c05feed706e9df00a",
+    "tablet_digest": "sha256:1e6920326ce3fede600af9ea795419a9211465df78fb8e0c3cc1310b07387d98",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": true,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-198",
+    "breakpoints": [
+      640,
+      1024
+    ],
+    "desktop_digest": "sha256:3d2816ca94a399e583f0b516fa68537a4b9d441ec920c398ba6afc3732a6037c",
+    "mobile_digest": "sha256:e0bf35e0e9735379971746e5ca4a6f03d239f40a318edb38991d14101dea1a36",
+    "tablet_digest": "sha256:6b6655d2e5c0ac14f1e6245b26e31753afb850f86c451c01c773559bc58de3ae",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-199",
+    "breakpoints": [
+      576,
+      992
+    ],
+    "desktop_digest": "sha256:071e3c741ec68c69cd0f1f1b0a9abb94b77745a65fe17a0c0900823385e34409",
+    "mobile_digest": "sha256:8bade1bbfc3a12f6b4482bc2c9882409f76fc77ecb59ca79bcefb81b58ee5be6",
+    "tablet_digest": "sha256:0130eb8fe5e337a4547e761579a13e6925c4f0f3f27032e318679ac12a827b9d",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  },
+  {
+    "interface_id": "corpus-200",
+    "breakpoints": [
+      768,
+      1200
+    ],
+    "desktop_digest": "sha256:d84f153ce2c0d0eeed65671e90f74f0ee6ee268752802b3e1a7a45a245c1eb7d",
+    "mobile_digest": "sha256:f1bb239a498ba10fea645fab715dac6e7524b8c422f9e8cbe07d191f6b0c7833",
+    "tablet_digest": "sha256:a90ff99d58d3b0c690dd8abd32b3a090b99198e9b1f93634c3b5b008833c54fe",
+    "desktop_mobile_agree": false,
+    "desktop_tablet_agree": false,
+    "tablet_mobile_agree": false,
+    "cause": "BREAKPOINT_RELAYOUT"
+  }
+]

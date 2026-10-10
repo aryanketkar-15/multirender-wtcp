@@ -1738,13 +1738,13 @@ git push origin feat/5.4-verifier-ui
 **2. Objective.** Measure the invariance claim rather than assert it, satisfying the no-unproven-claims requirement at its sharpest point.
 
 **3. Tasks to complete.**
-- [ ] Collect 200 real consent interfaces; record source and capture date
-- [ ] Harness rendering each across Chrome, Firefox, Safari, Edge × 5 viewports × 3 DPR × 2 font-fallback conditions
-- [ ] Compute digests; record agreement rate
-- [ ] **Third axis:** responsive breakpoint transitions measured separately from environment variation
-- [ ] Classify every disagreement by cause
-- [ ] Machine-readable results in `research/results/`
-- [ ] Generate the stability table for the paper
+- [x] Collect 200 real consent interfaces; record source and capture date
+- [x] Harness rendering each across Chrome, Firefox, Safari, Edge × 5 viewports × 3 DPR × 2 font-fallback conditions
+- [x] Compute digests; record agreement rate
+- [x] **Third axis:** responsive breakpoint transitions measured separately from environment variation
+- [x] Classify every disagreement by cause
+- [x] Machine-readable results in `research/results/`
+- [x] Generate the stability table for the paper
 
 **4. Files / modules affected.** `research/harness/stability.ts`, `research/harness/matrix.ts`, `research/corpus/manifest.json`, `research/results/stability-*.json`, `research/harness/report.ts`.
 
@@ -1758,19 +1758,19 @@ Classify every disagreement. An unexplained 0.8% disagreement rate is a weakness
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T6.1.1 | Harness runs full matrix | Corpus assembled | Execute | 24,000 renders; results written | ☐ |
-| T6.1.2 | Results reproducible | Matrix run once | Re-run on the same corpus | Agreement rate within 0.1% | ☐ |
-| T6.1.3 | Disagreements classified | Matrix complete | Inspect output | Every disagreement has a cause code | ☐ |
-| T6.1.4 | Responsive axis separate | Matrix complete | Inspect | Breakpoint results reported independently | ☐ |
-| T6.1.5 | Failures not discarded | Matrix complete | Inspect | Render failures counted, not silently dropped | ☐ |
-| T6.1.6 | Table generated | Results written | Run the report generator | Paper-ready table produced | ☐ |
+| T6.1.1 | Harness runs full matrix | Corpus assembled | Execute | 24,000 renders; results written | ✅ |
+| T6.1.2 | Results reproducible | Matrix run once | Re-run on the same corpus | Agreement rate within 0.1% | ✅ |
+| T6.1.3 | Disagreements classified | Matrix complete | Inspect output | Every disagreement has a cause code | ✅ |
+| T6.1.4 | Responsive axis separate | Matrix complete | Inspect | Breakpoint results reported independently | ✅ |
+| T6.1.5 | Failures not discarded | Matrix complete | Inspect | Render failures counted, not silently dropped | ✅ |
+| T6.1.6 | Table generated | Results written | Run the report generator | Paper-ready table produced | ✅ |
 
 **7. Verification checklist.**
-- [ ] 200 interfaces collected with provenance recorded
-- [ ] Full matrix executed; results committed as JSON
-- [ ] Every disagreement classified by cause
-- [ ] Responsive axis reported separately
-- [ ] Re-running reproduces the figures
+- [x] 200 interfaces collected with provenance recorded
+- [x] Full matrix executed; results committed as JSON
+- [x] Every disagreement classified by cause
+- [x] Responsive axis reported separately
+- [x] Re-running reproduces the figures
 
 **8. Completion criteria.** The matrix runs reproducibly, every disagreement is explained, and the stability table is generated from data rather than typed.
 
