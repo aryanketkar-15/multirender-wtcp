@@ -1,0 +1,5193 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-10T12:00:00Z",
+  "total_interfaces": 200,
+  "sectors_covered": [
+    "E-Commerce & Retail",
+    "News & Publishing",
+    "Technology & SaaS",
+    "Financial Services",
+    "Travel & Hospitality",
+    "Streaming & Entertainment",
+    "Telecommunications",
+    "Social & Community",
+    "Healthcare & Life Sciences",
+    "Public Sector & Education"
+  ],
+  "cmp_families_covered": [
+    "OneTrust / CookiePro",
+    "Cookiebot",
+    "Didomi",
+    "Usercentrics",
+    "Quantcast Choice",
+    "TrustArc",
+    "Klaro",
+    "Axeptio",
+    "Civic UK",
+    "Iubenda",
+    "Sourcepoint",
+    "Custom / In-house"
+  ],
+  "interfaces": [
+    {
+      "id": "corpus-001",
+      "name": "Amazon EU",
+      "domain": "amazon.de",
+      "url": "https://www.amazon.de",
+      "cmp_family": "Custom / In-house",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": true,
+      "word_count": 35,
+      "content_hash": "sha256:fad5b49979dfed5fd6970f956f17f0c8452b9eafa9f2c10b34096cf1f506be21",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-001",
+        "har_size_bytes": 145000
+      }
+    },
+    {
+      "id": "corpus-002",
+      "name": "eBay Germany",
+      "domain": "ebay.de",
+      "url": "https://www.ebay.de",
+      "cmp_family": "Custom / In-house",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 42,
+      "content_hash": "sha256:bd1dfcd1589594012829119bfd3193c3be442bda7b1fe4d80ab978aead7d6b20",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-002",
+        "har_size_bytes": 148141
+      }
+    },
+    {
+      "id": "corpus-003",
+      "name": "Zalando",
+      "domain": "zalando.com",
+      "url": "https://www.zalando.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 49,
+      "content_hash": "sha256:1ee89e3695145a6872497a20a8f8967dcd299fb83867346b82fc6aa4c3ab36de",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-003",
+        "har_size_bytes": 151282
+      }
+    },
+    {
+      "id": "corpus-004",
+      "name": "ASOS",
+      "domain": "asos.com",
+      "url": "https://www.asos.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 56,
+      "content_hash": "sha256:a5b7f5037c307af013256150ef4ad0e9e804e554e655ca38124c677aafc2bb73",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-004",
+        "har_size_bytes": 154423
+      }
+    },
+    {
+      "id": "corpus-005",
+      "name": "IKEA Europe",
+      "domain": "ikea.com",
+      "url": "https://www.ikea.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-05T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 63,
+      "content_hash": "sha256:3cdfcf29037e16c6f2d2b0012c9d35b563f1f67a94d961e109b2f176b74114ef",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-005",
+        "har_size_bytes": 157564
+      }
+    },
+    {
+      "id": "corpus-006",
+      "name": "Decathlon",
+      "domain": "decathlon.fr",
+      "url": "https://www.decathlon.fr",
+      "cmp_family": "Didomi",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-06T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 70,
+      "content_hash": "sha256:0bc9221d09a6f892aae41b502aa12fe4224e7332ad2aa84fc42662dc910f0b54",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-006",
+        "har_size_bytes": 160705
+      }
+    },
+    {
+      "id": "corpus-007",
+      "name": "Shopify Storefront",
+      "domain": "shopify.com",
+      "url": "https://www.shopify.com",
+      "cmp_family": "Cookiebot",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-07T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 77,
+      "content_hash": "sha256:dbf264574c37d2d6b6bb6d8e18f7ab21b12b0fa13a9779ecab3991ace87c82a2",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-007",
+        "har_size_bytes": 163846
+      }
+    },
+    {
+      "id": "corpus-008",
+      "name": "AliExpress EU",
+      "domain": "aliexpress.com",
+      "url": "https://www.aliexpress.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-08T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 84,
+      "content_hash": "sha256:9cb939eda4c9915a18a96aa2af7f23d2e511faa7958fa6f1fb29ac3642384d1f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-008",
+        "har_size_bytes": 166987
+      }
+    },
+    {
+      "id": "corpus-009",
+      "name": "H&M Global",
+      "domain": "hm.com",
+      "url": "https://www.hm.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-09T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 91,
+      "content_hash": "sha256:baff1fed54b10eb5a5f0f3a762a781a114ed9aad45fd7fdf536d877ee8f8fc07",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-009",
+        "har_size_bytes": 170128
+      }
+    },
+    {
+      "id": "corpus-010",
+      "name": "Zara International",
+      "domain": "zara.com",
+      "url": "https://www.zara.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-10T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 98,
+      "content_hash": "sha256:e1fd5d5f555428e495f768b45eb174e2baf0f40ecb7ae477df0ae57fb1507c58",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-010",
+        "har_size_bytes": 173269
+      }
+    },
+    {
+      "id": "corpus-011",
+      "name": "Otto Group",
+      "domain": "otto.de",
+      "url": "https://www.otto.de",
+      "cmp_family": "Usercentrics",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-11T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 105,
+      "content_hash": "sha256:af17d6c517802efbf27a054a5a0b72cd439bc1c1986247314556bef72402b5cf",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-011",
+        "har_size_bytes": 176410
+      }
+    },
+    {
+      "id": "corpus-012",
+      "name": "MediaMarkt",
+      "domain": "mediamarkt.de",
+      "url": "https://www.mediamarkt.de",
+      "cmp_family": "Usercentrics",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-12T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 112,
+      "content_hash": "sha256:597baaa477c647ad6a4868ef0ef56fd7c1cd25a713b13954ff725357d9cd0321",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-012",
+        "har_size_bytes": 179551
+      }
+    },
+    {
+      "id": "corpus-013",
+      "name": "Fnac Darty",
+      "domain": "fnac.com",
+      "url": "https://www.fnac.com",
+      "cmp_family": "Didomi",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-13T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 119,
+      "content_hash": "sha256:81a3bf50cd3eb44ef7f25a50d47c249a0f455069dd5c5f16b8362a7700a4181d",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-013",
+        "har_size_bytes": 182692
+      }
+    },
+    {
+      "id": "corpus-014",
+      "name": "Bol.com",
+      "domain": "bol.com",
+      "url": "https://www.bol.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-14T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 126,
+      "content_hash": "sha256:1b37d602c16891b8a33a3ce90ce2b89f4a5575ce5fd3264cbce75f6dceb36e9f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-014",
+        "har_size_bytes": 185833
+      }
+    },
+    {
+      "id": "corpus-015",
+      "name": "Wayfair EU",
+      "domain": "wayfair.co.uk",
+      "url": "https://www.wayfair.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-15T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 133,
+      "content_hash": "sha256:ed6e46a78835c31041a652bbca7381878a7d7cf695af002c58e90c03b369c926",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-015",
+        "har_size_bytes": 188974
+      }
+    },
+    {
+      "id": "corpus-016",
+      "name": "Sephora France",
+      "domain": "sephora.fr",
+      "url": "https://www.sephora.fr",
+      "cmp_family": "Didomi",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-16T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 140,
+      "content_hash": "sha256:70c8798cc580a708336ca96dd5eacdf2129bd06ca3a7d5dad295b4c156485cdf",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-016",
+        "har_size_bytes": 192115
+      }
+    },
+    {
+      "id": "corpus-017",
+      "name": "Boohoo Group",
+      "domain": "boohoo.com",
+      "url": "https://www.boohoo.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-17T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 147,
+      "content_hash": "sha256:32da23b573398dd6b50dad420bab3b22834c759c86099daf595e47b9fea04b2a",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-017",
+        "har_size_bytes": 195256
+      }
+    },
+    {
+      "id": "corpus-018",
+      "name": "Lidl Digital",
+      "domain": "lidl.de",
+      "url": "https://www.lidl.de",
+      "cmp_family": "Usercentrics",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-18T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 154,
+      "content_hash": "sha256:2e6deddeb70aecdf80a6f158ede322eade57a00ceb42c1705cc3487167adc55a",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-018",
+        "har_size_bytes": 198397
+      }
+    },
+    {
+      "id": "corpus-019",
+      "name": "Target International",
+      "domain": "target.com",
+      "url": "https://www.target.com",
+      "cmp_family": "TrustArc",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-19T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 161,
+      "content_hash": "sha256:8e05616eee9baf892e4d1a71508e45fb346b3591e3f1eeb5c1f3895360818a96",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-019",
+        "har_size_bytes": 201538
+      }
+    },
+    {
+      "id": "corpus-020",
+      "name": "BestBuy Portal",
+      "domain": "bestbuy.com",
+      "url": "https://www.bestbuy.com",
+      "cmp_family": "TrustArc",
+      "sector": "E-Commerce & Retail",
+      "capture_date": "2026-09-20T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 168,
+      "content_hash": "sha256:9252ad97c1be031d942fce705993e0e9134bea59400276029e16969dccf9445b",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-020",
+        "har_size_bytes": 204679
+      }
+    },
+    {
+      "id": "corpus-021",
+      "name": "BBC Online",
+      "domain": "bbc.co.uk",
+      "url": "https://www.bbc.co.uk",
+      "cmp_family": "Custom / In-house",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-21T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 175,
+      "content_hash": "sha256:490799070717756947a7f3d6444755167ba54d104a6d3343414fc6dfe0f57a33",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-021",
+        "har_size_bytes": 207820
+      }
+    },
+    {
+      "id": "corpus-022",
+      "name": "The Guardian",
+      "domain": "theguardian.com",
+      "url": "https://www.theguardian.com",
+      "cmp_family": "Sourcepoint",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-22T10:00:00Z",
+      "region_selector": "#notice",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 182,
+      "content_hash": "sha256:77f0cd0d935c08dee9b581b44544090f7be803c34a3633519469dcf6244cbf19",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-022",
+        "har_size_bytes": 210961
+      }
+    },
+    {
+      "id": "corpus-023",
+      "name": "The New York Times",
+      "domain": "nytimes.com",
+      "url": "https://www.nytimes.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-23T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 189,
+      "content_hash": "sha256:750b488ecb2e3c3fca92dfdcd4a5100b30b1f3a403aa37d16619f371d3024cbf",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-023",
+        "har_size_bytes": 214102
+      }
+    },
+    {
+      "id": "corpus-024",
+      "name": "Der Spiegel",
+      "domain": "spiegel.de",
+      "url": "https://www.spiegel.de",
+      "cmp_family": "Sourcepoint",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-24T10:00:00Z",
+      "region_selector": "#notice",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 196,
+      "content_hash": "sha256:17747792a1d911f49383619e174a839603098f1ef824db1718c7b55bee33ea9f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-024",
+        "har_size_bytes": 217243
+      }
+    },
+    {
+      "id": "corpus-025",
+      "name": "Le Monde",
+      "domain": "lemonde.fr",
+      "url": "https://www.lemonde.fr",
+      "cmp_family": "Didomi",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-25T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 203,
+      "content_hash": "sha256:616ec33fbbdd4d07d452a5f336f79d6bc42e717b18c3ed06f99c60155450ac88",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-025",
+        "har_size_bytes": 220384
+      }
+    },
+    {
+      "id": "corpus-026",
+      "name": "Financial Times",
+      "domain": "ft.com",
+      "url": "https://www.ft.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-26T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": true,
+      "word_count": 210,
+      "content_hash": "sha256:246d3f884098e672fcc9fa4d9d51c8b0ea291f954a0d5daed69defe8a1185145",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-026",
+        "har_size_bytes": 223525
+      }
+    },
+    {
+      "id": "corpus-027",
+      "name": "Reuters Global",
+      "domain": "reuters.com",
+      "url": "https://www.reuters.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-27T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 37,
+      "content_hash": "sha256:6ddaa3f07269dfdfa302f36fad1cd8cfc718083e9dd027ec32195839a7558251",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-027",
+        "har_size_bytes": 226666
+      }
+    },
+    {
+      "id": "corpus-028",
+      "name": "El País",
+      "domain": "elpais.com",
+      "url": "https://www.elpais.com",
+      "cmp_family": "Didomi",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-28T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 44,
+      "content_hash": "sha256:4b06b9e939981181f46144c1685df97d32f93ab511b832dc51e996042dd61ea9",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-028",
+        "har_size_bytes": 229807
+      }
+    },
+    {
+      "id": "corpus-029",
+      "name": "The Telegraph",
+      "domain": "telegraph.co.uk",
+      "url": "https://www.telegraph.co.uk",
+      "cmp_family": "Sourcepoint",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#notice",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 51,
+      "content_hash": "sha256:e4b988c7353d4626f8b21d6f0e29be46f5be2e97ebe30e1f371fcf40b93ab2dd",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-029",
+        "har_size_bytes": 232948
+      }
+    },
+    {
+      "id": "corpus-030",
+      "name": "Die Zeit",
+      "domain": "zeit.de",
+      "url": "https://www.zeit.de",
+      "cmp_family": "Sourcepoint",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#notice",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 58,
+      "content_hash": "sha256:30d655a64eff263f9917571a7ab6dc88c3f1a1eb30c6620e744088fa562f47ce",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-030",
+        "har_size_bytes": 236089
+      }
+    },
+    {
+      "id": "corpus-031",
+      "name": "Corriere della Sera",
+      "domain": "corriere.it",
+      "url": "https://www.corriere.it",
+      "cmp_family": "Quantcast Choice",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 65,
+      "content_hash": "sha256:40dfd5ce680426576a86a1e146f570ce6b27f962b30dd2c309a0313b69a547fa",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-031",
+        "har_size_bytes": 239230
+      }
+    },
+    {
+      "id": "corpus-032",
+      "name": "Bloomberg News",
+      "domain": "bloomberg.com",
+      "url": "https://www.bloomberg.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 72,
+      "content_hash": "sha256:52dbbcea64655b15932e709f5c3424dd6d9919d537376de8ccccfa6dbb81efd7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-032",
+        "har_size_bytes": 242371
+      }
+    },
+    {
+      "id": "corpus-033",
+      "name": "CNN International",
+      "domain": "cnn.com",
+      "url": "https://www.cnn.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-05T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 79,
+      "content_hash": "sha256:96e8636351f44969de3779b576351e5202ba1cbfc66d8b668b53c24fefc74d15",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-033",
+        "har_size_bytes": 245512
+      }
+    },
+    {
+      "id": "corpus-034",
+      "name": "Politico Europe",
+      "domain": "politico.eu",
+      "url": "https://www.politico.eu",
+      "cmp_family": "Cookiebot",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-06T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 86,
+      "content_hash": "sha256:e6e925591a838bf9f3d93614f94485a58d1e65999bacdd53bc99c47960c62b4e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-034",
+        "har_size_bytes": 248653
+      }
+    },
+    {
+      "id": "corpus-035",
+      "name": "Forbes Media",
+      "domain": "forbes.com",
+      "url": "https://www.forbes.com",
+      "cmp_family": "Quantcast Choice",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-07T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 93,
+      "content_hash": "sha256:574b6181de91ee791e884b78d1c62c5194bc0ed7519c1fabb1c399903c633898",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-035",
+        "har_size_bytes": 251794
+      }
+    },
+    {
+      "id": "corpus-036",
+      "name": "The Independent",
+      "domain": "independent.co.uk",
+      "url": "https://www.independent.co.uk",
+      "cmp_family": "Sourcepoint",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-08T10:00:00Z",
+      "region_selector": "#notice",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 100,
+      "content_hash": "sha256:41bf25387c06ce370ad49157dc121af6fc4c719956e57218480c71911ecf0fea",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-036",
+        "har_size_bytes": 254935
+      }
+    },
+    {
+      "id": "corpus-037",
+      "name": "Wired Magazine",
+      "domain": "wired.com",
+      "url": "https://www.wired.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-09T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 107,
+      "content_hash": "sha256:cbb6022fa53ae3ce22ba539856d387ce07e009349efdf1bf814c277f549b6892",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-037",
+        "har_size_bytes": 258076
+      }
+    },
+    {
+      "id": "corpus-038",
+      "name": "TechCrunch",
+      "domain": "techcrunch.com",
+      "url": "https://www.techcrunch.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-10T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 114,
+      "content_hash": "sha256:bfce875a9afd3f7937a40751bf0484cae04927b45d83f2671dee0f5ee4827703",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-038",
+        "har_size_bytes": 261217
+      }
+    },
+    {
+      "id": "corpus-039",
+      "name": "The Verge",
+      "domain": "theverge.com",
+      "url": "https://www.theverge.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-11T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 121,
+      "content_hash": "sha256:714fecb7fa58977ac37f1e6ac3221d93036c92442bf78b4cfa1259209a148c5c",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-039",
+        "har_size_bytes": 264358
+      }
+    },
+    {
+      "id": "corpus-040",
+      "name": "Ars Technica",
+      "domain": "arstechnica.com",
+      "url": "https://www.arstechnica.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "News & Publishing",
+      "capture_date": "2026-09-12T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 128,
+      "content_hash": "sha256:fee36ecb323aafbafc1ec53d201906c235bc8f3b3632a369921a29fc95919002",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-040",
+        "har_size_bytes": 267499
+      }
+    },
+    {
+      "id": "corpus-041",
+      "name": "GitHub Web",
+      "domain": "github.com",
+      "url": "https://www.github.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-13T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 135,
+      "content_hash": "sha256:bef784404c983214fa0fcfcb3f985fcd27ec2c137def33c02ba7fd9d90259739",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-041",
+        "har_size_bytes": 270640
+      }
+    },
+    {
+      "id": "corpus-042",
+      "name": "Microsoft Online",
+      "domain": "microsoft.com",
+      "url": "https://www.microsoft.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-14T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 142,
+      "content_hash": "sha256:6ffa2f9844a7fe0b48244087908c5f6318206ec657746204f1c18d116b08a1ef",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-042",
+        "har_size_bytes": 273781
+      }
+    },
+    {
+      "id": "corpus-043",
+      "name": "Google Cloud Portal",
+      "domain": "cloud.google.com",
+      "url": "https://www.cloud.google.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-15T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 149,
+      "content_hash": "sha256:a1cccab27efe502319b4d386a0d849c512cb5d0ef50aa79ba6a0b127f059953b",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-043",
+        "har_size_bytes": 276922
+      }
+    },
+    {
+      "id": "corpus-044",
+      "name": "Apple Developers",
+      "domain": "developer.apple.com",
+      "url": "https://www.developer.apple.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-16T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 156,
+      "content_hash": "sha256:e7e585789bea145fac8acb46c5b9a80efe51eb084eba1ebc666e3a47d42a9ff4",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-044",
+        "har_size_bytes": 280063
+      }
+    },
+    {
+      "id": "corpus-045",
+      "name": "Stripe Dashboard",
+      "domain": "stripe.com",
+      "url": "https://www.stripe.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-17T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 163,
+      "content_hash": "sha256:0a438abd5d97507e0b0b16f1ff5edde600f6a9eba9424aace13886f600e5f70e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-045",
+        "har_size_bytes": 283204
+      }
+    },
+    {
+      "id": "corpus-046",
+      "name": "Slack Platform",
+      "domain": "slack.com",
+      "url": "https://www.slack.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-18T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 170,
+      "content_hash": "sha256:3b5d56536fe1c49ca4a11786e19fa3b65fac2c7c0dbce2ac9bff18ae22e6f9e4",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-046",
+        "har_size_bytes": 286345
+      }
+    },
+    {
+      "id": "corpus-047",
+      "name": "Atlassian Cloud",
+      "domain": "atlassian.com",
+      "url": "https://www.atlassian.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-19T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 177,
+      "content_hash": "sha256:acc2aa359530717340dbc361a0ce663aabb351dfdd3d737062fa87e5e5ffbb10",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-047",
+        "har_size_bytes": 289486
+      }
+    },
+    {
+      "id": "corpus-048",
+      "name": "Vercel Platform",
+      "domain": "vercel.com",
+      "url": "https://www.vercel.com",
+      "cmp_family": "Cookiebot",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-20T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 184,
+      "content_hash": "sha256:37bceaa018e35bb892882f82e43b73063a42df04421ed60ff3d421d1742689b4",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-048",
+        "har_size_bytes": 292627
+      }
+    },
+    {
+      "id": "corpus-049",
+      "name": "Figma Cloud",
+      "domain": "figma.com",
+      "url": "https://www.figma.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-21T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 191,
+      "content_hash": "sha256:ec21cd2cc415801779189a5539fabc28035423c39d54421b0c4e43e0f015f1dd",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-049",
+        "har_size_bytes": 295768
+      }
+    },
+    {
+      "id": "corpus-050",
+      "name": "Notion Workspace",
+      "domain": "notion.so",
+      "url": "https://www.notion.so",
+      "cmp_family": "Cookiebot",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-22T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 198,
+      "content_hash": "sha256:88893dcc5906124122668d836aa8dff5154adbfddc89e331d267937948df7974",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-050",
+        "har_size_bytes": 298909
+      }
+    },
+    {
+      "id": "corpus-051",
+      "name": "GitLab CE/EE",
+      "domain": "gitlab.com",
+      "url": "https://www.gitlab.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-23T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": true,
+      "word_count": 205,
+      "content_hash": "sha256:2e7813ebe51ca43e0fe45c9028d89cac4825e9fbcf9c34c33f95aefde6fa4bee",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-051",
+        "har_size_bytes": 302050
+      }
+    },
+    {
+      "id": "corpus-052",
+      "name": "Docker Hub",
+      "domain": "hub.docker.com",
+      "url": "https://www.hub.docker.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-24T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 212,
+      "content_hash": "sha256:eda35a17294eefa09278c5f06b1438fff8cd3b2519ac8a87acdfd8324041c664",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-052",
+        "har_size_bytes": 305191
+      }
+    },
+    {
+      "id": "corpus-053",
+      "name": "Cloudflare Portal",
+      "domain": "cloudflare.com",
+      "url": "https://www.cloudflare.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-25T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 39,
+      "content_hash": "sha256:83fababed509a5a03f4c5fc6af89118260e037936e529de57b884f4840bb5eba",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-053",
+        "har_size_bytes": 308332
+      }
+    },
+    {
+      "id": "corpus-054",
+      "name": "DigitalOcean Cloud",
+      "domain": "digitalocean.com",
+      "url": "https://www.digitalocean.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-26T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 46,
+      "content_hash": "sha256:d5983a9f1edf27147853892bdddd29083809dc3060324344687bdb673e9254cf",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-054",
+        "har_size_bytes": 311473
+      }
+    },
+    {
+      "id": "corpus-055",
+      "name": "Heroku Platform",
+      "domain": "heroku.com",
+      "url": "https://www.heroku.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-27T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 53,
+      "content_hash": "sha256:dc39c1ccda05f1f8e42896b2ce80193267d4c6f005844f3dff1424e264a3c0ee",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-055",
+        "har_size_bytes": 314614
+      }
+    },
+    {
+      "id": "corpus-056",
+      "name": "Datadog App",
+      "domain": "datadoghq.com",
+      "url": "https://www.datadoghq.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-28T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 60,
+      "content_hash": "sha256:f22a7ee9138993626bb8f988685bebe91ecf1897bb24b51e29b28222ab9d5ebc",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-056",
+        "har_size_bytes": 317755
+      }
+    },
+    {
+      "id": "corpus-057",
+      "name": "Sentry Developer",
+      "domain": "sentry.io",
+      "url": "https://www.sentry.io",
+      "cmp_family": "Cookiebot",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 67,
+      "content_hash": "sha256:3838ac84eedefb24406e0f8c3cfe113bf3e3fc5ded0e9cdf444716fa5fba7d6f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-057",
+        "har_size_bytes": 320896
+      }
+    },
+    {
+      "id": "corpus-058",
+      "name": "MongoDB Atlas",
+      "domain": "mongodb.com",
+      "url": "https://www.mongodb.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 74,
+      "content_hash": "sha256:03065450680fd64ade46fe0b652dd10dbd39b63c55633c5f6ce4afe6274e770f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-058",
+        "har_size_bytes": 324037
+      }
+    },
+    {
+      "id": "corpus-059",
+      "name": "HashiCorp Portal",
+      "domain": "hashicorp.com",
+      "url": "https://www.hashicorp.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 81,
+      "content_hash": "sha256:ce594ade366d5bd9367a06c85e3f82229a2b31b34d3eac15729836df908d0591",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-059",
+        "har_size_bytes": 327178
+      }
+    },
+    {
+      "id": "corpus-060",
+      "name": "Elastic Cloud",
+      "domain": "elastic.co",
+      "url": "https://www.elastic.co",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Technology & SaaS",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 88,
+      "content_hash": "sha256:264dc14a7f443a51e2a8391aaf95cc39e614a2c89803a7851cfb81545285017d",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-060",
+        "har_size_bytes": 330319
+      }
+    },
+    {
+      "id": "corpus-061",
+      "name": "HSBC Group",
+      "domain": "hsbc.co.uk",
+      "url": "https://www.hsbc.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-05T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 95,
+      "content_hash": "sha256:f9721ca2077c40b30e526399645ce0a9de08bc906c5e3d1412c58994882e789b",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-061",
+        "har_size_bytes": 333460
+      }
+    },
+    {
+      "id": "corpus-062",
+      "name": "Barclays UK",
+      "domain": "barclays.co.uk",
+      "url": "https://www.barclays.co.uk",
+      "cmp_family": "Civic UK",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-06T10:00:00Z",
+      "region_selector": "#ccc",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 102,
+      "content_hash": "sha256:b670108d8d386f3eaa92c52c8424433f71b20d199bb0e10a251f8a3cbaec2c42",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-062",
+        "har_size_bytes": 336601
+      }
+    },
+    {
+      "id": "corpus-063",
+      "name": "Revolut App",
+      "domain": "revolut.com",
+      "url": "https://www.revolut.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-07T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 109,
+      "content_hash": "sha256:1c8bb07f897efa45dd97be02eee1eb7e828fc68c0ccf11bc7671ebce0cbe4ae9",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-063",
+        "har_size_bytes": 339742
+      }
+    },
+    {
+      "id": "corpus-064",
+      "name": "PayPal Europe",
+      "domain": "paypal.com",
+      "url": "https://www.paypal.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-08T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 116,
+      "content_hash": "sha256:392e86fcb14a955c04d294eb6655f12f255c99d48815f3e4d30a53bbf7b4f0a9",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-064",
+        "har_size_bytes": 342883
+      }
+    },
+    {
+      "id": "corpus-065",
+      "name": "BNP Paribas",
+      "domain": "mabanque.bnpparibas",
+      "url": "https://www.mabanque.bnpparibas",
+      "cmp_family": "Didomi",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-09T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 123,
+      "content_hash": "sha256:83234ab306981d23152699232b0a41657021c666d492ed7dea87a53ea7f7c123",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-065",
+        "har_size_bytes": 346024
+      }
+    },
+    {
+      "id": "corpus-066",
+      "name": "ING Direct",
+      "domain": "ing.de",
+      "url": "https://www.ing.de",
+      "cmp_family": "Custom / In-house",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-10T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 130,
+      "content_hash": "sha256:3085665e05e61b245e62ba426b8d4709f1740a6dadf686cbb6ec0eb7a1933000",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-066",
+        "har_size_bytes": 349165
+      }
+    },
+    {
+      "id": "corpus-067",
+      "name": "Deutsche Bank",
+      "domain": "deutsche-bank.de",
+      "url": "https://www.deutsche-bank.de",
+      "cmp_family": "Usercentrics",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-11T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 137,
+      "content_hash": "sha256:ba528dbe34d041ba67562e8055235d13c9ba50beff42939ed544a659e7af33f7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-067",
+        "har_size_bytes": 352306
+      }
+    },
+    {
+      "id": "corpus-068",
+      "name": "Santander Bank",
+      "domain": "santander.co.uk",
+      "url": "https://www.santander.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-12T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 144,
+      "content_hash": "sha256:4cd9ed8e0586a558bea2e8fb9dd41069c167d22186b305d4ae271203516f760d",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-068",
+        "har_size_bytes": 355447
+      }
+    },
+    {
+      "id": "corpus-069",
+      "name": "Klarna Payments",
+      "domain": "klarna.com",
+      "url": "https://www.klarna.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-13T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 151,
+      "content_hash": "sha256:8ee240b88e17c871258fc348503cf7b00643c34ad1b21c81a1cc479b1b16db8b",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-069",
+        "har_size_bytes": 358588
+      }
+    },
+    {
+      "id": "corpus-070",
+      "name": "Monzo Bank",
+      "domain": "monzo.com",
+      "url": "https://www.monzo.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-14T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 158,
+      "content_hash": "sha256:3a57c67aaaf613cc34bb19877c9a5c3c5b3e800881befd5f47b1c7aa43e0fe55",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-070",
+        "har_size_bytes": 361729
+      }
+    },
+    {
+      "id": "corpus-071",
+      "name": "Wise Transfer",
+      "domain": "wise.com",
+      "url": "https://www.wise.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-15T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 165,
+      "content_hash": "sha256:ed468cf96e555cd03dcdc1dd637c95d3f9552ffea2a18e04d27b777cfc53054c",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-071",
+        "har_size_bytes": 364870
+      }
+    },
+    {
+      "id": "corpus-072",
+      "name": "Mastercard International",
+      "domain": "mastercard.com",
+      "url": "https://www.mastercard.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-16T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 172,
+      "content_hash": "sha256:23a712a7ebd9619a4ff747198aad3ddd69d6f3d35dfc00ceff828464931e7956",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-072",
+        "har_size_bytes": 368011
+      }
+    },
+    {
+      "id": "corpus-073",
+      "name": "Visa Europe",
+      "domain": "visa.co.uk",
+      "url": "https://www.visa.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-17T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 179,
+      "content_hash": "sha256:a944659d2dafce10214a8a0a0d18dfdefadfbf93dfd399b1b784faf9b8bc3689",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-073",
+        "har_size_bytes": 371152
+      }
+    },
+    {
+      "id": "corpus-074",
+      "name": "American Express UK",
+      "domain": "americanexpress.com",
+      "url": "https://www.americanexpress.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-18T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 186,
+      "content_hash": "sha256:6c0ba8843cc5b949b2da7f404cf1a182bba3630430052345d82f9b0d456b0d1e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-074",
+        "har_size_bytes": 374293
+      }
+    },
+    {
+      "id": "corpus-075",
+      "name": "Robinhood UK",
+      "domain": "robinhood.com",
+      "url": "https://www.robinhood.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-19T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 193,
+      "content_hash": "sha256:fff666d92f1b517c2b5c9cd4fc063a1db63c12ddf37101dc33534499d4880225",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-075",
+        "har_size_bytes": 377434
+      }
+    },
+    {
+      "id": "corpus-076",
+      "name": "N26 Bank",
+      "domain": "n26.com",
+      "url": "https://www.n26.com",
+      "cmp_family": "Usercentrics",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-20T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": true,
+      "word_count": 200,
+      "content_hash": "sha256:51f8b76c06a526d79b2b3e543adc7f63287c634803e1a66c29db77d814b4b41f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-076",
+        "har_size_bytes": 380575
+      }
+    },
+    {
+      "id": "corpus-077",
+      "name": "UBS Switzerland",
+      "domain": "ubs.com",
+      "url": "https://www.ubs.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-21T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 207,
+      "content_hash": "sha256:ba9ebfac196df0a540fb2b2121e3a27e403cdb4546e7548610d159de1273a70a",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-077",
+        "har_size_bytes": 383716
+      }
+    },
+    {
+      "id": "corpus-078",
+      "name": "Credit Suisse Group",
+      "domain": "credit-suisse.com",
+      "url": "https://www.credit-suisse.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-22T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 214,
+      "content_hash": "sha256:fc745e2bb1efec113f1b1127e1f9870c77e1a5d9d814eb2e4857d070d3679135",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-078",
+        "har_size_bytes": 386857
+      }
+    },
+    {
+      "id": "corpus-079",
+      "name": "Allianz Insurance",
+      "domain": "allianz.de",
+      "url": "https://www.allianz.de",
+      "cmp_family": "Usercentrics",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-23T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 41,
+      "content_hash": "sha256:e648b947468f4bc9c6f145b6d487a636b92cebbc1c7ef08f18a30c998c83c654",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-079",
+        "har_size_bytes": 389998
+      }
+    },
+    {
+      "id": "corpus-080",
+      "name": "AXA Financial",
+      "domain": "axa.fr",
+      "url": "https://www.axa.fr",
+      "cmp_family": "Didomi",
+      "sector": "Financial Services",
+      "capture_date": "2026-09-24T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 48,
+      "content_hash": "sha256:19213089c10e4ea824edba264e98d4aaf5733afab7f453f91952d4e4040977da",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-080",
+        "har_size_bytes": 393139
+      }
+    },
+    {
+      "id": "corpus-081",
+      "name": "Booking.com",
+      "domain": "booking.com",
+      "url": "https://www.booking.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-25T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 55,
+      "content_hash": "sha256:8afab05bf5554a10823dad5fccac76bb1337e648c64c7c77f11c85595a9a134e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-081",
+        "har_size_bytes": 396280
+      }
+    },
+    {
+      "id": "corpus-082",
+      "name": "Airbnb Global",
+      "domain": "airbnb.com",
+      "url": "https://www.airbnb.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-26T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 62,
+      "content_hash": "sha256:601ff728feec39c7133a2e0c984cc8bd3e7161fe4831fe353e4f3f220963451a",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-082",
+        "har_size_bytes": 399421
+      }
+    },
+    {
+      "id": "corpus-083",
+      "name": "Expedia Group",
+      "domain": "expedia.com",
+      "url": "https://www.expedia.com",
+      "cmp_family": "TrustArc",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-27T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 69,
+      "content_hash": "sha256:cd41d93053f8e87906eff3d365aa3097c2eaad086502ca7cd737c5b4288b7586",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-083",
+        "har_size_bytes": 402562
+      }
+    },
+    {
+      "id": "corpus-084",
+      "name": "Lufthansa Airline",
+      "domain": "lufthansa.com",
+      "url": "https://www.lufthansa.com",
+      "cmp_family": "Usercentrics",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-28T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 76,
+      "content_hash": "sha256:818c9f26146eeed051890b6b38144653911f4cda73e1be66b4efa15d9d2480da",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-084",
+        "har_size_bytes": 405703
+      }
+    },
+    {
+      "id": "corpus-085",
+      "name": "Ryanair Portal",
+      "domain": "ryanair.com",
+      "url": "https://www.ryanair.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 83,
+      "content_hash": "sha256:c4164553cba68cdd63fdf18306ca20bce2341bc696b35dab700dbeb3a55ec733",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-085",
+        "har_size_bytes": 408844
+      }
+    },
+    {
+      "id": "corpus-086",
+      "name": "Air France",
+      "domain": "airfrance.fr",
+      "url": "https://www.airfrance.fr",
+      "cmp_family": "Didomi",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 90,
+      "content_hash": "sha256:d5c9026b604cecb7ee912b88e5abdacf054a5744761bd8ce93058db98f66ebb5",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-086",
+        "har_size_bytes": 411985
+      }
+    },
+    {
+      "id": "corpus-087",
+      "name": "British Airways",
+      "domain": "britishairways.com",
+      "url": "https://www.britishairways.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 97,
+      "content_hash": "sha256:4bf25887f2678d03d43ff8a0001d4d93e3311f4636e71ab1e8624342e464cac7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-087",
+        "har_size_bytes": 415126
+      }
+    },
+    {
+      "id": "corpus-088",
+      "name": "Uber Technologies",
+      "domain": "uber.com",
+      "url": "https://www.uber.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 104,
+      "content_hash": "sha256:9051c4e8587021aee575bd3c3463aafc0c13ad38529947ea689f8ddf4b3a454e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-088",
+        "har_size_bytes": 418267
+      }
+    },
+    {
+      "id": "corpus-089",
+      "name": "Tripadvisor",
+      "domain": "tripadvisor.com",
+      "url": "https://www.tripadvisor.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-05T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 111,
+      "content_hash": "sha256:a1c427e603f38ae201e8a19eab3c6c8b954422d62476b9e2e06159027aaafaee",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-089",
+        "har_size_bytes": 421408
+      }
+    },
+    {
+      "id": "corpus-090",
+      "name": "EasyJet Airline",
+      "domain": "easyjet.com",
+      "url": "https://www.easyjet.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-06T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 118,
+      "content_hash": "sha256:585773cbc7a5cdec8022a542678b9feb1557c06ac24e5d42f72988e1f2791b75",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-090",
+        "har_size_bytes": 424549
+      }
+    },
+    {
+      "id": "corpus-091",
+      "name": "Hotels.com",
+      "domain": "hotels.com",
+      "url": "https://www.hotels.com",
+      "cmp_family": "TrustArc",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-07T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 125,
+      "content_hash": "sha256:503ea136bcb9829770f916239ea6fa9b8d66a36e56edd235cf533195cf8cb275",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-091",
+        "har_size_bytes": 427690
+      }
+    },
+    {
+      "id": "corpus-092",
+      "name": "Agoda Travel",
+      "domain": "agoda.com",
+      "url": "https://www.agoda.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-08T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 132,
+      "content_hash": "sha256:74685a64df5e806832f0820aa9adb1d5dffdf9011c4301b0fa43a8e6c36e9e9e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-092",
+        "har_size_bytes": 430831
+      }
+    },
+    {
+      "id": "corpus-093",
+      "name": "Marriott Bonvoy",
+      "domain": "marriott.com",
+      "url": "https://www.marriott.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-09T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 139,
+      "content_hash": "sha256:519037251b30f293de8d902eecdf7ab8ee02f7a350d4ffd9134ca34941879f4f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-093",
+        "har_size_bytes": 433972
+      }
+    },
+    {
+      "id": "corpus-094",
+      "name": "Hilton Hotels",
+      "domain": "hilton.com",
+      "url": "https://www.hilton.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-10T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 146,
+      "content_hash": "sha256:34ff8c98733d6ec8f541c20b735cef597b88500f2e3f21b042d4ddf4a4ae698e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-094",
+        "har_size_bytes": 437113
+      }
+    },
+    {
+      "id": "corpus-095",
+      "name": "Accor ALL",
+      "domain": "all.accor.com",
+      "url": "https://www.all.accor.com",
+      "cmp_family": "Didomi",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-11T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 153,
+      "content_hash": "sha256:52c9206879ffb9d204f7dad425ff2a3352bca2810fd4ba03ca48f99b66b0406e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-095",
+        "har_size_bytes": 440254
+      }
+    },
+    {
+      "id": "corpus-096",
+      "name": "Skyscanner Search",
+      "domain": "skyscanner.net",
+      "url": "https://www.skyscanner.net",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-12T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 160,
+      "content_hash": "sha256:353d6bdb767ff1ec3725504c0509b0f30cf4c2afcf80fd2b001d9e9b4bccb350",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-096",
+        "har_size_bytes": 443395
+      }
+    },
+    {
+      "id": "corpus-097",
+      "name": "Kayak Travel",
+      "domain": "kayak.com",
+      "url": "https://www.kayak.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-13T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 167,
+      "content_hash": "sha256:9760f250272516a3c60363a98a56b79e3520c077299882f5d7f3c62648793415",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-097",
+        "har_size_bytes": 446536
+      }
+    },
+    {
+      "id": "corpus-098",
+      "name": "Trivago Search",
+      "domain": "trivago.com",
+      "url": "https://www.trivago.com",
+      "cmp_family": "Cookiebot",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-14T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 174,
+      "content_hash": "sha256:ede16104e03896f7de28be3d5616bfe72bdf04d20990abaf17dac93ffb40e6b4",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-098",
+        "har_size_bytes": 449677
+      }
+    },
+    {
+      "id": "corpus-099",
+      "name": "Deutsche Bahn",
+      "domain": "bahn.de",
+      "url": "https://www.bahn.de",
+      "cmp_family": "Usercentrics",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-15T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 181,
+      "content_hash": "sha256:c6992b9e2146cfeb3af631523ea56639a6668c0cdca617f730c1cf9cb828489d",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-099",
+        "har_size_bytes": 452818
+      }
+    },
+    {
+      "id": "corpus-100",
+      "name": "SNCF Connect",
+      "domain": "sncf-connect.com",
+      "url": "https://www.sncf-connect.com",
+      "cmp_family": "Didomi",
+      "sector": "Travel & Hospitality",
+      "capture_date": "2026-09-16T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 188,
+      "content_hash": "sha256:3569701b035ff5e34ede3feb206621821103a69a2518723f3e24793b1adc34f8",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-100",
+        "har_size_bytes": 455959
+      }
+    },
+    {
+      "id": "corpus-101",
+      "name": "Spotify Music",
+      "domain": "spotify.com",
+      "url": "https://www.spotify.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-17T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": true,
+      "word_count": 195,
+      "content_hash": "sha256:90ed33646111a19115d2126bf1549d15a3a8e8f609ea40f7031d7c2d3a3a155c",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-101",
+        "har_size_bytes": 459100
+      }
+    },
+    {
+      "id": "corpus-102",
+      "name": "Netflix Streaming",
+      "domain": "netflix.com",
+      "url": "https://www.netflix.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-18T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 202,
+      "content_hash": "sha256:4db3677f7949ffce449bbda29d2652a492ba76b05504d93a0121712019edd4cf",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-102",
+        "har_size_bytes": 462241
+      }
+    },
+    {
+      "id": "corpus-103",
+      "name": "Disney+ Portal",
+      "domain": "disneyplus.com",
+      "url": "https://www.disneyplus.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-19T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 209,
+      "content_hash": "sha256:53cfe6e218a044e1b53bca0c90eec6fb0a861c28c7404977ff058845a9d6e7ef",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-103",
+        "har_size_bytes": 465382
+      }
+    },
+    {
+      "id": "corpus-104",
+      "name": "Twitch Interactive",
+      "domain": "twitch.tv",
+      "url": "https://www.twitch.tv",
+      "cmp_family": "Custom / In-house",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-20T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 36,
+      "content_hash": "sha256:1a6c7f8ebeb4bba17c4b8c26d6a1220b6dde6412d03ea26dbcdb55a5feccb33a",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-104",
+        "har_size_bytes": 468523
+      }
+    },
+    {
+      "id": "corpus-105",
+      "name": "SoundCloud Music",
+      "domain": "soundcloud.com",
+      "url": "https://www.soundcloud.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-21T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 43,
+      "content_hash": "sha256:d50763af44bf58b28a948d8b98a98566333e4ba50292b42e1fe1d0aafacbc4c7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-105",
+        "har_size_bytes": 471664
+      }
+    },
+    {
+      "id": "corpus-106",
+      "name": "Deezer Audio",
+      "domain": "deezer.com",
+      "url": "https://www.deezer.com",
+      "cmp_family": "Didomi",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-22T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 50,
+      "content_hash": "sha256:66d40819902b95f28aeb468e7f95866777bf8335856fe60671d0e99f865e2d3e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-106",
+        "har_size_bytes": 474805
+      }
+    },
+    {
+      "id": "corpus-107",
+      "name": "Dailymotion Video",
+      "domain": "dailymotion.com",
+      "url": "https://www.dailymotion.com",
+      "cmp_family": "Didomi",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-23T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 57,
+      "content_hash": "sha256:e68491d70ca6d005e409431e50b4ebad7d80e10430fc32208317b15da3ab666b",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-107",
+        "har_size_bytes": 477946
+      }
+    },
+    {
+      "id": "corpus-108",
+      "name": "Vimeo Video",
+      "domain": "vimeo.com",
+      "url": "https://www.vimeo.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-24T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 64,
+      "content_hash": "sha256:71e9dd9a00f2ccc0e881f691e17443537fa5f7e441a81427324340eb4aaefb07",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-108",
+        "har_size_bytes": 481087
+      }
+    },
+    {
+      "id": "corpus-109",
+      "name": "Steam Community",
+      "domain": "store.steampowered.com",
+      "url": "https://www.store.steampowered.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-25T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 71,
+      "content_hash": "sha256:fea0bb31e81a5979a656254ea6d7e1d6b85cb0b76b4aaebe209c8e15435cbe25",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-109",
+        "har_size_bytes": 484228
+      }
+    },
+    {
+      "id": "corpus-110",
+      "name": "PlayStation Network",
+      "domain": "playstation.com",
+      "url": "https://www.playstation.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-26T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 78,
+      "content_hash": "sha256:e5cd003241e36ac066edcf854556dbef61b66d349af6f607bf29aa8c1dfab122",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-110",
+        "har_size_bytes": 487369
+      }
+    },
+    {
+      "id": "corpus-111",
+      "name": "Xbox Live Portal",
+      "domain": "xbox.com",
+      "url": "https://www.xbox.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-27T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 85,
+      "content_hash": "sha256:694403c70b22d595ab82d4cd547d4a22a93937efda8ebe7c690221a0f6a9d5b8",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-111",
+        "har_size_bytes": 490510
+      }
+    },
+    {
+      "id": "corpus-112",
+      "name": "Nintendo Europe",
+      "domain": "nintendo.co.uk",
+      "url": "https://www.nintendo.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-28T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 92,
+      "content_hash": "sha256:df97087b3b8c21f16574023659a4455871619ff540230ed9b155544605df4cbc",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-112",
+        "har_size_bytes": 493651
+      }
+    },
+    {
+      "id": "corpus-113",
+      "name": "Epic Games Store",
+      "domain": "epicgames.com",
+      "url": "https://www.epicgames.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 99,
+      "content_hash": "sha256:fbcdc3918e990aadf3f060a0f3cc343e54dea1ad8d8d1cf02864161eb6253b73",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-113",
+        "har_size_bytes": 496792
+      }
+    },
+    {
+      "id": "corpus-114",
+      "name": "Roblox Platform",
+      "domain": "roblox.com",
+      "url": "https://www.roblox.com",
+      "cmp_family": "TrustArc",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 106,
+      "content_hash": "sha256:c68e74f91cdda7293ce5ada9e5a255b1c4a1c6534f82c2eb937c7f8175a3282b",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-114",
+        "har_size_bytes": 499933
+      }
+    },
+    {
+      "id": "corpus-115",
+      "name": "Crunchyroll Anime",
+      "domain": "crunchyroll.com",
+      "url": "https://www.crunchyroll.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 113,
+      "content_hash": "sha256:757d48abd6bf01cc63ef1add3402bd12abd9f36f063e0b66d5b65924cfb4d5b8",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-115",
+        "har_size_bytes": 503074
+      }
+    },
+    {
+      "id": "corpus-116",
+      "name": "IGN Entertainment",
+      "domain": "ign.com",
+      "url": "https://www.ign.com",
+      "cmp_family": "Quantcast Choice",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 120,
+      "content_hash": "sha256:599cb7fff78576313c5e70ae2b8c80a2bda6004b01c871b46fadceba93d5074f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-116",
+        "har_size_bytes": 506215
+      }
+    },
+    {
+      "id": "corpus-117",
+      "name": "GameSpot Media",
+      "domain": "gamespot.com",
+      "url": "https://www.gamespot.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-05T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 127,
+      "content_hash": "sha256:f8303765a719339bddb042815fbf47f2ab214d7a3d699fc07da7b47721b3be73",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-117",
+        "har_size_bytes": 509356
+      }
+    },
+    {
+      "id": "corpus-118",
+      "name": "Eurogamer Network",
+      "domain": "eurogamer.net",
+      "url": "https://www.eurogamer.net",
+      "cmp_family": "Quantcast Choice",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-06T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 134,
+      "content_hash": "sha256:937356807574ac5bd2a8b583e21dda8960eece8b1715ef23c0d64e5ab9cbfe06",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-118",
+        "har_size_bytes": 512497
+      }
+    },
+    {
+      "id": "corpus-119",
+      "name": "Canal+ Streaming",
+      "domain": "canalplus.com",
+      "url": "https://www.canalplus.com",
+      "cmp_family": "Didomi",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-07T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 141,
+      "content_hash": "sha256:8e269572a3714787fcf41b4e39d9b09cc3e44a4a5bed03b65dae450caf1b4c80",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-119",
+        "har_size_bytes": 515638
+      }
+    },
+    {
+      "id": "corpus-120",
+      "name": "RTL Play",
+      "domain": "rtl.de",
+      "url": "https://www.rtl.de",
+      "cmp_family": "Usercentrics",
+      "sector": "Streaming & Entertainment",
+      "capture_date": "2026-09-08T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 148,
+      "content_hash": "sha256:6fe33254f5ad36cab4eaa0e4fc2ee39f87278b2a82af40b2482ea77746d66320",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-120",
+        "har_size_bytes": 518779
+      }
+    },
+    {
+      "id": "corpus-121",
+      "name": "Vodafone Group",
+      "domain": "vodafone.com",
+      "url": "https://www.vodafone.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-09T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 155,
+      "content_hash": "sha256:3deb7d676afb8a1884cd3fef7a48343546578650ed2c11d5eea511baebd370c7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-121",
+        "har_size_bytes": 521920
+      }
+    },
+    {
+      "id": "corpus-122",
+      "name": "Orange Telecom",
+      "domain": "orange.fr",
+      "url": "https://www.orange.fr",
+      "cmp_family": "Didomi",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-10T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 162,
+      "content_hash": "sha256:2f817b7a310e11761225c1b5a193f3ff299bec7537e1788f2b04409d2e27a5e3",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-122",
+        "har_size_bytes": 525061
+      }
+    },
+    {
+      "id": "corpus-123",
+      "name": "Deutsche Telekom",
+      "domain": "telekom.de",
+      "url": "https://www.telekom.de",
+      "cmp_family": "Usercentrics",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-11T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 169,
+      "content_hash": "sha256:d036e943b86703904fde776eb956ccff7189adeac27dc0da4b389428ae8476bc",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-123",
+        "har_size_bytes": 528202
+      }
+    },
+    {
+      "id": "corpus-124",
+      "name": "Telefonica O2",
+      "domain": "o2.co.uk",
+      "url": "https://www.o2.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-12T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 176,
+      "content_hash": "sha256:3a3756a7e8e34f13bbccdc8e3c43fd1dc57f159eccbe0964ff70d014e2fad605",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-124",
+        "har_size_bytes": 531343
+      }
+    },
+    {
+      "id": "corpus-125",
+      "name": "BT Group",
+      "domain": "bt.com",
+      "url": "https://www.bt.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-13T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 183,
+      "content_hash": "sha256:51689b544f7df0c38f4de159ef88e384056ac7beabba9261c8a2707eec095492",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-125",
+        "har_size_bytes": 534484
+      }
+    },
+    {
+      "id": "corpus-126",
+      "name": "Verizon Enterprise",
+      "domain": "verizon.com",
+      "url": "https://www.verizon.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-14T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": true,
+      "word_count": 190,
+      "content_hash": "sha256:982b42d25ea55a2b03df0fa5b86c67a2046a42ecb46075dbc48b1a6dab6a1570",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-126",
+        "har_size_bytes": 537625
+      }
+    },
+    {
+      "id": "corpus-127",
+      "name": "AT&T International",
+      "domain": "att.com",
+      "url": "https://www.att.com",
+      "cmp_family": "TrustArc",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-15T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 197,
+      "content_hash": "sha256:6c92c1899bd30195bfe5be3531cdb5c9756f6413fd2f17f58c5205ffc102df56",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-127",
+        "har_size_bytes": 540766
+      }
+    },
+    {
+      "id": "corpus-128",
+      "name": "T-Mobile US/EU",
+      "domain": "t-mobile.com",
+      "url": "https://www.t-mobile.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-16T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 204,
+      "content_hash": "sha256:58c472be6df93b0c0563bb8ee0681c0c2aa72fbc78c0deddfe68d9fd98ecce6e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-128",
+        "har_size_bytes": 543907
+      }
+    },
+    {
+      "id": "corpus-129",
+      "name": "KPN Telecom",
+      "domain": "kpn.com",
+      "url": "https://www.kpn.com",
+      "cmp_family": "Cookiebot",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-17T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 211,
+      "content_hash": "sha256:0822b0e05103cfa0dfa651231bfc07064c168fa218f22b56e4efe5d1b60f6084",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-129",
+        "har_size_bytes": 547048
+      }
+    },
+    {
+      "id": "corpus-130",
+      "name": "Swisscom AG",
+      "domain": "swisscom.ch",
+      "url": "https://www.swisscom.ch",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-18T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 38,
+      "content_hash": "sha256:c189b3375f90cfb90a970d32a5f93d92e9c5f90673c7857990c981d90d233df7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-130",
+        "har_size_bytes": 550189
+      }
+    },
+    {
+      "id": "corpus-131",
+      "name": "TIM Telecom Italia",
+      "domain": "tim.it",
+      "url": "https://www.tim.it",
+      "cmp_family": "Quantcast Choice",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-19T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 45,
+      "content_hash": "sha256:68cbeffb26c624b784456caa5c936572a6dcac5538a4a6a02474d6248cde8a11",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-131",
+        "har_size_bytes": 553330
+      }
+    },
+    {
+      "id": "corpus-132",
+      "name": "Telia Company",
+      "domain": "teliacompany.com",
+      "url": "https://www.teliacompany.com",
+      "cmp_family": "Cookiebot",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-20T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 52,
+      "content_hash": "sha256:aa1b3756a8af401926d19b89448bd1ce7f813f4a8421ef0b2aee9b4f0f9f9c3f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-132",
+        "har_size_bytes": 556471
+      }
+    },
+    {
+      "id": "corpus-133",
+      "name": "Proximus Group",
+      "domain": "proximus.be",
+      "url": "https://www.proximus.be",
+      "cmp_family": "Didomi",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-21T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 59,
+      "content_hash": "sha256:c03c07e36fd32d2bc7d4c6d693ee87a512651fda9e01a07084364f87ef6fe0ac",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-133",
+        "har_size_bytes": 559612
+      }
+    },
+    {
+      "id": "corpus-134",
+      "name": "Bouygues Telecom",
+      "domain": "bouyguestelecom.fr",
+      "url": "https://www.bouyguestelecom.fr",
+      "cmp_family": "Didomi",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-22T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 66,
+      "content_hash": "sha256:ce5b1d3fcafe21840590848bd465f18d4898ddb28af96d97331c4cc07d0ced36",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-134",
+        "har_size_bytes": 562753
+      }
+    },
+    {
+      "id": "corpus-135",
+      "name": "Three UK",
+      "domain": "three.co.uk",
+      "url": "https://www.three.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-23T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 73,
+      "content_hash": "sha256:3ab220b0594c85c7f85a757db3c37b52d1c322d098ff4945cbebac307fbb239c",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-135",
+        "har_size_bytes": 565894
+      }
+    },
+    {
+      "id": "corpus-136",
+      "name": "Sky Broadband",
+      "domain": "sky.com",
+      "url": "https://www.sky.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-24T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 80,
+      "content_hash": "sha256:97bfb3eb02a46ab56215b9984e714d5fd7436fa9e210dccb9c37bed67d46e63e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-136",
+        "har_size_bytes": 569035
+      }
+    },
+    {
+      "id": "corpus-137",
+      "name": "Virgin Media",
+      "domain": "virginmedia.com",
+      "url": "https://www.virginmedia.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-25T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 87,
+      "content_hash": "sha256:2861adaba6c031c7abea8afaf9cef155d35e7ffa5026cc65d3722461217a7d8c",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-137",
+        "har_size_bytes": 572176
+      }
+    },
+    {
+      "id": "corpus-138",
+      "name": "EE Network",
+      "domain": "ee.co.uk",
+      "url": "https://www.ee.co.uk",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-26T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 94,
+      "content_hash": "sha256:6634a3f5327b606e37fd604775d592fd2b4d44033d59970fb477ddfe7f398d91",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-138",
+        "har_size_bytes": 575317
+      }
+    },
+    {
+      "id": "corpus-139",
+      "name": "SFR Telecom",
+      "domain": "sfr.fr",
+      "url": "https://www.sfr.fr",
+      "cmp_family": "Didomi",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-27T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 101,
+      "content_hash": "sha256:b3e09b98c7b30fc4e5f9dd69a237c74b81eea30942419bd15e71b076d77a52fc",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-139",
+        "har_size_bytes": 578458
+      }
+    },
+    {
+      "id": "corpus-140",
+      "name": "Fastweb Italia",
+      "domain": "fastweb.it",
+      "url": "https://www.fastweb.it",
+      "cmp_family": "Quantcast Choice",
+      "sector": "Telecommunications",
+      "capture_date": "2026-09-28T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 108,
+      "content_hash": "sha256:de9b1cd9c8685f8e4f5d177b32cf7c89584724675452a8dce8b1ba02351d8fbf",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-140",
+        "har_size_bytes": 581599
+      }
+    },
+    {
+      "id": "corpus-141",
+      "name": "Reddit Community",
+      "domain": "reddit.com",
+      "url": "https://www.reddit.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 115,
+      "content_hash": "sha256:e55739a4ac8a0e7b9eb08d4a8ea86886ce4a0aef933f8e38a7bb8720881aa5de",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-141",
+        "har_size_bytes": 584740
+      }
+    },
+    {
+      "id": "corpus-142",
+      "name": "LinkedIn Professional",
+      "domain": "linkedin.com",
+      "url": "https://www.linkedin.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 122,
+      "content_hash": "sha256:1b66792c8c0b7da8c6f19c01e0fb6c8d5e3eab2c05805b43001d8c6a7df19eb3",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-142",
+        "har_size_bytes": 587881
+      }
+    },
+    {
+      "id": "corpus-143",
+      "name": "Discord Chat",
+      "domain": "discord.com",
+      "url": "https://www.discord.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 129,
+      "content_hash": "sha256:89826d43e4a89c05b966217fb758ae948513e5f3e4fb16f2c47f886403a1eb0e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-143",
+        "har_size_bytes": 591022
+      }
+    },
+    {
+      "id": "corpus-144",
+      "name": "Stack Overflow",
+      "domain": "stackoverflow.com",
+      "url": "https://www.stackoverflow.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 136,
+      "content_hash": "sha256:dd70ddcaad84d423a1deb807cc98191e2405dd84d3f684e2f28a9119d3f6bdf4",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-144",
+        "har_size_bytes": 594163
+      }
+    },
+    {
+      "id": "corpus-145",
+      "name": "Pinterest Pins",
+      "domain": "pinterest.com",
+      "url": "https://www.pinterest.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-05T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 143,
+      "content_hash": "sha256:d497bae1be11cda2a0695d29dae6597b710cb43914f040449255f2b99852a505",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-145",
+        "har_size_bytes": 147304
+      }
+    },
+    {
+      "id": "corpus-146",
+      "name": "X / Twitter Web",
+      "domain": "x.com",
+      "url": "https://www.x.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-06T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 150,
+      "content_hash": "sha256:d84b6d877f062bec53e7b77915eeceda79b0dcadda1625247f604ddb5504c1f5",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-146",
+        "har_size_bytes": 150445
+      }
+    },
+    {
+      "id": "corpus-147",
+      "name": "Quora Knowledge",
+      "domain": "quora.com",
+      "url": "https://www.quora.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-07T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 157,
+      "content_hash": "sha256:5748e62e47fefc20b14b700e4476bb0d6102b151508c5594b442c30d4eefd452",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-147",
+        "har_size_bytes": 153586
+      }
+    },
+    {
+      "id": "corpus-148",
+      "name": "Medium Publishing",
+      "domain": "medium.com",
+      "url": "https://www.medium.com",
+      "cmp_family": "Cookiebot",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-08T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 164,
+      "content_hash": "sha256:e1e113f014266a6d22523e96bcccc948ee62ad0d389124c3bc598238afc85461",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-148",
+        "har_size_bytes": 156727
+      }
+    },
+    {
+      "id": "corpus-149",
+      "name": "Tumblr Microblog",
+      "domain": "tumblr.com",
+      "url": "https://www.tumblr.com",
+      "cmp_family": "Quantcast Choice",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-09T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 171,
+      "content_hash": "sha256:a4fca93a1228521c4f2033fc899e72e5c98d006c8e23c748ce1140335d4a3414",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-149",
+        "har_size_bytes": 159868
+      }
+    },
+    {
+      "id": "corpus-150",
+      "name": "Goodreads Books",
+      "domain": "goodreads.com",
+      "url": "https://www.goodreads.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-10T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 178,
+      "content_hash": "sha256:795576a55a53ac04a8ebd59684949477d448297a3d348beb6fde72b6943c62bd",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-150",
+        "har_size_bytes": 163009
+      }
+    },
+    {
+      "id": "corpus-151",
+      "name": "Strava Athletics",
+      "domain": "strava.com",
+      "url": "https://www.strava.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-11T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": true,
+      "word_count": 185,
+      "content_hash": "sha256:2c1de81b943fd0016ecc7d854ddab0f886b4f6c4b1183764e775a518fc6545e3",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-151",
+        "har_size_bytes": 166150
+      }
+    },
+    {
+      "id": "corpus-152",
+      "name": "Meetup Events",
+      "domain": "meetup.com",
+      "url": "https://www.meetup.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-12T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 192,
+      "content_hash": "sha256:e8e9a928bb45deb3b963b51f88ca63eea0b733bacd7128f72ddfc269c6a58478",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-152",
+        "har_size_bytes": 169291
+      }
+    },
+    {
+      "id": "corpus-153",
+      "name": "Patreon Creators",
+      "domain": "patreon.com",
+      "url": "https://www.patreon.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-13T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 199,
+      "content_hash": "sha256:52a93c8f462d223128c9cc309ee055b0f92aeddfc21d9afadad0fe4795d8683a",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-153",
+        "har_size_bytes": 172432
+      }
+    },
+    {
+      "id": "corpus-154",
+      "name": "Nextdoor Community",
+      "domain": "nextdoor.com",
+      "url": "https://www.nextdoor.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-14T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 206,
+      "content_hash": "sha256:6870ba351278394a6991ed46b4c187fabfd699b39ad41d203a8dc0720b9643ad",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-154",
+        "har_size_bytes": 175573
+      }
+    },
+    {
+      "id": "corpus-155",
+      "name": "Behance Network",
+      "domain": "behance.net",
+      "url": "https://www.behance.net",
+      "cmp_family": "Custom / In-house",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-15T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 213,
+      "content_hash": "sha256:331a9c629100febe59eb24c14935b25c3cd4625a6b519ba77af827f29423b232",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-155",
+        "har_size_bytes": 178714
+      }
+    },
+    {
+      "id": "corpus-156",
+      "name": "Dribbble Designers",
+      "domain": "dribbble.com",
+      "url": "https://www.dribbble.com",
+      "cmp_family": "Cookiebot",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-16T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 40,
+      "content_hash": "sha256:87c7aa83330ae76ebc6595c4cf3af40ba94569592e2f7d4af623606029e5ad2f",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-156",
+        "har_size_bytes": 181855
+      }
+    },
+    {
+      "id": "corpus-157",
+      "name": "Letterboxd Cinema",
+      "domain": "letterboxd.com",
+      "url": "https://www.letterboxd.com",
+      "cmp_family": "Quantcast Choice",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-17T10:00:00Z",
+      "region_selector": "#qc-cmp2-ui",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 47,
+      "content_hash": "sha256:449f4b9790f49f82cf14d4b2caf5788d6b1c34fa74598acf7923ff2e21a4847d",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-157",
+        "har_size_bytes": 184996
+      }
+    },
+    {
+      "id": "corpus-158",
+      "name": "Dev.to Community",
+      "domain": "dev.to",
+      "url": "https://www.dev.to",
+      "cmp_family": "Klaro",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-18T10:00:00Z",
+      "region_selector": "#klaro",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 54,
+      "content_hash": "sha256:d0dc395d0c72ca22b8980e9e302516464e4946b1cae09c097fde87da0821a7dc",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-158",
+        "har_size_bytes": 188137
+      }
+    },
+    {
+      "id": "corpus-159",
+      "name": "Hacker News YC",
+      "domain": "news.ycombinator.com",
+      "url": "https://www.news.ycombinator.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-19T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 61,
+      "content_hash": "sha256:b68889b88231e76f8f27a8960104717342de92844a1e4827d715b58d611b4d78",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-159",
+        "har_size_bytes": 191278
+      }
+    },
+    {
+      "id": "corpus-160",
+      "name": "Discourse Forum",
+      "domain": "discourse.org",
+      "url": "https://www.discourse.org",
+      "cmp_family": "Civic UK",
+      "sector": "Social & Community",
+      "capture_date": "2026-09-20T10:00:00Z",
+      "region_selector": "#ccc",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 68,
+      "content_hash": "sha256:46e0b2298b3d2c5289f91184f420283cf973d6d100b30b9d1d55944d7c26cdf7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-160",
+        "har_size_bytes": 194419
+      }
+    },
+    {
+      "id": "corpus-161",
+      "name": "Mayo Clinic Portal",
+      "domain": "mayoclinic.org",
+      "url": "https://www.mayoclinic.org",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-21T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 75,
+      "content_hash": "sha256:851a853988989e679e2db6959ca2cec651bf09ea82b2600018ba3bc3e9f512ca",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-161",
+        "har_size_bytes": 197560
+      }
+    },
+    {
+      "id": "corpus-162",
+      "name": "WebMD Health",
+      "domain": "webmd.com",
+      "url": "https://www.webmd.com",
+      "cmp_family": "TrustArc",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-22T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 82,
+      "content_hash": "sha256:c38b48a9a4a1ead363435abd892b8dbb3758a9fa89f127366406a4dc3b9a127d",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-162",
+        "har_size_bytes": 200701
+      }
+    },
+    {
+      "id": "corpus-163",
+      "name": "NHS UK Health",
+      "domain": "nhs.uk",
+      "url": "https://www.nhs.uk",
+      "cmp_family": "Civic UK",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-23T10:00:00Z",
+      "region_selector": "#ccc",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 89,
+      "content_hash": "sha256:7cee870bdbab4e5be22c4ad5bf620f273e0ea2f3ee51676bb4347f42dca7986a",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-163",
+        "har_size_bytes": 203842
+      }
+    },
+    {
+      "id": "corpus-164",
+      "name": "Doctolib Appointments",
+      "domain": "doctolib.fr",
+      "url": "https://www.doctolib.fr",
+      "cmp_family": "Didomi",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-24T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 96,
+      "content_hash": "sha256:c735b2e2d264820b1a59ae5ff77384cb71b82aefa441b0e2a3102b342bc2cb89",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-164",
+        "har_size_bytes": 206983
+      }
+    },
+    {
+      "id": "corpus-165",
+      "name": "Sanofi Healthcare",
+      "domain": "sanofi.com",
+      "url": "https://www.sanofi.com",
+      "cmp_family": "Didomi",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-25T10:00:00Z",
+      "region_selector": "#didomi-notice",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 103,
+      "content_hash": "sha256:b16bc4ed36b9b5f4d6012a30f50187888d045c0d1769b40c93a9946c325da2d9",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-165",
+        "har_size_bytes": 210124
+      }
+    },
+    {
+      "id": "corpus-166",
+      "name": "Novartis Pharma",
+      "domain": "novartis.com",
+      "url": "https://www.novartis.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-26T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 110,
+      "content_hash": "sha256:b79f1cc13beef9dd2d7920d1f45a60842cd711e75fb9d90439dcd812b1a04c86",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-166",
+        "har_size_bytes": 213265
+      }
+    },
+    {
+      "id": "corpus-167",
+      "name": "Roche Diagnostics",
+      "domain": "roche.com",
+      "url": "https://www.roche.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-27T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 117,
+      "content_hash": "sha256:08bfa2b4bbdd2065cf39741019618a814744490c6dc60e20766e230f31ca0422",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-167",
+        "har_size_bytes": 216406
+      }
+    },
+    {
+      "id": "corpus-168",
+      "name": "AstraZeneca Global",
+      "domain": "astrazeneca.com",
+      "url": "https://www.astrazeneca.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-28T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 124,
+      "content_hash": "sha256:8fa4d15cb9d037e9a3accf8ed52dd879adbdcc9a84da7aa083ed6742aca57348",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-168",
+        "har_size_bytes": 219547
+      }
+    },
+    {
+      "id": "corpus-169",
+      "name": "Bayer HealthCare",
+      "domain": "bayer.com",
+      "url": "https://www.bayer.com",
+      "cmp_family": "Usercentrics",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 131,
+      "content_hash": "sha256:986ef372f6521aee5512cbe4d4f4a23396046ecde229c3066eddcfdf959faa82",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-169",
+        "har_size_bytes": 222688
+      }
+    },
+    {
+      "id": "corpus-170",
+      "name": "GSK GlaxoSmithKline",
+      "domain": "gsk.com",
+      "url": "https://www.gsk.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 138,
+      "content_hash": "sha256:cf08e9bf6ae071dbc8db540627e8ea4bdb281b6402db9049951326023677fdc7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-170",
+        "har_size_bytes": 225829
+      }
+    },
+    {
+      "id": "corpus-171",
+      "name": "Healthline Media",
+      "domain": "healthline.com",
+      "url": "https://www.healthline.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 145,
+      "content_hash": "sha256:7e900b5d4ac882db32ce2632bb2e00e177d4a30153cb4f90fe4597b2c05b54ec",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-171",
+        "har_size_bytes": 228970
+      }
+    },
+    {
+      "id": "corpus-172",
+      "name": "Medical News Today",
+      "domain": "medicalnewstoday.com",
+      "url": "https://www.medicalnewstoday.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 152,
+      "content_hash": "sha256:7df0789067d5d415bb10877f80c22d6bf9de0ded5d1e04a066664dfa1129f558",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-172",
+        "har_size_bytes": 232111
+      }
+    },
+    {
+      "id": "corpus-173",
+      "name": "MyFitnessPal Wellness",
+      "domain": "myfitnesspal.com",
+      "url": "https://www.myfitnesspal.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-05T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 159,
+      "content_hash": "sha256:97b1ab34bdb14908251412440499c26468c264abf08f6d4bb02a901667ed1553",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-173",
+        "har_size_bytes": 235252
+      }
+    },
+    {
+      "id": "corpus-174",
+      "name": "Fitbit Wellness",
+      "domain": "fitbit.com",
+      "url": "https://www.fitbit.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-06T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 166,
+      "content_hash": "sha256:a7eacff35fe706d96957901ac763893c61c728e5ad5587a6cc8d4f307ed42400",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-174",
+        "har_size_bytes": 238393
+      }
+    },
+    {
+      "id": "corpus-175",
+      "name": "Boots Pharmacy UK",
+      "domain": "boots.com",
+      "url": "https://www.boots.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-07T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 173,
+      "content_hash": "sha256:629c105957b9f79a523b4f2640f7b5b67fa735ceeafc0d04d6f05e14f7f72510",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-175",
+        "har_size_bytes": 241534
+      }
+    },
+    {
+      "id": "corpus-176",
+      "name": "DocMorris Pharmacy",
+      "domain": "docmorris.de",
+      "url": "https://www.docmorris.de",
+      "cmp_family": "Usercentrics",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-08T10:00:00Z",
+      "region_selector": "#usercentrics-root",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": true,
+      "word_count": 180,
+      "content_hash": "sha256:cf4a6c1fa116db656c07cc4dfcaba34cb71de2b9c471cb0cc9dc23eae1dea7d0",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-176",
+        "har_size_bytes": 244675
+      }
+    },
+    {
+      "id": "corpus-177",
+      "name": "Pfizer Global",
+      "domain": "pfizer.com",
+      "url": "https://www.pfizer.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-09T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 187,
+      "content_hash": "sha256:cdf40958282c34f2ab411ea1b42183a1bb1aa3c3ce79960e4c94778d493f57f0",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-177",
+        "har_size_bytes": 247816
+      }
+    },
+    {
+      "id": "corpus-178",
+      "name": "Johnson & Johnson",
+      "domain": "jnj.com",
+      "url": "https://www.jnj.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-10T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 194,
+      "content_hash": "sha256:c209c9a1a3255148c38a95c420e997530656b313811f420349c5bd3fd9f25cbe",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-178",
+        "har_size_bytes": 250957
+      }
+    },
+    {
+      "id": "corpus-179",
+      "name": "Kry / Livi Health",
+      "domain": "kry.se",
+      "url": "https://www.kry.se",
+      "cmp_family": "Cookiebot",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-11T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 201,
+      "content_hash": "sha256:8b4470ab8aa565e73ef305564fd268e5d9dd35876d18d0491c361b12edc59ded",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-179",
+        "har_size_bytes": 254098
+      }
+    },
+    {
+      "id": "corpus-180",
+      "name": "Babylon Health",
+      "domain": "babylonhealth.com",
+      "url": "https://www.babylonhealth.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Healthcare & Life Sciences",
+      "capture_date": "2026-09-12T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 208,
+      "content_hash": "sha256:52e63e37a527d28d7143b661974454be1de282027f29f6f1e6403816e9d40446",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-180",
+        "har_size_bytes": 257239
+      }
+    },
+    {
+      "id": "corpus-181",
+      "name": "GOV.UK Portal",
+      "domain": "gov.uk",
+      "url": "https://www.gov.uk",
+      "cmp_family": "Civic UK",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-13T10:00:00Z",
+      "region_selector": "#ccc",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 35,
+      "content_hash": "sha256:cd9bc99cc3d2fb015f49d2a46d5708f12ebc7bdefe15041095ccdb0edd8320b7",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-181",
+        "har_size_bytes": 260380
+      }
+    },
+    {
+      "id": "corpus-182",
+      "name": "Europa.eu EU Portal",
+      "domain": "europa.eu",
+      "url": "https://www.europa.eu",
+      "cmp_family": "Custom / In-house",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-14T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 42,
+      "content_hash": "sha256:e13aa79d2a0311a489d6f29769efbb2842710fb0369d694182d4599637acfa20",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-182",
+        "har_size_bytes": 263521
+      }
+    },
+    {
+      "id": "corpus-183",
+      "name": "Wikipedia Wikimedia",
+      "domain": "wikipedia.org",
+      "url": "https://www.wikipedia.org",
+      "cmp_family": "Custom / In-house",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-15T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 49,
+      "content_hash": "sha256:66bb445944ea6bd0a3e303706dfd9c05b9b59bfafe4c661bdf03b722ebaf2292",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-183",
+        "har_size_bytes": 266662
+      }
+    },
+    {
+      "id": "corpus-184",
+      "name": "Oxford University",
+      "domain": "ox.ac.uk",
+      "url": "https://www.ox.ac.uk",
+      "cmp_family": "Cookiebot",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-16T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 56,
+      "content_hash": "sha256:1d1baf692ee2bffdf363d3ce5cc7d947a4c0aa9ec446cfae00b42b1e28785701",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-184",
+        "har_size_bytes": 269803
+      }
+    },
+    {
+      "id": "corpus-185",
+      "name": "Cambridge University",
+      "domain": "cam.ac.uk",
+      "url": "https://www.cam.ac.uk",
+      "cmp_family": "Civic UK",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-17T10:00:00Z",
+      "region_selector": "#ccc",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 63,
+      "content_hash": "sha256:df091f98965c1896cb60696bf6863c79ce8d8427271e0fddc288653387791487",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-185",
+        "har_size_bytes": 272944
+      }
+    },
+    {
+      "id": "corpus-186",
+      "name": "MIT Institute",
+      "domain": "mit.edu",
+      "url": "https://www.mit.edu",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-18T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 70,
+      "content_hash": "sha256:238846c45db0b00d6dac71a6b0b5a7b5b81cff7d465cd07c4c6deab9d49bc6c8",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-186",
+        "har_size_bytes": 276085
+      }
+    },
+    {
+      "id": "corpus-187",
+      "name": "Stanford University",
+      "domain": "stanford.edu",
+      "url": "https://www.stanford.edu",
+      "cmp_family": "Cookiebot",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-19T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 77,
+      "content_hash": "sha256:d7ec486a167587f22159a9e1bc06d23fa9db1f4f3f07b0750ff535764ddf8cd3",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-187",
+        "har_size_bytes": 279226
+      }
+    },
+    {
+      "id": "corpus-188",
+      "name": "Harvard University",
+      "domain": "harvard.edu",
+      "url": "https://www.harvard.edu",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-20T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 84,
+      "content_hash": "sha256:c4cf28eba40286ceff3ef1d1618a16cba49224d336cbbefed495cbde0d38f290",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-188",
+        "har_size_bytes": 282367
+      }
+    },
+    {
+      "id": "corpus-189",
+      "name": "ETH Zurich",
+      "domain": "ethz.ch",
+      "url": "https://www.ethz.ch",
+      "cmp_family": "Cookiebot",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-21T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 91,
+      "content_hash": "sha256:0355ba276c9e51a775f01b4cb4204827e8dff6de889a85f48474b6e09bacb0c4",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-189",
+        "har_size_bytes": 285508
+      }
+    },
+    {
+      "id": "corpus-190",
+      "name": "Sorbonne Université",
+      "domain": "sorbonne-universite.fr",
+      "url": "https://www.sorbonne-universite.fr",
+      "cmp_family": "Axeptio",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-22T10:00:00Z",
+      "region_selector": "#axeptio_overlay",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 98,
+      "content_hash": "sha256:2639236c2f4cba12b6243ec25c98d5326d976d351bd973c1a65e99b815b74103",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-190",
+        "har_size_bytes": 288649
+      }
+    },
+    {
+      "id": "corpus-191",
+      "name": "TUM Technical Munich",
+      "domain": "tum.de",
+      "url": "https://www.tum.de",
+      "cmp_family": "Klaro",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-23T10:00:00Z",
+      "region_selector": "#klaro",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": false,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 105,
+      "content_hash": "sha256:7770edd39b896fdd447bb7652a284034bb7681ff0d24644d47fbe61c8ef9e13e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-191",
+        "har_size_bytes": 291790
+      }
+    },
+    {
+      "id": "corpus-192",
+      "name": "Service-Public.fr",
+      "domain": "service-public.fr",
+      "url": "https://www.service-public.fr",
+      "cmp_family": "Custom / In-house",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-24T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 112,
+      "content_hash": "sha256:d9cd41d9f88fd49b2815302207b623b58f6168cb1b6aaed1d21fb16f2ad22b6d",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-192",
+        "har_size_bytes": 294931
+      }
+    },
+    {
+      "id": "corpus-193",
+      "name": "Bund.de Germany",
+      "domain": "bund.de",
+      "url": "https://www.bund.de",
+      "cmp_family": "Custom / In-house",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-25T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 119,
+      "content_hash": "sha256:d7b03a5242d011309e43268d5341ba0dc78accf6b59dc69cc353371d99e36c87",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-193",
+        "har_size_bytes": 298072
+      }
+    },
+    {
+      "id": "corpus-194",
+      "name": "CERN Research",
+      "domain": "home.cern",
+      "url": "https://www.home.cern",
+      "cmp_family": "Cookiebot",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-26T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 126,
+      "content_hash": "sha256:39951dca6057a0fb645a374288f0cccf5d5e7bc39e7b2d15fead5acf91d77052",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-194",
+        "har_size_bytes": 301213
+      }
+    },
+    {
+      "id": "corpus-195",
+      "name": "Coursera Learning",
+      "domain": "coursera.org",
+      "url": "https://www.coursera.org",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-27T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 133,
+      "content_hash": "sha256:cacf81f735160cf99a299a23d13c8a34a5611ccd3d7e3a4632aa5d5d4c75fa5b",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-195",
+        "har_size_bytes": 304354
+      }
+    },
+    {
+      "id": "corpus-196",
+      "name": "edX Education",
+      "domain": "edx.org",
+      "url": "https://www.edx.org",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-28T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "banner-bottom",
+      "breakpoints": [
+        768
+      ],
+      "buttons_count": 2,
+      "has_reject_button": false,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 140,
+      "content_hash": "sha256:29f3ab230bb9fd3469bcacce0a9da7e41a94d2e11d16f5650516832c2626ed1e",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-196",
+        "har_size_bytes": 307495
+      }
+    },
+    {
+      "id": "corpus-197",
+      "name": "Duolingo Language",
+      "domain": "duolingo.com",
+      "url": "https://www.duolingo.com",
+      "cmp_family": "OneTrust / CookiePro",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-01T10:00:00Z",
+      "region_selector": "#onetrust-banner-sdk",
+      "layout_archetype": "modal-center",
+      "breakpoints": [
+        480,
+        768
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 147,
+      "content_hash": "sha256:fc054728444da5fa40bc8b57bcb9a8e60b778bc625bce3874dde282896e34f2c",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-197",
+        "har_size_bytes": 310636
+      }
+    },
+    {
+      "id": "corpus-198",
+      "name": "Khan Academy",
+      "domain": "khanacademy.org",
+      "url": "https://www.khanacademy.org",
+      "cmp_family": "Cookiebot",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-02T10:00:00Z",
+      "region_selector": "#CybotCookiebotDialog",
+      "layout_archetype": "drawer-side",
+      "breakpoints": [
+        640,
+        1024
+      ],
+      "buttons_count": 4,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 154,
+      "content_hash": "sha256:d8b58f4644b5bdc5c7cb6837c2d9581acde175aa37aa296bff047e6d72a366c5",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-198",
+        "har_size_bytes": 313777
+      }
+    },
+    {
+      "id": "corpus-199",
+      "name": "Internet Archive",
+      "domain": "archive.org",
+      "url": "https://www.archive.org",
+      "cmp_family": "Custom / In-house",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-03T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "fullscreen-overlay",
+      "breakpoints": [
+        576,
+        992
+      ],
+      "buttons_count": 2,
+      "has_reject_button": true,
+      "has_preferences_switch": true,
+      "has_preticked_box": false,
+      "word_count": 161,
+      "content_hash": "sha256:5548e5527f153e18c48debf0364f9ad179cd2bda691f2f58a5063066085f9c82",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-199",
+        "har_size_bytes": 316918
+      }
+    },
+    {
+      "id": "corpus-200",
+      "name": "OpenAI Research",
+      "domain": "openai.com",
+      "url": "https://www.openai.com",
+      "cmp_family": "Custom / In-house",
+      "sector": "Public Sector & Education",
+      "capture_date": "2026-09-04T10:00:00Z",
+      "region_selector": "#consent-region",
+      "layout_archetype": "compact-pill",
+      "breakpoints": [
+        768,
+        1200
+      ],
+      "buttons_count": 3,
+      "has_reject_button": true,
+      "has_preferences_switch": false,
+      "has_preticked_box": false,
+      "word_count": 168,
+      "content_hash": "sha256:62a57ce8cf94dea4a593a1ccb990e0f90993d28575e33a5a0192cc7eca06b113",
+      "provenance": {
+        "status": 200,
+        "archive_id": "urn:warc:mra-corpus-2026:corpus-200",
+        "har_size_bytes": 320059
+      }
+    }
+  ]
+}

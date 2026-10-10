@@ -17,6 +17,8 @@ composer.phar
 # research artefacts
 research/corpus/*
 !research/corpus/.gitkeep
+!research/corpus/manifest.json
+!research/corpus/*.ts
 research/results/*.raw.json
 
 # tooling output
