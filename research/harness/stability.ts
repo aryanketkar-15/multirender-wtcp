@@ -383,9 +383,16 @@ export function runStabilityMatrix(corpusManifest: CorpusManifest): {
   };
 }
 
-export function executeAndSaveStabilityResults(corpusPath?: string, outputDir?: string) {
-  const defaultCorpusPath = path.resolve(__dirname, '../corpus/manifest.json');
-  const defaultOutputDir = path.resolve(__dirname, '../results');
+export function executeAndSaveStabilityResults(
+  corpusPath?: string,
+  outputDir?: string,
+  baseDir?: string,
+) {
+  // baseDir is injected by the CLI runner (which can resolve __dirname or import.meta).
+  // Falls back to process.cwd() / relative paths when not supplied.
+  const resolvedBase = baseDir ?? process.cwd();
+  const defaultCorpusPath = path.resolve(resolvedBase, 'corpus/manifest.json');
+  const defaultOutputDir = path.resolve(resolvedBase, 'results');
 
   const resolvedCorpus = corpusPath || defaultCorpusPath;
   const resolvedOutDir = outputDir || defaultOutputDir;
@@ -421,7 +428,3 @@ export function executeAndSaveStabilityResults(corpusPath?: string, outputDir?: 
 
   return summary;
 }
-
-// Direct CLI execution
-executeAndSaveStabilityResults();
-
