@@ -43,8 +43,9 @@ export function MyPacks() {
       <div className="card">
         <h1>My Evidence Packs</h1>
         <p className="lede">
-          Portable, self-contained evidence of your past consent choices. Each pack contains the sealed
-          bundle, server commitment, your signed attestation, Merkle inclusion proofs, and the signed tree head.
+          Portable, self-contained evidence of your past consent choices. Each pack contains the
+          sealed bundle, server commitment, your signed attestation, Merkle inclusion proofs, and
+          the signed tree head.
         </p>
 
         {loading ? (

@@ -9,6 +9,7 @@ import { Login } from './pages/Login';
 import { MyPacks } from './pages/MyPacks';
 import { Register } from './pages/Register';
 import { ResetPassword } from './pages/ResetPassword';
+import { Verify } from './pages/Verify';
 import { VerifyEmail } from './pages/VerifyEmail';
 
 function Home() {
@@ -20,6 +21,9 @@ function Home() {
         <p className="lede">
           Evidence of what a consent screen showed, committed by the server before you act and
           attested by your browser when you do.
+        </p>
+        <p>
+          <Link to="/verifier">Open the Independent Verifier Dashboard</Link>
         </p>
         {user ? (
           <p>
@@ -45,6 +49,8 @@ export function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/verifier" element={<Verify />} />
+          <Route path="/verify-pack" element={<Verify />} />
           <Route
             path="/consent"
             element={
