@@ -145,14 +145,38 @@ export async function handleRequest(
         queryKey || headerKey || defaultOptions.serverPublicKeyHex,
       );
 
-      const result: VerificationResult = verifyPackStages1To10(zipBuffer, {
+      const stage10Result: VerificationResult = verifyPackStages1To10(zipBuffer, {
         ...defaultOptions,
         serverPublicKeyHex: resolvedKey,
       });
 
+      if (!stage10Result.ok || url.searchParams.get('skip_render') === 'true') {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(stage10Result, null, 2));
+        return;
+      }
+
+      // Proceed to Stage 11: Playwright re-render
+      const { unpackPack } = await import('./checks/unpack');
+      const { renderAndVerify } = await import('./render');
+      const unpacked = unpackPack(zipBuffer);
+      const renderResult = await renderAndVerify(unpacked);
+
+      const combinedResult: VerificationResult = {
+        ok: renderResult.ok,
+        verdict: renderResult.verdict,
+        passedStages: renderResult.passedStages,
+        failedStage: renderResult.failedStage,
+        stages: [...stage10Result.stages, ...renderResult.stages],
+        message: renderResult.message,
+        diff: renderResult.diff,
+        recomputedDigests: renderResult.recomputedDigests,
+      };
+
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify(result, null, 2));
+      res.end(JSON.stringify(combinedResult, null, 2));
       return;
     } catch (err) {
       res.statusCode = 500;

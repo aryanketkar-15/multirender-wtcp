@@ -522,4 +522,27 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 - Offline independence proven: verified with attestation server stopped and zero database connection (T5.2.13).
 - Code formatting and linting clean (`eslint . && prettier --check .` passes with zero errors).
 
+---
+
+## 16. Build record — playbook phase 5, milestone 5.3: headless re-render and digest comparison (2026-10-10)
+
+### 16.1 Decisions
+
+- **D-38 Playwright headed under Xvfb, environment vector mapping, secure context route mocking, and node-level semantic diffing.** Headless Chromium renders accessibility trees and subpixel font metrics subtly differently from headed Chrome, which would cause false-positive mismatches against client attestations. The verifier runs Chromium headed under Xvfb (`--display` or via `xvfb-run` in the container). The verification context mirrors the client's attested environment vector: viewport presets (`narrow`: 375×667, `small`: 768×1024, `medium`: 1280×800, `large`: 1920×1080), device scale factor (`1x`: 1.0, `2x`: 2.0, `3x`: 3.0), `forcedColors` (`active` vs `none`), and `reducedMotion` (`reduce` vs `no-preference`). Because Chromium disables `window.crypto.subtle` in insecure contexts (`about:blank`), the re-renderer intercepts `http://localhost/**` using Playwright's `page.route` to serve bundle markup and CSS in an offline secure context. The commitment-specified attestor module (`mra-attestor-1.0.0.js`) is injected, generating canonical semantic representations and SHA-256 digests. If the critical region digest mismatches, the semantic diff engine (`verifier/src/diff.ts`) performs node-level diffing across roles, accessible names, text content, states (`checked`, `disabled`, `required`, `selected`), visibility, occlusion, and discretized style buckets (`size`, `weight`, `contrast`, `prominence`). Divergences are returned as structured `mismatched_nodes` pinpointing exact indices, roles, fields, and values.
+
+### 16.2 What was verified, and how
+
+- **Honest pack verification (T5.3.1):** Recomputed critical region digest and context digest match client attestation exactly, returning `VERIFIED`.
+- **Text alteration detected (T5.3.2):** Server-modified disclosure produces `DIGEST_MISMATCH`, specifically naming the altered node and contrasting attested vs recomputed text.
+- **Prominence manipulation detected (T5.3.3):** Reduced prominence/contrast on the reject button produces `DIGEST_MISMATCH` with differing `prominence` and `contrast` bucket values.
+- **Pre-tick detected (T5.3.4):** Pre-checked consent checkbox triggers `DIGEST_MISMATCH` pinpointing `checked: true` vs attested `checked: false`.
+- **Context mismatch (T5.3.5):** Injecting an overlay outside `#consent-dialog` while preserving critical region digest yields `CONTEXT_MISMATCH`.
+- **Environment profile matching (T5.3.6):** Custom environment vector (`narrow`/`2x`, forced colors) is passed to Playwright context and verified via `window.innerWidth`, `window.devicePixelRatio`, and media query evaluation.
+- **Graceful render failure (T5.3.7):** Malformed bundles or script failures produce structured `RENDER_FAILED` without process crash.
+- **Fine-grained diff structure (T5.3.8):** Diff payload contains structured node indices, roles, field names, and before/after values.
+- **Flake-free repeatability (T5.3.9):** Honest pack verified 20 consecutive times with 0 flakes, producing identical `VERIFIED` verdicts across all iterations.
+- **Container reproducibility (T5.3.10):** `verifier/Dockerfile` pins `mcr.microsoft.com/playwright:v1.48.2-jammy`, font libraries (`fonts-dejavu-core`, `fonts-liberation`, `fonts-freefont-ttf`, `fonts-noto-core`), and `xvfb-run` execution.
+- **Full test suite:** All 27 tests in `verifier` (`checks.test.ts`, `render.test.ts`, `index.test.ts`) pass. Linter and Prettier check pass with 0 errors.
+
+
 

@@ -236,7 +236,7 @@ describe('Milestone 5.2 — Independent Verifier Skeleton & Cheap Checks', () =>
     });
 
     test('POST /verify with valid pack returns PROCEEDS_TO_RENDER', async () => {
-      const res = await fetch(`http://127.0.0.1:${port}/verify`, {
+      const res = await fetch(`http://127.0.0.1:${port}/verify?skip_render=true`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/zip' },
         body: new Uint8Array(fixtures.honest_pack),
