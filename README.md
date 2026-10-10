@@ -44,3 +44,4 @@ reviewed by the other developer.
 - [`docs/BUILD_PLAYBOOK.md`](docs/BUILD_PLAYBOOK.md): the build playbook with task boxes, per-test-case status (✅ / ◐ / ☐) and phase checkpoints (commit hashes) maintained as work lands.
 - [`docs/attestor-release.md`](docs/attestor-release.md): how to release the Attestor Module.
 - [`docs/FACULTY_BRIEFING.md`](docs/FACULTY_BRIEFING.md) and [`docs/DEMO.md`](docs/DEMO.md): the project explained, progress, honest limits, and the demonstration runbook.
+- [`docs/HANDOFF.md`](docs/HANDOFF.md): everything a new agent or developer needs: state, how to run, conventions, gotchas, next steps.
