@@ -1,0 +1,298 @@
+{
+  "env": {
+    "measured_at": "2026-10-14T18:48:44.027Z",
+    "cpu": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics",
+    "logical_cores": 16,
+    "memory_gb": 15,
+    "os": "Windows_NT 10.0.26200",
+    "node": "v22.20.0",
+    "chromium": "153.0.8010.12",
+    "attestor_version": "1.0.0",
+    "runs_per_cell": 500,
+    "note": "Single development machine. No physical phone was used."
+  },
+  "digest_latency": {
+    "small": {
+      "this_machine": {
+        "nodes_measured": {
+          "region": 22,
+          "context": 23
+        },
+        "attest_ms": {
+          "runs": 500,
+          "min": 2.3,
+          "p50": 3.4,
+          "p95": 5.1,
+          "p99": 8.4,
+          "max": 9.8
+        },
+        "measure_only_ms": {
+          "runs": 500,
+          "min": 1.9,
+          "p50": 2.8,
+          "p95": 3.9,
+          "p99": 4.4,
+          "max": 6.2
+        }
+      },
+      "emulated_4x_cpu_slowdown": {
+        "nodes_measured": {
+          "region": 22,
+          "context": 23
+        },
+        "attest_ms": {
+          "runs": 500,
+          "min": 10.9,
+          "p50": 20.6,
+          "p95": 28.6,
+          "p99": 31.9,
+          "max": 58
+        },
+        "measure_only_ms": {
+          "runs": 500,
+          "min": 9.2,
+          "p50": 18.6,
+          "p95": 25.1,
+          "p99": 35.5,
+          "max": 40.1
+        }
+      }
+    },
+    "standard": {
+      "this_machine": {
+        "nodes_measured": {
+          "region": 52,
+          "context": 53
+        },
+        "attest_ms": {
+          "runs": 500,
+          "min": 4.4,
+          "p50": 6.6,
+          "p95": 9.3,
+          "p99": 11.4,
+          "max": 17.6
+        },
+        "measure_only_ms": {
+          "runs": 500,
+          "min": 3.7,
+          "p50": 5.5,
+          "p95": 6.7,
+          "p99": 7.6,
+          "max": 8.3
+        }
+      },
+      "emulated_4x_cpu_slowdown": {
+        "nodes_measured": {
+          "region": 52,
+          "context": 53
+        },
+        "attest_ms": {
+          "runs": 500,
+          "min": 26.9,
+          "p50": 37.7,
+          "p95": 51.5,
+          "p99": 64.5,
+          "max": 74.8
+        },
+        "measure_only_ms": {
+          "runs": 500,
+          "min": 19.3,
+          "p50": 34.9,
+          "p95": 46.2,
+          "p99": 60.1,
+          "max": 78.4
+        }
+      }
+    },
+    "large": {
+      "this_machine": {
+        "nodes_measured": {
+          "region": 502,
+          "context": 503
+        },
+        "attest_ms": {
+          "runs": 500,
+          "min": 36.4,
+          "p50": 48.6,
+          "p95": 58.1,
+          "p99": 63.4,
+          "max": 86.5
+        },
+        "measure_only_ms": {
+          "runs": 500,
+          "min": 32.1,
+          "p50": 43.2,
+          "p95": 49.4,
+          "p99": 54.5,
+          "max": 59.6
+        }
+      },
+      "emulated_4x_cpu_slowdown": {
+        "nodes_measured": {
+          "region": 502,
+          "context": 503
+        },
+        "attest_ms": {
+          "runs": 500,
+          "min": 256.1,
+          "p50": 315,
+          "p95": 379.8,
+          "p99": 406.7,
+          "max": 423.4
+        },
+        "measure_only_ms": {
+          "runs": 500,
+          "min": 251.6,
+          "p50": 301.9,
+          "p95": 368.6,
+          "p99": 400.1,
+          "max": 458.8
+        }
+      }
+    }
+  },
+  "payload_sizes": {
+    "sealed_bundle_bytes": 1177,
+    "bundle_response_bytes": 2428,
+    "attestation_request_bytes": 1054,
+    "evidence_pack_zip_bytes": 5676,
+    "evidence_pack_entries": [
+      {
+        "file": "manifest.json",
+        "bytes": 1294,
+        "compressed_bytes": 529
+      },
+      {
+        "file": "bundle.json",
+        "bytes": 1232,
+        "compressed_bytes": 669
+      },
+      {
+        "file": "commitment.json",
+        "bytes": 1008,
+        "compressed_bytes": 571
+      },
+      {
+        "file": "attestation.json",
+        "bytes": 1389,
+        "compressed_bytes": 793
+      },
+      {
+        "file": "client_pubkey.pem",
+        "bytes": 177,
+        "compressed_bytes": 153
+      },
+      {
+        "file": "inclusion_proof_commitment.json",
+        "bytes": 1436,
+        "compressed_bytes": 754
+      },
+      {
+        "file": "inclusion_proof_attestation.json",
+        "bytes": 1898,
+        "compressed_bytes": 992
+      },
+      {
+        "file": "signed_tree_head.json",
+        "bytes": 393,
+        "compressed_bytes": 273
+      }
+    ],
+    "evidence_pack_uncompressed_bytes": 8827
+  },
+  "verifier_throughput": {
+    "first_result": {
+      "ok": true,
+      "verdict": "PROCEEDS_TO_RENDER",
+      "message": "All stages 1-10 cheap checks passed successfully; proceeds to render stage."
+    },
+    "attestor_hash_used": "sha256:f805f3642219c751e5e76699bb096aeb63ce5946e20a32748121bebb3cb2949a",
+    "stages_1_to_10": {
+      "packs": 1000,
+      "packs_per_minute": 37043,
+      "latency_ms": {
+        "runs": 1000,
+        "min": 1.001,
+        "p50": 1.399,
+        "p95": 2.3,
+        "p99": 8.076,
+        "max": 12.726
+      }
+    },
+    "stage_11_rerender_warm_browser": {
+      "packs": 50,
+      "packs_per_minute": 383,
+      "latency_ms": {
+        "runs": 50,
+        "min": 134.194,
+        "p50": 156.504,
+        "p95": 170.498,
+        "p99": 174.376,
+        "max": 174.376
+      },
+      "last_verdict": {
+        "ok": false,
+        "verdict": "DIGEST_MISMATCH",
+        "message": "Semantic digest mismatch on critical region: Digest mismatch: expected sha256:6c91ddf96c7d1111b8d3086677691678625f61ef663df9a4170be48226805385, recomputed sha256:cb4fe9cbf7cfcbb9bc10397774e15759ec3bdc0ee72e9dc9e781b5fa4d38f0fb"
+      }
+    }
+  },
+  "merkle_proofs": {
+    "tool": "server/bin/measure_proofs.php",
+    "php": "8.2.12",
+    "samples_per_size": 200,
+    "sizes": [
+      {
+        "leaves": 10000,
+        "bulk_load_seconds": 1.7,
+        "path_hashes_min": 12,
+        "path_hashes_max": 14,
+        "ceil_log2": 14,
+        "generate_ms": {
+          "p50": 6.6752,
+          "p95": 8.2902,
+          "max": 10.1279
+        },
+        "verify_ms": {
+          "p50": 0.0283,
+          "p95": 0.0419,
+          "max": 0.7585
+        }
+      },
+      {
+        "leaves": 100000,
+        "bulk_load_seconds": 10.8,
+        "path_hashes_min": 12,
+        "path_hashes_max": 17,
+        "ceil_log2": 17,
+        "generate_ms": {
+          "p50": 6.9825,
+          "p95": 9.6689,
+          "max": 11.755
+        },
+        "verify_ms": {
+          "p50": 0.0298,
+          "p95": 0.0442,
+          "max": 0.3316
+        }
+      },
+      {
+        "leaves": 1000000,
+        "bulk_load_seconds": 103.3,
+        "path_hashes_min": 19,
+        "path_hashes_max": 20,
+        "ceil_log2": 20,
+        "generate_ms": {
+          "p50": 13.0158,
+          "p95": 19.585,
+          "max": 31.2632
+        },
+        "verify_ms": {
+          "p50": 0.0377,
+          "p95": 0.0529,
+          "max": 0.2617
+        }
+      }
+    ]
+  }
+}

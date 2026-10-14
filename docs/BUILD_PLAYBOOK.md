@@ -1729,6 +1729,8 @@ git push origin feat/5.4-verifier-ui
 
 **Owner:** A · **Depends on:** Phase 5 · **This phase produces the paper.**
 
+> **Correction 2026-10-15.** Milestones 6.1 and 6.2 were built as models over corpus metadata (no page is rendered, no digest is computed), so their ticks were removed. Milestone 6.3 was re-done with real measurements. See PROJECT_LOG sections 18.0, 19.0 and 20.
+
 ---
 
 ## Milestone 6.1 — Corpus and stability harness
@@ -1738,13 +1740,13 @@ git push origin feat/5.4-verifier-ui
 **2. Objective.** Measure the invariance claim rather than assert it, satisfying the no-unproven-claims requirement at its sharpest point.
 
 **3. Tasks to complete.**
-- [x] Collect 200 real consent interfaces; record source and capture date
-- [x] Harness rendering each across Chrome, Firefox, Safari, Edge × 5 viewports × 3 DPR × 2 font-fallback conditions
-- [x] Compute digests; record agreement rate
-- [x] **Third axis:** responsive breakpoint transitions measured separately from environment variation
-- [x] Classify every disagreement by cause
-- [x] Machine-readable results in `research/results/`
-- [x] Generate the stability table for the paper
+- [ ] Collect 200 real consent interfaces; record source and capture date
+- [ ] Harness rendering each across Chrome, Firefox, Safari, Edge × 5 viewports × 3 DPR × 2 font-fallback conditions
+- [ ] Compute digests; record agreement rate
+- [ ] **Third axis:** responsive breakpoint transitions measured separately from environment variation
+- [ ] Classify every disagreement by cause
+- [ ] Machine-readable results in `research/results/`
+- [ ] Generate the stability table for the paper
 
 **4. Files / modules affected.** `research/harness/stability.ts`, `research/harness/matrix.ts`, `research/corpus/manifest.json`, `research/results/stability-*.json`, `research/harness/report.ts`.
 
@@ -1758,19 +1760,19 @@ Classify every disagreement. An unexplained 0.8% disagreement rate is a weakness
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T6.1.1 | Harness runs full matrix | Corpus assembled | Execute | 24,000 renders; results written | ✅ |
-| T6.1.2 | Results reproducible | Matrix run once | Re-run on the same corpus | Agreement rate within 0.1% | ✅ |
-| T6.1.3 | Disagreements classified | Matrix complete | Inspect output | Every disagreement has a cause code | ✅ |
-| T6.1.4 | Responsive axis separate | Matrix complete | Inspect | Breakpoint results reported independently | ✅ |
-| T6.1.5 | Failures not discarded | Matrix complete | Inspect | Render failures counted, not silently dropped | ✅ |
-| T6.1.6 | Table generated | Results written | Run the report generator | Paper-ready table produced | ✅ |
+| T6.1.1 | Harness runs full matrix | Corpus assembled | Execute | 24,000 renders; results written | ☐ model only |
+| T6.1.2 | Results reproducible | Matrix run once | Re-run on the same corpus | Agreement rate within 0.1% | ☐ model only |
+| T6.1.3 | Disagreements classified | Matrix complete | Inspect output | Every disagreement has a cause code | ☐ model only |
+| T6.1.4 | Responsive axis separate | Matrix complete | Inspect | Breakpoint results reported independently | ☐ model only |
+| T6.1.5 | Failures not discarded | Matrix complete | Inspect | Render failures counted, not silently dropped | ☐ model only |
+| T6.1.6 | Table generated | Results written | Run the report generator | Paper-ready table produced | ☐ model only |
 
 **7. Verification checklist.**
-- [x] 200 interfaces collected with provenance recorded
-- [x] Full matrix executed; results committed as JSON
-- [x] Every disagreement classified by cause
-- [x] Responsive axis reported separately
-- [x] Re-running reproduces the figures
+- [ ] 200 interfaces collected with provenance recorded
+- [ ] Full matrix executed; results committed as JSON
+- [ ] Every disagreement classified by cause
+- [ ] Responsive axis reported separately
+- [ ] Re-running reproduces the figures
 
 **8. Completion criteria.** The matrix runs reproducibly, every disagreement is explained, and the stability table is generated from data rather than typed.
 
@@ -1797,11 +1799,11 @@ git push origin feat/6.1-stability-harness
 **2. Objective.** Measure sensitivity against documented dark patterns rather than invented ones.
 
 **3. Tasks to complete.**
-- [x] Define 20 mutations drawn from the Nouwens and Matte taxonomies
-- [x] Implement each as a deterministic transform over a corpus page
-- [x] Run across the full corpus; record per-mutation detection
-- [x] Identify and analyse any undetected mutation
-- [x] Generate the sensitivity table
+- [ ] Define 20 mutations drawn from the Nouwens and Matte taxonomies
+- [ ] Implement each as a deterministic transform over a corpus page
+- [ ] Run across the full corpus; record per-mutation detection
+- [ ] Identify and analyse any undetected mutation
+- [ ] Generate the sensitivity table
 
 **4. Files / modules affected.** `research/mutations/*.ts`, `research/mutations/manifest.json`, `research/harness/sensitivity.ts`, `research/results/sensitivity-*.json`.
 
@@ -1813,22 +1815,22 @@ Each mutation records which of the six style features is expected to catch it. A
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T6.2.1 | All 20 implemented | Suite defined | Run | 20 mutations execute | ☑ |
-| T6.2.2 | Mutations deterministic | Suite built | Apply twice | Identical output | ☑ |
-| T6.2.3 | Text mutations detected | Suite run | Inspect | 100% detection | ☑ |
-| T6.2.4 | State mutations detected | Suite run | Inspect | 100% detection | ☑ |
-| T6.2.5 | Style mutations detected | Suite run | Inspect | Rate recorded per mutation | ☑ |
-| T6.2.6 | Occlusion mutations detected | Suite run | Inspect | Rate recorded | ☑ |
-| T6.2.7 | Zero-width injection detected | Suite run | Inspect | Detected via normalisation | ☑ |
-| T6.2.8 | Undetected analysed | Suite complete | Inspect | Each miss has a written explanation | ☑ |
-| T6.2.9 | Cosmetic change NOT flagged | Control mutation | Run | Semantically neutral restyle does not trip the digest | ☑ |
+| T6.2.1 | All 20 implemented | Suite defined | Run | 20 mutations execute | ☐ model only |
+| T6.2.2 | Mutations deterministic | Suite built | Apply twice | Identical output | ☐ model only |
+| T6.2.3 | Text mutations detected | Suite run | Inspect | 100% detection | ☐ model only |
+| T6.2.4 | State mutations detected | Suite run | Inspect | 100% detection | ☐ model only |
+| T6.2.5 | Style mutations detected | Suite run | Inspect | Rate recorded per mutation | ☐ model only |
+| T6.2.6 | Occlusion mutations detected | Suite run | Inspect | Rate recorded | ☐ model only |
+| T6.2.7 | Zero-width injection detected | Suite run | Inspect | Detected via normalisation | ☐ model only |
+| T6.2.8 | Undetected analysed | Suite complete | Inspect | Each miss has a written explanation | ☐ model only |
+| T6.2.9 | Cosmetic change NOT flagged | Control mutation | Run | Semantically neutral restyle does not trip the digest | ☐ model only |
 
 **7. Verification checklist.**
-- [x] All 20 traceable to a published taxonomy entry (13 × Nouwens2020, 6 × Matte2020, 1 × CONTROL)
-- [x] Per-mutation results recorded, not only an aggregate
-- [x] Every miss explained (M-02: 40 idempotent misses — corpus already had `has_reject_button=false`; M-03/M-15: idempotent on pre-ticked interfaces)
-- [x] Control mutation M-18 confirmed: 0 false positives across 200 interfaces
-- [x] Mutation list fixed before thresholds — no tuning to test set occurred (O-03 ordering constraint satisfied)
+- [ ] All 20 traceable to a published taxonomy entry (13 × Nouwens2020, 6 × Matte2020, 1 × CONTROL)
+- [ ] Per-mutation results recorded, not only an aggregate
+- [ ] Every miss explained (M-02: 40 idempotent misses — corpus already had `has_reject_button=false`; M-03/M-15: idempotent on pre-ticked interfaces)
+- [ ] Control mutation M-18 confirmed: 0 false positives across 200 interfaces
+- [ ] Mutation list fixed before thresholds — no tuning to test set occurred (O-03 ordering constraint satisfied)
 
 **8. Completion criteria.** Twenty taxonomy-derived mutations measured, per-mutation results recorded, misses explained, and controls confirm no over-sensitivity.
 
@@ -1852,13 +1854,13 @@ git push origin feat/6.2-mutation-suite
 **2. Objective.** Replace every performance target with a measured figure (decision D-17).
 
 **3. Tasks to complete.**
-- [ ] Client digest timing: median and p95, 500 runs, on a mid-range Android device and a desktop
-- [ ] Payload sizes: bundle, attestation, evidence pack
-- [ ] Verification throughput: packs per minute, single verifier instance
-- [ ] Merkle proof generation at 10k, 100k, 1M leaves
-- [ ] Results table pairing each original target with its measurement
+- [ ] Client digest timing: median and p95, 500 runs, on a mid-range Android device (NOT MEASURED, no phone; desktop and a 4x-slowdown proxy are measured) and a desktop
+- [x] Payload sizes: bundle, attestation, evidence pack
+- [x] Verification throughput: packs per minute, single verifier instance
+- [x] Merkle proof generation at 10k, 100k, 1M leaves
+- [x] Results table pairing each original target with its measurement
 
-**4. Files / modules affected.** `research/harness/cost.ts`, `research/results/cost-*.json`, `docs/performance.md`.
+**4. Files / modules affected.** `research/harness/cost-real.cjs`, `cost-report.cjs`, `make-mobile-page.cjs`, `server/bin/measure_proofs.php`, `research/results/cost-*.json`, `cost-table.md`, `mobile-timing.html`.
 
 **5. Implementation guidance.** Report median and p95, never mean — a single slow run skews a mean and hides the distribution.
 
@@ -1870,18 +1872,18 @@ Where measurement misses the original target, report the miss. A missed target w
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T6.3.1 | Digest timing on mobile | Device available | 500 runs | Median and p95 recorded | ☐ |
-| T6.3.2 | Digest timing on desktop | — | 500 runs | Median and p95 recorded | ☐ |
-| T6.3.3 | Payload sizes | Flow complete | Measure | All three recorded | ☐ |
-| T6.3.4 | Verification throughput | Verifier running | Sustained load | Packs/minute recorded | ☐ |
-| T6.3.5 | Proof generation scaling | Synthetic trees | Measure at three sizes | Logarithmic scaling confirmed | ☐ |
-| T6.3.6 | Measurements reproducible | Run once | Re-run | Within 10% | ☐ |
+| T6.3.1 | Digest timing on mobile | Device available | 500 runs | Median and p95 recorded | ☐ not measured (no phone; proxy only) |
+| T6.3.2 | Digest timing on desktop | — | 500 runs | Median and p95 recorded | ✅ |
+| T6.3.3 | Payload sizes | Flow complete | Measure | All three recorded | ✅ |
+| T6.3.4 | Verification throughput | Verifier running | Sustained load | Packs/minute recorded | ✅ |
+| T6.3.5 | Proof generation scaling | Synthetic trees | Measure at three sizes | Logarithmic scaling confirmed | ✅ |
+| T6.3.6 | Measurements reproducible | Run once | Re-run | Within 10% | ◐ roughly, not a controlled re-run |
 
 **7. Verification checklist.**
-- [ ] Every performance claim in the report traces to a row in `research/results/`
-- [ ] Mobile figures from real hardware, model recorded
-- [ ] Median and p95 reported, not mean
-- [ ] Targets missed are reported as missed
+- [x] Every performance claim in the report traces to a row in `research/results/`
+- [ ] Mobile figures from real hardware, model recorded (**not done**: no phone has been used; run `research/results/mobile-timing.html` on one)
+- [x] Median and p95 reported, not mean
+- [x] Targets missed are reported as missed (500-node digest p95 58 ms even on a desktop; stage-11 re-render 383 packs/min)
 
 **8. Completion criteria.** All cost figures measured and committed; no unmeasured performance claim remains anywhere in the report.
 
@@ -1902,12 +1904,12 @@ git push origin feat/6.3-cost-measurement
 
 | Item | Detail |
 |---|---|
-| Milestones completed | 6.1, 6.2, 6.3 |
-| Tests passed | T6.1.1–T6.3.6 (21 cases) |
-| Known issues | Record the measured invariance envelope and its edges here |
-| Git commit | record hash |
-| Phase verification | Stability matrix executed and classified; 20 mutations measured per-mutation; all cost figures from real hardware |
-| **Go / No-Go** | **Go** when every target in the design document has a measured figure beside it, including those that fall short |
+| Milestones completed | **6.3 only (partly: no phone figure).** 6.1 and 6.2 exist as models over corpus metadata and are not measurements (PROJECT_LOG 18.0, 19.0). |
+| Tests passed | T6.3.2–T6.3.5 real; T6.3.6 roughly; T6.3.1 not measured; T6.1.x and T6.2.x not met (model only) |
+| Known issues | Stage 11 reports DIGEST_MISMATCH on an honest pack (PROJECT_LOG 20.3, item 2; O-08/O-12/O-13); 500-node digest p95 58 ms on a desktop; stage 11 at 383 packs/min; no physical-phone timing |
+| Git commit | record hash when committed |
+| Phase verification | Cost figures measured on real components (PROJECT_LOG 20). Stability matrix and mutation suite still to be redone with real rendering. |
+| **Go / No-Go** | **No-Go for Phase 7 as a research result.** Product polish can proceed, but no stability, sensitivity or mobile-latency claim may be made until 6.1, 6.2 and the phone run are done for real, and the stage-11 mismatch is resolved. |
 
 ---
 

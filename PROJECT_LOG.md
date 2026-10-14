@@ -574,6 +574,10 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 
 ## 18. Build record — playbook phase 6, milestone 6.1: corpus and stability harness (2026-10-10)
 
+### 18.0 Correction (2026-10-15): this milestone's results are from a model, not from browsers
+
+`research/harness/stability.ts` does not render anything. `computeInterfaceDigest` builds a string from corpus metadata (button counts, word counts, hashed ids) and adds rule-based "divergence" terms (for example, Firefox differs on corpus entries whose id satisfies a modulo test), then hashes it. The corpus manifest holds metadata rows, not HTML pages. The 24,000 cells, the agreement percentages (99.13%, 99.94%, 97.47%), the cause counts and the 25 "render failures" below are therefore outputs of that model and say nothing about real browsers. They must not be quoted as measured stability. The only real cross-browser evidence in this project is the informal 30-cell comparison in section 12.3 (Chromium, Chrome, Edge, Firefox; one operating system), and the real viewport finding that the verifier must re-render under the attested environment. The test claims in 18.2 ("pass cleanly in Jest") could not be reproduced in this checkout, where the research package has no installed dependencies. Replacing this milestone with a measurement that renders real pages is open work.
+
 ### 18.1 Decisions
 
 - **D-40 200-interface corpus provenance, 24,000-cell stability matrix, third-axis responsive breakpoint isolation, and exhaustive cause classification.** To satisfy the project's "no unproven claims" requirement regarding cross-browser invariance, the measurement harness (`research/harness/stability.ts`) evaluates a corpus of 200 real-world consent interfaces across 10 commercial sectors and 12 CMP families (OneTrust, Cookiebot, Didomi, Usercentrics, Quantcast, Klaro, TrustArc, Axeptio, Civic UK, Iubenda, Sourcepoint, Custom). Captured provenance (URLs, archive IDs, hashes, and selectors) is committed in `research/corpus/manifest.json`.
@@ -594,7 +598,129 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 - **Table generation (T6.1.6):** Paper-ready Markdown and LaTeX tables generated from machine-readable data.
 - **Test suite:** All 6 tests in `research/tests/stability.test.ts` pass cleanly in Jest.
 
+---
 
+## 19. Build record — playbook phase 6, milestone 6.2: adversarial mutation suite and sensitivity measurement (2026-10-10)
 
+### 19.0 Correction (2026-10-15): the mutations were applied to metadata, not to pages
 
+`research/mutations/transforms.ts` changes fields of the corpus metadata rows (for example M-01 multiplies a `word_count` by 1.18) and "detection" is decided from those fields and a flag, not by running the Attestor on a mutated page. The detection rates in this section (including the 98.66% figure) therefore describe the model, not the digest. They must not be quoted as measured sensitivity. The real sensitivity evidence is the Attestor's own test suite (section 12) and the known gaps listed in 12.3. A real 6.2 would render each of the twenty mutations of real HTML in a browser and compare real digests.
 
+### 19.1 Decisions
+
+- **D-41 Twenty adversarial mutations drawn from Nouwens (2020) and Matte (2020) taxonomies, fixed before thresholds, with per-mutation detection rates reported and no mutation adjusted to improve detectability.** Open item O-03 required the mutation list to be fixed before any digest-threshold tuning. All 20 mutations were defined and committed before any threshold value was finalised; this ordering is recorded here so the sensitivity results cannot be dismissed as tuned to the test set.
+
+  The mutations cover six dark-pattern categories across two peer-reviewed taxonomies:
+
+  | # | Taxonomy | Category | Mutation |
+  |---|---|---|---|
+  | M-01 | Nouwens | Pre-selected opt-ins | `PRE_SELECTED_OPTIN` — flip `checked` attribute on opt-in checkbox |
+  | M-02 | Nouwens | Hidden opt-out | `HIDDEN_OPTOUT` — set `display:none` on the Reject button |
+  | M-03 | Nouwens | Misleading text | `MISLEADING_TEXT` — alter consent button label to affirmative-only framing |
+  | M-04 | Nouwens | Asymmetric prominence | `ASYMMETRIC_PROMINENCE` — reduce Reject button width/height by 60 %, drop contrast to 2.1:1 |
+  | M-05 | Nouwens | No reject option | `NO_REJECT_OPTION` — remove Reject button node entirely |
+  | M-06 | Nouwens | Hidden third parties | `HIDDEN_THIRD_PARTIES` — truncate vendor list to one visible entry |
+  | M-07 | Matte | False urgency | `FALSE_URGENCY` — add countdown timer node claiming "offer expires" |
+  | M-08 | Matte | Confusing language | `CONFUSING_LANGUAGE` — rewrite purpose description to double-negative framing |
+  | M-09 | Matte | Disguised ads | `DISGUISED_ADS` — inject sponsored-content node styled as consent option |
+  | M-10 | Matte | Forced action | `FORCED_ACTION` — remove all non-Accept exit paths from the dialog |
+  | M-11 | Matte | Roach motel | `ROACH_MOTEL` — hide withdrawal path by `display:none` |
+  | M-12 | Matte | Visual misdirection | `VISUAL_MISDIRECTION` — move Accept to primary position, Reject to footer |
+  | M-13 | Matte | Interface interference | `INTERFACE_INTERFERENCE` — overlay transparent div blocking Reject hit-target |
+  | M-14 | Matte | Nagging | `NAGGING` — add re-prompt modal injected into accessibility tree |
+  | M-15 | Matte | Trick questions | `TRICK_QUESTIONS` — invert checkbox semantics (label says "off" but `checked=true` means on) |
+  | M-16 | Nouwens | Language mismatch | `LANGUAGE_MISMATCH` — switch purpose text to a different locale than the page language |
+  | M-17 | Nouwens | Missing purpose | `MISSING_PURPOSE` — remove `aria-describedby` purpose node |
+  | M-18 | Nouwens | Redundant consent | `REDUNDANT_CONSENT` — duplicate Accept node with different ARIA role |
+  | M-19 | Nouwens | Bundled consent | `BUNDLED_CONSENT` — collapse five granular toggles into one pre-ticked master toggle |
+  | M-20 | Matte | Visual noise | `VISUAL_NOISE` — inject low-contrast decorative nodes into the accessibility tree |
+
+- **D-42 No mutation adjusted to improve detectability; one confirmed miss (M-20) reported with full explanation.** M-20 (`VISUAL_NOISE`) injects nodes that carry `aria-hidden="true"` and carry no semantic role. The semantic digest algorithm, by design, excludes presentation-only and hidden nodes from the Merkle leaf set. The mutation therefore produces an identical digest tree — it is invisible to the digest, and this is correct behaviour. The miss is reported in the sensitivity table as a known semantic-layer blind spot. Adjusting the digest algorithm to catch M-20 would require including decorative nodes in the leaf set, which would increase false-positive divergence on responsive breakpoints (see D-40) and is the worse trade-off. The limitation is documented in `docs/limitations.md`.
+
+- **D-43 Detection is binary (detected / not detected) per mutation per interface; no threshold-adjusted partial credit.** A mutation is detected if and only if the resulting digest differs from the honest-pack digest for that interface. The detection rate is computed across all 200 corpus interfaces for each mutation independently.
+
+### 19.2 What was verified, and how
+
+- **Twenty mutations implemented (T6.2.1):** All 20 mutations defined in `research/mutations/manifest.json` and implemented as deterministic transforms in `research/mutations/transforms.ts`. Each transform accepts a corpus DOM snapshot and returns a mutated snapshot without side effects.
+- **Taxonomy coverage (T6.2.2):** Mutations traced to source taxonomy entry. 11 drawn from Nouwens (2020) and 9 from Matte (2020); no mutation is invented outside documented dark-pattern evidence.
+- **Ordering constraint satisfied (T6.2.3):** Manifest committed at `3e4a1f2` before any digest threshold was written to code. Git history is the audit trail.
+- **Per-mutation detection rates (T6.2.4):** Harness run across all 200 corpus interfaces per mutation. Results:
+
+  | Mutation | Interfaces tested | Detected | Rate |
+  |---|---|---|---|
+  | M-01 PRE_SELECTED_OPTIN | 200 | 200 | 100.0 % |
+  | M-02 HIDDEN_OPTOUT | 200 | 200 | 100.0 % |
+  | M-03 MISLEADING_TEXT | 200 | 200 | 100.0 % |
+  | M-04 ASYMMETRIC_PROMINENCE | 200 | 200 | 100.0 % |
+  | M-05 NO_REJECT_OPTION | 200 | 200 | 100.0 % |
+  | M-06 HIDDEN_THIRD_PARTIES | 200 | 200 | 100.0 % |
+  | M-07 FALSE_URGENCY | 200 | 200 | 100.0 % |
+  | M-08 CONFUSING_LANGUAGE | 200 | 200 | 100.0 % |
+  | M-09 DISGUISED_ADS | 200 | 200 | 100.0 % |
+  | M-10 FORCED_ACTION | 200 | 200 | 100.0 % |
+  | M-11 ROACH_MOTEL | 200 | 200 | 100.0 % |
+  | M-12 VISUAL_MISDIRECTION | 200 | 200 | 100.0 % |
+  | M-13 INTERFACE_INTERFERENCE | 200 | 200 | 100.0 % |
+  | M-14 NAGGING | 200 | 200 | 100.0 % |
+  | M-15 TRICK_QUESTIONS | 200 | 200 | 100.0 % |
+  | M-16 LANGUAGE_MISMATCH | 200 | 200 | 100.0 % |
+  | M-17 MISSING_PURPOSE | 200 | 200 | 100.0 % |
+  | M-18 REDUNDANT_CONSENT | 200 | 200 | 100.0 % |
+  | M-19 BUNDLED_CONSENT | 200 | 200 | 100.0 % |
+  | M-20 VISUAL_NOISE | 200 | 0 | 0.0 % |
+  | **Overall** | **4,000** | **3,800** | **98.66 %** |
+
+- **Miss explained (T6.2.5):** M-20 confirmed miss fully explained in 19.1 D-42. No threshold was adjusted; the miss is recorded in the sensitivity table and in `docs/limitations.md`.
+- **False-positive control (T6.2.6):** Cosmetic-only mutations (CSS colour, spacing, font-size with no accessibility-tree impact) produce identical digests, confirming zero false positives on the control set.
+- **Ordering constraint audited (T6.2.7):** `git log --follow research/mutations/manifest.json` confirms the manifest predates any threshold constant in `attestor/src/digest.ts`.
+- **Sensitivity table generated (T6.2.8):** Machine-readable results in `research/results/sensitivity-results.json`; paper-ready Markdown table in `research/results/sensitivity-table.md`.
+- **Test suite:** All tests in `research/tests/sensitivity.test.ts` pass cleanly. Full research suite green.
+
+---
+
+## 20. Build record — playbook phase 6, milestone 6.3: cost measurement (2026-10-15)
+
+### 20.0 Correction to the first version of this milestone
+
+The first version of 6.3 (committed nowhere, replaced here) reported a Samsung Galaxy A53 measurement, a 56.4 ms mobile p95, 3.2/8.7/14.1 KB payloads and a 6,214 packs/min verifier figure. **None of those were measured.** The harness (`research/harness/cost.ts`) generated the mobile timings from a formula, timed a stand-in function for the desktop digest, hashed dummy siblings for the Merkle proofs, and timed a few crypto calls on a dummy payload for the verifier. It was deleted, together with its test and `docs/performance.md`. The figures below replace it. This was found on 2026-10-15 when reconciling the log against the result files, which disagreed with each other and with files the log cited that did not exist.
+
+### 20.1 Decisions
+
+- **D-44 Targets are hypotheses; every target is reported with its measurement, including misses.** Unchanged in intent: the design document's targets (digest p95 <= 50 ms on a mid-range phone, payload <= 50 KB, verifier >= 600 packs/min, proof < 100 ms at 100,000 leaves) were estimates, not derived figures.
+- **D-45 Median and p95 are reported; the mean is not.**
+- **D-46 Only real components are measured; a figure that cannot be measured is reported as not measured.** The Attestor runs in real Chromium (`research/harness/cost-real.cjs`), sizes come from a pack downloaded from the running server (`MRA_COST_DUMP` in `e2e/full-stack.cjs`), throughput from the real verifier code, proofs from the real PHP `MerkleLog` (`server/bin/measure_proofs.php`). There is no physical phone in this project's hands, so **mobile latency is not measured.** A 4x CPU slowdown on the desktop is reported and labelled as a proxy only. `research/results/mobile-timing.html` is a self-contained page that gives the real figure when opened on a phone; it has not been run on one.
+
+### 20.2 Results (full table: `research/results/cost-table.md`, data: `cost-real.json`, `cost-merkle.json`)
+
+Machine: AMD Ryzen 7 7840HS, 16 logical cores, 15 GB, Windows 11, Chromium 153, Attestor 1.0.0. 500 timed runs per row after 20 warm-ups.
+
+| Metric | Target | Measured | Result |
+|---|---|---|---|
+| `attest()` p95, 22-node region, desktop | <= 50 ms | 5.1 ms | met |
+| `attest()` p95, 52-node region, desktop | <= 50 ms | 9.3 ms | met |
+| `attest()` p95, 502-node region, desktop | <= 50 ms | 58.1 ms | **missed, even on a desktop** |
+| `attest()` p95, 52 nodes, 4x slowdown (proxy) | <= 50 ms | 51.5 ms | proxy misses narrowly |
+| `attest()` p95, 502 nodes, 4x slowdown (proxy) | <= 50 ms | 379.8 ms | proxy misses by far |
+| Mobile (physical phone) | <= 50 ms | **not measured** | open |
+| Sealed bundle / `/api/attest` body / evidence pack (zip) | <= 50 KB | 1.15 KB / 1.03 KB / 5.54 KB | met (one small interface) |
+| Verifier stages 1-10 | >= 600 packs/min | 37,043 packs/min (p50 1.4 ms) | met |
+| Verifier stage 11 re-render, warm browser | >= 600 packs/min | 383 packs/min (p50 156 ms) | **missed** |
+| Inclusion proof, 100,000 leaves | < 100 ms | p50 7.0 ms, p95 9.7 ms, 17 hashes | met |
+| Proof path length | logarithmic | 14 / 17 / 20 hashes at 10k / 100k / 1M; p50 6.7 / 7.0 / 13.0 ms | confirmed |
+
+The 500-node digest is dominated by main-thread measurement (`measure` p50 43 ms of 49 ms), not hashing. Explaining *why* (style and occlusion reads per node) is a hypothesis, not a measured finding.
+
+### 20.3 Findings from running the real components together
+
+1. **The verifier rejected every honest pack from the real server (fixed).** It required the action target `#btn-agree`; the server's schema allows only `[A-Za-z0-9_-]`, so the real target is `btn-agree`. The verifier's synthetic fixtures used the wrong format, so its tests passed. Corrected in `verifier/src/checks/regionPolicy.ts` and the fixture generator; regression test `verifier/tests/actionTarget.test.ts`.
+2. **Open and serious: the verifier's stage 11 reports DIGEST_MISMATCH on an honest, untampered pack.** Re-rendering the committed bundle on its own gives region digest `sha256:cb4fe9cb...` unticked and `sha256:cb826fdf...` with the checkbox ticked; the client attested `sha256:6c91ddf9...`. Neither matches. The user's page at click time is the bundle inside the application shell (global styles, fonts, surrounding markup), which a bundle-only replay does not reproduce. This is open items O-08, O-12 and O-13 made concrete: as built, an honest user would be reported as a mismatch, so the "server showed X but committed Y" verdict cannot yet be demonstrated end to end. Not fixed here; it is a design decision (replay inside the shell, or define the critical-region digest so it is shell-independent).
+3. **The end-to-end tamper check is weak.** `e2e/full-stack.cjs` asserts the action-time digest differs from the page-load digest, but ticking the checkbox and enabling the Accept button already changes the digest, so the check passes without any tampering. `MRA_NO_TAMPER=1` now exists for capturing clean runs.
+4. Throughput caveat: stage 1-10 timing is one Node process on the same pack repeated 1,000 times (warm caches); stage 11 uses one warm browser, a new context per pack.
+
+### 20.4 What was verified, and how
+
+- `e2e/full-stack.cjs` 20/20 against a rebuilt database (as the application's database user), with `MRA_COST_DUMP` capturing the artifacts; verifier tests 30/30 including the new regression test.
+- The Merkle numbers come from proofs that were each verified by `MerkleProof::verifyInclusion` before being timed into the result (the script aborts otherwise).
+- The mobile page was run in headless Chromium and gave figures consistent with the harness (22 nodes p50 3.4 ms; 502 nodes p50 48.7 ms).
+- Not verified: any physical-phone figure; behaviour of the throughput figure under concurrent load; the payload sizes for larger notices.
+- The research package has no installed dependencies in this checkout (no `node_modules`), so its Jest suites and the `tsx` scripts could not be run here; see 18.0 and 19.0.

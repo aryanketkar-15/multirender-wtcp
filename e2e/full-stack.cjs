@@ -134,6 +134,10 @@ async function post(p, body) {
     if (r.url().endsWith('/api/attest')) posted.push(JSON.parse(r.postData()));
   });
   const replies = [];
+  const bundleReplies = [];
+  page.on('response', async (r) => {
+    if (r.url().endsWith('/api/bundle')) bundleReplies.push(await r.text().catch(() => '{}'));
+  });
   page.on('response', async (r) => {
     if (r.url().endsWith('/api/attest'))
       replies.push({ status: r.status(), body: await r.json().catch(() => ({})) });
@@ -159,14 +163,36 @@ async function post(p, body) {
   );
 
   // The attack T4.2.4 describes: change the rendered page after load, before the user acts.
-  await page.evaluate(() => {
-    const p = document.querySelector('#disclosure');
-    p.textContent = 'We will never share your data with anyone.';
-  });
+  // MRA_NO_TAMPER=1 skips it, so a clean run can be captured as an honest evidence pack.
+  const tamper = !process.env.MRA_NO_TAMPER;
+  if (tamper) {
+    await page.evaluate(() => {
+      const p = document.querySelector('#disclosure');
+      p.textContent = 'We will never share your data with anyone.';
+    });
+  }
   await page.locator('#agree').check();
   await page.locator('#btn-agree').click();
   await page.getByText(/was recorded as signed evidence/).waitFor({ timeout: 15000 });
 
+  // Optional: dump this run's real artifacts for the cost measurement (research/harness/cost-real.cjs).
+  if (process.env.MRA_COST_DUMP) {
+    const dir = process.env.MRA_COST_DUMP;
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'attestation-request.json'), JSON.stringify(posted[0]));
+    fs.writeFileSync(path.join(dir, 'bundle-response.json'), bundleReplies[0] || '{}');
+    const dump = await page.evaluate(async () => {
+      const list = await (await fetch('/api/packs')).json();
+      const id = list.packs[0].id;
+      const buf = new Uint8Array(await (await fetch('/api/pack/' + id + '/download')).arrayBuffer());
+      let bin = '';
+      for (const b of buf) bin += String.fromCharCode(b);
+      return { id, zip: btoa(bin) };
+    });
+    fs.writeFileSync(path.join(dir, 'pack.zip'), Buffer.from(dump.zip, 'base64'));
+    const keys = await (await fetch(API + '/.well-known/mra-key')).text();
+    fs.writeFileSync(path.join(dir, 'mra-key.json'), keys);
+  }
   check('exactly one attestation posted', posted.length === 1);
   const a = posted[0].attestation;
   check(
@@ -176,7 +202,7 @@ async function post(p, body) {
   );
   check(
     'digest at action time differs from the digest at page load',
-    a.critical_region_digest !== loadRegion,
+    tamper ? a.critical_region_digest !== loadRegion : true,
     `${a.critical_region_digest.slice(0, 18)}... vs ${loadRegion.slice(0, 18)}...`,
   );
   check(
