@@ -8,6 +8,9 @@
     "generate:manifest": "tsx corpus/generate-manifest.ts",
     "stability": "tsx harness/run-stability.ts",
     "report": "tsx harness/report.ts",
-    "sensitivity": "tsx harness/run-sensitivity.ts"
+    "sensitivity": "tsx harness/run-sensitivity.ts",
+    "cost": "node harness/cost-real.cjs",
+    "cost:report": "node harness/cost-report.cjs",
+    "cost:mobile-page": "node harness/make-mobile-page.cjs"
   }
 }

@@ -1,0 +1,58 @@
+{
+    "tool": "server\/bin\/measure_proofs.php",
+    "php": "8.2.12",
+    "samples_per_size": 200,
+    "sizes": [
+        {
+            "leaves": 10000,
+            "bulk_load_seconds": 1.7,
+            "path_hashes_min": 12,
+            "path_hashes_max": 14,
+            "ceil_log2": 14,
+            "generate_ms": {
+                "p50": 6.6752,
+                "p95": 8.2902,
+                "max": 10.1279
+            },
+            "verify_ms": {
+                "p50": 0.0283,
+                "p95": 0.0419,
+                "max": 0.7585
+            }
+        },
+        {
+            "leaves": 100000,
+            "bulk_load_seconds": 10.8,
+            "path_hashes_min": 12,
+            "path_hashes_max": 17,
+            "ceil_log2": 17,
+            "generate_ms": {
+                "p50": 6.9825,
+                "p95": 9.6689,
+                "max": 11.755
+            },
+            "verify_ms": {
+                "p50": 0.0298,
+                "p95": 0.0442,
+                "max": 0.3316
+            }
+        },
+        {
+            "leaves": 1000000,
+            "bulk_load_seconds": 103.3,
+            "path_hashes_min": 19,
+            "path_hashes_max": 20,
+            "ceil_log2": 20,
+            "generate_ms": {
+                "p50": 13.0158,
+                "p95": 19.585,
+                "max": 31.2632
+            },
+            "verify_ms": {
+                "p50": 0.0377,
+                "p95": 0.0529,
+                "max": 0.2617
+            }
+        }
+    ]
+}

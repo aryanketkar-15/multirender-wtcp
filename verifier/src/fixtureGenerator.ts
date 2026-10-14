@@ -56,7 +56,7 @@ export function generateAllFixtures(): GeneratedFixtures {
     v: 'mra/1.0',
     commitment_hash: commitmentHash,
     action: 'accept',
-    action_target: '#btn-agree',
+    action_target: 'btn-agree',
     env: {
       engine: 'Blink',
       engine_major: 130,
@@ -226,7 +226,7 @@ export function generateAllFixtures(): GeneratedFixtures {
       ...baseFiles,
       'attestation.json': JSON.stringify(
         {
-          record: { ...attestationRecord, action: 'reject', action_target: '#btn-reject' },
+          record: { ...attestationRecord, action: 'reject', action_target: 'btn-reject' },
           signature: attestationSig, // original signature over "accept"
           attestation_hash: attestationHash,
         },

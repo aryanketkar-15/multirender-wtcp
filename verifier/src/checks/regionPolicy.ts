@@ -110,9 +110,9 @@ export function checkRegionPolicy(
   const actionTarget = String(attestationRecord.action_target ?? '');
   const action = String(attestationRecord.action ?? '');
 
-  if (action === 'accept' && actionTarget !== `#${ACCEPT_ID}`) {
+  if (action === 'accept' && actionTarget !== ACCEPT_ID) {
     violations.push(`action_target ${actionTarget} does not match accept action`);
-  } else if (action === 'reject' && actionTarget !== `#${REJECT_ID}`) {
+  } else if (action === 'reject' && actionTarget !== REJECT_ID) {
     violations.push(`action_target ${actionTarget} does not match reject action`);
   } else if (action !== 'accept' && action !== 'reject') {
     violations.push(`unknown attestation action ${action}`);
