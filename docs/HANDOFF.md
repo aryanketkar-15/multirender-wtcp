@@ -41,37 +41,26 @@ docs/       the documents above.
 - **Validation order for `/api/attest`:** schema, signature, then DB checks; eleven distinct error codes (`SCHEMA_INVALID`, `CLIENT_SIGNATURE_INVALID`, `KEY_BINDING_INVALID`, `COMMITMENT_UNKNOWN`, `SESSION_MISMATCH`, `NONCE_MISMATCH`, `REPLAY_DETECTED`, `COMMITMENT_EXPIRED`, `ATTESTOR_UNRECOGNISED`, `ATTESTOR_MISMATCH`, `ACTION_TARGET_INVALID`, `REGION_POLICY_VIOLATION`). Nonce consumed last, atomically.
 - **Migrations** `001`-`021`, numbered in build order (the playbook's numbers differ; that is recorded).
 
-## 5. Current state (honest)
+## 5. Current state (honest, updated 2026-10-15)
 
 | Playbook phase | State |
 |---|---|
-| 0 Setup and baseline | Done (CI config written, never run on GitHub) |
-| 1 Accounts, validation, security | Done |
-| 2 Sealed bundle and commitment | Done |
-| 3 Attestor and semantic digest | Done; thresholds provisional |
-| 4 Client attestation and Merkle log | Done; two claims not met (below) |
-| **5 Evidence pack and independent verifier** | **NOT STARTED** |
-| 6 Measurement and research harness | Not started (informal seed only) |
-| 7 Product polish, accessibility, report, demo | Not started |
+| 0 to 4 | Done (CI config written, never run on GitHub; WebAuthn not built) |
+| 5 Evidence pack and verifier | Built and committed (5.1 to 5.4). **But stage 11 reports DIGEST_MISMATCH on an honest pack** (PROJECT_LOG 20.3 item 2): a bundle-only re-render does not reproduce the digest the real app produced. Open design decision (O-08/O-12/O-13). |
+| 6.1 stability matrix, 6.2 mutation suite | **Models over corpus metadata, not measurements.** Nothing is rendered. Do not quote their percentages (PROJECT_LOG 18.0, 19.0). To be redone with real rendering. |
+| 6.3 cost measurement | **Redone with real components** (PROJECT_LOG 20): 500-node digest p95 58 ms on a desktop (target 50), stage-11 re-render 383 packs/min (target 600), proofs and payloads fine. **No physical phone has been used**: run `research/results/mobile-timing.html` on one. |
+| 7 Polish, accessibility, report, demo | Started, uncommitted in the working tree (design system, EmptyState/ErrorBoundary/Skeleton, CSS, a CI edit). |
 
-Latest counts: 415 PHP tests, 159 client tests, 234 attestor tests, verifier 2 smoke tests, plus `e2e/full-stack.cjs` 20/20 as the restricted DB account. ~55 local commits on `main`, **nothing pushed** (no remote exists).
+Latest counts: verifier 30 tests; e2e 20/20 (`MRA_NO_TAMPER=1` and `MRA_COST_DUMP=<dir>` capture a clean run and its artifacts). The research package has no installed dependencies in this checkout, so its Jest suites are unverified.
 
 ## 6. Things that are NOT done or NOT proven (do not claim them)
 
-- No independent verifier, no evidence pack: the headline verdict ("server showed X but committed Y") cannot be demonstrated end to end yet.
-- **O-08:** the context digest covers the application's own chrome (header with the user's name), so a bundle-only replay cannot reproduce it. Must be decided before Phase 5.
-- **O-12/O-13:** the server sees only the client's digests; region policy is checked on the committed bundle only.
-- **O-02:** no real `mra-sth-witness` repo or schedule; `GitWitness` + `bin/publish_sth.php` tested only against a local bare git remote.
-- WebAuthn tier not built. Real SMTP delivery never exercised (dev uses a file outbox in `server/var/outbox`). CI never run. Second-machine checks (T2.1.1 bundle hash, T3.5.1 attestor hash, O-09) not done.
-- **O-03:** the 20-mutation suite must be fixed BEFORE thresholds are finalised (thresholds are provisional).
-- **O-01:** ask Prof. Diwate whether syllabus units III/IV must be demonstrated; if yes the verifier is Spring Boot, not Node. Decide before Phase 5.
-- Cross-browser: 30/30 cells agree across Chromium, Chrome, Edge, Firefox on one OS, small sample, no Safari.
-- Attestor host is a separate origin on the same machine, not independently operated.
-- Known findings (PROJECT_LOG 12.3): zero-width injection leaves the semantic digest unchanged (caught by the bundle hash); one large button makes siblings read `suppressed`; pointer-events:none overlays are invisible to occlusion; `aria-hidden` visible content is skipped.
+- Any stability, cross-browser rate, or mutation-detection percentage from milestones 6.1/6.2 (models).
+- Any mobile latency figure (no phone used).
+- That the verifier agrees with an honest client (it does not yet; see above).
+- External witness (O-02), real SMTP, CI runs, second-machine reproducibility (O-09), Safari/other OS (O-10), units III/IV question to Prof. Rahul Diwate (O-01).
+- The faculty for this project is **Prof. Rahul Diwate**.
 
-## 6a. Phase 5 plan (next work), from the playbook
-
-5.1 evidence pack export (zip, self-contained, only the session subject may download; `/api/pack/{id}` is already behind ownership authorization with stubs); 5.2 verifier skeleton and cheap checks (signatures, hashes, Merkle proofs, registry, twelve verdict paths); 5.3 headless re-render under the recorded env profile with Playwright and digest comparison, node-level diff; 5.4 verifier UI. Reuse: `MerkleProof` (PHP) and the JS verifier code in `e2e/full-stack.cjs`; the attestor bundle at `attestor/dist` computes digests inside Playwright. Resolve O-08 first.
 
 ## 7. Running everything on the user's machine (Windows, PowerShell 5.1: no `&&`)
 
