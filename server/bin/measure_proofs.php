@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Cost measurement (milestone 6.3): time the real MerkleLog::inclusionProof on logs of 10k, 100k and
  * 1M leaves in a scratch database, and the real MerkleProof::verifyInclusion on each proof.
@@ -10,6 +8,8 @@ declare(strict_types=1);
  *
  *   php bin/measure_proofs.php [samples] [size ...]
  */
+
+declare(strict_types=1);
 
 use Mra\Config\Env;
 use Mra\Service\MerkleLog;
@@ -27,11 +27,10 @@ $sizes = array_map('intval', array_slice($argv, 2)) ?: [10000, 100000, 1000000];
 $name = 'mra_scratch_cost';
 
 /** @param list<float> $v */
-function pct(array $v, float $p): float
-{
+$pct = static function (array $v, float $p): float {
     sort($v);
     return round($v[(int) min(count($v) - 1, floor($p * count($v)))], 4);
-}
+};
 
 $out = ['tool' => 'server/bin/measure_proofs.php', 'php' => PHP_VERSION, 'samples_per_size' => $samples, 'sizes' => []];
 foreach ($sizes as $n) {
@@ -68,8 +67,8 @@ foreach ($sizes as $n) {
         'path_hashes_min' => min($paths),
         'path_hashes_max' => max($paths),
         'ceil_log2' => (int) ceil(log($n, 2)),
-        'generate_ms' => ['p50' => pct($gen, 0.5), 'p95' => pct($gen, 0.95), 'max' => round(max($gen), 4)],
-        'verify_ms' => ['p50' => pct($ver, 0.5), 'p95' => pct($ver, 0.95), 'max' => round(max($ver), 4)],
+        'generate_ms' => ['p50' => $pct($gen, 0.5), 'p95' => $pct($gen, 0.95), 'max' => round(max($gen), 4)],
+        'verify_ms' => ['p50' => $pct($ver, 0.5), 'p95' => $pct($ver, 0.95), 'max' => round(max($ver), 4)],
     ];
     unset($pdo, $log);
     ScratchDatabase::drop($name);

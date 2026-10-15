@@ -36,8 +36,11 @@ evidence-pack-<pack-id>.zip
 ├── client_pubkey.pem
 ├── inclusion_proof_commitment.json
 ├── inclusion_proof_attestation.json
-└── signed_tree_head.json
+├── signed_tree_head.json
+└── representation.json        (optional)
 ```
+
+`representation.json` is present for attestations made with Attestor 1.1.0 or later (section 3.8).
 
 ---
 
@@ -202,6 +205,16 @@ RFC 6962 inclusion proofs verifying that the commitment leaf and attestation lea
 
 ---
 
+### 3.8 `representation.json` (optional)
+
+The semantic representation of the critical region, as the exact RFC 8785 text that was hashed:
+`{"v":"srd/1.0","policy":"consent/v1","nodes":[...]}`. The signed `critical_region_digest` in
+`attestation.json` is the SHA-256 of this text. The file is **not signed and not trusted**: the
+server refuses to store a representation whose hash differs from the signed digest, and the verifier
+recomputes the hash at stage 1 and rejects the pack (`MALFORMED_PACK`) if it differs. Its only use
+is to let the verifier name the node that differs when the re-render does not match. A pack without
+it (Attestor 1.0.0) still verifies; a mismatch can then be reported only at region level.
+
 ### 3.7 `signed_tree_head.json`
 
 The RFC 6962 tree head signed by the server's Ed25519 key:
@@ -228,7 +241,7 @@ The independent verifier executes the following stages sequentially (cheap check
 
 | Stage | Name | Description | Failure Code |
 |---|---|---|---|
-| **1** | Schema & Unpack | Parse archive and validate `manifest.json` schema version `1.0`. All required files present. | `MALFORMED_PACK` |
+| **1** | Schema & Unpack | Parse archive and validate `manifest.json` schema version `1.0`. All required files present. If `representation.json` is present, its canonical hash must equal the signed `critical_region_digest`. | `MALFORMED_PACK` |
 | **2** | Server Signature | Verify Ed25519 signature on `commitment.record` using trusted server public key. | `SERVER_SIGNATURE_INVALID` |
 | **3** | Client Signature | Verify ECDSA P-256 signature on `attestation.record` using `client_pubkey.pem`. | `CLIENT_SIGNATURE_INVALID` |
 | **4** | Key Binding | Verify `SHA-256(DER(client_pubkey))` matches `commitment.record.client_pubkey_fpr`. | `KEY_BINDING_INVALID` |
@@ -238,6 +251,6 @@ The independent verifier executes the following stages sequentially (cheap check
 | **8** | Merkle Inclusion | Verify both inclusion proofs against `STH.root_hash` and assert `idx_commitment < idx_attestation`. Verify Ed25519 signature on `STH`. | `MERKLE_PROOF_INVALID` |
 | **9** | Region Policy | Verify bundle markup and CSS satisfy `consent/v1` rules (disclosure text, valid actions). | `REGION_POLICY_VIOLATION` |
 | **10** | Attestor Registry | Verify `attestor_hash` matches a registered and verified build of the Attestor Module. | `ATTESTOR_UNRECOGNISED` |
-| **11** | Semantic Re-Render | Headless browser re-renders `bundle.json` using recorded `env` profile. Compare extracted critical region digest against `attestation.record.critical_region_digest`. | `DIGEST_MISMATCH` |
+| **11** | Semantic Re-Render | Headless browser re-renders `bundle.json` with the Attestor build whose SHA-256 equals `attestation.record.attestor_hash` (the newest available build, flagged in the result, if that exact build is not available), under the recorded `env` profile and in the form state the interface permits at the moment of the action (consent box ticked for Accept). Compare the critical region digest against `attestation.record.critical_region_digest`. On a mismatch with `representation.json` present, the changed nodes are named. The context digest is compared only on request (it covers the application shell, which is not sealed). | `DIGEST_MISMATCH` |
 
 If all 11 stages pass, the verifier issues a positive verdict: **`VERIFIED`**.

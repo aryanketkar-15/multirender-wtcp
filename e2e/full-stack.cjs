@@ -175,7 +175,8 @@ async function post(p, body) {
   let inappRegion = null;
   if (process.env.MRA_COST_DUMP) {
     // What the user's page looks like just before the click, measured in place by the shipped Attestor.
-    const attestorCode = await (await fetch('http://127.0.0.1:8090/mra-attestor-1.0.0.js')).text();
+    const distDir = path.join(ROOT, 'attestor/dist');
+    const attestorCode = fs.readFileSync(path.join(distDir, JSON.parse(fs.readFileSync(path.join(distDir, 'manifest.json'), 'utf8')).file), 'utf8');
     const inapp = await page.evaluate(async (code) => {
       (0, eval)(code + String.fromCharCode(10) + ';globalThis.MRAttestor = MRAttestor;');
       const ev = await MRAttestor.attest({ regionSelector: '#consent-region' });

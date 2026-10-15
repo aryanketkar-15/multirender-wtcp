@@ -12,6 +12,8 @@ namespace Mra\Validation;
 final class AttestationSchema
 {
     public const DIGEST = '/^sha256:[a-f0-9]{64}$/';
+    public const MAX_NODES = 2000;
+    public const MAX_REPRESENTATION_BYTES = 262144;
 
     private const TOP = [
         'v', 'type', 'session_id', 'commitment_hash', 'critical_region_digest', 'context_digest',
@@ -26,13 +28,16 @@ final class AttestationSchema
     public static function check(array $body): array
     {
         $errors = [];
-        $unexpected = array_diff(array_keys($body), ['attestation', 'signature']);
+        $unexpected = array_diff(array_keys($body), ['attestation', 'signature', 'region_representation']);
         if ($unexpected !== []) {
             $errors['body'] = 'Unexpected members: ' . implode(', ', array_map('strval', $unexpected));
         }
         $signature = $body['signature'] ?? null;
         if (!is_string($signature) || preg_match('/^[A-Za-z0-9_-]{86}$/', $signature) !== 1) {
             $errors['signature'] = 'Expected 64 bytes as unpadded base64url.';
+        }
+        if (array_key_exists('region_representation', $body)) {
+            $errors += self::checkRepresentation($body['region_representation']);
         }
         $a = $body['attestation'] ?? null;
         if (!is_array($a) || array_is_list($a)) {
@@ -69,6 +74,31 @@ final class AttestationSchema
             }
         }
         return $errors + self::checkEnv($a['env'] ?? null);
+    }
+
+    /**
+     * The unsigned side member: shape only. Its content is not trusted; the validator keeps it only
+     * if its hash equals the signed critical_region_digest.
+     *
+     * @return array<string,string>
+     */
+    private static function checkRepresentation(mixed $r): array
+    {
+        if (!is_array($r) || array_is_list($r) || array_diff(array_keys($r), ['v', 'policy', 'nodes']) !== []) {
+            return ['region_representation' => 'Expected an object with v, policy and nodes.'];
+        }
+        $ok = ($r['v'] ?? null) === 'srd/1.0'
+            && is_string($r['policy'] ?? null) && strlen($r['policy']) <= 64
+            && is_array($r['nodes'] ?? null) && array_is_list($r['nodes']) && count($r['nodes']) <= self::MAX_NODES;
+        if (!$ok) {
+            return ['region_representation' => 'Invalid version, policy or node list.'];
+        }
+        foreach ($r['nodes'] as $node) {
+            if (!is_array($node) || array_is_list($node)) {
+                return ['region_representation.nodes' => 'Every node must be an object.'];
+            }
+        }
+        return [];
     }
 
     /** @return array<string,string> */

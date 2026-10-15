@@ -19,6 +19,7 @@ final class AttestationRejected extends \RuntimeException
     public const ATTESTOR_MISMATCH = 'ATTESTOR_MISMATCH';
     public const ACTION_TARGET_INVALID = 'ACTION_TARGET_INVALID';
     public const REGION_POLICY_VIOLATION = 'REGION_POLICY_VIOLATION';
+    public const REPRESENTATION_MISMATCH = 'REPRESENTATION_MISMATCH';
 
     /** @param array<array-key,mixed> $detail safe to log and to return: never contains secrets */
     public function __construct(

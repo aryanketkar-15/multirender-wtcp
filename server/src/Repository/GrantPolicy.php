@@ -22,6 +22,7 @@ final class GrantPolicy
         'mra_bundle',
         'mra_commitment',
         'mra_attestation',
+        'mra_attestation_representation',
         'mra_leaf',
         'mra_node',
         'mra_sth',

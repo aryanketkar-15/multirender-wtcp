@@ -61,6 +61,21 @@ This document is written so the other developer can release unaided.
    names this `attestor_hash` and version, and `GET /api/bundle` tells the browser which file and
    integrity value to load.
 
+## Keeping earlier versions
+
+`release.sh` rebuilds `dist/` from scratch, which deletes earlier releases. Evidence packs name the
+exact build that produced them, and a verifier replays a pack with that build, so every released
+file must stay available:
+
+```bash
+git checkout -- attestor/dist/mra-attestor-<earlier-version>.js
+git show attestor-v<earlier-version>:attestor/dist/manifest.json > attestor/dist/manifest-<earlier-version>.json
+git add -f attestor/dist/manifest-<earlier-version>.json
+```
+
+`dist/manifest.json` always describes the newest release. The release-artefact test compares a
+fresh build with it only when the two have the same version.
+
 ## Rollback
 
 Never delete a registry row: evidence packs that reference a version must stay verifiable.

@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { chromium } from 'playwright';
@@ -64,27 +65,43 @@ export async function launchPlaywrightBrowser(options: LaunchOptions = {}): Prom
 }
 
 /**
- * Locate and read the independently hosted Attestor Module bundle.
+ * Finds the Attestor Module build the pack names (by the SHA-256 of its bytes, which is the
+ * attestor_hash the server committed to) among the builds available to this verifier. When none
+ * matches, the newest available build is used and the result says so: a replay with a different
+ * module is a weaker statement than a replay with the attested one.
  */
-export function resolveAttestorScript(customPath?: string): string {
+export function resolveAttestor(
+  customPath: string | undefined,
+  attestedHash: string,
+): { code: string; hash: string; exact: boolean } {
+  const hashOf = (code: string) =>
+    'sha256:' + crypto.createHash('sha256').update(code).digest('hex');
   if (customPath && fs.existsSync(customPath)) {
-    return fs.readFileSync(customPath, 'utf8');
+    const code = fs.readFileSync(customPath, 'utf8');
+    return { code, hash: hashOf(code), exact: hashOf(code) === attestedHash };
   }
-
-  const candidatePaths = [
-    path.join(__dirname, '../../attestor/dist/mra-attestor-1.0.0.js'),
-    path.join(__dirname, '../attestor/dist/mra-attestor-1.0.0.js'),
-    path.join(process.cwd(), '../attestor/dist/mra-attestor-1.0.0.js'),
-    path.join(process.cwd(), 'attestor/dist/mra-attestor-1.0.0.js'),
-  ];
-
-  for (const p of candidatePaths) {
-    if (fs.existsSync(p)) {
-      return fs.readFileSync(p, 'utf8');
+  const dirs = [
+    path.join(__dirname, '../../attestor/dist'),
+    path.join(__dirname, '../attestor/dist'),
+    path.join(process.cwd(), '../attestor/dist'),
+    path.join(process.cwd(), 'attestor/dist'),
+  ].filter((d) => fs.existsSync(d));
+  const found: Array<{ code: string; hash: string; file: string }> = [];
+  for (const d of dirs) {
+    for (const file of fs.readdirSync(d).filter((f) => /^mra-attestor-.*[.]js$/.test(f))) {
+      const code = fs.readFileSync(path.join(d, file), 'utf8');
+      found.push({ code, hash: hashOf(code), file });
     }
+    if (found.length) break;
   }
-
-  throw new Error('Could not locate Attestor Module bundle (mra-attestor-1.0.0.js)');
+  if (!found.length) {
+    throw new Error('Could not locate an Attestor Module build (mra-attestor-<version>.js)');
+  }
+  const exact = found.find((f) => f.hash === attestedHash);
+  if (exact) return { code: exact.code, hash: exact.hash, exact: true };
+  found.sort((a, b) => a.file.localeCompare(b.file, undefined, { numeric: true }));
+  const newest = found[found.length - 1];
+  return { code: newest.code, hash: newest.hash, exact: false };
 }
 
 /**
@@ -182,7 +199,11 @@ export async function renderAndVerify(
         body: htmlContent,
       });
     });
-    const attestorCode = resolveAttestorScript(options.attestorScriptPath);
+    const attestor = resolveAttestor(
+      options.attestorScriptPath,
+      String(pack.attestation.record.attestor_hash ?? ''),
+    );
+    const attestorCode = attestor.code;
     const attestedCriticalRegionDigest = String(
       pack.attestation.record.critical_region_digest ?? '',
     );
@@ -194,7 +215,11 @@ export async function renderAndVerify(
      */
     const action = String(pack.attestation.record.action ?? '');
     const candidates: Array<'ticked' | 'pristine'> =
-      action === 'accept' ? ['ticked'] : action === 'reject' ? ['pristine', 'ticked'] : ['pristine', 'ticked'];
+      action === 'accept'
+        ? ['ticked']
+        : action === 'reject'
+          ? ['pristine', 'ticked']
+          : ['pristine', 'ticked'];
 
     const measureState = async (state: 'ticked' | 'pristine') => {
       const p = page as Page;
@@ -249,7 +274,8 @@ export async function renderAndVerify(
     for (const state of candidates) {
       if (state !== candidates[0]) recomputed = await measureState(state);
       if (
-        recomputed.critical_region_digest.toLowerCase() === attestedCriticalRegionDigest.toLowerCase()
+        recomputed.critical_region_digest.toLowerCase() ===
+        attestedCriticalRegionDigest.toLowerCase()
       ) {
         break;
       }
@@ -362,11 +388,15 @@ export async function renderAndVerify(
           stage: 11,
           name: 'Semantic Re-Render',
           ok: true,
-          message:
-            'Recomputed semantic digest and context digest match client attestation exactly.',
+          message: options.compareContext
+            ? 'Recomputed region digest and context digest match the client attestation exactly.'
+            : 'Recomputed critical-region digest matches the client attestation exactly. The context digest was not compared.',
           details: {
             critical_region_digest: recomputed.critical_region_digest,
             context_digest: recomputed.context_digest,
+            replay_attestor_hash: attestor.hash,
+            replay_attestor_is_the_attested_build: attestor.exact,
+            context_compared: options.compareContext === true,
           },
         },
       ],
