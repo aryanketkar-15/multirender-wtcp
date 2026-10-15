@@ -493,7 +493,7 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 | O-16 | Occlusion is the least stable feature across engines (all Firefox disagreements) and fonts (section 18.2). | Revisit sampling at boundary cases without losing clickjacking detection. |
 | O-17 | A transparent overlay on a control at or below the fold is not detected (6% of M-13 pages, section 19.3). | Decide whether the sampling should scroll or test edge points. |
 | O-18 | Milestones 6.1 and 6.2 use a synthetic corpus; no real consent pages, no WebKit, no non-Windows OS (sections 18.1, 18.4). | Collect real pages if the paper needs the claim. |
-| O-19 | A real evidence pack carries no representation of the attested nodes, so a mismatch cannot name the changed node (section 21.4). | Add the region representation to the pack. |
+| O-19 | A real evidence pack carried no representation of the attested nodes, so a mismatch could not name the changed node. **Resolved for new packs (section 22, D-50 to D-52).** Packs from Attestor 1.0.0 still cannot be explained at node level. | Resolved |
 
 ---
 
@@ -737,3 +737,40 @@ Two conclusions. First, the application's own styling does not affect the critic
 - **O-19:** a real pack contains no representation of the attested nodes, so on a mismatch the verifier can say that the critical region differs but cannot name the changed node (the node-level diff exists only for packs that carry a representation). Adding the region representation to the pack would enable it.
 - **O-08** (above) and the font and viewport sensitivities of section 18.
 - The pre-click state of any control other than the consent box is not replayed.
+
+
+---
+
+## 22. Build record — region representation in the evidence pack (open item O-19, 2026-10-15)
+
+### 22.1 Why
+
+After section 21 a real pack verified when honest and gave `DIGEST_MISMATCH` when the page had been altered, but the verifier could only say that the critical region differed. The node-level diff the dashboard was built around existed only for packs that carried a representation, and real packs did not.
+
+### 22.2 Design
+
+The signed `critical_region_digest` is already the SHA-256 of the RFC 8785 text of the representation (`attestor/src/digest.ts`). So the representation can travel beside the signed attestation without being signed itself: whoever holds it recomputes the hash and compares it with the signed digest, and a copy that does not match is detectably not the one attested. This needed no change to the signed attestation, its schema version or the log leaf.
+
+- **D-50 The representation is an unsigned side member, accepted only if it hashes to the signed digest.** The client sends `region_representation` next to `attestation` and `signature`. The server (`AttestationSchema`, `AttestationValidator`) checks its shape (version `srd/1.0`, at most 2,000 nodes, at most 256 KB), recomputes its hash after the signature check and refuses a mismatch with a new code `REPRESENTATION_MISMATCH` (422) **before** the nonce is spent, so an honest retry still works. It is stored as the exact canonical text in a new append-only table `mra_attestation_representation` (migration 023, in `GrantPolicy.APPEND_ONLY`) inside the same transaction as the attestation, and exported as `representation.json` in the pack (manifest component `region_representation`). The Merkle log record is unchanged.
+- **D-51 The Attestor returns the representation: version 1.1.0.** `attest()` now includes `region_representation` in its evidence (the alternative, calling `measure()` a second time, would have doubled the main-thread cost). Because this changes what the module produces, it is a new version under the release procedure: reproducible double build, hash `sha256:b4f5d3e1...4072`, tag `attestor-v1.1.0`, registered beside 1.0.0 (both stay recognised). The 1.0.0 file and its manifest are kept in `attestor/dist/` (`manifest-1.0.0.json`) because packs name the build that made them. The second-developer reproduction (T3.5.1) was not done.
+- **D-52 The verifier checks the representation and replays with the exact attested build.** Stage 1 rejects a pack whose `representation.json` does not hash to the signed digest (`MALFORMED_PACK`). Stage 11 now selects the Attestor build whose SHA-256 equals the pack's `attestor_hash`; if that exact build is not available it uses the newest and says so in the result (`replay_attestor_is_the_attested_build`). Packs without a representation (Attestor 1.0.0) still verify and still mismatch, only without the node name.
+
+### 22.3 Result on real packs (`verifier/fixtures/real/`, `verifier/tests/realPacks.test.ts`)
+
+For a real run in which a script rewrote the disclosure after the page loaded and before the click, the verifier now reports:
+
+> Node 1 (paragraph): text: attested "we will never share your data with anyone." vs committed "we share your usage data with selected partners for advertising and analytics. you can withdraw consent at any time from your account."
+
+The honest pack from the same stack verifies, and the replay is done with the Attestor 1.1.0 build the pack names. Packs from 1.0.0 keep working.
+
+### 22.4 Verification
+
+Server: `AttestationRepresentationTest` (5 tests: stored and exported byte for byte; altered representation refused with the nonce intact; five malformed shapes refused; oversize refused; absent representation still works). Attestor: the shipped representation hashes to the digest in a real browser (235 tests). Client: the representation travels beside, and is not part of, the signed payload (175 tests excluding the unfinished Phase 7 `App.test.tsx`). Verifier: 35 tests including the named node, the tampered `representation.json`, and the exact-build replay. End to end against the live stack: 21 of 21 (honest) and 20 of 20 (altered page).
+
+### 22.5 Limits
+
+- The representation is what the client reports. A client that lies about it is caught only because its hash must equal the signed digest; the digest itself is still the client's claim about its page, which is the verifier's job to compare with a faithful re-render.
+- It discloses the text and state of the notice the user saw. That is the consent notice, not personal data, but it is a copy of page content stored beyond the bundle.
+- Only the critical-region representation is shipped. The context representation (the whole page) is not, so a context mismatch still cannot be explained (O-08).
+- Packs from before Attestor 1.1.0 cannot be explained at node level.
+- O-19 is resolved for new packs.

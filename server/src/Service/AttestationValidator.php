@@ -66,6 +66,9 @@ final class AttestationValidator
         }
         $fingerprint = ClientKeyVerifier::fingerprint((string) $a['client_pubkey']);
 
+        // 2b. The unsigned representation is kept only if it is what the signed digest is the hash of.
+        $representation = $this->checkedRepresentation($body, (string) $a['critical_region_digest']);
+
         // 3. The commitment this attestation answers.
         $stored = $this->commitments->findByHash((string) $a['commitment_hash']);
         if ($stored === null || CommitmentService::hash($stored['commitment_blob']) !== $a['commitment_hash']) {
@@ -114,7 +117,44 @@ final class AttestationValidator
 
         // 7. Spend the nonce and write, atomically.
         $leafOfCommitment = isset($commitment['log_leaf_index']) ? (int) $commitment['log_leaf_index'] : null;
-        return $this->persist($a, $canonical, (string) $body['signature'], $fingerprint, $user, $session->id, $leafOfCommitment);
+        return $this->persist(
+            $a,
+            $canonical,
+            (string) $body['signature'],
+            $fingerprint,
+            $user,
+            $session->id,
+            $leafOfCommitment,
+            $representation
+        );
+    }
+
+    /**
+     * @param array<string,mixed> $body
+     * @return string|null the canonical text to store, or null when none was sent
+     */
+    private function checkedRepresentation(array $body, string $signedDigest): ?string
+    {
+        if (!array_key_exists('region_representation', $body)) {
+            return null;
+        }
+        $canonical = Jcs::encode($body['region_representation']);
+        if (strlen($canonical) > AttestationSchema::MAX_REPRESENTATION_BYTES) {
+            throw new AttestationRejected(
+                AttestationRejected::SCHEMA_INVALID,
+                422,
+                'The attestation is malformed.',
+                ['fields' => ['region_representation' => 'Too large.']]
+            );
+        }
+        if ('sha256:' . hash('sha256', $canonical) !== $signedDigest) {
+            throw new AttestationRejected(
+                AttestationRejected::REPRESENTATION_MISMATCH,
+                422,
+                'The representation is not the one the signed digest is the hash of.'
+            );
+        }
+        return $canonical;
     }
 
     /** @param array<string,mixed> $commitment */
@@ -152,7 +192,8 @@ final class AttestationValidator
         string $fingerprint,
         User $user,
         string $sessionId,
-        ?int $commitmentLeaf
+        ?int $commitmentLeaf,
+        ?string $representation = null
     ): array {
         $owns = !$this->pdo->inTransaction();
         if ($owns) {
@@ -183,6 +224,9 @@ final class AttestationValidator
                 $leaf['index'],
                 $this->clock->now()
             );
+            if ($representation !== null) {
+                $this->attestations->saveRepresentation($id, $representation);
+            }
             if ($owns) {
                 $this->pdo->commit();
             }

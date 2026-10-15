@@ -22,6 +22,11 @@ export interface Evidence {
   attestor_version: string;
   region_nodes: number;
   context_nodes: number;
+  /**
+   * Attestor 1.1.0 and later: the representation that critical_region_digest is the hash of. It is
+   * sent beside the signed attestation, not inside it, so a verifier can name the node that differs.
+   */
+  region_representation?: unknown;
 }
 
 export interface AttestorModule {

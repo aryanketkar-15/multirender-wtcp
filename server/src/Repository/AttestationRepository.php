@@ -30,6 +30,24 @@ final class AttestationRepository extends BaseRepository
         return (int) $this->pdo->lastInsertId();
     }
 
+    /** Stores the exact canonical text whose SHA-256 is the signed critical_region_digest. */
+    public function saveRepresentation(int $attestationId, string $canonicalJson): void
+    {
+        $this->run(
+            'INSERT INTO mra_attestation_representation (attestation_id, representation_json) VALUES (?, ?)',
+            [$attestationId, $canonicalJson]
+        );
+    }
+
+    public function representationFor(int $attestationId): ?string
+    {
+        $value = $this->run(
+            'SELECT representation_json FROM mra_attestation_representation WHERE attestation_id = ?',
+            [$attestationId]
+        )->fetchColumn();
+        return $value === false ? null : (string) $value;
+    }
+
     /** @return array<string,mixed>|null */
     public function findByCommitment(string $commitmentHash): ?array
     {

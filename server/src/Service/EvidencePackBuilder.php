@@ -141,6 +141,10 @@ final class EvidencePackBuilder
             'attestation_hash' => (string) $attestationRow['attestation_hash'],
         ];
 
+        // Present for attestations made with Attestor 1.1.0 or later: the exact text whose SHA-256 is
+        // the signed critical_region_digest. Not signed; a verifier recomputes the hash.
+        $representation = $this->attestations->representationFor($attestationId);
+
         $manifest = [
             'schema_version' => self::SCHEMA_VERSION,
             'pack_id' => $packId,
@@ -170,7 +174,11 @@ final class EvidencePackBuilder
             ],
         ];
 
-        return $this->createZip([
+        if ($representation !== null) {
+            $manifest['components']['region_representation'] = 'representation.json';
+        }
+
+        $files = [
             'manifest.json' => json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
             'bundle.json' => json_encode($bundleRecord, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
             'commitment.json' => json_encode($commitmentJson, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
@@ -179,7 +187,12 @@ final class EvidencePackBuilder
             'inclusion_proof_commitment.json' => json_encode($commitmentProof, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
             'inclusion_proof_attestation.json' => json_encode($attestationProof, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
             'signed_tree_head.json' => json_encode($head, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
-        ]);
+        ];
+        if ($representation !== null) {
+            $files['representation.json'] = $representation;
+        }
+
+        return $this->createZip($files);
     }
 
     /**

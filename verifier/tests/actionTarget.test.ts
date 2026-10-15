@@ -18,10 +18,16 @@ const bundle = {
 describe('region policy: action target format matches the server', () => {
   test('the bare element id the server issues is accepted', () => {
     expect(checkRegionPolicy(bundle, { action: 'accept', action_target: 'btn-agree' })).toEqual([]);
-    expect(checkRegionPolicy(bundle, { action: 'reject', action_target: 'btn-reject' })).toEqual([]);
+    expect(checkRegionPolicy(bundle, { action: 'reject', action_target: 'btn-reject' })).toEqual(
+      [],
+    );
   });
   test('a mismatched target is still refused', () => {
-    expect(checkRegionPolicy(bundle, { action: 'accept', action_target: 'btn-reject' })).toHaveLength(1);
-    expect(checkRegionPolicy(bundle, { action: 'reject', action_target: '#btn-reject' })).toHaveLength(1);
+    expect(
+      checkRegionPolicy(bundle, { action: 'accept', action_target: 'btn-reject' }),
+    ).toHaveLength(1);
+    expect(
+      checkRegionPolicy(bundle, { action: 'reject', action_target: '#btn-reject' }),
+    ).toHaveLength(1);
   });
 });

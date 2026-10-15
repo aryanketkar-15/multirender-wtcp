@@ -34,6 +34,11 @@ export interface Attestation {
 export interface SignedAttestation {
   attestation: Attestation;
   signature: string;
+  /**
+   * What the region digest is the hash of. Not covered by the signature and not trusted: the server
+   * and any verifier recompute its hash and compare it with the signed digest.
+   */
+  region_representation?: unknown;
 }
 
 export interface CommitmentFields {
@@ -91,7 +96,14 @@ export async function createAttestation(input: AttestationInput): Promise<Signed
     client_ts: isoSeconds(input.now ?? new Date()),
     client_pubkey: await publicKeyPem(input.pair.publicKey),
   };
-  return { attestation, signature: await signText(input.pair, jcs(attestation)) };
+  const signed: SignedAttestation = {
+    attestation,
+    signature: await signText(input.pair, jcs(attestation)),
+  };
+  if (input.evidence.region_representation !== undefined) {
+    signed.region_representation = input.evidence.region_representation;
+  }
+  return signed;
 }
 
 export type SubmitResult =

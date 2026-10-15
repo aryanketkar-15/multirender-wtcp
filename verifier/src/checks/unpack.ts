@@ -1,6 +1,7 @@
 import AdmZip from 'adm-zip';
 import type { PackManifest, UnpackedPack } from '../verdicts';
-import { sha256Hex } from './crypto';
+import { canonicalJson } from './jcs';
+import { sha256Hex, sha256Prefixed } from './crypto';
 
 export const REQUIRED_FILES = [
   'manifest.json',
@@ -119,6 +120,23 @@ export function unpackPack(zipBuffer: Buffer): UnpackedPack {
     throw new PackMalformedError(
       'attestation.json must contain record object and signature string',
     );
+  }
+
+  // representation.json (optional, Attestor 1.1.0+): not signed itself, so it is accepted only if it
+  // is exactly what the signed critical_region_digest is the hash of.
+  if (fileBuffers['representation.json']) {
+    let representation: unknown;
+    try {
+      representation = JSON.parse(fileBuffers['representation.json'].toString('utf8'));
+    } catch {
+      throw new PackMalformedError('representation.json is not valid JSON');
+    }
+    const signedDigest = String(attestation.record.critical_region_digest ?? '');
+    if (sha256Prefixed(canonicalJson(representation)) !== signedDigest) {
+      throw new PackMalformedError(
+        'representation.json is not the representation the signed region digest was computed from',
+      );
+    }
   }
 
   // Parse client_pubkey.pem
