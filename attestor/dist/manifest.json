@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
-  "file": "mra-attestor-1.0.0.js",
-  "sha384": "sha384-iEpmLu+URVkWq/PTD7nn0GjpOAv5K0hMUNUcmrRcERzWAkJbxTcG2TUTPRmhXX28",
-  "sha256": "sha256:f805f3642219c751e5e76699bb096aeb63ce5946e20a32748121bebb3cb2949a",
-  "bytes": 14615
+  "version": "1.1.0",
+  "file": "mra-attestor-1.1.0.js",
+  "sha384": "sha384-AUZ0cI/sCH+VO7dG6hRBQPI2KrfscD2o5dRcPoimFufiLqfIMb309p1Up2K0HQiz",
+  "sha256": "sha256:b4f5d3e115ec18782a3ec8ce7abfc05150b904b21f4c14e980913a98a36d4072",
+  "bytes": 14646
 }
