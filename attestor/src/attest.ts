@@ -23,6 +23,13 @@ export interface Evidence {
   context_digest: string;
   env: EnvVector;
   attestor_version: string;
+  /**
+   * The exact representation that `critical_region_digest` is the SHA-256 of (RFC 8785 canonical
+   * text). It is not signed itself and does not need to be: anyone can recompute the hash and
+   * compare it with the signed digest, so a copy that does not match is detectably not the one
+   * attested. It lets a verifier name the node that differs when a re-render does not match.
+   */
+  region_representation: Representation;
   /** Node counts, for diagnostics and the cost measurements. Not part of any digest. */
   region_nodes: number;
   context_nodes: number;
@@ -59,6 +66,7 @@ export async function attest(opts: AttestOptions, worker?: DigestWorker): Promis
     context_digest: context.digest,
     env: collectEnv(),
     attestor_version: ATTESTOR_VERSION,
+    region_representation: reps.region,
     region_nodes: reps.region.nodes.length,
     context_nodes: reps.context.nodes.length,
   };
