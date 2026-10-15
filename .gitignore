@@ -31,3 +31,4 @@ playwright-report/
 .idea/
 .vscode/
 .DS_Store
+research/results/raw/
