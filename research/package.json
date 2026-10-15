@@ -1,14 +1,11 @@
 {
   "name": "mra-research",
   "private": true,
-  "version": "0.1.0",
-  "type": "module",
+  "version": "0.2.0",
   "scripts": {
-    "test": "jest -c jest.config.cjs",
-    "generate:manifest": "tsx corpus/generate-manifest.ts",
-    "stability": "tsx harness/run-stability.ts",
-    "report": "tsx harness/report.ts",
-    "sensitivity": "tsx harness/run-sensitivity.ts",
+    "corpus": "node corpus/generate-manifest.cjs",
+    "stability": "node harness/stability-real.cjs",
+    "sensitivity": "node harness/sensitivity-real.cjs",
     "cost": "node harness/cost-real.cjs",
     "cost:report": "node harness/cost-report.cjs",
     "cost:mobile-page": "node harness/make-mobile-page.cjs"
