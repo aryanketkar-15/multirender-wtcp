@@ -140,9 +140,12 @@ export function Consent() {
       const ctx = loaded.current;
       if (!ctx) return;
       pending.current = { action, target, signed: null };
+      // Start measuring in this same tick, before any state change can touch the page: attest()
+      // reads the page synchronously, and it must read what the user was looking at.
+      const measuring = ctx.attestor.attest({ regionSelector: '#consent-region' });
       setState({ kind: 'submitting', action, ...ctx });
       try {
-        const evidence = await ctx.attestor.attest({ regionSelector: '#consent-region' });
+        const evidence = await measuring;
         const pair = await getClientKey();
         const signed = await createAttestation({
           commitment: {

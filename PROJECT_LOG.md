@@ -209,7 +209,7 @@ Changes arriving after a phase has been considered settled. Maintained separatel
 | O-05 | The architecture diagram does not yet show the account layer | Team | Report drafting |
 | O-06 | The Web Technology mapping table's authentication row predates the account layer | Team | Report drafting |
 | O-07 | No dedicated database-layer section exists; connection handling, migrations and transaction policy are currently covered only by a single table row | Team | Report drafting |
-| O-08 | Context digest covers the application chrome; a bundle-only replay cannot reproduce it (section 12.3) | Team | Phase 5 |
+| O-08 | Context digest covers the application chrome; a bundle-only replay cannot reproduce it (section 12.3) | Team | Phase 5 Update 2026-10-15: partly resolved: the critical region replays; the context digest does not and is not compared by default (D-49). |
 | O-09 | Attestor build reproducibility on the second developer's machine | Team | Attestor release |
 
 ---
@@ -486,13 +486,14 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 |---|---|---|
 | O-02 | Create the real `mra-sth-witness` repository, give the publisher push access through the clone's own credentials, and schedule `bin/publish_sth.php`. | The externally witnessed claim |
 | O-08 | Context digest still covers the application chrome; unresolved (section 12.3, finding 6). | Phase 5 |
-| O-12 | The verifier does not yet re-render the committed bundle or compare digests; the server cannot see the client's region, only its digest. Region policy is enforced on the committed bundle only. | Phase 5 |
-| O-13 | The logged attestation proves what the *client reported*. Whether that matches a faithful re-render of the committed bundle is the verifier's job. | Phase 5 |
+| O-12 | The verifier does not yet re-render the committed bundle or compare digests; the server cannot see the client's region, only its digest. Region policy is enforced on the committed bundle only. | Phase 5 Update 2026-10-15: the verifier now re-renders and compares the critical-region digest on real packs (section 21); region policy is still enforced on the committed bundle only. |
+| O-13 | The logged attestation proves what the *client reported*. Whether that matches a faithful re-render of the committed bundle is the verifier's job. | Phase 5 Update 2026-10-15: a faithful re-render now reproduces the signed digest for honest packs and flags an altered page (section 21). |
 | O-14 | Key management for the witness push credentials and the server signing key remains environment-variable only (prototype limitation). | Report |
 | O-15 | The digest is not font-invariant: 15% of region digests change under font substitution (section 18.2). The environment vector does not record the font condition; a verifier on other fonts would report mismatches for honest pages. | Decide: record fonts, pin them in the verifier, or make prominence and occlusion less font-sensitive. |
 | O-16 | Occlusion is the least stable feature across engines (all Firefox disagreements) and fonts (section 18.2). | Revisit sampling at boundary cases without losing clickjacking detection. |
 | O-17 | A transparent overlay on a control at or below the fold is not detected (6% of M-13 pages, section 19.3). | Decide whether the sampling should scroll or test edge points. |
 | O-18 | Milestones 6.1 and 6.2 use a synthetic corpus; no real consent pages, no WebKit, no non-Windows OS (sections 18.1, 18.4). | Collect real pages if the paper needs the claim. |
+| O-19 | A real evidence pack carries no representation of the attested nodes, so a mismatch cannot name the changed node (section 21.4). | Add the region representation to the pack. |
 
 ---
 
@@ -678,9 +679,9 @@ Machine: AMD Ryzen 7 7840HS, 16 logical cores, 15 GB, Windows 11, Chromium 153, 
 | `attest()` p95, 52 nodes, 4x slowdown (proxy) | <= 50 ms | 51.5 ms | proxy misses narrowly |
 | `attest()` p95, 502 nodes, 4x slowdown (proxy) | <= 50 ms | 379.8 ms | proxy misses by far |
 | Mobile (physical phone) | <= 50 ms | **not measured** | open |
-| Sealed bundle / `/api/attest` body / evidence pack (zip) | <= 50 KB | 1.15 KB / 1.03 KB / 5.54 KB | met (one small interface) |
-| Verifier stages 1-10 | >= 600 packs/min | 37,043 packs/min (p50 1.4 ms) | met |
-| Verifier stage 11 re-render, warm browser | >= 600 packs/min | 383 packs/min (p50 156 ms) | **missed** |
+| Sealed bundle / `/api/attest` body / evidence pack (zip) | <= 50 KB | 1.15 KB / 1.03 KB / 5.63 KB | met (one small interface) |
+| Verifier stages 1-10 | >= 600 packs/min | 24,582 packs/min (p50 2.1 ms) | met |
+| Verifier stage 11 re-render, warm browser | >= 600 packs/min | 328 packs/min (p50 173 ms) | **missed** |
 | Inclusion proof, 100,000 leaves | < 100 ms | p50 7.0 ms, p95 9.7 ms, 17 hashes | met |
 | Proof path length | logarithmic | 14 / 17 / 20 hashes at 10k / 100k / 1M; p50 6.7 / 7.0 / 13.0 ms | confirmed |
 
@@ -689,7 +690,7 @@ The 500-node digest is dominated by main-thread measurement (`measure` p50 43 ms
 ### 20.3 Findings from running the real components together
 
 1. **The verifier rejected every honest pack from the real server (fixed).** It required the action target `#btn-agree`; the server's schema allows only `[A-Za-z0-9_-]`, so the real target is `btn-agree`. The verifier's synthetic fixtures used the wrong format, so its tests passed. Corrected in `verifier/src/checks/regionPolicy.ts` and the fixture generator; regression test `verifier/tests/actionTarget.test.ts`.
-2. **Open and serious: the verifier's stage 11 reports DIGEST_MISMATCH on an honest, untampered pack.** Re-rendering the committed bundle on its own gives region digest `sha256:cb4fe9cb...` unticked and `sha256:cb826fdf...` with the checkbox ticked; the client attested `sha256:6c91ddf9...`. Neither matches. The user's page at click time is the bundle inside the application shell (global styles, fonts, surrounding markup), which a bundle-only replay does not reproduce. This is open items O-08, O-12 and O-13 made concrete: as built, an honest user would be reported as a mismatch, so the "server showed X but committed Y" verdict cannot yet be demonstrated end to end. Not fixed here; it is a design decision (replay inside the shell, or define the critical-region digest so it is shell-independent).
+2. **The verifier's stage 11 reported DIGEST_MISMATCH on an honest, untampered pack (found here, fixed and explained in section 21).** The first run of the real verifier on the first real pack gave `sha256:cb4fe9cb...` unticked and `sha256:cb826fdf...` ticked against the attested `sha256:6c91ddf9...`; neither matched. The cause was found in section 21 (the client measured the page after locking its own controls).
 3. **The end-to-end tamper check is weak.** `e2e/full-stack.cjs` asserts the action-time digest differs from the page-load digest, but ticking the checkbox and enabling the Accept button already changes the digest, so the check passes without any tampering. `MRA_NO_TAMPER=1` now exists for capturing clean runs.
 4. Throughput caveat: stage 1-10 timing is one Node process on the same pack repeated 1,000 times (warm caches); stage 11 uses one warm browser, a new context per pack.
 
@@ -700,3 +701,39 @@ The 500-node digest is dominated by main-thread measurement (`measure` p50 43 ms
 - The mobile page was run in headless Chromium and gave figures consistent with the harness (22 nodes p50 3.4 ms; 502 nodes p50 48.7 ms).
 - Not verified: any physical-phone figure; behaviour of the throughput figure under concurrent load; the payload sizes for larger notices.
 - Milestones 6.1 and 6.2 were redone with real rendering afterwards (sections 18 and 19).
+
+
+---
+
+## 21. Build record — resolving the stage-11 mismatch on honest packs (2026-10-15)
+
+### 21.1 What was wrong, and how it was found
+
+The real verifier reported `DIGEST_MISMATCH` on every honest pack from the real server (section 20.3, item 2). To find out why, `e2e/full-stack.cjs` (with `MRA_COST_DUMP`) now also measures, in the live app, the digest of the page just before the click, and the bundle from the downloaded pack was replayed in Chromium under three form states. Results for one real run:
+
+| Page state | Region digest | Matches the signed digest | Matches the live page before the click |
+|---|---|---|---|
+| Replay, box untouched | `cfa72278...` | no | no |
+| Replay, consent box ticked, Accept enabled | `cb826fdf...` | no | **yes** |
+| Replay, box ticked and every control disabled | `6c91ddf9...` | **yes** | no |
+
+Two conclusions. First, the application's own styling does not affect the critical-region digest: the live page before the click equals a bundle-only replay with the box ticked. Second, the digest that was signed described the page *after* the client had disabled the checkbox, Accept and Reject, a state the user never saw. `CriticalRegion` locked the controls and only then called the handler that measures. No replay of the bundle could match that, and the synthetic verifier fixtures could not show it.
+
+### 21.2 Decisions
+
+- **D-47 The client measures the page before locking it.** `CriticalRegion` now calls the action handler (which starts `attest()`, reading the page synchronously) before it disables the controls, and `Consent.act` starts the measurement before it updates any state. The signed digest is the digest of the page as the user saw it at the moment of the click. Regression tests: `client/tests/ConsentAttestation.test.tsx` (the controls are still enabled and the box ticked when `attest` runs; it fails on the old code) and a new end-to-end check that the signed digest equals the live page's pre-click digest (`e2e/full-stack.cjs`, 21 of 21).
+- **D-48 The verifier replays the form states the interface permits.** For `accept` the box must be ticked (Accept is disabled otherwise); for `reject` it tries untouched and ticked. It stops at the first state that reproduces the digest. No protocol change was needed. Limit: only the consent box is a replayable state; any further interaction state would need to be recorded in the attestation.
+- **D-49 The context digest is not compared by default.** It covers the whole page the user saw, including the application shell (header, user name), which is not part of the sealed bundle, so a bundle-only replay cannot reproduce it. `renderAndVerify` now compares it only with `compareContext: true`. Consequence stated plainly: a `VERIFIED` verdict covers the critical region and the signatures, bindings and log; it does **not** cover content outside the region (for example the footer link M-17 or an overlay placed outside the region). O-08 therefore remains open in that form. A real pack does give `CONTEXT_MISMATCH` when compared (tested).
+
+### 21.3 Results on real packs (`verifier/tests/realPacks.test.ts`, packs in `verifier/fixtures/real/`)
+
+- Honest real pack: stages 1 to 10 pass, stage 11 returns **VERIFIED**.
+- Real pack from a run in which a script rewrote the disclosure text after load and before the click: stages 1 to 10 pass, stage 11 returns **DIGEST_MISMATCH**. This is the product's headline claim, demonstrated for the first time on the real stack end to end (server, client, Attestor in Chromium, evidence pack, verifier).
+- Verifier unit tests 33 of 33; client unit tests 173 passed (one separate suite, `tests/App.test.tsx`, belongs to unfinished Phase 7 work and fails to parse; it is not part of this change).
+- Throughput was re-measured on the new honest pack: stages 1 to 10 at 24,582 packs/min, stage 11 at 328 packs/min (section 20.2). The machine was busier during that run, so these figures are conservative.
+
+### 21.4 Still open
+
+- **O-19:** a real pack contains no representation of the attested nodes, so on a mismatch the verifier can say that the critical region differs but cannot name the changed node (the node-level diff exists only for packs that carry a representation). Adding the region representation to the pack would enable it.
+- **O-08** (above) and the font and viewport sensitivities of section 18.
+- The pre-click state of any control other than the consent box is not replayed.

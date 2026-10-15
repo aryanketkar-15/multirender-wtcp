@@ -25,6 +25,13 @@ export interface RenderOptions {
    * Attested representation if known out-of-band for detailed diffing.
    */
   attestedRepresentation?: { nodes: SrdNodeLike[] };
+  /**
+   * Also require the context digest to match. Off by default: the context digest covers the whole
+   * page the user saw, including the application shell, which is not part of the sealed bundle, so a
+   * bundle-only replay cannot reproduce it (open item O-08). Turn on only when replaying a page that
+   * includes the same shell.
+   */
+  compareContext?: boolean;
 }
 
 /**
@@ -175,53 +182,79 @@ export async function renderAndVerify(
         body: htmlContent,
       });
     });
-    await page.goto('http://localhost/', { waitUntil: 'load' });
-
-    // Load and inject the Attestor Module
     const attestorCode = resolveAttestorScript(options.attestorScriptPath);
-    await page.addScriptTag({ content: attestorCode });
-
-    // Evaluate measurement inside the page context
-    const recomputed = await page.evaluate(
-      async (opts) => {
-        const win = window as unknown as {
-          MRAttestor?: {
-            measure: (
-              doc: Document,
-              options: { regionSelector: string; regionPolicy: string },
-            ) => { region: { nodes: SrdNodeLike[] }; context: { nodes: SrdNodeLike[] } };
-            digestOf: (rep: unknown) => Promise<{ digest: string }>;
-          };
-        };
-        const attestor = win.MRAttestor;
-        if (!attestor) {
-          throw new Error('MRAttestor global not found in page');
-        }
-
-        const reps = attestor.measure(document, {
-          regionSelector: opts.regionSelector,
-          regionPolicy: opts.regionPolicy || 'consent/v1',
-        });
-
-        const regionDigestRes = await attestor.digestOf(reps.region);
-        const contextDigestRes = await attestor.digestOf(reps.context);
-
-        return {
-          critical_region_digest: regionDigestRes.digest,
-          context_digest: contextDigestRes.digest,
-          regionRepresentation: reps.region,
-          contextRepresentation: reps.context,
-        };
-      },
-      {
-        regionSelector: bundle.critical_region ?? '#consent-dialog',
-        regionPolicy: bundle.region_policy ?? 'consent/v1',
-      },
-    );
-
     const attestedCriticalRegionDigest = String(
       pack.attestation.record.critical_region_digest ?? '',
     );
+
+    /**
+     * The user attested the page as it was just before the click, so the replay must put the form in
+     * a state the interface allows at that moment: Accept is only enabled with the consent box
+     * ticked; Reject can be clicked with the box ticked or not. Candidate states are tried in turn.
+     */
+    const action = String(pack.attestation.record.action ?? '');
+    const candidates: Array<'ticked' | 'pristine'> =
+      action === 'accept' ? ['ticked'] : action === 'reject' ? ['pristine', 'ticked'] : ['pristine', 'ticked'];
+
+    const measureState = async (state: 'ticked' | 'pristine') => {
+      const p = page as Page;
+      await p.goto('http://localhost/', { waitUntil: 'load' });
+      await p.addScriptTag({ content: attestorCode });
+      return p.evaluate(
+        async (opts) => {
+          const win = window as unknown as {
+            MRAttestor?: {
+              measure: (
+                doc: Document,
+                options: { regionSelector: string; regionPolicy: string },
+              ) => { region: { nodes: SrdNodeLike[] }; context: { nodes: SrdNodeLike[] } };
+              digestOf: (rep: unknown) => Promise<{ digest: string }>;
+            };
+          };
+          const attestor = win.MRAttestor;
+          if (!attestor) {
+            throw new Error('MRAttestor global not found in page');
+          }
+          if (opts.state === 'ticked') {
+            const box = document.querySelector<HTMLInputElement>('#agree');
+            const accept = document.querySelector<HTMLButtonElement>('#btn-agree');
+            if (box) box.checked = true;
+            if (accept) accept.disabled = false;
+          }
+
+          const reps = attestor.measure(document, {
+            regionSelector: opts.regionSelector,
+            regionPolicy: opts.regionPolicy || 'consent/v1',
+          });
+
+          const regionDigestRes = await attestor.digestOf(reps.region);
+          const contextDigestRes = await attestor.digestOf(reps.context);
+
+          return {
+            critical_region_digest: regionDigestRes.digest,
+            context_digest: contextDigestRes.digest,
+            regionRepresentation: reps.region,
+            contextRepresentation: reps.context,
+          };
+        },
+        {
+          state,
+          regionSelector: bundle.critical_region ?? '#consent-dialog',
+          regionPolicy: bundle.region_policy ?? 'consent/v1',
+        },
+      );
+    };
+
+    let recomputed = await measureState(candidates[0]);
+    for (const state of candidates) {
+      if (state !== candidates[0]) recomputed = await measureState(state);
+      if (
+        recomputed.critical_region_digest.toLowerCase() === attestedCriticalRegionDigest.toLowerCase()
+      ) {
+        break;
+      }
+    }
+
     const attestedContextDigest = String(pack.attestation.record.context_digest ?? '');
 
     // Extract attested representation if available in pack (or from options)
@@ -288,6 +321,7 @@ export async function renderAndVerify(
 
     // Check context digest match (catches overlays or deceptive injected chrome outside critical region)
     if (
+      options.compareContext &&
       attestedContextDigest &&
       recomputed.context_digest.toLowerCase() !== attestedContextDigest.toLowerCase()
     ) {

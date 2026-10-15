@@ -172,6 +172,20 @@ async function post(p, body) {
     });
   }
   await page.locator('#agree').check();
+  let inappRegion = null;
+  if (process.env.MRA_COST_DUMP) {
+    // What the user's page looks like just before the click, measured in place by the shipped Attestor.
+    const attestorCode = await (await fetch('http://127.0.0.1:8090/mra-attestor-1.0.0.js')).text();
+    const inapp = await page.evaluate(async (code) => {
+      (0, eval)(code + String.fromCharCode(10) + ';globalThis.MRAttestor = MRAttestor;');
+      const ev = await MRAttestor.attest({ regionSelector: '#consent-region' });
+      const reps = MRAttestor.measure(document, { regionSelector: '#consent-region' });
+      return { region: ev.critical_region_digest, context: ev.context_digest, nodes: reps.region.nodes, env: ev.env };
+    }, attestorCode);
+    inappRegion = inapp.region;
+    fs.mkdirSync(process.env.MRA_COST_DUMP, { recursive: true });
+    fs.writeFileSync(path.join(process.env.MRA_COST_DUMP, 'inapp-before-click.json'), JSON.stringify(inapp));
+  }
   await page.locator('#btn-agree').click();
   await page.getByText(/was recorded as signed evidence/).waitFor({ timeout: 15000 });
 
@@ -205,6 +219,13 @@ async function post(p, body) {
     tamper ? a.critical_region_digest !== loadRegion : true,
     `${a.critical_region_digest.slice(0, 18)}... vs ${loadRegion.slice(0, 18)}...`,
   );
+  if (inappRegion && !tamper) {
+    check(
+      'the signed digest is the digest of the page as the user saw it just before the click',
+      a.critical_region_digest === inappRegion,
+      a.critical_region_digest.slice(0, 18) + ' vs ' + inappRegion.slice(0, 18),
+    );
+  }
   check(
     'attestation binds the commitment hash, not the bare bundle hash',
     a.commitment_hash && !('bundle_hash' in a),

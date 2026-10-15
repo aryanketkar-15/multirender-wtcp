@@ -1906,10 +1906,10 @@ git push origin feat/6.3-cost-measurement
 |---|---|
 | Milestones completed | 6.1, 6.2, 6.3, each with the limits below (all three were redone with real components after first versions were found to be simulated; PROJECT_LOG 18 to 20) |
 | Tests passed | T6.1.1 to T6.1.6 (T6.1.2 for Chromium only); T6.2.1 to T6.2.9 (T6.2.3, .6, .7 partial); T6.3.2 to T6.3.5 real; T6.3.6 roughly; **T6.3.1 (physical phone) not measured** |
-| Known issues | Synthetic corpus, no WebKit, one OS; digest not font-invariant (85% agreement, O-15); occlusion unstable across engines and blind below the fold (O-16, O-17); 500-node digest p95 58 ms on a desktop; stage 11 at 383 packs/min and reports DIGEST_MISMATCH on an honest pack (PROJECT_LOG 20.3, O-08/O-12/O-13); mutation list written after thresholds (O-03 unmet) |
+| Known issues | Synthetic corpus, no WebKit, one OS; digest not font-invariant (85% agreement, O-15); occlusion unstable across engines and blind below the fold (O-16, O-17); 500-node digest p95 58 ms on a desktop; stage 11 at 328 packs/min; the honest-pack mismatch was found and fixed (PROJECT_LOG 21, D-47 to D-49) but the context digest is not replayable from the bundle (O-08) and real packs cannot name the changed node (O-19); mutation list written after thresholds (O-03 unmet) |
 | Git commit | see git log (feat/6.1-stability-harness-real, feat/6.2-mutation-suite-real) |
 | Phase verification | 24,000 real renders in four browsers; 20 mutations x 200 pages on the real DOM; cost figures on real components |
-| **Go / No-Go** | **Conditional.** Product polish (Phase 7) can proceed. No end-to-end verification claim, no mobile-latency claim and no claim about real-world consent banners may be made until the stage-11 mismatch is resolved, a phone has run `research/results/mobile-timing.html`, and real pages are collected. |
+| **Go / No-Go** | **Conditional.** Product polish (Phase 7) can proceed. No claim that content outside the critical region is verified, no mobile-latency claim and no claim about real-world consent banners may be made until a phone has run `research/results/mobile-timing.html`, and real pages are collected. |
 
 ---
 

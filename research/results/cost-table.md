@@ -4,6 +4,8 @@ Measured 2026-10-14T18:48:44.027Z on one development machine: AMD Ryzen 7 7840HS
 
 Median (p50) and 95th percentile (p95) are reported, never the mean. Every component measured is the real one: the built Attestor Module in real Chromium, the real verifier, the real PHP Merkle log, and an evidence pack downloaded from the running server. **No physical phone was used.** The "mobile" rows below are an emulated 4x CPU slowdown on the machine above; they are a proxy, not a measurement of any phone. `research/results/mobile-timing.html` runs the same measurement on a real device and has not been run yet.
 
+Digest latency and Merkle figures: run of 2026-10-14T18:48:44.027Z on a quiet machine. Payload sizes and verifier throughput: re-run of 2026-10-15T05:32:33.024Z against a new real pack after the stage-11 fix; the machine was busier during that re-run (its own digest-latency figures were 1.7x to 2.8x slower and were discarded), so the throughput figures are conservative.
+
 ## 1. Client digest latency (target: p95 <= 50 ms, mid-range mobile)
 
 500 timed runs per row after 20 warm-up runs. `attest()` is the whole client-side step (measure both regions, canonicalise, hash in the worker). "Measure only" is the main-thread part.
@@ -26,21 +28,21 @@ Taken from one real consent flow on the running server (an accepted attestation,
 | Sealed bundle (markup + CSS) | 1177 | 1.15 |
 | Whole `/api/bundle` response (bundle + commitment + signature) | 2428 | 2.37 |
 | `/api/attest` request body | 1054 | 1.03 |
-| Evidence pack (zip) | 5676 | 5.54 |
-| Evidence pack contents, uncompressed (8 files) | 8827 | 8.62 |
+| Evidence pack (zip) | 5760 | 5.63 |
+| Evidence pack contents, uncompressed (8 files) | 8990 | 8.78 |
 
-All are under the 50 KB target (largest: pack 5.54 KB): met.
+All are under the 50 KB target (largest: pack 5.63 KB): met.
 
 | Pack file | Bytes | Compressed |
 |---|---|---|
-| manifest.json | 1294 | 529 |
+| manifest.json | 1297 | 529 |
 | bundle.json | 1232 | 669 |
-| commitment.json | 1008 | 571 |
-| attestation.json | 1389 | 793 |
-| client_pubkey.pem | 177 | 153 |
-| inclusion_proof_commitment.json | 1436 | 754 |
-| inclusion_proof_attestation.json | 1898 | 992 |
-| signed_tree_head.json | 393 | 273 |
+| commitment.json | 1009 | 568 |
+| attestation.json | 1389 | 801 |
+| client_pubkey.pem | 177 | 151 |
+| inclusion_proof_commitment.json | 1515 | 786 |
+| inclusion_proof_attestation.json | 1977 | 1041 |
+| signed_tree_head.json | 394 | 273 |
 
 ## 3. Verifier throughput (target: >= 600 packs/min, one instance)
 
@@ -48,10 +50,10 @@ The real pack from section 2, verified by the real verifier. First result on tha
 
 | Pipeline | Packs timed | Packs / minute | p50 per pack | p95 per pack | vs 600/min target |
 |---|---|---|---|---|---|
-| Stages 1-10 (parsing, signatures, hashes, Merkle proofs, policy, registry) | 1000 | 37043 | 1.399 ms | 2.3 ms | met |
-| Stage 11 re-render in a warm Chromium (one pack at a time) | 50 | 383 | 156.504 ms | 170.498 ms | **MISSED** |
+| Stages 1-10 (parsing, signatures, hashes, Merkle proofs, policy, registry) | 1000 | 24582 | 2.119 ms | 4.432 ms | met |
+| Stage 11 re-render in a warm Chromium (one pack at a time) | 50 | 328 | 172.558 ms | 221.43 ms | **MISSED** |
 
-Last stage-11 verdict on the honest pack: **DIGEST_MISMATCH** (ok = false). Semantic digest mismatch on critical region: Digest mismatch: expected sha256:6c91ddf96c7d1111b8d3086677691678625f61ef663df9a4170be48226805385, recomputed sha256:cb4fe9cbf7cfcbb9bc10397774e15759ec3bdc0ee72e9dc9e781b5fa4d38f0fb
+Last stage-11 verdict on the honest pack: **VERIFIED** (ok = true). All 11 verification stages passed: Evidence pack is mutually verified.
 
 Stages 1-10 time only the cheap checks in one Node process. Stage 11 launches no new browser per pack here (one warm browser, a new context and page per pack).
 

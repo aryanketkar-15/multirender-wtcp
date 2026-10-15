@@ -46,7 +46,7 @@ docs/       the documents above.
 | Playbook phase | State |
 |---|---|
 | 0 to 4 | Done (CI config written, never run on GitHub; WebAuthn not built) |
-| 5 Evidence pack and verifier | Built and committed (5.1 to 5.4). **But stage 11 reports DIGEST_MISMATCH on an honest pack** (PROJECT_LOG 20.3 item 2): a bundle-only re-render does not reproduce the digest the real app produced. Open design decision (O-08/O-12/O-13). |
+| 5 Evidence pack and verifier | Built and committed (5.1 to 5.4). **Now verified end to end on the real stack** (PROJECT_LOG 21): an honest real pack gives VERIFIED; a page rewritten after load gives DIGEST_MISMATCH. The client was measuring after locking its own controls (fixed, D-47). A VERIFIED verdict covers the critical region only: the context digest is not replayable (O-08, D-49). No node-level diff on real packs (O-19). |
 | 6.1 stability matrix, 6.2 mutation suite | **Redone with real rendering** (PROJECT_LOG 18, 19): 24,000 real renders in Chromium, Chrome, Edge, Firefox over a *synthetic* 200-page corpus (browser 99.43%, DPR 100%, **font 84.97%**, viewport 61.41% agreement); 20 mutations on the real DOM, 0 false positives on the control, one real blind spot (overlay below the fold). Safari not measured. Raw data is git-ignored; regenerate with `research/harness/stability-real.cjs run <browser>` then `analyse`. |
 | 6.3 cost measurement | **Redone with real components** (PROJECT_LOG 20): 500-node digest p95 58 ms on a desktop (target 50), stage-11 re-render 383 packs/min (target 600), proofs and payloads fine. **No physical phone has been used**: run `research/results/mobile-timing.html` on one. |
 | 7 Polish, accessibility, report, demo | Started, uncommitted in the working tree (design system, EmptyState/ErrorBoundary/Skeleton, CSS, a CI edit). |
@@ -57,7 +57,7 @@ Latest counts: verifier 30 tests; e2e 20/20 (`MRA_NO_TAMPER=1` and `MRA_COST_DUM
 
 - Any claim about real-world consent banners (corpus is synthetic), Safari/WebKit, other operating systems, or font-independence (the digest changes under font substitution).
 - Any mobile latency figure (no phone used).
-- That the verifier agrees with an honest client (it does not yet; see above).
+- Anything outside the critical region being verified (the context digest is not compared by default, D-49); naming the changed node on a real pack (O-19).
 - External witness (O-02), real SMTP, CI runs, second-machine reproducibility (O-09), Safari/other OS (O-10), units III/IV question to Prof. Rahul Diwate (O-01).
 - The faculty for this project is **Prof. Rahul Diwate**.
 
