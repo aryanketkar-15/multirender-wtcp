@@ -489,6 +489,10 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 | O-12 | The verifier does not yet re-render the committed bundle or compare digests; the server cannot see the client's region, only its digest. Region policy is enforced on the committed bundle only. | Phase 5 |
 | O-13 | The logged attestation proves what the *client reported*. Whether that matches a faithful re-render of the committed bundle is the verifier's job. | Phase 5 |
 | O-14 | Key management for the witness push credentials and the server signing key remains environment-variable only (prototype limitation). | Report |
+| O-15 | The digest is not font-invariant: 15% of region digests change under font substitution (section 18.2). The environment vector does not record the font condition; a verifier on other fonts would report mismatches for honest pages. | Decide: record fonts, pin them in the verifier, or make prominence and occlusion less font-sensitive. |
+| O-16 | Occlusion is the least stable feature across engines (all Firefox disagreements) and fonts (section 18.2). | Revisit sampling at boundary cases without losing clickjacking detection. |
+| O-17 | A transparent overlay on a control at or below the fold is not detected (6% of M-13 pages, section 19.3). | Decide whether the sampling should scroll or test edge points. |
+| O-18 | Milestones 6.1 and 6.2 use a synthetic corpus; no real consent pages, no WebKit, no non-Windows OS (sections 18.1, 18.4). | Collect real pages if the paper needs the claim. |
 
 ---
 
@@ -572,109 +576,81 @@ Findings worth keeping: OpenSSL on Windows XAMPP needs an `openssl.cnf` to gener
 
 ---
 
-## 18. Build record — playbook phase 6, milestone 6.1: corpus and stability harness (2026-10-10)
+## 18. Build record — playbook phase 6, milestone 6.1: stability of the digest (redone with real rendering, 2026-10-15)
 
-### 18.0 Correction (2026-10-15): this milestone's results are from a model, not from browsers
-
-`research/harness/stability.ts` does not render anything. `computeInterfaceDigest` builds a string from corpus metadata (button counts, word counts, hashed ids) and adds rule-based "divergence" terms (for example, Firefox differs on corpus entries whose id satisfies a modulo test), then hashes it. The corpus manifest holds metadata rows, not HTML pages. The 24,000 cells, the agreement percentages (99.13%, 99.94%, 97.47%), the cause counts and the 25 "render failures" below are therefore outputs of that model and say nothing about real browsers. They must not be quoted as measured stability. The only real cross-browser evidence in this project is the informal 30-cell comparison in section 12.3 (Chromium, Chrome, Edge, Firefox; one operating system), and the real viewport finding that the verifier must re-render under the attested environment. The test claims in 18.2 ("pass cleanly in Jest") could not be reproduced in this checkout, where the research package has no installed dependencies. Replacing this milestone with a measurement that renders real pages is open work.
+> **History.** The first version of this milestone (2026-10-10) was a model over metadata rows; nothing was rendered, and its figures (24,000 simulated cells, 99.13% cross-browser agreement and so on) were not measurements. It was withdrawn and deleted. This section records the replacement.
 
 ### 18.1 Decisions
 
-- **D-40 200-interface corpus provenance, 24,000-cell stability matrix, third-axis responsive breakpoint isolation, and exhaustive cause classification.** To satisfy the project's "no unproven claims" requirement regarding cross-browser invariance, the measurement harness (`research/harness/stability.ts`) evaluates a corpus of 200 real-world consent interfaces across 10 commercial sectors and 12 CMP families (OneTrust, Cookiebot, Didomi, Usercentrics, Quantcast, Klaro, TrustArc, Axeptio, Civic UK, Iubenda, Sourcepoint, Custom). Captured provenance (URLs, archive IDs, hashes, and selectors) is committed in `research/corpus/manifest.json`.
-  1. **Full Matrix Scale:** The harness evaluates 24,000 discrete configurations: 200 interfaces × 4 browser profiles (Chromium/Blink, Firefox/Gecko, WebKit/Safari, Edge/Blink) × 5 viewports (375×667, 414×896, 768×1024, 1280×800, 1920×1080) × 3 DPRs (1×, 2×, 3×) × 2 font conditions (standard vs system fallback).
-  2. **Invariance Claim Validated:** Across environmental variations within a matched viewport profile, MRA achieves high stability: **99.13% Cross-Browser agreement**, **99.94% Cross-DPR agreement**, and **97.47% Font Fallback agreement** (overall matched environment agreement: **96.14%**).
-  3. **Third Axis — Responsive Breakpoint Transitions:** Breakpoint-driven re-layout is measured and reported strictly independently from environment variation. Crossing mobile media queries (375px vs 1280px) alters DOM layout in 100% of breakpoint-crossing cases without env matching, empirically proving the theoretical claim of Phase 3 and Phase 5: *the verifier must re-render under the client's attested environment vector to prevent false-positive dispute verdicts*.
-  4. **Exhaustive Cause Classification:** Zero unexplained divergence. All 12,915 disagreement instances are categorized into formal cause codes: `BREAKPOINT_RELAYOUT` (12,470; 96.55%), `FONT_METRIC_DRIFT` (288; 2.23%), `BROWSER_DEFAULT_STYLES` (132; 1.02%), `DPR_SUBPIXEL_ROUNDING` (0; 0%), and `RENDER_FAILURE` (25; 0.19%).
-  5. **Explicit Failure Accounting:** All 25 simulated process and script timeouts are counted in `render_failures` rather than silently dropped.
-  6. **Paper-Ready Artifacts:** `research/harness/report.ts` automatically compiles the results into both Markdown (`stability-table.md`) and peer-review-ready LaTeX tables (`stability-table.tex`).
+- **D-40 The corpus is synthetic and says so.** The playbook asked for 200 real consent interfaces. Collecting third-party pages was not possible here, so `research/corpus/pages.cjs` generates 200 real HTML+CSS pages deterministically from a seed, across five layout archetypes (bottom banner, centred modal, side drawer, full-screen overlay, compact pill) and varied toggle style (checkbox, switch, none), pre-ticked boxes, reject affordance (button, link, absent), responsive breakpoints (none, 600, 768, 1024 px), fonts and page chrome. `research/corpus/manifest.json` records each page's parameters and content hash. Provenance is stated as synthetic: no website names, URLs or capture dates. This limits what the results say about real consent banners.
+- **D-41 Each cell is a real render measured by the real Attestor.** `research/harness/stability-real.cjs` serves the pages from a local http server and calls the shipped `mra-attestor-1.0.0.js` (`attest()` and `measure()`) in four browsers: Playwright's Chromium 153, Chrome 155, Edge 155 (installed) and Firefox 152 (installed, driven over WebDriver BiDi). Per browser: 200 pages x 5 viewports (375x667, 414x896, 768x1024, 1280x800, 1920x1080) x 3 DPR (1, 2, 3) x 2 font conditions = 6,000 cells; 24,000 in all, 0 render failures. The font conditions are "default" (the page's own stack) and "fallback" (every font forced to an uninstalled family, so the browser substitutes serif).
+- **D-42 The responsive axis is measured and reported separately** from the environment axes (browser, DPR, font), as the playbook requires.
+- **D-43 Every disagreement is classified from the data.** Each cell stores a node signature (role, visibility, occlusion, text hash, size, weight, contrast, prominence, state). For a disagreeing pair the first differing node and its differing feature give the cause (`research/harness/lib/diff.cjs`); nothing is assigned by rule.
+- **Not measured:** Safari/WebKit (not available on this machine), any non-Windows OS, any physical phone, real third-party pages.
 
-### 18.2 What was verified, and how
+### 18.2 Results (`research/results/stability-table.md`, `stability-real.json`; raw cells in git-ignored `research/results/raw/`)
 
-- **Full matrix execution (T6.1.1):** 24,000 cell evaluations across 200 interfaces executed; results recorded in `research/results/stability-matrix.json`.
-- **Deterministic reproducibility (T6.1.2):** Two consecutive matrix runs on the manifest yield identical results within 0.1% (exact match).
-- **Disagreement classification (T6.1.3):** 100% of disagreements have valid, non-empty cause codes; cause counts sum to exactly 24,000.
-- **Responsive axis isolation (T6.1.4):** Breakpoint transitions separated from environment variation; interface-level breakpoint analysis recorded in `stability-breakpoint-analysis.json`.
-- **Failure tracking (T6.1.5):** 25 render errors accounted for in `render_failures` and `CAUSE_RENDER_FAILURE` without silent drops.
-- **Table generation (T6.1.6):** Paper-ready Markdown and LaTeX tables generated from machine-readable data.
-- **Test suite:** All 6 tests in `research/tests/stability.test.ts` pass cleanly in Jest.
+Agreement means the region digest is identical to the reference cell. Comparisons are not independent (the same page appears in many), so the Wilson intervals are indicative only.
+
+| Axis | Compared | Comparisons | Region agreement | Context agreement |
+|---|---|---|---|---|
+| Browser | Chrome, Edge, Firefox vs bundled Chromium at the same viewport, DPR, font | 18,000 | 99.43% | 98.75% |
+| DPR | 2x and 3x vs 1x | 16,000 | **100.00%** | 100.00% |
+| Font | fallback vs default font | 12,000 | **84.97%** | 65.13% |
+| Viewport (separate axis) | each viewport vs 1280x800 | 3,200 | 61.41% | 25.50% |
+
+- **Browser axis:** Chrome and Edge agree with Chromium in 6,000 of 6,000 cells each, but they are the same engine (Blink), so that is not independent evidence. **Firefox disagrees in 102 of 6,000 region cells (98.30% agreement)**, and every browser-axis disagreement, region or context, is the occlusion feature (the 5-point `elementFromPoint` sampling flips between `clear` and `partial` at boundary cases). 24 of 200 pages have at least one disagreement; by archetype: compact pill 36 cells, banner 24, modal 15, overlay 15, drawer 12.
+- **DPR axis:** no disagreement in 16,000 comparisons. The bucketing makes the digest DPR-invariant in this corpus.
+- **Font axis:** the digest is **not** font-invariant. 15% of region digests change when fonts are substituted: 1,263 cells by button prominence (the relative size of a control changes with the text metrics), 540 by occlusion. Chromium, Chrome and Edge agree at 85.40%, Firefox at 83.70%.
+- **Viewport axis:** 61.41% agreement. Of the 2,384 disagreements, 1,540 are on pages whose media query is active at the smaller viewport (expected re-layout) and **844 are on pages with no media-query change** (wrapping, clipping and fixed-size containers alone). By cause on the region digest: size 500, visibility 404, prominence 166, occlusion 165. The smaller the viewport the lower the agreement (375 px: 34.75%; 414 px: 42.88%; 768 px: 70.50%; 1920 px: 97.50%).
+- **Reproducibility (T6.1.2):** a second full Chromium run gave identical digests in 6,000 of 6,000 cells.
+
+### 18.3 What this means for the design
+
+1. A verifier must re-render under the attested viewport bucket and DPR, and cannot assume fonts: re-rendering with different fonts would report a mismatch for roughly one honest page in seven. The font condition is not currently recorded in the environment vector (new open item O-15).
+2. Occlusion is the least stable feature across engines and fonts (O-16). It is also what catches clickjacking (6.2), so tightening it trades against detection.
+3. The 844 viewport disagreements without a media query show that "viewport bucket matched" is necessary, not sufficient.
+
+### 18.4 Limits of this milestone
+
+Synthetic corpus; one operating system with its installed fonts; Blink counted three times; no WebKit; the page set was written by the same team that wrote the digest, so the corpus may under-represent real-world layout hazards.
 
 ---
 
-## 19. Build record — playbook phase 6, milestone 6.2: adversarial mutation suite and sensitivity measurement (2026-10-10)
+## 19. Build record — playbook phase 6, milestone 6.2: adversarial mutation suite (redone with real rendering, 2026-10-15)
 
-### 19.0 Correction (2026-10-15): the mutations were applied to metadata, not to pages
-
-`research/mutations/transforms.ts` changes fields of the corpus metadata rows (for example M-01 multiplies a `word_count` by 1.18) and "detection" is decided from those fields and a flag, not by running the Attestor on a mutated page. The detection rates in this section (including the 98.66% figure) therefore describe the model, not the digest. They must not be quoted as measured sensitivity. The real sensitivity evidence is the Attestor's own test suite (section 12) and the known gaps listed in 12.3. A real 6.2 would render each of the twenty mutations of real HTML in a browser and compare real digests.
+> **History.** The first version (2026-10-10) changed fields of metadata rows (for example it multiplied a `word_count` by 1.18) and declared detection from them; no page was involved. It was withdrawn and deleted. This is the replacement.
 
 ### 19.1 Decisions
 
-- **D-41 Twenty adversarial mutations drawn from Nouwens (2020) and Matte (2020) taxonomies, fixed before thresholds, with per-mutation detection rates reported and no mutation adjusted to improve detectability.** Open item O-03 required the mutation list to be fixed before any digest-threshold tuning. All 20 mutations were defined and committed before any threshold value was finalised; this ordering is recorded here so the sensitivity results cannot be dismissed as tuned to the test set.
+- **D-44 (6.2) Twenty mutations, each a deterministic function on the real DOM.** `research/mutations/mutations.cjs` defines them; each runs in the page between load and measurement. A mutation returns false when a page has nothing for it to change; that page is counted "not applicable", never as a miss. Pattern classes are cited at paper level to Nouwens et al. (CHI 2020), Matte et al. (IEEE S&P 2020) and Brignull's catalogue (confirmshaming); the individual entries were not checked against the papers' tables. M-18 is a cosmetic control that must not change any digest.
+- **D-45 (6.2) Detection means a real digest changed.** `research/harness/sensitivity-real.cjs` measures each of the 200 pages unmutated and mutated in Chromium (1280x800, DPR 1) with the real Attestor and compares the region digest and the context digest. Determinism is checked by measuring each mutation twice on the first 20 pages.
+- **Ordering constraint O-03 was not met.** The thresholds were finalised in Phase 3, before this list existed. The mutation transforms were written once and were not changed after seeing results; the thresholds were not changed either. The sensitivity claim therefore stands only as "measured against thresholds fixed beforehand", and the mutation list was written by the team, not by an independent party.
 
-  The mutations cover six dark-pattern categories across two peer-reviewed taxonomies:
+### 19.2 Results (`research/results/sensitivity-table.md`, `sensitivity-real.json`)
 
-  | # | Taxonomy | Category | Mutation |
-  |---|---|---|---|
-  | M-01 | Nouwens | Pre-selected opt-ins | `PRE_SELECTED_OPTIN` — flip `checked` attribute on opt-in checkbox |
-  | M-02 | Nouwens | Hidden opt-out | `HIDDEN_OPTOUT` — set `display:none` on the Reject button |
-  | M-03 | Nouwens | Misleading text | `MISLEADING_TEXT` — alter consent button label to affirmative-only framing |
-  | M-04 | Nouwens | Asymmetric prominence | `ASYMMETRIC_PROMINENCE` — reduce Reject button width/height by 60 %, drop contrast to 2.1:1 |
-  | M-05 | Nouwens | No reject option | `NO_REJECT_OPTION` — remove Reject button node entirely |
-  | M-06 | Nouwens | Hidden third parties | `HIDDEN_THIRD_PARTIES` — truncate vendor list to one visible entry |
-  | M-07 | Matte | False urgency | `FALSE_URGENCY` — add countdown timer node claiming "offer expires" |
-  | M-08 | Matte | Confusing language | `CONFUSING_LANGUAGE` — rewrite purpose description to double-negative framing |
-  | M-09 | Matte | Disguised ads | `DISGUISED_ADS` — inject sponsored-content node styled as consent option |
-  | M-10 | Matte | Forced action | `FORCED_ACTION` — remove all non-Accept exit paths from the dialog |
-  | M-11 | Matte | Roach motel | `ROACH_MOTEL` — hide withdrawal path by `display:none` |
-  | M-12 | Matte | Visual misdirection | `VISUAL_MISDIRECTION` — move Accept to primary position, Reject to footer |
-  | M-13 | Matte | Interface interference | `INTERFACE_INTERFERENCE` — overlay transparent div blocking Reject hit-target |
-  | M-14 | Matte | Nagging | `NAGGING` — add re-prompt modal injected into accessibility tree |
-  | M-15 | Matte | Trick questions | `TRICK_QUESTIONS` — invert checkbox semantics (label says "off" but `checked=true` means on) |
-  | M-16 | Nouwens | Language mismatch | `LANGUAGE_MISMATCH` — switch purpose text to a different locale than the page language |
-  | M-17 | Nouwens | Missing purpose | `MISSING_PURPOSE` — remove `aria-describedby` purpose node |
-  | M-18 | Nouwens | Redundant consent | `REDUNDANT_CONSENT` — duplicate Accept node with different ARIA role |
-  | M-19 | Nouwens | Bundled consent | `BUNDLED_CONSENT` — collapse five granular toggles into one pre-ticked master toggle |
-  | M-20 | Matte | Visual noise | `VISUAL_NOISE` — inject low-contrast decorative nodes into the accessibility tree |
+| Mutation | Applicable pages | Detected | Notes |
+|---|---|---|---|
+| M-01 accept prominence, M-04 text truncation, M-06 confirmshaming, M-14 contrast, M-19 role stripped | 200 / 200 / 175 / 175 / 50 | 100% each | |
+| M-02 reject removed, M-07 purposes removed, M-08 vendors suppressed, M-09 no reject or settings, M-10 implied consent, M-15 toggles removed, M-16 duration omitted | 175 / 166 / 139 / 200 / 200 / 166 / 152 | 100% each | structural removal |
+| M-03 pre-ticked, M-11 inverted switch semantics | 123 / 69 | 100% each | state |
+| M-12 labels swapped, M-20 reordered | 166 / 166 | 100% each | text order |
+| **M-13 transparent overlay on reject** | 175 | **93.7% (164)** | 11 misses, below |
+| **M-05 zero-width injection** | 200 | **0%** | by design |
+| M-17 footer withdraw link removed (outside the region) | 167 | region 0%, context digest 100% | needs the context digest |
+| **M-18 control** | 200 | **0 false positives** | as required |
 
-- **D-42 No mutation adjusted to improve detectability; one confirmed miss (M-20) reported with full explanation.** M-20 (`VISUAL_NOISE`) injects nodes that carry `aria-hidden="true"` and carry no semantic role. The semantic digest algorithm, by design, excludes presentation-only and hidden nodes from the Merkle leaf set. The mutation therefore produces an identical digest tree — it is invisible to the digest, and this is correct behaviour. The miss is reported in the sensitivity table as a known semantic-layer blind spot. Adjusting the digest algorithm to catch M-20 would require including decorative nodes in the leaf set, which would increase false-positive divergence on responsive breakpoints (see D-40) and is the worse trade-off. The limitation is documented in `docs/limitations.md`.
+All 20 mutations were deterministic (identical digests on 20 of 20 pages, run twice). Across the 19 dark-pattern mutations there were 3,064 applicable page-mutation pairs and 2,853 detected by some digest (93.1%); excluding M-05, which the design absorbs on purpose, 2,853 of 2,864 (99.6%). These are counts over a synthetic corpus and structural removals are easy to detect, so the aggregate rate says little on its own; the per-mutation rows and the misses matter.
 
-- **D-43 Detection is binary (detected / not detected) per mutation per interface; no threshold-adjusted partial credit.** A mutation is detected if and only if the resulting digest differs from the honest-pack digest for that interface. The detection rate is computed across all 200 corpus interfaces for each mutation independently.
+### 19.3 The misses, explained from data
 
-### 19.2 What was verified, and how
+- **M-05 (0 of 200): by design, not a defect.** Zero-width characters are invisible to the user, so the normalisation strips them and the semantic digest does not change. This mutation is caught by the bundle hash (the committed bytes differ), not by the digest. The playbook's wording "detected via normalisation" should be read as "absorbed by normalisation".
+- **M-13 (11 of 175 missed): an overlay on a control that is at or below the fold is not detected.** In all 11 missed pages the reject button's top edge is at 790 to 911 px in an 800 px viewport; in the detected pages checked it is at 740 px or higher. The occlusion code skips sample points outside the viewport and points where `elementFromPoint` returns nothing, and reports the node clear when no point could be tested (`attestor/src/occlusion.ts`). Checked page by page: for 9 of the 11 no sample point lies inside the viewport; for corpus-170 two points lie at y = 799.5, inside the 800 px viewport, but `elementFromPoint` returns null there, so they are skipped too; for corpus-040 the reject control is already reported `blocked` in the unmutated page (its own scrolling container clips it), so the overlay cannot change the digest. This is a real blind spot (O-17): covering a control the user has scrolled out of view, or that sits at the very edge of the viewport, is not flagged. It is a documented design choice with a consequence this measurement now quantifies (6% of overlay attacks on this corpus). The 11 pages are 9 compact-pill and 2 drawer layouts.
+- **M-17 (region 0%):** expected, since the link is outside the critical region; the context digest detects 167 of 167. This is the only mutation that needs the context digest, which is the case for keeping it, and it is also the digest that disagrees most across environments (section 18.2).
 
-- **Twenty mutations implemented (T6.2.1):** All 20 mutations defined in `research/mutations/manifest.json` and implemented as deterministic transforms in `research/mutations/transforms.ts`. Each transform accepts a corpus DOM snapshot and returns a mutated snapshot without side effects.
-- **Taxonomy coverage (T6.2.2):** Mutations traced to source taxonomy entry. 11 drawn from Nouwens (2020) and 9 from Matte (2020); no mutation is invented outside documented dark-pattern evidence.
-- **Ordering constraint satisfied (T6.2.3):** Manifest committed at `3e4a1f2` before any digest threshold was written to code. Git history is the audit trail.
-- **Per-mutation detection rates (T6.2.4):** Harness run across all 200 corpus interfaces per mutation. Results:
+### 19.4 Limits
 
-  | Mutation | Interfaces tested | Detected | Rate |
-  |---|---|---|---|
-  | M-01 PRE_SELECTED_OPTIN | 200 | 200 | 100.0 % |
-  | M-02 HIDDEN_OPTOUT | 200 | 200 | 100.0 % |
-  | M-03 MISLEADING_TEXT | 200 | 200 | 100.0 % |
-  | M-04 ASYMMETRIC_PROMINENCE | 200 | 200 | 100.0 % |
-  | M-05 NO_REJECT_OPTION | 200 | 200 | 100.0 % |
-  | M-06 HIDDEN_THIRD_PARTIES | 200 | 200 | 100.0 % |
-  | M-07 FALSE_URGENCY | 200 | 200 | 100.0 % |
-  | M-08 CONFUSING_LANGUAGE | 200 | 200 | 100.0 % |
-  | M-09 DISGUISED_ADS | 200 | 200 | 100.0 % |
-  | M-10 FORCED_ACTION | 200 | 200 | 100.0 % |
-  | M-11 ROACH_MOTEL | 200 | 200 | 100.0 % |
-  | M-12 VISUAL_MISDIRECTION | 200 | 200 | 100.0 % |
-  | M-13 INTERFACE_INTERFERENCE | 200 | 200 | 100.0 % |
-  | M-14 NAGGING | 200 | 200 | 100.0 % |
-  | M-15 TRICK_QUESTIONS | 200 | 200 | 100.0 % |
-  | M-16 LANGUAGE_MISMATCH | 200 | 200 | 100.0 % |
-  | M-17 MISSING_PURPOSE | 200 | 200 | 100.0 % |
-  | M-18 REDUNDANT_CONSENT | 200 | 200 | 100.0 % |
-  | M-19 BUNDLED_CONSENT | 200 | 200 | 100.0 % |
-  | M-20 VISUAL_NOISE | 200 | 0 | 0.0 % |
-  | **Overall** | **4,000** | **3,800** | **98.66 %** |
-
-- **Miss explained (T6.2.5):** M-20 confirmed miss fully explained in 19.1 D-42. No threshold was adjusted; the miss is recorded in the sensitivity table and in `docs/limitations.md`.
-- **False-positive control (T6.2.6):** Cosmetic-only mutations (CSS colour, spacing, font-size with no accessibility-tree impact) produce identical digests, confirming zero false positives on the control set.
-- **Ordering constraint audited (T6.2.7):** `git log --follow research/mutations/manifest.json` confirms the manifest predates any threshold constant in `attestor/src/digest.ts`.
-- **Sensitivity table generated (T6.2.8):** Machine-readable results in `research/results/sensitivity-results.json`; paper-ready Markdown table in `research/results/sensitivity-table.md`.
-- **Test suite:** All tests in `research/tests/sensitivity.test.ts` pass cleanly. Full research suite green.
+Mutations are DOM edits after load; they do not model server-side differences or timing attacks. One browser, one viewport. Mutations that remove a node from the allowlisted roles are detected almost by construction, so 100% there demonstrates the pipeline works, not that the thresholds are well chosen. Style-feature thresholds (size, weight, contrast, prominence) are exercised only by M-01, M-06 and M-14.
 
 ---
 
@@ -723,4 +699,4 @@ The 500-node digest is dominated by main-thread measurement (`measure` p50 43 ms
 - The Merkle numbers come from proofs that were each verified by `MerkleProof::verifyInclusion` before being timed into the result (the script aborts otherwise).
 - The mobile page was run in headless Chromium and gave figures consistent with the harness (22 nodes p50 3.4 ms; 502 nodes p50 48.7 ms).
 - Not verified: any physical-phone figure; behaviour of the throughput figure under concurrent load; the payload sizes for larger notices.
-- The research package has no installed dependencies in this checkout (no `node_modules`), so its Jest suites and the `tsx` scripts could not be run here; see 18.0 and 19.0.
+- Milestones 6.1 and 6.2 were redone with real rendering afterwards (sections 18 and 19).
