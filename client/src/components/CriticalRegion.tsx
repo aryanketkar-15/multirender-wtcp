@@ -18,6 +18,7 @@ interface Props {
  *  - the consent checkbox is forced unticked on mount and never defaulted,
  *  - Accept stays disabled until the box is ticked,
  *  - an action is captured once: a double click records one action, not two,
+ *  - the page is measured before the controls are locked, never after,
  *  - everything is reachable and operable from the keyboard (native controls, no custom widgets).
  */
 export function CriticalRegion({ markup, css, onAction, locked = false }: Props) {
@@ -42,8 +43,10 @@ export function CriticalRegion({ markup, css, onAction, locked = false }: Props)
       if (acted.current) return;
       if (action === 'accept' && !(box?.checked ?? false)) return;
       acted.current = true;
-      sync();
+      // The handler starts measuring the page synchronously. It must run BEFORE the controls are
+      // locked: the evidence has to describe the page as the user saw it when they clicked.
       onAction(action, target);
+      sync();
     };
     const onAccept = fire('accept', 'btn-agree');
     const onReject = fire('reject', 'btn-reject');

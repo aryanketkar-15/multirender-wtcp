@@ -164,6 +164,25 @@ describe('attestation signed at the moment of action (T4.2)', () => {
     expect(a.context_digest).toBe(changed.context_digest);
   });
 
+  it('measures the page as the user saw it, before the controls are locked (found in milestone 6.3)', async () => {
+    // Regression: the digest was once taken after the client had disabled every control, so a
+    // re-render of the committed bundle (which still has them enabled) could never match it.
+    const seen: Record<string, boolean> = {};
+    const ctx = await setup(() => {
+      fakeModule.attest.mockImplementation(async () => {
+        seen.boxTicked = (screen.getByRole('checkbox') as HTMLInputElement).checked;
+        seen.boxEnabled = !(screen.getByRole('checkbox') as HTMLInputElement).disabled;
+        seen.acceptEnabled = !(screen.getByRole('button', { name: 'Accept' }) as HTMLButtonElement).disabled;
+        seen.rejectEnabled = !(screen.getByRole('button', { name: 'Reject' }) as HTMLButtonElement).disabled;
+        return evidence;
+      });
+    });
+    await ctx.user.click(await screen.findByRole('checkbox'));
+    await ctx.user.click(screen.getByRole('button', { name: 'Accept' }));
+    await screen.findByText(RECORDED);
+    expect(seen).toEqual({ boxTicked: true, boxEnabled: true, acceptEnabled: true, rejectEnabled: true });
+  });
+
   it('signs so that the signature verifies against the carried public key (T4.2.6)', async () => {
     const { post } = await acceptOnce();
     await screen.findByText(RECORDED);

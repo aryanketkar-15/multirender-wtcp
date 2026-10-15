@@ -546,7 +546,7 @@ describe('Milestone 5.3 — Headless / Xvfb-headed Re-render and Digest Comparis
     });
 
     const unpacked = unpackPack(contextAttackZip);
-    const result = await renderAndVerify(unpacked, { browser });
+    const result = await renderAndVerify(unpacked, { browser, compareContext: true });
 
     expect(result.ok).toBe(false);
     expect(result.verdict).toBe(Verdict.CONTEXT_MISMATCH);

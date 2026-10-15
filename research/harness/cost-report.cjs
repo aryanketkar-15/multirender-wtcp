@@ -21,6 +21,7 @@ L.push('');
 L.push('Median (p50) and 95th percentile (p95) are reported, never the mean. Every component measured is the real one: the built Attestor Module in real Chromium, the real verifier, the real PHP Merkle log, and an evidence pack downloaded from the running server. **No physical phone was used.** The "mobile" rows below are an emulated 4x CPU slowdown on the machine above; they are a proxy, not a measurement of any phone. `research/results/mobile-timing.html` runs the same measurement on a real device and has not been run yet.');
 L.push('');
 
+if (d.provenance_note) { L.push(d.provenance_note); L.push(''); }
 L.push('## 1. Client digest latency (target: p95 <= 50 ms, mid-range mobile)');
 L.push('');
 L.push(`${d.env.runs_per_cell} timed runs per row after 20 warm-up runs. \`attest()\` is the whole client-side step (measure both regions, canonicalise, hash in the worker). "Measure only" is the main-thread part.`);

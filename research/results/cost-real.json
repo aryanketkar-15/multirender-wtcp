@@ -155,11 +155,11 @@
     "sealed_bundle_bytes": 1177,
     "bundle_response_bytes": 2428,
     "attestation_request_bytes": 1054,
-    "evidence_pack_zip_bytes": 5676,
+    "evidence_pack_zip_bytes": 5760,
     "evidence_pack_entries": [
       {
         "file": "manifest.json",
-        "bytes": 1294,
+        "bytes": 1297,
         "compressed_bytes": 529
       },
       {
@@ -169,36 +169,36 @@
       },
       {
         "file": "commitment.json",
-        "bytes": 1008,
-        "compressed_bytes": 571
+        "bytes": 1009,
+        "compressed_bytes": 568
       },
       {
         "file": "attestation.json",
         "bytes": 1389,
-        "compressed_bytes": 793
+        "compressed_bytes": 801
       },
       {
         "file": "client_pubkey.pem",
         "bytes": 177,
-        "compressed_bytes": 153
+        "compressed_bytes": 151
       },
       {
         "file": "inclusion_proof_commitment.json",
-        "bytes": 1436,
-        "compressed_bytes": 754
+        "bytes": 1515,
+        "compressed_bytes": 786
       },
       {
         "file": "inclusion_proof_attestation.json",
-        "bytes": 1898,
-        "compressed_bytes": 992
+        "bytes": 1977,
+        "compressed_bytes": 1041
       },
       {
         "file": "signed_tree_head.json",
-        "bytes": 393,
+        "bytes": 394,
         "compressed_bytes": 273
       }
     ],
-    "evidence_pack_uncompressed_bytes": 8827
+    "evidence_pack_uncompressed_bytes": 8990
   },
   "verifier_throughput": {
     "first_result": {
@@ -209,31 +209,31 @@
     "attestor_hash_used": "sha256:f805f3642219c751e5e76699bb096aeb63ce5946e20a32748121bebb3cb2949a",
     "stages_1_to_10": {
       "packs": 1000,
-      "packs_per_minute": 37043,
+      "packs_per_minute": 24582,
       "latency_ms": {
         "runs": 1000,
-        "min": 1.001,
-        "p50": 1.399,
-        "p95": 2.3,
-        "p99": 8.076,
-        "max": 12.726
+        "min": 1.084,
+        "p50": 2.119,
+        "p95": 4.432,
+        "p99": 8.504,
+        "max": 12.751
       }
     },
     "stage_11_rerender_warm_browser": {
       "packs": 50,
-      "packs_per_minute": 383,
+      "packs_per_minute": 328,
       "latency_ms": {
         "runs": 50,
-        "min": 134.194,
-        "p50": 156.504,
-        "p95": 170.498,
-        "p99": 174.376,
-        "max": 174.376
+        "min": 146.499,
+        "p50": 172.558,
+        "p95": 221.43,
+        "p99": 541.204,
+        "max": 541.204
       },
       "last_verdict": {
-        "ok": false,
-        "verdict": "DIGEST_MISMATCH",
-        "message": "Semantic digest mismatch on critical region: Digest mismatch: expected sha256:6c91ddf96c7d1111b8d3086677691678625f61ef663df9a4170be48226805385, recomputed sha256:cb4fe9cbf7cfcbb9bc10397774e15759ec3bdc0ee72e9dc9e781b5fa4d38f0fb"
+        "ok": true,
+        "verdict": "VERIFIED",
+        "message": "All 11 verification stages passed: Evidence pack is mutually verified."
       }
     }
   },
@@ -294,5 +294,6 @@
         }
       }
     ]
-  }
+  },
+  "provenance_note": "Digest latency and Merkle figures: run of 2026-10-14T18:48:44.027Z on a quiet machine. Payload sizes and verifier throughput: re-run of 2026-10-15T05:32:33.024Z against a new real pack after the stage-11 fix; the machine was busier during that re-run (its own digest-latency figures were 1.7x to 2.8x slower and were discarded), so the throughput figures are conservative."
 }
