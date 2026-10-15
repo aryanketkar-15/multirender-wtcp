@@ -51,7 +51,11 @@ describe('reproducible build (T3.5.1)', () => {
   });
 
   const committed = join(__dirname, '../dist/manifest.json');
-  (existsSync(committed) ? it : it.skip)('matches the committed release artefact', () => {
+  // Only a release of THIS version can be compared: after a version bump the committed manifest is
+  // still the previous release until release.sh has produced the new one.
+  const sameVersion =
+    existsSync(committed) && JSON.parse(readFileSync(committed, 'utf8')).version === ma.version;
+  (sameVersion ? it : it.skip)('matches the committed release artefact', () => {
     const manifest = JSON.parse(readFileSync(committed, 'utf8'));
     expect(ma.sha256).toBe(manifest.sha256);
     expect(ma.sha384).toBe(manifest.sha384);

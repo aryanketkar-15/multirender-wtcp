@@ -147,6 +147,30 @@ describeBrowser('dual digest in a Web Worker', () => {
     });
   });
 
+  it('ships the representation that critical_region_digest is the hash of (milestone 6.3 follow-up)', async () => {
+    await withPage(subscription, {}, async (page) => {
+      const out = await page.evaluate(async (sel) => {
+        const e = (await window.MRAttestor.attest({ regionSelector: sel })) as unknown as {
+          critical_region_digest: string;
+          region_nodes: number;
+          region_representation: { v: string; nodes: unknown[] };
+        };
+        const again = await window.MRAttestor.digestOf(e.region_representation);
+        return {
+          digest: e.critical_region_digest,
+          again: again.digest,
+          v: e.region_representation.v,
+          n: e.region_representation.nodes.length,
+          expected: e.region_nodes,
+        };
+      }, SEL);
+      // Anyone holding the representation can recompute the signed digest from it.
+      expect(out.again).toBe(out.digest);
+      expect(out.v).toBe('srd/1.0');
+      expect(out.n).toBe(out.expected);
+    });
+  });
+
   it('measures a 500-node region and records the timing (T3.4.10)', async () => {
     const rows = Array.from(
       { length: 250 },
