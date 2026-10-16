@@ -97,3 +97,10 @@ function php { & C:\xampp\php\php.exe -d extension=sodium -d extension=zip @args
 - Thresholds and their justification: `PROJECT_LOG.md` 12.2. Normalisation order: 12.1.
 - Measurements for Phase 6: 12.3 (35 ms for 500 nodes) and 13.2 (proof timing, race results).
 - What is unverified: this file section 6, `PROJECT_LOG.md` 12.5 and 13.5, and ☐/◐ rows in `docs/BUILD_PLAYBOOK.md`.
+
+## 11. Repository, remote and in-flight work (updated 2026-10-16)
+
+- **Remote:** https://github.com/aryanketkar-15/multirender-wtcp.git. `main` holds only finished, tested work. All other branches and the tags `attestor-v1.0.0` and `attestor-v1.1.0` are pushed too. GitHub Actions has never run the CI workflow; branch protection and other settings are not configured.
+- **Unfinished UI work:** branch `wip/phase7-ui` (design tokens, EmptyState, ErrorBoundary, Skeleton, icons, stylesheet and layout changes). Not merged: `client/tests/App.test.tsx` fails to parse with it. The UI refinement had just begun: the dev stack was started and a screenshot script drafted, but no refinement was made. The verifier dashboard (`/verifier`) needs the verifier HTTP server (`verifier/src/server.ts`, port 8095), which has to be bundled with esbuild to run because the package has no `tsx`.
+- **Attestor:** current release 1.1.0 (ships the region representation); 1.0.0 stays in `attestor/dist/` because packs name the build that made them.
+- **Fixtures:** `verifier/fixtures/real/` holds real packs from the live stack (honest, and page altered after load, for 1.1.0 and 1.0.0).
