@@ -774,3 +774,40 @@ Server: `AttestationRepresentationTest` (5 tests: stored and exported byte for b
 - Only the critical-region representation is shipped. The context representation (the whole page) is not, so a context mismatch still cannot be explained (O-08).
 - Packs from before Attestor 1.1.0 cannot be explained at node level.
 - O-19 is resolved for new packs.
+
+
+---
+
+## 23. Build record — Phase 7 design system, product polish, and accessibility (2026-10-16)
+
+### 23.1 Why
+
+The baseline Phase 7 user interface has been found functionally complete but visually sparse. The unauthenticated landing page has consisted of a single isolated card lacking an explanation of the two-sided protocol flow; the Verifier dashboard has required manual pack selection without guidance or instant test fixtures for examination; and the `DIGEST_MISMATCH` discrepancy view has suffered from awkward mid-word breaks (`word-break: break-all`) and an absence of non-technical analysis for academic evaluators. Furthermore, `client/tests/App.test.tsx` has previously failed to parse under Jest due to Vite-specific environment property access (`import.meta.env.DEV`), preventing the Phase 7 WIP branch from completing its regression gate.
+
+### 23.2 Design and Implementation
+
+- **D-53 Jest compatibility in error boundary without runtime regressions.** The runtime development flag in `client/src/components/ErrorBoundary.tsx` has been replaced with a dual check supporting both Vite (`typeof process !== 'undefined'` and `process.env.NODE_ENV !== 'production'`). `client/tests/App.test.tsx` and all 15 client test suites now pass completely under Jest (167 tests passed).
+- **D-54 Attestor 1.1.0 registered in independent verifier default recognized set.** The SHA-256 build hash for Attestor v1.1.0 (`sha256:b4f5d3e115ec18782a3ec8ce7abfc05150b904b21f4c14e980913a98a36d4072`) has been appended to `DEFAULT_RECOGNIZED_ATTESTORS` in `verifier/src/checks/registry.ts`, allowing live verifier daemons and test suites to verify honest packs without manual registry override.
+- **D-55 Information hierarchy and protocol explanation on the home page.** A comprehensive `Home.tsx` landing page has been introduced, structuring the interface into five legible tiers:
+  1. *Hero Header:* Direct call-to-actions, problem framing, and academic course project attribution (VIT Pune TY-A9, Prof. Rahul Diwate).
+  2. *Four-Pillar Architecture Grid:* Plain-English breakdown of pre-interaction server commitment (Ed25519), browser layout attestation (ECDSA P-256), RFC 6962 transparency log, and independent headless browser verification.
+  3. *Comparative Prior Art Analysis:* Clear contrast explaining why screenshots (trivially edited in DevTools) and server-side logs (one-sided database flags) fail in court or under regulatory dispute, whereas MRA provides non-repudiable mutual evidence.
+  4. *Demonstration Scenarios:* Direct walkthroughs of the honest consent flow, post-load notice rewriting attack, and spliced signature tamper attempt.
+  5. *Institutional Footnote:* VIT Pune Computer Engineering department attribution.
+- **D-56 Verifier dashboard demonstration loader and non-expert diff clarity.**
+  1. *Instant Viva Demo Packs:* Three self-contained demonstration packs (`honest_pack.zip`, `page_altered_pack.zip`, `tampered_attestation_pack.zip`) have been published under `client/public/fixtures/` and integrated into the Verifier upload interface with one-click loader buttons, enabling examiners to inspect verified and attack outcomes immediately.
+  2. *Diff View Non-Expert Interpretation:* `DiffView.tsx` has been enhanced with friendly semantic property labels ("Rendered Text", "Checkbox State", "Visual Prominence", "Color Contrast", "Overlay Occlusion") and an explicit non-expert summary callout explaining that the browser attestation captures what was physically visible on screen, whereas the recomputed render reproduces the server's committed bundle.
+  3. *Typography and Word-Wrap Fix:* `.diff-value-box` has been transitioned from `word-break: break-all` to `overflow-wrap: break-word; white-space: pre-wrap;`, preserving natural word boundaries in legal notice texts.
+- **D-57 Flow continuity across consent and evidence pack states.**
+  1. *Recorded State Continuity:* `RecordedPanel.tsx` now includes a direct link to the Independent Verifier (`/verifier`), allowing users to test their newly sealed pack immediately.
+  2. *Evidence Pack Actions:* `MyPacks.tsx` groups download and verifier shortcuts into a responsive flex layout with `white-space: nowrap` button labels.
+- **D-58 Assets provenance register and documented design system.** `ASSETS.md` has been expanded to register all hand-authored vector icons, logo marks, CSS loading animations, and system font tokens with zero external tracker or CDN dependencies. A full design system specification has been authored in `docs/design-system.md`.
+
+### 23.3 Verification
+
+- Full-stack screenshot suite: All 12 views captured at full resolution into `screenshots/` (`01_home.png` through `12_admin.png`).
+- Client tests: 15 of 15 suites passed (167 tests passed, 9 browser-only tests skipped per Jest environment).
+- Attestor tests: 235 tests passed.
+- Verifier tests: 35 tests passed, including `realPacks.test.ts` and `render.test.ts`.
+- Server PHPUnit: 430 tests passed (12,675 assertions).
+

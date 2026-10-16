@@ -107,7 +107,7 @@ export function MyPacks() {
                     Recorded on {new Date(pack.created_at).toLocaleString()}
                   </small>
                 </div>
-                <div>
+                <div className="pack-actions">
                   <a
                     href={`/api/pack/${pack.id}/download`}
                     download={`evidence-pack-${pack.id}.zip`}
@@ -116,6 +116,13 @@ export function MyPacks() {
                   >
                     Download (.zip)
                   </a>
+                  <Link
+                    to="/verifier"
+                    className="btn secondary"
+                    aria-label={`Verify evidence pack ${pack.id} in Independent Verifier`}
+                  >
+                    Verify in Verifier →
+                  </Link>
                 </div>
               </div>
             ))}

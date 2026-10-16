@@ -79,6 +79,21 @@ export function Verify() {
     }
   }
 
+  async function handleLoadDemo(filename: string) {
+    try {
+      setErrorMessage(null);
+      setResult(null);
+      const res = await fetch(`/fixtures/${filename}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching demo pack`);
+      const blob = await res.blob();
+      const demoFile = new File([blob], filename, { type: 'application/zip' });
+      validateAndSetFile(demoFile);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setErrorMessage(`Failed to load demo pack: ${msg}`);
+    }
+  }
+
   async function handleVerify() {
     if (!file) {
       setErrorMessage('Please select an evidence pack (.zip) to verify.');
@@ -225,6 +240,45 @@ export function Verify() {
                     <p className="hint">Supports self-contained MRA evidence packages.</p>
                   </>
                 )}
+              </div>
+            </div>
+
+            {/* Quick-test Demonstration Packs for Viva / Testing */}
+            <div className="demo-packs-container">
+              <p className="demo-packs-title">
+                <strong>Quick Demonstration Packs:</strong> Load pre-packaged test cases to verify instantly:
+              </p>
+              <div className="demo-packs-group">
+                <button
+                  type="button"
+                  className="btn secondary btn-sm demo-pack-btn"
+                  onClick={() => void handleLoadDemo('honest_pack.zip')}
+                  disabled={verifying}
+                  data-testid="load-demo-honest"
+                >
+                  <span className="demo-pack-badge badge-success">Pass</span>
+                  <span>Honest Pack (VERIFIED)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn secondary btn-sm demo-pack-btn"
+                  onClick={() => void handleLoadDemo('page_altered_pack.zip')}
+                  disabled={verifying}
+                  data-testid="load-demo-altered"
+                >
+                  <span className="demo-pack-badge badge-danger">Attack</span>
+                  <span>Notice Altered (Node Diff)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn secondary btn-sm demo-pack-btn"
+                  onClick={() => void handleLoadDemo('tampered_attestation_pack.zip')}
+                  disabled={verifying}
+                  data-testid="load-demo-tampered"
+                >
+                  <span className="demo-pack-badge badge-warn">Tamper</span>
+                  <span>Spliced Signature (Invalid)</span>
+                </button>
               </div>
             </div>
 

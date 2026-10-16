@@ -48,10 +48,10 @@ describe('real packs from the live stack', () => {
   let browser: Browser;
   beforeAll(async () => {
     browser = await launchPlaywrightBrowser({ headless: process.env.HEADLESS === 'true' });
-  });
+  }, 30_000);
   afterAll(async () => {
-    await browser.close();
-  });
+    if (browser) await browser.close();
+  }, 30_000);
 
   test('an honest pack passes the cheap checks and verifies after re-render', async () => {
     const zip = read('honest_pack.zip');

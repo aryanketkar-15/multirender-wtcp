@@ -71,6 +71,9 @@ export function RecordedPanel({
             My evidence packs
           </a>
         )}
+        <a href="/verifier" className="btn secondary">
+          Verify in Verifier →
+        </a>
         <button type="button" className="btn secondary" onClick={() => location.reload()}>
           Start over
         </button>

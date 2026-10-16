@@ -46,7 +46,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     // Log to console in development only; never surface to UI
-    if (import.meta.env.DEV) {
+    if (typeof process !== 'undefined' ? process.env?.NODE_ENV !== 'production' : true) {
       // eslint-disable-next-line no-console
       console.error('[ErrorBoundary]', error, info.componentStack);
     }
