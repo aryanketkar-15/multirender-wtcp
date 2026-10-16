@@ -138,3 +138,55 @@ jobs:
       - name: Coverage gate (changed files, 70% lines)
         working-directory: .
         run: php scripts/php-coverage-gate.php server/coverage/clover.xml origin/main 70
+
+  # T7.2.9 — Accessibility gate: run axe-core against every client route.
+  # An unlabelled button, missing aria-label, or AA contrast violation fails CI.
+  accessibility:
+    runs-on: ubuntu-latest
+    needs: client
+    defaults: { run: { working-directory: client } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: client/package-lock.json }
+      - run: npm ci
+      - run: npm run build
+
+      # Install axe-core CLI (zero runtime deps, uses Chromium via Playwright)
+      - name: Install axe-core CLI
+        run: npm install -g @axe-core/cli
+
+      # Start the built app on port 4173 (vite preview default)
+      - name: Start preview server
+        run: npx vite preview --port 4173 &
+        env:
+          NODE_ENV: production
+
+      # Wait for server to be ready
+      - name: Wait for server
+        run: |
+          for i in $(seq 1 15); do
+            curl -sf http://localhost:4173 && break || sleep 1
+          done
+
+      # Run axe against all client routes. --exit fails with code 1 if any violation.
+      # --tags wcag2a,wcag2aa enforces WCAG 2.1 AA (T7.2.7).
+      - name: Run axe accessibility scan
+        id: axe
+        run: |
+          axe \
+            http://localhost:4173/ \
+            http://localhost:4173/login \
+            http://localhost:4173/register \
+            http://localhost:4173/verifier \
+            --exit \
+            --tags wcag2a,wcag2aa \
+            --reporter cli \
+            2>&1 | tee axe-report.txt
+          EXIT=${PIPESTATUS[0]}
+          echo "## Accessibility report" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat axe-report.txt >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit $EXIT
+

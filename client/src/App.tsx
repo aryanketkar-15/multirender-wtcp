@@ -1,4 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { Layout } from './components/Layout';
 import { RequireAuth } from './components/RequireAuth';
 import { AuthProvider, useAuth } from './lib/auth';
@@ -11,6 +12,7 @@ import { Register } from './pages/Register';
 import { ResetPassword } from './pages/ResetPassword';
 import { Verify } from './pages/Verify';
 import { VerifyEmail } from './pages/VerifyEmail';
+
 
 function Home() {
   const { user } = useAuth();
@@ -47,41 +49,44 @@ export function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/verifier" element={<Verify />} />
-          <Route path="/verify-pack" element={<Verify />} />
-          <Route
-            path="/consent"
-            element={
-              <RequireAuth>
-                <Consent />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/packs"
-            element={
-              <RequireAuth>
-                <MyPacks />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/admin/consent"
-            element={
-              <RequireAuth>
-                <AdminConsent />
-              </RequireAuth>
-            }
-          />
-          <Route path="/register" element={<Register />} />
-          <Route path="/verify" element={<VerifyEmail />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Routes>
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/verifier" element={<ErrorBoundary><Verify /></ErrorBoundary>} />
+            <Route path="/verify-pack" element={<ErrorBoundary><Verify /></ErrorBoundary>} />
+            <Route
+              path="/consent"
+              element={
+                <RequireAuth>
+                  <ErrorBoundary><Consent /></ErrorBoundary>
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/packs"
+              element={
+                <RequireAuth>
+                  <ErrorBoundary><MyPacks /></ErrorBoundary>
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/admin/consent"
+              element={
+                <RequireAuth>
+                  <ErrorBoundary><AdminConsent /></ErrorBoundary>
+                </RequireAuth>
+              }
+            />
+            <Route path="/register" element={<ErrorBoundary><Register /></ErrorBoundary>} />
+            <Route path="/verify" element={<ErrorBoundary><VerifyEmail /></ErrorBoundary>} />
+            <Route path="/login" element={<ErrorBoundary><Login /></ErrorBoundary>} />
+            <Route path="/forgot-password" element={<ErrorBoundary><ForgotPassword /></ErrorBoundary>} />
+            <Route path="/reset-password" element={<ErrorBoundary><ResetPassword /></ErrorBoundary>} />
+          </Routes>
+        </ErrorBoundary>
       </AuthProvider>
     </BrowserRouter>
   );
 }
+
