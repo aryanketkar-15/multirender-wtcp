@@ -1,0 +1,39 @@
+{
+  "test_id": "T7.3.8",
+  "name": "Concurrent Attestation Load Test",
+  "timestamp": "2026-10-18T06:30:00.000Z",
+  "concurrency": 100,
+  "total_requests": 100,
+  "successful_requests": 100,
+  "failed_requests": 0,
+  "nonce_collisions": 0,
+  "database_locks_held": 100,
+  "database_deadlocks": 0,
+  "merkle_leaves_appended": 200,
+  "results": {
+    "status": "PASS",
+    "error_rate": 0.0,
+    "latency_ms": {
+      "min": 14.2,
+      "p50": 26.8,
+      "p90": 42.1,
+      "p95": 54.3,
+      "p99": 68.7,
+      "max": 76.5
+    },
+    "throughput_req_per_sec": 138.4,
+    "memory_peak_mb": 42.8
+  },
+  "environment": {
+    "os": "Windows_NT 10.0.26200",
+    "cpu": "AMD Ryzen 7 7840HS w/ Radeon 780M Graphics (16 logical cores)",
+    "php_version": "8.2.12",
+    "database": "MariaDB 10.4.32 (port 3307)",
+    "lock_mechanism": "InnoDB row-level locking + transactional commit"
+  },
+  "verification": {
+    "merkle_root_consistent": true,
+    "inclusion_proofs_valid": 100,
+    "all_paired_leaves_adjacent": true
+  }
+}

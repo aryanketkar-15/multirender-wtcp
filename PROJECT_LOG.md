@@ -811,3 +811,23 @@ The baseline Phase 7 user interface has been found functionally complete but vis
 - Verifier tests: 35 tests passed, including `realPacks.test.ts` and `render.test.ts`.
 - Server PHPUnit: 430 tests passed (12,675 assertions).
 
+---
+
+## 24. Build record — Milestone 7.3 full regression sweep, coverage reporting, and known-issues register (2026-10-18)
+
+### 24.1 Why
+
+Prior to release tagging, the project playbook requires an end-to-end regression sweep across all modules, an honest accounting of empirical boundaries and known issues, and a verified security audit confirming that no secret-bearing credentials or plaintext personal data exist in the repository or database storage.
+
+### 24.2 Design and Implementation
+
+- **D-59 Formal Known Issues Register.** Established `docs/known-issues.md` categorizing all empirical limits discovered during real testing: font substitution sensitivity (KI-01, 84.97% agreement), below-the-fold occlusion blind spot (KI-02, 93.7% detection), unreplayable application chrome context (KI-03), synthetic corpus scope (KI-04), Windows 11 / emulated CPU mobile testbed bounds (KI-05), local tree-head witness (KI-06), WebAuthn deferral (KI-07), and development file outbox (KI-08).
+- **D-60 Concurrency Load Benchmark.** Executed 100 concurrent client attestation requests against the Merkle log append path under single-instance MariaDB row-level locking (`research/results/load-test.json`). Verified 100/100 success rate with zero nonce collisions, zero deadlocks, and p95 latency of 54.3 ms (138.4 req/s throughput).
+- **D-61 Comprehensive Regression and Security Audit.** Documented `docs/test-report.md` recording 917 total tests across 42 suites (801 passed, 116 skipped browser integration tests, 0 failures; 13,614 total assertions). Performed git history security sweep verifying zero leaked credentials and verified database privilege restriction (INSERT/SELECT only on evidence tables).
+
+### 24.3 Verification
+
+- All 11 Milestone 7.3 test cases (T7.3.1–T7.3.11) verified and marked passing in `docs/BUILD_PLAYBOOK.md`.
+- `docs/known-issues.md` and `docs/test-report.md` published and committed.
+
+
