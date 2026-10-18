@@ -1926,14 +1926,14 @@ git push origin feat/6.3-cost-measurement
 **2. Objective.** Deliver the no-ready-made-assets requirement with provenance that survives a challenge.
 
 **3. Tasks to complete.**
-- [ ] Spacing scale, type scale, colour palette as CSS custom properties
-- [ ] Hand-coded SVG logo and wordmark, source committed
-- [ ] Icon set hand-drawn, or open-licensed with the licence file committed
-- [ ] Empty-state illustrations in CSS and SVG
-- [ ] CSS transitions only — no GIFs
-- [ ] System font stack, or one open-licensed family with its licence committed
-- [ ] `ASSETS.md` listing every asset, its origin, author and licence
-- [ ] Apply the system across all pages
+- [x] Spacing scale, type scale, colour palette as CSS custom properties
+- [x] Hand-coded SVG logo and wordmark, source committed
+- [x] Icon set hand-drawn, or open-licensed with the licence file committed
+- [x] Empty-state illustrations in CSS and SVG
+- [x] CSS transitions only — no GIFs
+- [x] System font stack, or one open-licensed family with its licence committed
+- [x] `ASSETS.md` listing every asset, its origin, author and licence
+- [x] Apply the system across all pages
 
 **4. Files / modules affected.** `client/src/styles/tokens.css`, `client/src/assets/logo.svg`, `icons/*.svg`, `ASSETS.md`, `docs/design-system.md`.
 
@@ -1945,18 +1945,18 @@ Build the system before applying it. Retrofitting tokens across finished pages c
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T7.1.1 | No raster images | Build complete | Search for `.gif`, `.jpg`, `.png` in `client/src/assets` | None, or each accounted for in `ASSETS.md` | ☐ |
-| T7.1.2 | Logo renders | — | Load any page | SVG logo renders at all sizes | ☐ |
-| T7.1.3 | Tokens applied | — | Inspect computed styles | Values resolve to custom properties | ☐ |
-| T7.1.4 | `ASSETS.md` complete | — | Cross-check every asset file | Every file has an entry | ☐ |
-| T7.1.5 | Licences committed | Third-party assets present | Check for licence files | All present | ☐ |
-| T7.1.6 | No GIF animation | — | Search for animated assets | None; CSS transitions only | ☐ |
+| T7.1.1 | No raster images | Build complete | Search for `.gif`, `.jpg`, `.png` in `client/src/assets` | None, or each accounted for in `ASSETS.md` | ✅ |
+| T7.1.2 | Logo renders | — | Load any page | SVG logo renders at all sizes | ✅ |
+| T7.1.3 | Tokens applied | — | Inspect computed styles | Values resolve to custom properties | ✅ |
+| T7.1.4 | `ASSETS.md` complete | — | Cross-check every asset file | Every file has an entry | ✅ |
+| T7.1.5 | Licences committed | Third-party assets present | Check for licence files | All present | ✅ |
+| T7.1.6 | No GIF animation | — | Search for animated assets | None; CSS transitions only | ✅ |
 
 **7. Verification checklist.**
-- [ ] Every visual asset accounted for in `ASSETS.md`
-- [ ] No stock photography, no downloaded logos, no GIFs
-- [ ] Design tokens applied consistently across all pages
-- [ ] Third-party licences committed where applicable
+- [x] Every visual asset accounted for in `ASSETS.md`
+- [x] No stock photography, no downloaded logos, no GIFs
+- [x] Design tokens applied consistently across all pages
+- [x] Third-party licences committed where applicable
 
 **8. Completion criteria.** Every asset is original or properly licensed and documented, and the design system is applied throughout.
 
@@ -1980,13 +1980,13 @@ git push origin feat/7.1-design-system
 **2. Objective.** Deliver the "product, not a mini project" requirement, which comes down almost entirely to the states student projects skip.
 
 **3. Tasks to complete.**
-- [ ] Empty state on every list, explaining what goes there and what to do next
-- [ ] Skeleton loaders, not spinners on blank pages
-- [ ] Error states that are specific and recoverable; no raw stack traces reach the user
-- [ ] Responsive verification at 375px, 768px and 1440px
-- [ ] Keyboard navigation throughout
-- [ ] ARIA labelling on every control
-- [ ] Contrast meeting WCAG AA
+- [x] Empty state on every list, explaining what goes there and what to do next
+- [x] Skeleton loaders, not spinners on blank pages
+- [x] Error states that are specific and recoverable; no raw stack traces reach the user
+- [x] Responsive verification at 375px, 768px and 1440px
+- [x] Keyboard navigation throughout
+- [x] ARIA labelling on every control
+- [x] Contrast meeting WCAG AA
 - [ ] Automated accessibility scan in CI
 
 **4. Files / modules affected.** `client/src/components/EmptyState.tsx`, `Skeleton.tsx`, `ErrorBoundary.tsx`, all page components, `.github/workflows/ci.yml`.
@@ -1999,22 +1999,22 @@ Run an automated scan in CI, but verify keyboard operation manually — automate
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T7.2.1 | Empty state on packs | New account | Open pack list | Explanatory empty state with a next action | ☐ |
-| T7.2.2 | Skeleton while loading | Slow network simulated | Load pack list | Skeleton, not a blank page | ☐ |
-| T7.2.3 | Error recoverable | API returning 500 | Trigger | Clear message plus retry; no stack trace | ☐ |
-| T7.2.4 | Responsive at 375px | — | View every page | No horizontal scroll; all controls reachable | ☐ |
-| T7.2.5 | Keyboard navigation | — | Tab through each page | All interactive elements reachable and operable | ☐ |
-| T7.2.6 | Focus visible | — | Tab through | Visible focus indicator everywhere | ☐ |
-| T7.2.7 | Contrast AA | — | Run the scan | No AA violations | ☐ |
-| T7.2.8 | Screen reader labels | — | Navigate with a screen reader | All controls announced meaningfully | ☐ |
+| T7.2.1 | Empty state on packs | New account | Open pack list | Explanatory empty state with a next action | ✅ |
+| T7.2.2 | Skeleton while loading | Slow network simulated | Load pack list | Skeleton, not a blank page | ✅ |
+| T7.2.3 | Error recoverable | API returning 500 | Trigger | Clear message plus retry; no stack trace | ✅ |
+| T7.2.4 | Responsive at 375px | — | View every page | No horizontal scroll; all controls reachable | ✅ |
+| T7.2.5 | Keyboard navigation | — | Tab through each page | All interactive elements reachable and operable | ✅ |
+| T7.2.6 | Focus visible | — | Tab through | Visible focus indicator everywhere | ✅ |
+| T7.2.7 | Contrast AA | — | Run the scan | No AA violations | ✅ |
+| T7.2.8 | Screen reader labels | — | Navigate with a screen reader | All controls announced meaningfully | ✅ |
 | T7.2.9 | CI accessibility gate | Scan wired | Introduce an unlabelled button | CI fails | ☐ |
 
 **7. Verification checklist.**
-- [ ] Every list has an empty state
-- [ ] Every async action has a loading state
-- [ ] No raw error reaches the user
-- [ ] Full keyboard operation verified manually on every page
-- [ ] WCAG AA contrast passing
+- [x] Every list has an empty state
+- [x] Every async action has a loading state
+- [x] No raw error reaches the user
+- [x] Full keyboard operation verified manually on every page
+- [x] WCAG AA contrast passing
 - [ ] Accessibility scan gating CI
 
 **8. Completion criteria.** All three state types present throughout, responsive at three widths, fully keyboard-operable, AA contrast, scan in CI.

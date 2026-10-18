@@ -7,6 +7,8 @@
 export const DEFAULT_RECOGNIZED_ATTESTORS: readonly string[] = [
   // Attestor v1.0.0 official build
   'sha256:f805f3642219c751e5e76699bb096aeb63ce5946e20a32748121bebb3cb2949a',
+  // Attestor v1.1.0 official build
+  'sha256:b4f5d3e115ec18782a3ec8ce7abfc05150b904b21f4c14e980913a98a36d4072',
 ];
 
 export function isRecognisedAttestor(

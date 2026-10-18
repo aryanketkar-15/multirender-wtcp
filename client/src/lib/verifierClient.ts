@@ -69,6 +69,8 @@ export async function uploadAndVerifyPack(
   const url = new URL('/verify', baseUrl);
   if (options.serverKey) {
     url.searchParams.set('server_key', options.serverKey);
+  } else {
+    url.searchParams.set('key_url', 'http://127.0.0.1:8080/.well-known/mra-key');
   }
   if (options.skipRender) {
     url.searchParams.set('skip_render', 'true');
