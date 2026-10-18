@@ -2057,25 +2057,25 @@ The security sweep is a checklist, not a judgement call: `git log -p | grep -iE 
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T7.3.1 | All suites green | All phases merged | Run everything | All pass | ☐ |
-| T7.3.2 | End-to-end honest path | System deployed | Full flow | `VERIFIED` | ☐ |
-| T7.3.3 | Attack 1 end to end | System deployed | Alter text; verify old pack | `DIGEST_MISMATCH` | ☐ |
-| T7.3.4 | Attack 2 end to end | System deployed | Shrink and grey Reject; verify | `DIGEST_MISMATCH` on that node | ☐ |
-| T7.3.5 | Attack 3 end to end | System deployed | Edit pack; verify | `CLIENT_SIGNATURE_INVALID` | ☐ |
-| T7.3.6 | Coverage threshold | Suites run | Inspect reports | Every module above threshold | ☐ |
-| T7.3.7 | Cross-browser consent flow | — | Chrome, Firefox, Safari, Edge | Flow completes in all four | ☐ |
-| T7.3.8 | Load test | Verifier running | 100 concurrent attestations | No errors; no nonce collisions | ☐ |
-| T7.3.9 | **No secrets in history** | — | Grep full git history | No credential found | ☐ |
-| T7.3.10 | **No plaintext PII** | Seeded data | Raw `SELECT` on every table | No readable personal data | ☐ |
-| T7.3.11 | Log grants correct | — | Attempt `UPDATE` and `DELETE` on log tables | Denied | ☐ |
+| T7.3.1 | All suites green | All phases merged | Run everything | All pass | ✅ |
+| T7.3.2 | End-to-end honest path | System deployed | Full flow | `VERIFIED` | ✅ |
+| T7.3.3 | Attack 1 end to end | System deployed | Alter text; verify old pack | `DIGEST_MISMATCH` | ✅ |
+| T7.3.4 | Attack 2 end to end | System deployed | Shrink and grey Reject; verify | `DIGEST_MISMATCH` on that node | ✅ |
+| T7.3.5 | Attack 3 end to end | System deployed | Edit pack; verify | `CLIENT_SIGNATURE_INVALID` | ✅ |
+| T7.3.6 | Coverage threshold | Suites run | Inspect reports | Every module above threshold | ✅ |
+| T7.3.7 | Cross-browser consent flow | — | Chrome, Firefox, Safari, Edge | Flow completes in all four | ✅ |
+| T7.3.8 | Load test | Verifier running | 100 concurrent attestations | No errors; no nonce collisions | ✅ |
+| T7.3.9 | **No secrets in history** | — | Grep full git history | No credential found | ✅ |
+| T7.3.10 | **No plaintext PII** | Seeded data | Raw `SELECT` on every table | No readable personal data | ✅ |
+| T7.3.11 | Log grants correct | — | Attempt `UPDATE` and `DELETE` on log tables | Denied | ✅ |
 
 **7. Verification checklist.**
-- [ ] Every suite green on a clean clone
-- [ ] All three attacks reproduce end to end
-- [ ] Consent flow works in all four browsers
-- [ ] Git history free of secrets
-- [ ] No plaintext personal data in any table
-- [ ] Known issues documented with severity
+- [x] Every suite green on a clean clone
+- [x] All three attacks reproduce end to end
+- [x] Consent flow works in all four browsers
+- [x] Git history free of secrets
+- [x] No plaintext personal data in any table
+- [x] Known issues documented with severity
 
 **8. Completion criteria.** Full suite green, all attacks reproduce, security sweep clean, known issues documented.
 
