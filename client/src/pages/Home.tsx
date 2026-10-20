@@ -156,8 +156,8 @@ export function Home() {
                 {RECORDS.map((r) => (
                   <tr key={r.record}>
                     <th scope="row">{r.record}</th>
-                    <td>{r.control}</td>
-                    <td>{r.limit}</td>
+                    <td data-label="Who controls it">{r.control}</td>
+                    <td data-label="What it cannot show">{r.limit}</td>
                   </tr>
                 ))}
               </tbody>

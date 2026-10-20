@@ -907,3 +907,15 @@ The interim dark theme was replaced by a restrained light one: white surfaces on
 - **Landing page:** two columns where the content has two parts (headline and a drawn diagram of the four parties; section heading and its list), so no half of a row is empty. The diagram (`components/FlowDiagram.tsx`) is original inline SVG with a text alternative.
 - **Sign in and sign up:** a colour panel saying what the account is for, beside the form (`components/AuthLayout.tsx`). Field labels, ids and behaviour are unchanged.
 - **Checks after the change:** client 176 tests, ESLint, Prettier, `tsc` and `vite build` clean; axe-core 0 violations in 24 page states; taste-skill lint 0 failures; end to end 21 of 21 (honest) and 20 of 20 (page altered) in bundled Chromium, and 20 of 20 in Chrome 155 and Edge 155; the honest pack `VERIFIED` and the altered page `DIGEST_MISMATCH` naming the paragraph. The theme touches colours that feed the digest's contrast bucket, which is why the last two were re-run rather than assumed.
+
+### 26.8 Phone layout and keyboard basics (2026-10-20)
+
+Found by looking at every page at 375 px, not by assumption, and fixed:
+
+- **Diff table on phones:** three squeezed columns broke the committed text letter by letter. Narrow screens now stack each row with the column name above each value (the landing comparison table likewise).
+- **Evidence pack card:** a `flex: 1 1 280px` became a 280 px height once the card turned into a column, leaving a large empty gap. Fixed.
+- **Header on phones:** the user chip is hidden below 600 px and Sign out is a small button, so the header stays compact. The landing diagram is hidden below 600 px because its labels fall under a readable size; the numbered steps below it say the same.
+- **Skip link** to the main region and a **document title per route** (WCAG 2.4.1 and 2.4.2), with tests (`client/tests/a11yBasics.test.tsx`).
+- **Test hygiene:** the browser-based key test had a 5 s start-up timeout that failed once on a busy machine (it passed alone); it now allows 90 s.
+
+Checks: client 178 tests, ESLint, Prettier, `tsc`, `vite build` clean; axe-core 0 violations in 24 page states with no overflow at 375 px; end to end 21 of 21 and 20 of 20, honest pack `VERIFIED`, altered page `DIGEST_MISMATCH`.

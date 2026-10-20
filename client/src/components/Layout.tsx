@@ -7,6 +7,9 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
   const { user, logout } = useAuth();
   return (
     <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <header className="app-header">
         <Link to="/" className="brand">
           <Logo />
@@ -18,8 +21,10 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
               <Link to="/consent">Consent</Link>
               <Link to="/packs">Evidence Packs</Link>
               <Link to="/verifier">Verifier</Link>
-              <span aria-label="Signed in as">{user.name}</span>
-              <button type="button" className="btn secondary" onClick={() => void logout()}>
+              <span className="nav-user" aria-label="Signed in as">
+                {user.name}
+              </span>
+              <button type="button" className="btn secondary btn-sm" onClick={() => void logout()}>
                 Sign out
               </button>
             </>
@@ -32,7 +37,9 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
           )}
         </nav>
       </header>
-      <main className={wide ? 'page wide' : 'page'}>{children}</main>
+      <main id="main" tabIndex={-1} className={wide ? 'page wide' : 'page'}>
+        {children}
+      </main>
     </>
   );
 }

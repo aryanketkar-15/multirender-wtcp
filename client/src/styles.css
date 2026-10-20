@@ -2152,3 +2152,107 @@ details.evidence dd code {
     padding: var(--space-4);
   }
 }
+
+/* Skip link: first stop for keyboard users, visible only while focused. */
+.skip-link {
+  position: absolute;
+  left: var(--space-3);
+  top: -4rem;
+  z-index: var(--z-toast);
+  padding: var(--space-2) var(--space-3);
+  background: var(--ink);
+  color: #ffffff;
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+main:focus {
+  outline: none;
+}
+
+/* Phones and narrow windows. */
+@media (max-width: 720px) {
+  /* A flex-basis of 280px is a height once the card is a column: it left a large empty gap. */
+  .pack-info {
+    flex: 0 0 auto;
+  }
+
+  /* Three-column tables become stacked rows with the column name above each value. */
+  .compare-table thead,
+  .diff-comparison-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .compare-table,
+  .compare-table tbody,
+  .compare-table tr,
+  .compare-table th,
+  .compare-table td,
+  .diff-comparison-table,
+  .diff-comparison-table tbody,
+  .diff-comparison-table tr,
+  .diff-comparison-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .compare-table tr,
+  .diff-comparison-table tr {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .compare-table th,
+  .compare-table td,
+  .diff-comparison-table td {
+    padding: var(--space-1) 0;
+    border: 0;
+  }
+
+  .compare-table tbody th {
+    min-width: 0;
+  }
+
+  .compare-table td::before,
+  .diff-comparison-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+}
+
+@media (max-width: 600px) {
+  /* The diagram's labels fall below a readable size here; the numbered steps say the same thing. */
+  .flow-diagram {
+    display: none;
+  }
+
+  .app-header {
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .app-nav {
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-3);
+  }
+
+  .nav-user {
+    display: none;
+  }
+
+  .home-hero-actions .btn {
+    flex: 1 1 100%;
+  }
+}
