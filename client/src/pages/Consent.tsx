@@ -265,6 +265,7 @@ function ConsentFlow({ demo }: { demo: boolean }) {
               logLeafIndex={regionState.logLeafIndex}
               commitmentLeafIndex={regionState.commitmentLeafIndex}
               packId={regionState.packId}
+              autoCheck={demo}
             />
           ) : null}
           {demo && regionState.kind === 'recorded' ? (

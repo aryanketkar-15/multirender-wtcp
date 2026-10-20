@@ -2533,3 +2533,65 @@ main:focus {
   color: var(--ink);
   font-size: var(--text-sm);
 }
+
+/* ---- Merkle tree view ---- */
+.merkle-view {
+  margin: var(--space-3) 0 0;
+}
+
+.merkle-view svg {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.merkle-edge {
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.merkle-node rect {
+  fill: var(--card);
+  stroke: var(--line);
+  stroke-width: 1.5;
+}
+
+.merkle-node.sibling rect {
+  fill: var(--tint);
+}
+
+.merkle-node.computed rect {
+  fill: var(--brand-soft);
+  stroke: var(--brand);
+}
+
+.merkle-node.root rect,
+.merkle-node.leaf rect {
+  fill: var(--brand);
+  stroke: var(--brand);
+}
+
+.merkle-node-label {
+  font-size: 9px;
+  fill: var(--ink-muted);
+}
+
+.merkle-node-hash {
+  font-family: var(--mono);
+  font-size: 10px;
+  fill: var(--ink);
+}
+
+.merkle-node.root .merkle-node-label,
+.merkle-node.root .merkle-node-hash,
+.merkle-node.leaf .merkle-node-label,
+.merkle-node.leaf .merkle-node-hash {
+  fill: #ffffff;
+}
+
+.merkle-view figcaption {
+  margin-top: var(--space-2);
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+}

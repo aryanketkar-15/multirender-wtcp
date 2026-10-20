@@ -967,3 +967,17 @@ Checks: client 178 tests, ESLint, Prettier, `tsc`, `vite build` clean; axe-core 
 **D-71 Records notice on sign-in and sign-up.** A short note under both forms: choices are saved as signed evidence of what the browser displayed, and their fingerprint is added to an append-only log, so they cannot be quietly changed. Client: tsc, ESLint, Prettier, 198 tests, build clean.
 
 **Not done.** The extension is not packaged for the Chrome Web Store and was tested only in Chrome on Windows.
+
+---
+
+## 31. Build record: Merkle tree view, test isolation (2026-10-21)
+
+**D-72 The log check now draws the proof.** After "Check this record in the log" (run automatically on the live demo page), the recorded panel shows the audit path as a tree: the user's record at the bottom, each sibling hash the log supplied, the hashes the browser recomputed on the way up, and the root, compared with the root the server signed. It draws the real inclusion proof, not an illustration: `walkInclusion` keeps every intermediate hash of the RFC 9162 walk, and `verifyInclusion` now uses it. Text equivalents are provided for screen readers. On the running stack: entry 217 of 218, 5 hashes, recomputed root equal to the signed root.
+
+**Test isolation fix.** Two Google sign-in tests read the developer's `server/.env`, so they failed once a real client id was configured there. `TestCase::makeApp()` now treats "no client id passed" as "Google sign-in off", so the suite no longer depends on local configuration.
+
+**Verification (clean machine, nothing else running).** Server 460 tests, 12,779 assertions, 0 failures, phpcs clean; attestor 235/235; verifier 35/35; client 203/203 (5 new, including every leaf of trees of 1 to 13 entries compared with an independently built reference tree), ESLint, Prettier, `tsc`, `vite build`.
+
+**Note on earlier failed runs.** A first set of runs showed failures that were not defects: about 20 duplicate Vite dev servers left from restarts were each using a full core, so browser-launch hooks timed out, and a child PHP process lacked the sodium extension. Running the suites alone on a quiet machine passes everything.
+
+**Not done.** The tree draws the path to the root, not the whole log. The head's Ed25519 signature is not checked in the browser (as before); the independent verifier covers it.
