@@ -410,7 +410,7 @@ export function Verify() {
           <div className="verifier-results-container">
             <div className="results-actions-bar">
               <button type="button" className="btn secondary" onClick={handleReset}>
-                ← Verify Another Evidence Pack
+                Verify another evidence pack
               </button>
             </div>
 
