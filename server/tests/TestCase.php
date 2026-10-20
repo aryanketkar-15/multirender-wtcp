@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mra\Tests;
 
 use Mra\App;
+use Mra\Service\GoogleIdTokenVerifier;
 use Mra\Config\DatabaseConfig;
 use Mra\Crypto\BlindIndex;
 use Mra\Crypto\FieldCipher;
@@ -46,7 +47,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /** An application wired with throwaway keys and the fake clock, on the transactional connection. */
-    protected function makeApp(): App
+    protected function makeApp(?GoogleIdTokenVerifier $google = null, ?string $googleClientId = null): App
     {
         return new App(
             $this->pdo,
@@ -54,7 +55,9 @@ abstract class TestCase extends BaseTestCase
             new BlindIndex(str_repeat("\x62", 32)),
             $this->clock,
             $this->mailer,
-            new KeyStore('test-k1', str_repeat("\x07", 32))
+            new KeyStore('test-k1', str_repeat("\x07", 32)),
+            $google,
+            $googleClientId
         );
     }
 

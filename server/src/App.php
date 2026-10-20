@@ -32,6 +32,9 @@ use Mra\Service\AttestationValidator;
 use Mra\Service\AuthService;
 use Mra\Service\BundleBuilder;
 use Mra\Service\CommitmentService;
+use Mra\Service\GoogleAuthService;
+use Mra\Service\GoogleIdTokenVerifier;
+use Mra\Service\GoogleJwks;
 use Mra\Service\ConsentBundleFactory;
 use Mra\Service\EvidencePackBuilder;
 use Mra\Service\MerkleLog;
@@ -58,6 +61,8 @@ final class App
     public readonly RegistrationService $registration;
     public readonly SessionService $sessions;
     public readonly AuthService $auth;
+    public readonly GoogleAuthService $googleAuth;
+    public readonly ?string $googleClientId;
     public readonly PackRepository $packs;
     public readonly CommitmentService $commitments;
     public readonly NonceService $nonces;
@@ -78,7 +83,9 @@ final class App
         public readonly BlindIndex $index,
         public readonly Clock $clock,
         public readonly MailerInterface $mailer,
-        public readonly KeyStore $keys
+        public readonly KeyStore $keys,
+        ?GoogleIdTokenVerifier $googleVerifier = null,
+        ?string $googleClientId = null
     ) {
         $this->users = new UserRepository($pdo, $cipher, $index);
         $this->audit = new AuditLogger($pdo, $cipher);
@@ -103,6 +110,20 @@ final class App
             $this->audit,
             $this->security,
             $clock
+        );
+        // Sign in with Google is on only when GOOGLE_CLIENT_ID is set (or a verifier is injected, in tests).
+        $configuredId = $googleClientId ?? Env::get('GOOGLE_CLIENT_ID');
+        $this->googleClientId = $configuredId === '' ? null : $configuredId;
+        $jwks = new GoogleJwks(dirname(__DIR__) . '/var/cache/google-jwks.json');
+        $this->googleAuth = new GoogleAuthService(
+            $googleVerifier ?? ($this->googleClientId === null
+                ? null
+                : new GoogleIdTokenVerifier($this->googleClientId, $jwks->get(...), $clock)),
+            $this->users,
+            $this->sessions,
+            $this->throttle,
+            $this->audit,
+            $this->security
         );
         $this->packs = new PackRepository($pdo);
         $this->commitments = new CommitmentService(new Signer($keys), new CommitmentRepository($pdo), $clock);

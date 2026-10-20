@@ -2256,3 +2256,32 @@ main:focus {
     flex: 1 1 100%;
   }
 }
+
+/* "Continue with Google" and the divider that separates it from the password form. */
+.google-signin {
+  margin-bottom: var(--space-3);
+}
+
+.google-signin-button {
+  min-height: 44px;
+}
+
+.google-signin .hint {
+  margin: var(--space-2) 0 0;
+}
+
+.auth-or {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-4) 0 var(--space-2);
+  color: var(--ink-muted);
+  font-size: var(--text-sm);
+}
+
+.auth-or::before,
+.auth-or::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--line);
+}

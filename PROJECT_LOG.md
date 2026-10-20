@@ -919,3 +919,17 @@ Found by looking at every page at 375 px, not by assumption, and fixed:
 - **Test hygiene:** the browser-based key test had a 5 s start-up timeout that failed once on a busy machine (it passed alone); it now allows 90 s.
 
 Checks: client 178 tests, ESLint, Prettier, `tsc`, `vite build` clean; axe-core 0 violations in 24 page states with no overflow at 375 px; end to end 21 of 21 and 20 of 20, honest pack `VERIFIED`, altered page `DIGEST_MISMATCH`.
+
+---
+
+## 27. Build record: sign in and sign up with Google (2026-10-20)
+
+**D-66 Google Identity Services with server-side ID-token verification.** "Continue with Google" appears on the sign-in and sign-up pages only when `GOOGLE_CLIENT_ID` is set; otherwise nothing is loaded from Google. The browser receives a signed ID token and posts it to `POST /api/auth/google`; the server verifies it (RS256 only against Google's published keys, issuer, audience equal to our client id, expiry, verified email), then creates, links or signs in. No client secret is used or stored, and no Google API access or refresh token is kept. Details, rules and limits: `docs/google-signin.md`.
+
+**D-67 Account-linking rules written against takeover.** Match on Google's `sub` first (stored only as an HMAC blind index, migration 024); link a verified existing account with the same email; for an existing **unverified** account with that email, replace its password by an unusable one and mark it verified, because whoever registered it never proved they own the address (pre-hijacking). Failed attempts are throttled per IP; the session identifier is replaced on sign-in; CSRF applies.
+
+**Verification.** PHP 460 tests (29 new): 17 token-verifier tests (valid, tampered payload, `alg: none`, HMAC algorithm confusion, wrong audience and issuer, expiry and skew, future `iat`, unverified email, key rotation, malformed input, key conversion against OpenSSL) and 12 sign-in tests through the real kernel; client 185 tests (7 new, one existing test corrected because the login page now makes one more GET); phpcs clean. An HTTP-level run on the real PHP server with a locally minted token and test key set created a verified account and a signed-in session. With the project's real client id Google's script loaded and drew its button in our page.
+
+**Not verified: a completed sign-in with a real Google account.** Google reported `The given origin is not allowed for the given client ID` for `http://localhost:5173` and `http://127.0.0.1:5173`: the authorized JavaScript origins (and, while the consent screen is in testing, the test user) still have to be added in the Cloud console. Also fixed in passing: PSR-12 errors in `AttestationRepresentationTest` and long lines in `load_attest.php` that an earlier run had missed, and stale PHP servers piling up on port 8080 (Windows lets several bind it).
+
+**KI-13.** Google sign-in has not been exercised end to end against real Google, and Google's live key-set fetch has not run.

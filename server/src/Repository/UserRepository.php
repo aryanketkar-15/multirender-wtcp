@@ -51,6 +51,16 @@ final class UserRepository extends BaseRepository
         return $this->fetchOne('WHERE email_bidx = ?', [$this->index->forEmail($email)]);
     }
 
+    public function findByGoogleSub(string $sub): ?User
+    {
+        return $this->fetchOne('WHERE google_sub_bidx = ?', [$this->index->forGoogleSub($sub)]);
+    }
+
+    public function linkGoogleSub(int $id, string $sub): void
+    {
+        $this->run('UPDATE users SET google_sub_bidx = ? WHERE id = ?', [$this->index->forGoogleSub($sub), $id]);
+    }
+
     public function findById(int $id): ?User
     {
         return $this->fetchOne('WHERE id = ?', [$id]);
