@@ -82,7 +82,10 @@ export function Home() {
             <div className="home-hero-actions">
               {user ? (
                 <>
-                  <Link to="/consent" className="btn primary" id="hero-consent-btn">
+                  <Link to="/demo" className="btn primary" id="hero-demo-btn">
+                    Try the live demo
+                  </Link>
+                  <Link to="/consent" className="btn secondary" id="hero-consent-btn">
                     Open Consent Notice
                   </Link>
                   <Link to="/verifier" className="btn secondary" id="hero-verifier-btn">

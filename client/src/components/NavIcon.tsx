@@ -5,6 +5,7 @@
 export type NavIconName =
   | 'home'
   | 'consent'
+  | 'demo'
   | 'packs'
   | 'verifier'
   | 'admin'
@@ -19,6 +20,7 @@ export type NavIconName =
 const PATHS: Record<NavIconName, string> = {
   home: 'M3 11l9-7 9 7M5 10v10h5v-6h4v6h5V10',
   consent: 'M6 3h9l4 4v14H6zM15 3v4h4M9 14l2 2 4-4',
+  demo: 'M7 4l13 8-13 8z',
   packs: 'M3 7l2-3h14l2 3M3 7h18v13H3zM9 12h6',
   verifier: 'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6zM8.5 12l2.5 2.5 4.5-5',
   admin: 'M4 20h4L19 9l-4-4L4 16zM13 7l4 4',

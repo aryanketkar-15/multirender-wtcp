@@ -79,6 +79,7 @@ export function Layout({ children, wide = false }: { children: ReactNode; wide?:
     ? [
         { to: '/', label: 'Home', icon: 'home', end: true },
         { to: '/consent', label: 'Consent', icon: 'consent' },
+        { to: '/demo', label: 'Live demo', icon: 'demo' },
         { to: '/packs', label: 'Evidence packs', icon: 'packs' },
         { to: '/verifier', label: 'Verifier', icon: 'verifier' },
         ...(user.admin
