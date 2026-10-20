@@ -933,3 +933,15 @@ Checks: client 178 tests, ESLint, Prettier, `tsc`, `vite build` clean; axe-core 
 **Not verified: a completed sign-in with a real Google account.** Google reported `The given origin is not allowed for the given client ID` for `http://localhost:5173` and `http://127.0.0.1:5173`: the authorized JavaScript origins (and, while the consent screen is in testing, the test user) still have to be added in the Cloud console. Also fixed in passing: PSR-12 errors in `AttestationRepresentationTest` and long lines in `load_attest.php` that an earlier run had missed, and stale PHP servers piling up on port 8080 (Windows lets several bind it).
 
 **KI-13.** Google sign-in has not been exercised end to end against real Google, and Google's live key-set fetch has not run.
+
+---
+
+## 28. Build record: collapsible sidebar and copy pass (2026-10-20)
+
+**D-68 Side navigation replaces the top bar.** The sidebar is 248 px, collapses to a 68 px icon rail, and remembers the choice in `localStorage` (guarded, so blocked storage only means the choice is not remembered). Collapsed labels stay in the page for screen readers and appear as tooltips. Below 860 px it becomes an off-canvas drawer with a menu button, backdrop, Escape and close button. The current page is marked with `aria-current`; the admin item shows only to admins. Icons are inline SVG, decorative.
+
+**Copy and style pass (frontend-design checklist).** Removed the "→" and "←" suffixes from three links and buttons; removed ALL-CAPS tracked labels from the recorded-meta label, the demo-packs title and the flow-card tag. Capitals remain only on the compact verdict and stage badges, where they encode status.
+
+**Verification.** Client: tsc, ESLint, Prettier, 193 tests (8 new for the sidebar), `vite build` clean. Axe-core on the new layout: 0 violations, no overflow at 375 px. Checked visually expanded, collapsed, phone and open drawer.
+
+**Not done.** The committed `screenshots/` still show the old top bar and need regenerating.

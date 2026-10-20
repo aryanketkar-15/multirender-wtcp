@@ -86,7 +86,7 @@ export function RecordedPanel({
           className="btn primary btn-sm"
           id="btn-verify-in-verifier"
         >
-          Verify in Verifier →
+          Verify in the verifier
         </a>
         <button type="button" className="btn secondary btn-sm" onClick={() => location.reload()}>
           Start over

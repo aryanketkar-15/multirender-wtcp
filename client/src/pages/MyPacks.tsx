@@ -132,7 +132,7 @@ export function MyPacks() {
                     className="btn secondary"
                     aria-label={`Verify evidence pack ${pack.id} in Independent Verifier`}
                   >
-                    Verify in Verifier →
+                    Verify in the verifier
                   </Link>
                 </div>
               </div>
