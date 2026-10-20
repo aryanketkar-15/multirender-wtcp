@@ -197,7 +197,11 @@ describe('Login page', () => {
     await submit(user);
     expect(await screen.findByText('home page')).toBeInTheDocument();
     expect(post).toHaveBeenCalledTimes(2);
-    expect(apiModule.api.get).toHaveBeenCalledTimes(2); // load, then the refresh
+    // load, then the refresh (the Google config lookup is a separate GET and is not counted)
+    const sessionCalls = jest
+      .mocked(apiModule.api.get)
+      .mock.calls.filter(([path]) => path === '/api/session');
+    expect(sessionCalls).toHaveLength(2);
   });
 
   it('does not call a plain 403 an unverified email', async () => {

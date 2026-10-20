@@ -3,6 +3,7 @@ import type { FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormField } from '../components/FormField';
 import { AuthLayout } from '../components/AuthLayout';
+import { GoogleSignIn } from '../components/GoogleSignIn';
 import { api } from '../lib/api';
 import { validateRegistration } from '../lib/validation';
 import type { Errors } from '../lib/validation';
@@ -73,6 +74,7 @@ export function Register() {
           {banner}
         </div>
       ) : null}
+      <GoogleSignIn mode="signup" redirectTo="/" />
       <form onSubmit={onSubmit} noValidate>
         <FormField
           label="Full name"

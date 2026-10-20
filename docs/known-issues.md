@@ -38,6 +38,7 @@ In accordance with academic integrity and the project's verification protocol, a
 | **KI-10** | Consent flow not run through the app in Firefox or Safari | **LOW** | M4 (Client) | Playwright's Firefox is unavailable here; WebKit not installed. Firefox digests were measured separately (PROJECT_LOG 18) | Open |
 | **KI-11** | Accessibility checked by automated rules only | **LOW** | M4 (Client) | axe-core covers part of WCAG; no manual screen-reader pass | Open |
 | **KI-12** | `scripts/dev-backend.cjs` is a mock API | **LOW** | Tooling | Fixed responses on port 8080 for UI work; never the MRA server; must not be used for results | Labelled |
+| **KI-13** | Google sign-in not exercised against real Google | **LOW** | M1 (Accounts) | Needs the OAuth origins and a test user configured in the Cloud console, and a real login; the live key-set fetch has not run | Open |
 
 ---
 

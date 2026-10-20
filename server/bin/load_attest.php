@@ -153,7 +153,13 @@ $out = [
     'child_process_errors' => $childErrors,
     'replay_detected_responses' => $nonceReplays,
     'attestation_rows' => $attestationRows,
-    'latency_ms_per_request' => ['min' => $pct($latencies, 0.0), 'p50' => $pct($latencies, 0.5), 'p95' => $pct($latencies, 0.95), 'p99' => $pct($latencies, 0.99), 'max' => $latencies === [] ? 0 : round(max($latencies), 2)],
+    'latency_ms_per_request' => [
+        'min' => $pct($latencies, 0.0),
+        'p50' => $pct($latencies, 0.5),
+        'p95' => $pct($latencies, 0.95),
+        'p99' => $pct($latencies, 0.99),
+        'max' => $latencies === [] ? 0 : round(max($latencies), 2),
+    ],
     'wall_clock_seconds_for_all' => round(microtime(true) - $wall0, 2),
     'log' => [
         'leaves_before_attesting' => $leavesBefore,
@@ -168,7 +174,12 @@ $out = [
         'inclusion_proofs_checked' => $proofsChecked,
         'inclusion_proofs_valid' => $proofsValid,
     ],
-    'environment' => ['php' => PHP_VERSION, 'os' => PHP_OS, 'database' => 'MariaDB (scratch database on the dev instance)', 'note' => 'application kernel in separate OS processes, no HTTP layer: the PHP built-in server is single-threaded'],
+    'environment' => [
+        'php' => PHP_VERSION,
+        'os' => PHP_OS,
+        'database' => 'MariaDB (scratch database on the dev instance)',
+        'note' => 'application kernel in separate OS processes, no HTTP layer: the PHP built-in server is single-threaded',
+    ],
 ];
 echo json_encode($out, JSON_PRETTY_PRINT) . "\n";
 unset($app, $app2);

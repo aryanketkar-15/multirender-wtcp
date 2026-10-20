@@ -142,13 +142,14 @@ final class AttestationRepresentationTest extends TestCase
     public function testAMalformedRepresentationIsRejectedByTheSchema(): void
     {
         $b = $this->bundle();
-        foreach ([
+        $cases = [
             'a list' => [1, 2],
             'wrong version' => ['v' => 'srd/9', 'policy' => 'consent/v1', 'nodes' => []],
             'extra member' => ['v' => 'srd/1.0', 'policy' => 'consent/v1', 'nodes' => [], 'extra' => 1],
             'node not an object' => ['v' => 'srd/1.0', 'policy' => 'consent/v1', 'nodes' => ['x']],
             'nodes not a list' => ['v' => 'srd/1.0', 'policy' => 'consent/v1', 'nodes' => ['a' => []]],
-        ] as $label => $bad) {
+        ];
+        foreach ($cases as $label => $bad) {
             $res = $this->send('POST', '/api/attest', $this->client->body($b) + ['region_representation' => $bad]);
             $this->assertSame(422, $res->status, $label);
             $this->assertSame('SCHEMA_INVALID', $res->data()['error'], $label);

@@ -39,6 +39,12 @@ final class BlindIndex
         return hash_hmac('sha256', $domain . "\0" . $value, $this->pepper, true);
     }
 
+    /** @return string 32 raw bytes: lookup key for a Google subject id (never stored raw) */
+    public function forGoogleSub(string $sub): string
+    {
+        return hash_hmac('sha256', 'google-sub:' . $sub, $this->pepper, true);
+    }
+
     /** @return string 32 raw bytes */
     public function forEmail(string $email): string
     {

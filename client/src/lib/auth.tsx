@@ -29,6 +29,8 @@ interface AuthContextValue {
   status: 'loading' | 'ready' | 'error';
   user: User | null;
   login: (email: string, password: string) => Promise<LoginOutcome>;
+  /** Signs in or up with a Google ID token (the credential Google Identity Services returns). */
+  loginWithGoogle: (credential: string) => Promise<LoginOutcome>;
   logout: () => Promise<void>;
   refresh: () => Promise<void>;
 }
@@ -37,6 +39,7 @@ const signedOut: AuthContextValue = {
   status: 'ready',
   user: null,
   login: async () => ({ kind: 'error' }),
+  loginWithGoogle: async () => ({ kind: 'error' }),
   logout: async () => {},
   refresh: async () => {},
 };
@@ -95,6 +98,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     [apply],
   );
 
+  const loginWithGoogle = useCallback(
+    async (credential: string): Promise<LoginOutcome> => {
+      const post = () =>
+        api.post<SessionPayload & { error?: string }>('/api/auth/google', { credential });
+      let res = await post();
+      if (res.status === 403 && res.data.error === 'csrf_rejected') {
+        await refresh();
+        res = await post();
+      }
+      if (res.ok) {
+        apply(res.data);
+        return { kind: 'ok' };
+      }
+      if (res.status === 401) return { kind: 'invalid' };
+      if (res.status === 429) return { kind: 'throttled', retryAfter: null };
+      return { kind: 'error' };
+    },
+    [apply, refresh],
+  );
+
   const logout = useCallback(async () => {
     await api.post('/api/logout');
     await discardClientKeys(); // the signing key does not outlive the session
@@ -103,8 +126,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [refresh]);
 
   const value = useMemo(
-    () => ({ status, user, login, logout, refresh }),
-    [status, user, login, logout, refresh],
+    () => ({ status, user, login, loginWithGoogle, logout, refresh }),
+    [status, user, login, loginWithGoogle, logout, refresh],
   );
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

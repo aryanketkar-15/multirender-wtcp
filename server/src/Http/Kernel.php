@@ -9,6 +9,7 @@ use Mra\Controller\AdminController;
 use Mra\Controller\AttestationController;
 use Mra\Controller\AuthController;
 use Mra\Controller\BundleController;
+use Mra\Controller\GoogleAuthController;
 use Mra\Controller\KeyController;
 use Mra\Controller\LogController;
 use Mra\Controller\OtpController;
@@ -65,6 +66,10 @@ final class Kernel
         $this->router->add('GET', '/api/session', [$authController, 'session'], [$session]);
         $this->router->add('POST', '/api/login', [$authController, 'login'], [$session, $csrf]);
         $this->router->add('POST', '/api/logout', [$authController, 'logout'], [$session, $csrf, $auth]);
+
+        $googleController = new GoogleAuthController($app->googleAuth, $app->googleClientId);
+        $this->router->add('GET', '/api/auth/config', [$googleController, 'config']);
+        $this->router->add('POST', '/api/auth/google', [$googleController, 'login'], [$session, $csrf]);
 
         $this->router->add('GET', '/.well-known/mra-key', [new KeyController($app->keys), 'show']);
 
