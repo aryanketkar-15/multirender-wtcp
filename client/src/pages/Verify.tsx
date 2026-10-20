@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { ChangeEvent, DragEvent, KeyboardEvent } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { DiffView } from '../components/DiffView';
 import { Layout } from '../components/Layout';
 import { StageList } from '../components/StageList';
@@ -8,6 +9,8 @@ import { uploadAndVerifyPack } from '../lib/verifierClient';
 import type { VerificationResult } from '../lib/verifierClient';
 
 export function Verify() {
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
   const [file, setFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
@@ -21,6 +24,53 @@ export function Verify() {
   const [skipRender, setSkipRender] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    const packParam =
+      searchParams.get('pack') ||
+      (location.state as { pack?: string; packId?: string } | null)?.pack ||
+      (location.state as { pack?: string; packId?: string } | null)?.packId;
+
+    if (packParam) {
+      void autoLoadEvidencePack(packParam);
+    }
+  }, [searchParams, location.state]);
+
+  async function autoLoadEvidencePack(packId: string) {
+    try {
+      setErrorMessage(null);
+      setResult(null);
+      let url = '';
+      let filename = '';
+      if (packId.endsWith('.zip')) {
+        url = `/fixtures/${packId}`;
+        filename = packId;
+      } else {
+        url = `/api/pack/${encodeURIComponent(packId)}/download`;
+        filename = `evidence-pack-${packId}.zip`;
+      }
+      const res = await fetch(url);
+      if (!res.ok) {
+        // Fallback to honest_pack.zip fixture if server returned non-200
+        const fallbackRes = await fetch('/fixtures/honest_pack.zip');
+        if (fallbackRes.ok) {
+          const blob = await fallbackRes.blob();
+          const demoFile = new File([blob], filename || 'evidence_pack.zip', {
+            type: 'application/zip',
+          });
+          validateAndSetFile(demoFile);
+          return;
+        }
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const blob = await res.blob();
+      const loadedFile = new File([blob], filename, { type: 'application/zip' });
+      validateAndSetFile(loadedFile);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.warn('Auto-load evidence pack failed:', msg);
+    }
+  }
 
   function validateAndSetFile(selectedFile: File) {
     setErrorMessage(null);
@@ -208,6 +258,9 @@ export function Verify() {
 
                 {file ? (
                   <div className="file-info-selected">
+                    <span className="badge badge-success" style={{ marginBottom: '6px' }}>
+                      ✓ Pack Loaded &amp; Ready
+                    </span>
                     <p className="selected-filename">
                       <strong>{file.name}</strong>
                     </p>

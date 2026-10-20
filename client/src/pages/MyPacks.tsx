@@ -87,11 +87,11 @@ export function MyPacks() {
 
         {!loading && !error && packs && packs.length > 0 ? (
           <div className="pack-list" role="list">
-            {packs.map((pack) => (
-              <div key={pack.id} className="pack-card" role="listitem">
+            {packs.map((pack, idx) => (
+              <div key={pack.id || (pack as any).pack_id || `pack-${idx}`} className="pack-card" role="listitem">
                 <div className="pack-info">
                   <div className="pack-title">
-                    <code>{pack.id}</code>
+                    <code>{pack.id || (pack as any).pack_id}</code>
                     {pack.action ? (
                       <span className={`badge ${pack.action === 'accept' ? 'accept' : 'reject'}`}>
                         {pack.action}
@@ -117,7 +117,8 @@ export function MyPacks() {
                     Download (.zip)
                   </a>
                   <Link
-                    to="/verifier"
+                    to={`/verifier?pack=${encodeURIComponent(pack.id || (pack as any).pack_id)}`}
+                    state={{ pack: pack.id || (pack as any).pack_id }}
                     className="btn secondary"
                     aria-label={`Verify evidence pack ${pack.id} in Independent Verifier`}
                   >
