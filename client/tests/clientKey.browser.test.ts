@@ -4,8 +4,9 @@ import type { Page } from 'playwright';
 
 describeBrowser('client signing key (T4.1)', () => {
   const lab = new Lab();
-  beforeAll(() => lab.start());
-  afterAll(() => lab.stop());
+  // Starting a real browser can take well over the 5 s default when the machine is busy.
+  beforeAll(() => lab.start(), 90_000);
+  afterAll(() => lab.stop(), 30_000);
 
   const fpr = (page: Page, csrf: string) =>
     page.evaluate(async (c) => {

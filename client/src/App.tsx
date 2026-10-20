@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { RequireAuth } from './components/RequireAuth';
 import { AuthProvider } from './lib/auth';
@@ -14,10 +15,35 @@ import { VerifyEmail } from './pages/VerifyEmail';
 
 import { Home } from './pages/Home';
 
+const TITLES: Record<string, string> = {
+  '/': 'Mutual Render Attestation',
+  '/consent': 'Consent',
+  '/packs': 'My evidence packs',
+  '/verifier': 'Independent verifier',
+  '/verify-pack': 'Independent verifier',
+  '/admin/consent': 'Edit consent text',
+  '/register': 'Create your account',
+  '/verify': 'Verify your email',
+  '/login': 'Sign in',
+  '/forgot-password': 'Reset your password',
+  '/reset-password': 'Choose a new password',
+};
+
+/** Keeps the browser tab title in step with the page, so screen-reader users hear where they are. */
+function RouteTitle() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const page = TITLES[pathname];
+    document.title = page && pathname !== '/' ? `${page} · MRA` : 'MRA · Mutual Render Attestation';
+  }, [pathname]);
+  return null;
+}
+
 export function App() {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <AuthProvider>
+        <RouteTitle />
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />

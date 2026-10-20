@@ -90,10 +90,10 @@ function NodeCard({ node }: { node: MismatchedNode }) {
                     {labelInfo.hint && <span className="diff-field-hint">{labelInfo.hint}</span>}
                     <code>{fieldName}</code>
                   </td>
-                  <td className="diff-value-attested">
+                  <td className="diff-value-attested" data-label="Attested by browser">
                     <div className="diff-value-box attested">{formatValue(delta.attested)}</div>
                   </td>
-                  <td className="diff-value-recomputed">
+                  <td className="diff-value-recomputed" data-label="Committed by server">
                     <div className="diff-value-box recomputed">{formatValue(delta.recomputed)}</div>
                   </td>
                 </tr>
