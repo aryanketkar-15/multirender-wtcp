@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FormField } from '../components/FormField';
 import { AuthLayout } from '../components/AuthLayout';
 import { GoogleSignIn } from '../components/GoogleSignIn';
+import { RecordsNotice } from '../components/RecordsNotice';
 import { useAuth } from '../lib/auth';
 import { MESSAGES, validEmail } from '../lib/validation';
 import type { Errors } from '../lib/validation';
@@ -101,6 +102,7 @@ export function Login() {
           {submitting ? 'Signing in…' : 'Sign in'}
         </button>
       </form>
+      <RecordsNotice />
       <div className="links">
         <Link to="/forgot-password">Forgot your password?</Link>
         <Link to="/register">Create an account</Link>
