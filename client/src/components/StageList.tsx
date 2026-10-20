@@ -1,4 +1,5 @@
 import type { StageResult } from '../lib/verifierClient';
+import { Mark } from './Mark';
 
 export interface StageListProps {
   stages: StageResult[];
@@ -62,9 +63,11 @@ export function StageList({ stages, passedStages = 0, failedStage }: StageListPr
               data-testid={`stage-item-${item.stageNum}`}
             >
               <div className="stage-status-icon" aria-hidden="true">
-                {item.status === 'pass' && '✓'}
-                {item.status === 'fail' && '✗'}
-                {item.status === 'pending' && '—'}
+                <Mark
+                  kind={
+                    item.status === 'pass' ? 'pass' : item.status === 'fail' ? 'fail' : 'pending'
+                  }
+                />
               </div>
               <div className="stage-info">
                 <span className="stage-name">{item.name}</span>

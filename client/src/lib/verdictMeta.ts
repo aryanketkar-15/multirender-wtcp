@@ -18,31 +18,31 @@ export const VERDICT_METADATA: Record<string, VerdictMeta> = {
     code: 'VERIFIED',
     category: 'success',
     badgeLabel: 'VERIFIED',
-    title: 'Evidence Verified — Consent Record Is Authentic & Mutual',
+    title: 'Evidence verified: the committed notice matches what the browser attested',
     summary:
-      'What the server committed to in the log matches exactly what the user saw and signed on screen. Both cryptographic signatures and the independent browser re-render match with zero discrepancies.',
+      'The critical region, re-rendered from the bundle the server committed to, matches the digest the user’s browser signed. Every signature, binding and log proof also checked out. Content outside the critical region was not compared.',
     legalSignificance:
-      'The evidence pack provides strong mutual non-repudiation: neither the user nor the service provider can credibly dispute the terms presented.',
+      'Both sides’ records agree on the critical region, which makes it hard for either to deny it later. It does not by itself settle a legal dispute, and it does not cover content outside the critical region.',
   },
   DIGEST_MISMATCH: {
     code: 'DIGEST_MISMATCH',
     category: 'attack',
-    badgeLabel: 'ATTACK DETECTED',
-    title: 'Consent Notice Alteration Detected',
+    badgeLabel: 'MISMATCH',
+    title: 'The committed notice and the attested page differ',
     summary:
-      'The server committed to a different consent notice than what the user actually saw and signed. The recomputed render tree diverges from the user’s attested screen capture.',
+      'Re-rendering the notice the server committed to gives a different result from the page the user’s browser attested. The elements that differ are listed below.',
     legalSignificance:
-      'Indicates server misconduct or a deceptive dark pattern: the user was shown different terms, visual prominence, or pre-selected choices than what the server logged.',
+      'The page the user’s browser attested differs from the bundle the server committed to. The cause may be the server, a script or extension that changed the page after it loaded, or a difference in environment such as fonts or viewport. The evidence shows that it differs and where, not who did it.',
   },
   RENDER_DIGEST_MISMATCH: {
     code: 'RENDER_DIGEST_MISMATCH',
     category: 'attack',
-    badgeLabel: 'ATTACK DETECTED',
-    title: 'Consent Notice Alteration Detected',
+    badgeLabel: 'MISMATCH',
+    title: 'The committed notice and the attested page differ',
     summary:
-      'The server committed to a different consent notice than what the user actually saw and signed. The recomputed render tree diverges from the user’s attested screen capture.',
+      'Re-rendering the notice the server committed to gives a different result from the page the user’s browser attested. The elements that differ are listed below.',
     legalSignificance:
-      'Indicates server misconduct or a deceptive dark pattern: the user was shown different terms, visual prominence, or pre-selected choices than what the server logged.',
+      'The page the user’s browser attested differs from the bundle the server committed to. The cause may be the server, a script or extension that changed the page after it loaded, or a difference in environment such as fonts or viewport. The evidence shows that it differs and where, not who did it.',
   },
   CONTEXT_MISMATCH: {
     code: 'CONTEXT_MISMATCH',
@@ -52,7 +52,7 @@ export const VERDICT_METADATA: Record<string, VerdictMeta> = {
     summary:
       'The critical consent text matched, but external visual layers, deceptive overlays, or surrounding elements altered the user’s perception when consenting.',
     legalSignificance:
-      'Indicates an occlusion or deceptive overlay attack outside the critical dialog region.',
+      'Something around the critical region differs from what was committed, for example an overlay. The context digest also covers the surrounding application, so check the details before concluding that an attack took place.',
   },
   SERVER_SIGNATURE_INVALID: {
     code: 'SERVER_SIGNATURE_INVALID',
@@ -72,7 +72,7 @@ export const VERDICT_METADATA: Record<string, VerdictMeta> = {
     summary:
       'The user’s cryptographic ECDSA signature on the attestation does not match the client public key in the pack.',
     legalSignificance:
-      'The attestation cannot be authenticated to the user’s hardware or browser key pair.',
+      'The attestation cannot be authenticated to the browser key pair registered for the session.',
   },
   KEY_BINDING_INVALID: {
     code: 'KEY_BINDING_INVALID',
@@ -140,7 +140,7 @@ export const VERDICT_METADATA: Record<string, VerdictMeta> = {
     summary:
       'The attestor module code hash named in the commitment is not recognized in the approved attestor registry.',
     legalSignificance:
-      'The attestation code cannot be vouched for by an independent governance authority.',
+      'The measuring code named in the attestation is not a build this verifier recognises.',
   },
   MALFORMED_PACK: {
     code: 'MALFORMED_PACK',

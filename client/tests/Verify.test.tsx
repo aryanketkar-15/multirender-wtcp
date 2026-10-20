@@ -52,7 +52,9 @@ describe('Milestone 5.4 — Verifier interface and plain-language dashboard', ()
 
     await waitFor(() => {
       expect(
-        screen.getByText(/Evidence Verified — Consent Record Is Authentic & Mutual/i),
+        screen.getByText(
+          /Evidence verified: the committed notice matches what the browser attested/i,
+        ),
       ).toBeInTheDocument();
     });
 
@@ -123,7 +125,9 @@ describe('Milestone 5.4 — Verifier interface and plain-language dashboard', ()
     fireEvent.click(screen.getByRole('button', { name: /run independent verification/i }));
 
     await waitFor(() => {
-      expect(screen.getByText(/Consent Notice Alteration Detected/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/The committed notice and the attested page differ/i),
+      ).toBeInTheDocument();
     });
 
     // Check that DiffView is rendered with side-by-side evidence
@@ -233,7 +237,9 @@ describe('Milestone 5.4 — Verifier interface and plain-language dashboard', ()
 
     await waitFor(() => {
       expect(
-        screen.getByText(/Evidence Verified — Consent Record Is Authentic & Mutual/i),
+        screen.getByText(
+          /Evidence verified: the committed notice matches what the browser attested/i,
+        ),
       ).toBeInTheDocument();
     });
   });
@@ -310,12 +316,15 @@ describe('Milestone 5.4 — Verifier interface and plain-language dashboard', ()
       </MemoryRouter>,
     );
 
-    const dropzone = screen.getByRole('button', { name: /upload evidence pack dropzone/i });
-    expect(dropzone).toHaveAttribute('tabIndex', '0');
-
-    // Focus on dropzone using keyboard
-    dropzone.focus();
-    expect(dropzone).toHaveFocus();
+    // The dropzone is a labelled group, not a button: a button may not contain the real controls
+    // (axe rule nested-interactive). The keyboard path is the Browse button inside it.
+    const group = screen.getByRole('group', { name: /evidence pack upload/i });
+    expect(group).not.toHaveAttribute('tabindex');
+    const browse = screen.getByRole('button', { name: /browse files/i });
+    expect(group).toContainElement(browse);
+    await user.tab();
+    browse.focus();
+    expect(browse).toHaveFocus();
 
     // Render VerdictCard directly to test disclosure keyboard operation
     const result: verifierClient.VerificationResult = {

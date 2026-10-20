@@ -195,6 +195,33 @@ final class AttestationValidator
         ?int $commitmentLeaf,
         ?string $representation = null
     ): array {
+        // Hold the log append lock across the whole transaction, up to and including its commit.
+        return $this->log->whileLocked(fn (): array => $this->persistLocked(
+            $a,
+            $canonical,
+            $signature,
+            $fingerprint,
+            $user,
+            $sessionId,
+            $commitmentLeaf,
+            $representation
+        ));
+    }
+
+    /**
+     * @param array<string,mixed> $a
+     * @return array{id:int,attestation_hash:string,commitment_hash:string,log_leaf_index:int,commitment_leaf_index:?int}
+     */
+    private function persistLocked(
+        array $a,
+        string $canonical,
+        string $signature,
+        string $fingerprint,
+        User $user,
+        string $sessionId,
+        ?int $commitmentLeaf,
+        ?string $representation = null
+    ): array {
         $owns = !$this->pdo->inTransaction();
         if ($owns) {
             $this->pdo->beginTransaction();

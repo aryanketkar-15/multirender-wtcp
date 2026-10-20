@@ -172,15 +172,22 @@ describe('attestation signed at the moment of action (T4.2)', () => {
       fakeModule.attest.mockImplementation(async () => {
         seen.boxTicked = (screen.getByRole('checkbox') as HTMLInputElement).checked;
         seen.boxEnabled = !(screen.getByRole('checkbox') as HTMLInputElement).disabled;
-        seen.acceptEnabled = !(screen.getByRole('button', { name: 'Accept' }) as HTMLButtonElement).disabled;
-        seen.rejectEnabled = !(screen.getByRole('button', { name: 'Reject' }) as HTMLButtonElement).disabled;
+        seen.acceptEnabled = !(screen.getByRole('button', { name: 'Accept' }) as HTMLButtonElement)
+          .disabled;
+        seen.rejectEnabled = !(screen.getByRole('button', { name: 'Reject' }) as HTMLButtonElement)
+          .disabled;
         return evidence;
       });
     });
     await ctx.user.click(await screen.findByRole('checkbox'));
     await ctx.user.click(screen.getByRole('button', { name: 'Accept' }));
     await screen.findByText(RECORDED);
-    expect(seen).toEqual({ boxTicked: true, boxEnabled: true, acceptEnabled: true, rejectEnabled: true });
+    expect(seen).toEqual({
+      boxTicked: true,
+      boxEnabled: true,
+      acceptEnabled: true,
+      rejectEnabled: true,
+    });
   });
 
   it('signs so that the signature verifies against the carried public key (T4.2.6)', async () => {

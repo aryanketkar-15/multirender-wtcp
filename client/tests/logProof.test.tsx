@@ -127,7 +127,7 @@ describe('RecordedPanel', () => {
     expect(screen.getByText(/entry 5/)).toHaveTextContent('entry 4');
     await user.click(screen.getByRole('button', { name: 'Check this record in the log' }));
     expect(await screen.findByText('Verified in the log.')).toBeInTheDocument();
-    expect(screen.getAllByText(/^✓/)).toHaveLength(4);
+    expect(screen.getAllByRole('img', { name: 'Passed' })).toHaveLength(4);
   });
 
   it('offers to start over, and hides the log check when no entry is known', () => {
@@ -158,6 +158,6 @@ describe('RecordedPanel', () => {
     );
     await user.click(screen.getByRole('button', { name: 'Check this record in the log' }));
     expect(await screen.findByText('Could not verify.')).toBeInTheDocument();
-    expect(screen.getAllByText(/^✗/).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('img', { name: 'Failed' }).length).toBeGreaterThan(0);
   });
 });

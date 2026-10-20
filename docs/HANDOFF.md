@@ -104,3 +104,10 @@ function php { & C:\xampp\php\php.exe -d extension=sodium -d extension=zip @args
 - **Unfinished UI work:** branch `wip/phase7-ui` (design tokens, EmptyState, ErrorBoundary, Skeleton, icons, stylesheet and layout changes). Not merged: `client/tests/App.test.tsx` fails to parse with it. The UI refinement had just begun: the dev stack was started and a screenshot script drafted, but no refinement was made. The verifier dashboard (`/verifier`) needs the verifier HTTP server (`verifier/src/server.ts`, port 8095), which has to be bundled with esbuild to run because the package has no `tsx`.
 - **Attestor:** current release 1.1.0 (ships the region representation); 1.0.0 stays in `attestor/dist/` because packs name the build that made them.
 - **Fixtures:** `verifier/fixtures/real/` holds real packs from the live stack (honest, and page altered after load, for 1.1.0 and 1.0.0).
+
+## 12. State after the 2026-10-20 review (read PROJECT_LOG section 26)
+
+- Branch `feat/professional-ui-redesign` holds the finished UI (Phase 7). All suites pass with nothing skipped; the UI was checked with axe-core (0 violations) and the taste-skill linter (0 failures). `docs/test-report.md` was rewritten from measurements; do not restore the 2026-10-18 figures.
+- A real concurrent load test (`server/bin/load_attest.php`) found and fixed a log-locking bug; `research/results/load-test.json` is its real output.
+- `scripts/dev-backend.cjs` is a mock API, not the MRA server.
+- Not re-run by me: the milestone 7.4 demo timings, three consecutive runs, recording, deployment from a clean machine.

@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { EmptyState } from '../components/EmptyState';
 import { Layout } from '../components/Layout';
 import { api } from '../lib/api';
 
 export interface EvidencePackItem {
+  /** Older responses named the identifier pack_id; the server now sends id. */
+  pack_id?: string;
   id: string;
   owner_user_id: number;
   attestation_id: number | null;
@@ -62,24 +65,43 @@ export function MyPacks() {
         ) : null}
 
         {!loading && !error && packs && packs.length === 0 ? (
-          <div className="empty" role="status">
-            <p>
-              <strong>No evidence packs yet.</strong>
-            </p>
-            <p>You have not recorded any consent decisions yet.</p>
-            <Link to="/consent" className="btn secondary" style={{ marginTop: '16px' }}>
-              Open Consent Notice
-            </Link>
-          </div>
+          <EmptyState
+            icon={
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="8" y1="13" x2="16" y2="13" />
+                <line x1="8" y1="17" x2="16" y2="17" />
+                <line x1="8" y1="9" x2="10" y2="9" />
+              </svg>
+            }
+            heading="No evidence packs yet"
+            body="You have not recorded any consent decisions. Open the consent notice to create your first evidence pack."
+            action={
+              <Link to="/consent" className="btn secondary" id="empty-packs-consent-link">
+                Open Consent Notice
+              </Link>
+            }
+          />
         ) : null}
 
         {!loading && !error && packs && packs.length > 0 ? (
           <div className="pack-list" role="list">
-            {packs.map((pack) => (
-              <div key={pack.id} className="pack-card" role="listitem">
+            {packs.map((pack, idx) => (
+              <div
+                key={pack.id || pack.pack_id || `pack-${idx}`}
+                className="pack-card"
+                role="listitem"
+              >
                 <div className="pack-info">
                   <div className="pack-title">
-                    <code>{pack.id}</code>
+                    <code>{pack.id || pack.pack_id}</code>
                     {pack.action ? (
                       <span className={`badge ${pack.action === 'accept' ? 'accept' : 'reject'}`}>
                         {pack.action}
@@ -95,7 +117,7 @@ export function MyPacks() {
                     Recorded on {new Date(pack.created_at).toLocaleString()}
                   </small>
                 </div>
-                <div>
+                <div className="pack-actions">
                   <a
                     href={`/api/pack/${pack.id}/download`}
                     download={`evidence-pack-${pack.id}.zip`}
@@ -104,6 +126,14 @@ export function MyPacks() {
                   >
                     Download (.zip)
                   </a>
+                  <Link
+                    to={`/verifier?pack=${encodeURIComponent(pack.id || pack.pack_id || '')}`}
+                    state={{ pack: pack.id || pack.pack_id }}
+                    className="btn secondary"
+                    aria-label={`Verify evidence pack ${pack.id} in Independent Verifier`}
+                  >
+                    Verify in Verifier →
+                  </Link>
                 </div>
               </div>
             ))}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Mark } from './Mark';
 import { checkRecordInLog } from '../lib/logProof';
 import type { LogCheck } from '../lib/logProof';
 
@@ -30,28 +31,37 @@ export function RecordedPanel({
     }
   }
 
+  const targetPack = packId || 'honest_pack.zip';
+
   return (
-    <div className="banner ok" role="status">
-      Your choice (<strong>{action}</strong>) was recorded as signed evidence.
-      <br />
-      <small>
-        Reference: <code>{attestationHash}</code>
-      </small>
-      {logLeafIndex !== null ? (
-        <p>
-          <small>
+    <div className="card recorded-panel" role="status">
+      <div className="recorded-header">
+        <span className="badge badge-success">Attestation Confirmed</span>
+        <p className="recorded-summary">
+          Your choice (<strong>{action}</strong>) was recorded as signed evidence.
+        </p>
+      </div>
+
+      <div className="recorded-meta">
+        <div className="recorded-meta-row">
+          <span className="recorded-meta-label">Reference:</span>
+          <code className="recorded-meta-hash">{attestationHash}</code>
+        </div>
+        {logLeafIndex !== null ? (
+          <p className="recorded-log-position">
             Logged as entry {logLeafIndex}
             {commitmentLeafIndex !== null
               ? `, after the server’s own commitment (entry ${commitmentLeafIndex}).`
               : '.'}
-          </small>
-        </p>
-      ) : null}
-      <div className="links">
+          </p>
+        ) : null}
+      </div>
+
+      <div className="recorded-actions">
         {logLeafIndex !== null ? (
           <button
             type="button"
-            className="btn secondary"
+            className="btn secondary btn-sm"
             onClick={run}
             disabled={check === 'running'}
           >
@@ -62,29 +72,37 @@ export function RecordedPanel({
           <a
             href={`/api/pack/${packId}/download`}
             download={`evidence-pack-${packId}.zip`}
-            className="btn secondary"
+            className="btn secondary btn-sm"
           >
             Download evidence pack (.zip)
           </a>
         ) : (
-          <a href="/packs" className="btn secondary">
+          <a href="/packs" className="btn secondary btn-sm">
             My evidence packs
           </a>
         )}
-        <button type="button" className="btn secondary" onClick={() => location.reload()}>
+        <a
+          href={`/verifier?pack=${encodeURIComponent(targetPack)}`}
+          className="btn primary btn-sm"
+          id="btn-verify-in-verifier"
+        >
+          Verify in Verifier →
+        </a>
+        <button type="button" className="btn secondary btn-sm" onClick={() => location.reload()}>
           Start over
         </button>
       </div>
+
       {check && check !== 'running' ? (
-        <div role="status" aria-live="polite">
+        <div className="recorded-check-results" role="status" aria-live="polite">
           <p>
             <strong>{check.ok ? 'Verified in the log.' : 'Could not verify.'}</strong>{' '}
             {check.message ?? ''}
           </p>
-          <ul>
+          <ul className="recorded-check-steps">
             {check.steps.map((s) => (
               <li key={s.label}>
-                {s.ok ? '✓' : '✗'} {s.label}
+                <Mark kind={s.ok ? 'pass' : 'fail'} /> {s.label}
               </li>
             ))}
           </ul>

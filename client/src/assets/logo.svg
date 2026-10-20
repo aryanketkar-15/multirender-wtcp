@@ -1,0 +1,46 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 32 32"
+  width="32"
+  height="32"
+  role="img"
+  aria-label="MRA mark"
+>
+  <!--
+    MRA Logo — hand-coded SVG. Author: MRA project team.
+    Concept: two mirrored document corners meeting at a mutual
+    verification check. The bracket forms "M" (Mutual), the tick
+    forms "A" (Attestation), the meeting point is the render.
+    No stock icon, no third-party SVG library.
+    Licence: original work, committed with source.
+  -->
+  <!-- Background tile -->
+  <rect x="1" y="1" width="30" height="30" rx="8" fill="hsl(188,80%,23%)"/>
+  <!-- Left bracket (server side) -->
+  <path
+    d="M8 22V10h7"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Right bracket (client side) -->
+  <path
+    d="M24 10v12h-7"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <!-- Mutual verification tick -->
+  <path
+    d="M12.5 16.5l3.2 3.2 5-6"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="2.4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

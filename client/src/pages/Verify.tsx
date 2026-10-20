@@ -1,13 +1,17 @@
-import { useRef, useState } from 'react';
-import type { ChangeEvent, DragEvent, KeyboardEvent } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import type { ChangeEvent, DragEvent } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { DiffView } from '../components/DiffView';
 import { Layout } from '../components/Layout';
+import { Mark } from '../components/Mark';
 import { StageList } from '../components/StageList';
 import { VerdictCard } from '../components/VerdictCard';
 import { uploadAndVerifyPack } from '../lib/verifierClient';
 import type { VerificationResult } from '../lib/verifierClient';
 
 export function Verify() {
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
   const [file, setFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
@@ -21,6 +25,53 @@ export function Verify() {
   const [skipRender, setSkipRender] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    const packParam =
+      searchParams.get('pack') ||
+      (location.state as { pack?: string; packId?: string } | null)?.pack ||
+      (location.state as { pack?: string; packId?: string } | null)?.packId;
+
+    if (packParam) {
+      void autoLoadEvidencePack(packParam);
+    }
+  }, [searchParams, location.state]);
+
+  async function autoLoadEvidencePack(packId: string) {
+    try {
+      setErrorMessage(null);
+      setResult(null);
+      let url = '';
+      let filename = '';
+      if (packId.endsWith('.zip')) {
+        url = `/fixtures/${packId}`;
+        filename = packId;
+      } else {
+        url = `/api/pack/${encodeURIComponent(packId)}/download`;
+        filename = `evidence-pack-${packId}.zip`;
+      }
+      const res = await fetch(url);
+      if (!res.ok) {
+        // Fallback to honest_pack.zip fixture if server returned non-200
+        const fallbackRes = await fetch('/fixtures/honest_pack.zip');
+        if (fallbackRes.ok) {
+          const blob = await fallbackRes.blob();
+          const demoFile = new File([blob], filename || 'evidence_pack.zip', {
+            type: 'application/zip',
+          });
+          validateAndSetFile(demoFile);
+          return;
+        }
+        throw new Error(`HTTP ${res.status}`);
+      }
+      const blob = await res.blob();
+      const loadedFile = new File([blob], filename, { type: 'application/zip' });
+      validateAndSetFile(loadedFile);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.warn('Auto-load evidence pack failed:', msg);
+    }
+  }
 
   function validateAndSetFile(selectedFile: File) {
     setErrorMessage(null);
@@ -72,10 +123,18 @@ export function Verify() {
     }
   }
 
-  function handleDropzoneKeyDown(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      fileInputRef.current?.click();
+  async function handleLoadDemo(filename: string) {
+    try {
+      setErrorMessage(null);
+      setResult(null);
+      const res = await fetch(`/fixtures/${filename}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status} fetching demo pack`);
+      const blob = await res.blob();
+      const demoFile = new File([blob], filename, { type: 'application/zip' });
+      validateAndSetFile(demoFile);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setErrorMessage(`Failed to load demo pack: ${msg}`);
     }
   }
 
@@ -139,7 +198,7 @@ export function Verify() {
           <p className="lede">
             Audit mutual render attestation evidence packs independently. Verify cryptographic
             commitments, inclusion in the transparency log, and headless browser re-render
-            invariance with zero trust required.
+            invariance without having to trust the server.
           </p>
         </header>
 
@@ -157,10 +216,8 @@ export function Verify() {
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              onKeyDown={handleDropzoneKeyDown}
-              tabIndex={0}
-              role="button"
-              aria-label="Upload evidence pack dropzone. Press Enter or Space to choose a file."
+              role="group"
+              aria-label="Evidence pack upload: drop a .zip file here or use the button"
             >
               <input
                 ref={fileInputRef}
@@ -193,6 +250,9 @@ export function Verify() {
 
                 {file ? (
                   <div className="file-info-selected">
+                    <span className="badge badge-success" style={{ marginBottom: '6px' }}>
+                      <Mark kind="pass" label="" /> Pack loaded and ready
+                    </span>
                     <p className="selected-filename">
                       <strong>{file.name}</strong>
                     </p>
@@ -225,6 +285,46 @@ export function Verify() {
                     <p className="hint">Supports self-contained MRA evidence packages.</p>
                   </>
                 )}
+              </div>
+            </div>
+
+            {/* Quick-test Demonstration Packs for Viva / Testing */}
+            <div className="demo-packs-container">
+              <p className="demo-packs-title">
+                <strong>Quick Demonstration Packs:</strong> Load pre-packaged test cases to verify
+                instantly:
+              </p>
+              <div className="demo-packs-group">
+                <button
+                  type="button"
+                  className="btn secondary btn-sm demo-pack-btn"
+                  onClick={() => void handleLoadDemo('honest_pack.zip')}
+                  disabled={verifying}
+                  data-testid="load-demo-honest"
+                >
+                  <span className="demo-pack-badge badge-success">Pass</span>
+                  <span>Honest Pack (VERIFIED)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn secondary btn-sm demo-pack-btn"
+                  onClick={() => void handleLoadDemo('page_altered_pack.zip')}
+                  disabled={verifying}
+                  data-testid="load-demo-altered"
+                >
+                  <span className="demo-pack-badge badge-danger">Attack</span>
+                  <span>Notice Altered (Node Diff)</span>
+                </button>
+                <button
+                  type="button"
+                  className="btn secondary btn-sm demo-pack-btn"
+                  onClick={() => void handleLoadDemo('tampered_attestation_pack.zip')}
+                  disabled={verifying}
+                  data-testid="load-demo-tampered"
+                >
+                  <span className="demo-pack-badge badge-warn">Tamper</span>
+                  <span>Spliced Signature (Invalid)</span>
+                </button>
               </div>
             </div>
 

@@ -38,8 +38,9 @@ final class Kernel
     {
         try {
             return $this->router->dispatch($request);
-        } catch (Throwable) {
-            // Internal detail never reaches the client; the failure is still visible in the PHP log.
+        } catch (Throwable $e) {
+            // Internal detail never reaches the client; the failure goes to the PHP log (class and message only).
+            error_log('mra: unhandled ' . $e::class . ': ' . $e->getMessage());
             return Response::error(500, 'server_error', 'Something went wrong. Please try again.');
         }
     }

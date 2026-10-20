@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FormField } from '../components/FormField';
-import { Layout } from '../components/Layout';
+import { AuthLayout } from '../components/AuthLayout';
 import { api } from '../lib/api';
 import { validateRegistration } from '../lib/validation';
 import type { Errors } from '../lib/validation';
@@ -58,84 +58,89 @@ export function Register() {
   }
 
   return (
-    <Layout>
-      <div className="card">
-        <h1>Create your account</h1>
-        <p className="lede">Your consent records are tied to a verified email address.</p>
-        {banner ? (
-          <div className="banner error" role="alert">
-            {banner}
-          </div>
-        ) : null}
-        <form onSubmit={onSubmit} noValidate>
-          <FormField
-            label="Full name"
-            name="name"
-            type="text"
-            autoComplete="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            error={errors.name}
-          />
-          <FormField
-            label="Email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={errors.email}
-          />
-          <FormField
-            label="Password"
-            name="password"
-            type="password"
-            autoComplete="new-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={errors.password}
-            hint="12–128 characters, with at least one letter and one digit."
-          />
-          <FormField
-            label="Retype password"
-            name="password_confirm"
-            type="password"
-            autoComplete="new-password"
-            value={passwordConfirm}
-            onChange={(e) => setPasswordConfirm(e.target.value)}
-            error={errors.password_confirm}
-          />
-          <div className="field">
-            <div className="check">
-              <input
-                id="accept_terms"
-                type="checkbox"
-                checked={acceptTerms}
-                onChange={(e) => setAcceptTerms(e.target.checked)}
-                aria-invalid={errors.accept_terms ? 'true' : undefined}
-                aria-describedby={errors.accept_terms ? 'accept_terms-error' : undefined}
-              />
-              <label htmlFor="accept_terms">
-                I agree that my consent records are stored as encrypted evidence.
-              </label>
-            </div>
-            {errors.accept_terms ? (
-              <p id="accept_terms-error" role="alert" className="field-error">
-                {errors.accept_terms}
-              </p>
-            ) : null}
-          </div>
-          <button type="submit" className="btn block" disabled={submitting}>
-            {submitting ? <span className="spinner" aria-hidden="true" /> : null}
-            {submitting ? 'Creating account…' : 'Create account'}
-          </button>
-        </form>
-        <div className="links">
-          <span>
-            Already registered? <Link to="/login">Sign in</Link>
-          </span>
+    <AuthLayout
+      title="Create your account"
+      lede="Your consent records are tied to a verified email address."
+      asideTitle="Why an account"
+      asidePoints={[
+        'A six-digit code confirms your email address.',
+        'Your name and email are stored encrypted.',
+        'Each consent you give becomes a signed record in a public log.',
+      ]}
+    >
+      {banner ? (
+        <div className="banner error" role="alert">
+          {banner}
         </div>
+      ) : null}
+      <form onSubmit={onSubmit} noValidate>
+        <FormField
+          label="Full name"
+          name="name"
+          type="text"
+          autoComplete="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          error={errors.name}
+        />
+        <FormField
+          label="Email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={errors.email}
+        />
+        <FormField
+          label="Password"
+          name="password"
+          type="password"
+          autoComplete="new-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          error={errors.password}
+          hint="12–128 characters, with at least one letter and one digit."
+        />
+        <FormField
+          label="Retype password"
+          name="password_confirm"
+          type="password"
+          autoComplete="new-password"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+          error={errors.password_confirm}
+        />
+        <div className="field">
+          <div className="check">
+            <input
+              id="accept_terms"
+              type="checkbox"
+              checked={acceptTerms}
+              onChange={(e) => setAcceptTerms(e.target.checked)}
+              aria-invalid={errors.accept_terms ? 'true' : undefined}
+              aria-describedby={errors.accept_terms ? 'accept_terms-error' : undefined}
+            />
+            <label htmlFor="accept_terms">
+              I agree that my consent records are stored as encrypted evidence.
+            </label>
+          </div>
+          {errors.accept_terms ? (
+            <p id="accept_terms-error" role="alert" className="field-error">
+              {errors.accept_terms}
+            </p>
+          ) : null}
+        </div>
+        <button type="submit" className="btn block" disabled={submitting}>
+          {submitting ? <span className="spinner" aria-hidden="true" /> : null}
+          {submitting ? 'Creating account…' : 'Create account'}
+        </button>
+      </form>
+      <div className="links">
+        <span>
+          Already registered? <Link to="/login">Sign in</Link>
+        </span>
       </div>
-    </Layout>
+    </AuthLayout>
   );
 }
