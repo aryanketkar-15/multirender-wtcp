@@ -1,5 +1,12 @@
 'use strict';
 
+/*
+ * MOCK. This is NOT the MRA server. It answers on port 8080 with fixed, scripted responses so the
+ * React UI can be worked on without the database. Nothing it returns is real evidence: no signatures
+ * are verified and no log is written. Never use it to produce results, screenshots or test counts.
+ * The real server is server/public/index.php (see docs/deployment.md).
+ */
+
 /**
  * Dev Backend Server for MRA Studio.
  * Runs on port 8080 to provide full authentication, session management,

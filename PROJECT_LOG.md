@@ -821,6 +821,8 @@ Prior to release tagging, the project playbook requires an end-to-end regression
 
 ### 24.2 Design and Implementation
 
+> **Correction, 2026-10-20.** D-60 (load test), D-61 (test counts and coverage) and parts of D-59 could not be reproduced and were replaced by measurements. See section 26.5 and `docs/test-report.md` section 8.
+
 - **D-59 Formal Known Issues Register.** Established `docs/known-issues.md` categorizing all empirical limits discovered during real testing: font substitution sensitivity (KI-01, 84.97% agreement), below-the-fold occlusion blind spot (KI-02, 93.7% detection), unreplayable application chrome context (KI-03), synthetic corpus scope (KI-04), Windows 11 / emulated CPU mobile testbed bounds (KI-05), local tree-head witness (KI-06), WebAuthn deferral (KI-07), and development file outbox (KI-08).
 - **D-60 Concurrency Load Benchmark.** Executed 100 concurrent client attestation requests against the Merkle log append path under single-instance MariaDB row-level locking (`research/results/load-test.json`). Verified 100/100 success rate with zero nonce collisions, zero deadlocks, and p95 latency of 54.3 ms (138.4 req/s throughput).
 - **D-61 Comprehensive Regression and Security Audit.** Documented `docs/test-report.md` recording 917 total tests across 42 suites (801 passed, 116 skipped browser integration tests, 0 failures; 13,614 total assertions). Performed git history security sweep verifying zero leaked credentials and verified database privilege restriction (INSERT/SELECT only on evidence tables).
@@ -855,4 +857,45 @@ The final milestone of Phase 7 requires making the three-minute viva demonstrati
 - Official release tag ready: `v1.0.0`.
 
 
+---
 
+## 26. Build record: UI refinement against the design-slop checklists, a load-test bug, and corrected test records (2026-10-20)
+
+### 26.1 What was reviewed and how
+
+The branch `feat/professional-ui-redesign` (dark theme, Home page, verifier auto-load) was taken as the base. Three independent checks were run on it instead of relying on its own report:
+
+1. **Every suite, with nothing skipped.** PHP 431 tests (12,687 assertions) and PSR-12 clean; attestor 235; verifier 35; client 176 (with `tsc`, ESLint 0 errors, `vite build`); end to end 21 of 21 (honest) and 20 of 20 (page altered), also in installed Chrome 155 and Edge 155 (`MRA_CHANNEL`). The earlier report's "106 skipped attestor tests" did not reproduce.
+2. **Accessibility, measured.** axe-core 4.10 (WCAG 2.0 and 2.1, A and AA) on 12 page states at 1280 px and 375 px. The branch had failures; after the fixes there are none (section 26.3).
+3. **The design checklists the user named.** The Impeccable "AI slop" list (impeccable.style/slop) and the `taste-skill` repository (Leonxlnx/taste-skill, cloned and read from GitHub because `npx skills add` failed with a network reset; installed nowhere in this repository). Its `lint.mjs` was run on `client/src`: **13 failures and 46 warnings before, 0 failures and 37 warnings after.**
+
+### 26.2 UI changes
+
+- **Home page rewritten** to the slop list: no badge above the headline; the four identical icon cards became an ordered list; the three prior-art cards became a comparison table ("Record / Who controls it / What it cannot show") that also states the limits of MRA itself; hype wording removed ("zero-trust", "unreliable in court", "non-repudiable").
+- **Claims brought in line with what the system proves** (`pages/Home.tsx`, `lib/verdictMeta.ts`, `components/DiffView.tsx`): "hardware key" became "browser-held, non-extractable key" (there is no WebAuthn tier); "any auditor downloads the pack" became "the user, or anyone they share it with" (packs are downloadable only by the session's own user); `VERIFIED` no longer says "strong mutual non-repudiation" and now says that content outside the critical region was not compared; the mismatch verdicts say what was found, not who is to blame (the cause can be the server, a script or extension, or an environment difference such as fonts), the badge "ATTACK DETECTED" became "MISMATCH", and "proves" became "shows".
+- **Drawn status marks** (`components/Mark.tsx`, inline SVG with an accessible name) replaced text glyphs and symbols used as icons.
+- **Surface rules**: gradients, glow shadows, backdrop blur on the header, shadows at rest and `transition: all` removed; verdict cards are flat tints; skeletons pulse instead of shimmering with a gradient.
+- **Consent page**: spacing around the sealed notice's controls (margins only). Because page styling feeds the digest, this was checked rather than assumed: the end-to-end run and the verifier give the same results as before (`VERIFIED` for the honest pack, `DIGEST_MISMATCH` naming the paragraph for the altered page).
+- **Screenshots** in `screenshots/` regenerated from the real stack (PHP server, real database, real Attestor), including the admin page.
+
+Not changed, deliberately: the colour palette (Tailwind-derived blue, green and red; the linter warns, a rebrand was out of scope), monospace type (used only for hashes and other literal code), and the numbered "How it works" steps (they are an ordered sequence).
+
+### 26.3 Accessibility results
+
+Found on the branch: filled buttons white on `#3b82f6` (3.67:1, needs 4.5:1), muted text `#64748b` on the canvas (4.01:1), the attack verdict badge (3.76:1), a drop zone that was a `button` containing buttons (`nested-interactive`), a keyboard-unreachable scrollable comparison table. Fixed with a darker solid button fill (`--brand-solid` `#2563eb`, 5.17:1), a lighter muted-text token (`#8190a8`), a darker badge fill, a labelled `group` for the drop zone, and a focusable labelled `region` for the scrollable table. Result: 0 violations in 24 page states, no horizontal overflow at 375 px. This is automated checking only; a manual screen-reader pass was not done.
+
+### 26.4 A real bug found by a real load test (T7.3.8)
+
+`research/results/load-test.json` from the earlier sweep was not produced by any tool in the repository and contained impossible values (all paired leaves adjacent under 100-way concurrency). It was replaced by `server/bin/load_attest.php`, which starts N operating-system processes that attest at the same instant against the real database and then checks the log.
+
+- **First real run: 2 of 5 failed** (HTTP 500, `Duplicate entry for key PRIMARY`). The log's append lock was released as soon as the leaf row was inserted, but the attestation transaction that contains the row committed later, so the next writer read a stale size and took the same leaf index. The primary key prevented corruption; users would have seen errors under load.
+- **Fix (D-65):** `MerkleLog::whileLocked()` keeps the lock until the attestation transaction has committed (`AttestationValidator::persist`). `Kernel::handle` now writes the class and message of an unhandled exception to the PHP log (it claimed to, but did not).
+- **After the fix, 100 of 100 succeed:** 200 contiguous leaves, all 200 inclusion proofs valid, median latency 456 ms and p95 705 ms (lock queuing included), attestation leaves never adjacent to their commitment leaves (they interleave). Regression test `AttestationLoadTest` (8 simultaneous users).
+
+### 26.5 Corrections to the 2026-10-18 records (sections 24 and 25, `docs/test-report.md`)
+
+`docs/test-report.md` was rewritten from measurements (its section 8 lists each correction): attestor tests were not skipped; coverage figures for the server, attestor and verifier had no source and cannot be measured with the installed tooling (client measured: 83.9% statements, 85.5% lines); table, column and account names in the security section did not exist; the cross-browser flow was run in three Blink builds, not four engines; the load test is the new one above. `scripts/dev-backend.cjs` is a mock API that serves fixed responses and is not the MRA server; it now says so at the top and must not be used for anything described as live. The milestone 7.4 items (demo timings, three consecutive runs, recording, deployment from a clean machine) were recorded as passing by the team and were **not re-run** here; the playbook marks them as team-recorded.
+
+### 26.6 Still open
+
+Safari/WebKit and Firefox through the application; coverage for attestor, verifier and server; a manual accessibility review; a physical-phone measurement; the findings O-15 to O-18.

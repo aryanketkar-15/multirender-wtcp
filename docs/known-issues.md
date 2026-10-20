@@ -34,6 +34,10 @@ In accordance with academic integrity and the project's verification protocol, a
 | **KI-06** | Local Tree Head Publication Witness | **LOW** | M5 (Transparency Log) | Local script publication without remote mirror | Open Item (O-02) |
 | **KI-07** | WebAuthn Hardware Tier Unimplemented | **LOW** | M4 (Client) | Hardware token enrollment deferred to future work | Future Work |
 | **KI-08** | Simulated SMTP Email Delivery | **LOW** | M1 (Accounts) | Development file outbox used in place of SMTP relay | Dev Configuration |
+| **KI-09** | Coverage not measurable for three modules | **LOW** | M2-M6 | Attestor and verifier code runs inside Chromium (Jest instrumentation breaks or misses it); no PHP coverage driver installed | Open |
+| **KI-10** | Consent flow not run through the app in Firefox or Safari | **LOW** | M4 (Client) | Playwright's Firefox is unavailable here; WebKit not installed. Firefox digests were measured separately (PROJECT_LOG 18) | Open |
+| **KI-11** | Accessibility checked by automated rules only | **LOW** | M4 (Client) | axe-core covers part of WCAG; no manual screen-reader pass | Open |
+| **KI-12** | `scripts/dev-backend.cjs` is a mock API | **LOW** | Tooling | Fixed responses on port 8080 for UI work; never the MRA server; must not be used for results | Labelled |
 
 ---
 

@@ -1,6 +1,64 @@
 import { Link } from 'react-router-dom';
 import { Layout } from '../components/Layout';
+import { Mark } from '../components/Mark';
 import { useAuth } from '../lib/auth';
+
+const STEPS = [
+  {
+    title: 'The server commits to the notice',
+    body: 'Before you act, the server seals the notice (HTML and CSS) into a bundle and signs a commitment to its hash with Ed25519, together with a single-use nonce.',
+  },
+  {
+    title: 'Your browser attests what it shows',
+    body: 'When you click, a separately hosted measuring script, checked by its hash before it runs, summarises what the page shows: text, controls, their states, sizes and contrast, and what covers what. Your browser signs that digest with a key it holds and cannot export.',
+  },
+  {
+    title: 'Both records go into an append-only log',
+    body: 'The commitment and your attestation are added to a Merkle log that follows RFC 6962. Signed tree heads make later insertion, removal or alteration detectable.',
+  },
+  {
+    title: 'Anyone holding the pack can check it',
+    body: 'You can export a self-contained evidence pack. A verifier that does not trust the server re-renders the committed notice and compares it with what your browser signed. If they differ, it names the element that changed.',
+  },
+];
+
+const RECORDS = [
+  {
+    record: 'Screenshot or screen recording',
+    control: 'The user’s browser',
+    limit: 'Can be edited before it is captured. The server has no evidence of what it served.',
+  },
+  {
+    record: 'Server database entry such as accepted = true',
+    control: 'The service provider',
+    limit:
+      'The user cannot show what the notice looked like, and the provider can change its own records unnoticed.',
+  },
+  {
+    record: 'MRA evidence pack',
+    control: 'Server commitment and browser attestation, both in a public log',
+    limit:
+      'Shows whether the notice matches and where it differs. Covers the consent region only, can be sensitive to fonts and viewport, and does not say who caused a difference.',
+  },
+];
+
+const SCENARIOS = [
+  {
+    kind: 'pass' as const,
+    title: 'Honest consent: VERIFIED',
+    body: 'The user reads the notice and accepts. All 11 verifier stages pass, including a re-render of the committed notice that matches what the browser signed.',
+  },
+  {
+    kind: 'fail' as const,
+    title: 'Notice rewritten after load: DIGEST_MISMATCH',
+    body: 'A script changes the disclosure text after the page loads, for example to promise that no data is shared. The verifier re-renders the committed notice and names the paragraph that differs, with both texts.',
+  },
+  {
+    kind: 'fail' as const,
+    title: 'Attestation edited after signing: CLIENT_SIGNATURE_INVALID',
+    body: 'A pack whose attestation was altered after the browser signed it fails at stage 3, before any re-render.',
+  },
+];
 
 export function Home() {
   const { user } = useAuth();
@@ -8,21 +66,15 @@ export function Home() {
   return (
     <Layout wide>
       <div className="home-container">
-        {/* Hero Section */}
-        <section className="card home-hero" aria-labelledby="home-hero-title">
-          <div className="home-hero-eyebrow">
-            <span className="hero-tag">PS-3</span>
-            <span>Web Technologies Course Project · VIT Pune TY-A9</span>
-          </div>
-
+        <section className="home-hero" aria-labelledby="home-hero-title">
           <h1 id="home-hero-title" className="home-hero-title">
             Mutual Render Attestation
           </h1>
 
           <p className="home-hero-lede">
-            Cryptographic, two-sided evidence of what a consent screen actually rendered.
-            Committed by the server before you act, attested by your browser when you do,
-            and sealed in an append-only transparency log.
+            Evidence, from both sides, of what a consent screen showed. The server commits to the
+            notice before you act, your browser attests to what it displayed when you did, and both
+            records are added to an append-only log that anyone can check.
           </p>
 
           <div className="home-hero-actions">
@@ -32,7 +84,7 @@ export function Home() {
                   Open Consent Notice
                 </Link>
                 <Link to="/verifier" className="btn secondary" id="hero-verifier-btn">
-                  Independent Verifier Dashboard
+                  Independent Verifier
                 </Link>
                 <Link to="/packs" className="btn secondary" id="hero-packs-btn">
                   My Evidence Packs
@@ -46,10 +98,10 @@ export function Home() {
             ) : (
               <>
                 <Link to="/login" className="btn primary" id="hero-signin-btn">
-                  Try Interactive Consent Flow
+                  Try the Consent Flow
                 </Link>
                 <Link to="/verifier" className="btn secondary" id="hero-verifier-btn">
-                  Independent Verifier Dashboard
+                  Independent Verifier
                 </Link>
                 <Link to="/register" className="btn secondary" id="hero-register-btn">
                   Create Demo Account
@@ -65,160 +117,72 @@ export function Home() {
           )}
         </section>
 
-        {/* The 4-Stage Protocol Architecture */}
         <section className="home-section" aria-labelledby="architecture-title">
-          <header className="home-section-header">
-            <h2 id="architecture-title">How Mutual Attestation Works</h2>
-            <p className="home-section-subtitle">
-              Neither party can unilaterally fabricate or repudiate the consent record.
-            </p>
-          </header>
+          <h2 id="architecture-title">How it works</h2>
+          <ol className="steps">
+            {STEPS.map((s) => (
+              <li key={s.title} className="step">
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
 
-          <div className="flow-grid">
-            <div className="flow-card">
-              <div className="flow-step-num">01</div>
-              <h3>Server Commitment</h3>
-              <p>
-                Before user interaction, the server seals an immutable HTML/CSS bundle and signs an
-                <strong> Ed25519 commitment</strong> binding the bundle hash, policy rules, and a single-use nonce.
-              </p>
-              <div className="flow-card-tag">Pre-Interaction</div>
-            </div>
-
-            <div className="flow-card">
-              <div className="flow-step-num">02</div>
-              <h3>Browser Attestation</h3>
-              <p>
-                At the exact moment of interaction, an independently hosted Attestor module (SRI verified)
-                computes a normalized <strong>semantic layout digest</strong> and signs it with a hardware/browser
-                <strong> ECDSA P-256</strong> key pair.
-              </p>
-              <div className="flow-card-tag">Interaction Instant</div>
-            </div>
-
-            <div className="flow-card">
-              <div className="flow-step-num">03</div>
-              <h3>Append-Only Log</h3>
-              <p>
-                Both the server commitment and client attestation are recorded as sequential leaves in an
-                <strong> RFC 6962 Merkle tree</strong> with Signed Tree Heads (STHs), preventing backdating or omission.
-              </p>
-              <div className="flow-card-tag">Transparency Log</div>
-            </div>
-
-            <div className="flow-card">
-              <div className="flow-step-num">04</div>
-              <h3>Independent Verifier</h3>
-              <p>
-                Any auditor downloads a self-contained <strong>evidence pack (.zip)</strong>. A headless Chromium
-                runner re-renders the bundle across <strong>11 verification stages</strong>, flagging exact node diffs if altered.
-              </p>
-              <div className="flow-card-tag">Zero-Trust Audit</div>
-            </div>
+        <section className="home-section" aria-labelledby="records-title">
+          <h2 id="records-title">How it compares with other records</h2>
+          <div
+            className="table-scroll"
+            tabIndex={0}
+            role="region"
+            aria-label="Comparison of consent records, scrollable"
+          >
+            <table className="compare-table">
+              <thead>
+                <tr>
+                  <th scope="col">Record</th>
+                  <th scope="col">Who controls it</th>
+                  <th scope="col">What it cannot show</th>
+                </tr>
+              </thead>
+              <tbody>
+                {RECORDS.map((r) => (
+                  <tr key={r.record}>
+                    <th scope="row">{r.record}</th>
+                    <td>{r.control}</td>
+                    <td>{r.limit}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </section>
 
-        {/* Why Screenshots & Logs Fail */}
-        <section className="home-section" aria-labelledby="comparison-title">
-          <header className="home-section-header">
-            <h2 id="comparison-title">Why Prior Art Fails</h2>
-            <p className="home-section-subtitle">
-              Single-sided evidence is structurally vulnerable to unilateral fabrication.
-            </p>
-          </header>
-
-          <div className="comparison-grid">
-            <div className="comparison-card vulnerability">
-              <div className="comparison-badge">Single-Sided (Client)</div>
-              <h3>Screenshots &amp; Replay</h3>
-              <p>
-                Easily fabricated or edited in browser DevTools before screenshot capture. The server has no
-                cryptographic guarantee of what code was executed.
-              </p>
-              <div className="comparison-status">Unreliable in court</div>
-            </div>
-
-            <div className="comparison-card vulnerability">
-              <div className="comparison-badge">Single-Sided (Server)</div>
-              <h3>Server Database Logs</h3>
-              <p>
-                The provider controls the database and merely logs <code>accepted = true</code>. The user cannot
-                prove which deceptive disclosures, dark patterns, or hidden boxes were present.
-              </p>
-              <div className="comparison-status">Subject to vendor dispute</div>
-            </div>
-
-            <div className="comparison-card solution">
-              <div className="comparison-badge solution-badge">Two-Sided (MRA)</div>
-              <h3>Two-Sided Render Attestation</h3>
-              <p>
-                Bilateral mathematical binding: Server commits sealed code beforehand; client signs layout digest at click time;
-                third-party verifier checks headless browser re-render equality.
-              </p>
-              <div className="comparison-status verified">Non-repudiable &amp; audited</div>
-            </div>
-          </div>
-        </section>
-
-        {/* Demonstration Centerpiece & Viva Scenarios */}
-        <section className="card demo-scenarios-card" aria-labelledby="scenarios-title">
-          <h2 id="scenarios-title">Demonstration Scenarios</h2>
-          <p className="lede">
-            Explore the live verification outcomes implemented and tested in the project:
-          </p>
-
-          <div className="scenarios-list">
-            <div className="scenario-item">
-              <div className="scenario-marker ok">✓</div>
-              <div className="scenario-content">
-                <strong>Honest Consent Flow (VERIFIED)</strong>
-                <p>
-                  User reads standard disclosure and consents. Verifier executes all 11 stages: unpack, signatures,
-                  bundle integrity, Merkle proofs, and Chromium re-render. All 11 stages pass.
-                </p>
-              </div>
-            </div>
-
-            <div className="scenario-item">
-              <div className="scenario-marker attack">!</div>
-              <div className="scenario-content">
-                <strong>Notice Alteration Attack (DIGEST_MISMATCH with Node Diff)</strong>
-                <p>
-                  A malicious script or provider modifies disclosure text after page load (e.g. promising no data sharing).
-                  Verifier re-renders the committed bundle, detects the digest discrepancy, and pinpoints the exact DOM node and text diff.
-                </p>
-              </div>
-            </div>
-
-            <div className="scenario-item">
-              <div className="scenario-marker tamper">✕</div>
-              <div className="scenario-content">
-                <strong>Pack Splicing / Tamper (CLIENT_SIGNATURE_INVALID)</strong>
-                <p>
-                  An adversary attempts to splice an attestation with a modified public key or forged signature.
-                  Verifier Stage 3 catches the cryptographic signature invalidity immediately.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="scenarios-action">
+        <section className="home-section" aria-labelledby="scenarios-title">
+          <h2 id="scenarios-title">Three cases to try in the verifier</h2>
+          <ul className="scenarios">
+            {SCENARIOS.map((s) => (
+              <li key={s.title} className="scenario">
+                <Mark kind={s.kind} />
+                <div>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p>
             <Link to="/verifier" className="btn primary">
-              Launch Independent Verifier Dashboard
+              Open the verifier
             </Link>
-          </div>
+          </p>
         </section>
 
-        {/* Academic Footer */}
         <footer className="home-academic-footer">
           <p>
-            <strong>Project PS-3: Mutual Render Attestation</strong> · Group TY-A9
-          </p>
-          <p>
-            Department of Computer Engineering, Vishwakarma Institute of Technology, Pune
-          </p>
-          <p>
-            Course: Web Technologies · Faculty Guide: Prof. Rahul Diwate
+            <strong>PS-3 Mutual Render Attestation</strong>, Group TY-A9. Department of Computer
+            Engineering, Vishwakarma Institute of Technology, Pune. Course: Web Technologies.
+            Faculty guide: Prof. Rahul Diwate.
           </p>
         </footer>
       </div>

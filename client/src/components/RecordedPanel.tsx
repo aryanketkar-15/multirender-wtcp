@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Mark } from './Mark';
 import { checkRecordInLog } from '../lib/logProof';
 import type { LogCheck } from '../lib/logProof';
 
@@ -101,7 +102,7 @@ export function RecordedPanel({
           <ul className="recorded-check-steps">
             {check.steps.map((s) => (
               <li key={s.label}>
-                {s.ok ? '✓' : '✗'} {s.label}
+                <Mark kind={s.ok ? 'pass' : 'fail'} /> {s.label}
               </li>
             ))}
           </ul>

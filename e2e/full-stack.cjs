@@ -127,7 +127,8 @@ async function post(p, body) {
   const code = fs.readFileSync(path.join(OUTBOX, mail), 'utf8').match(/\b(\d{6})\b/)[1];
   check('verify email by OTP', (await post('/api/otp/verify', { email, code })) === 200);
 
-  const browser = await chromium.launch();
+  const browser = await chromium.launch(process.env.MRA_CHANNEL ? { channel: process.env.MRA_CHANNEL } : {}); // MRA_CHANNEL=chrome or msedge runs the same flow in the installed browser
+  console.log('browser:', browser.version(), process.env.MRA_CHANNEL || 'bundled chromium');
   const page = await browser.newPage();
   const posted = [];
   page.on('request', (r) => {

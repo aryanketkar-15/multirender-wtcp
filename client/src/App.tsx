@@ -12,7 +12,6 @@ import { ResetPassword } from './pages/ResetPassword';
 import { Verify } from './pages/Verify';
 import { VerifyEmail } from './pages/VerifyEmail';
 
-
 import { Home } from './pages/Home';
 
 export function App() {
@@ -22,13 +21,29 @@ export function App() {
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/verifier" element={<ErrorBoundary><Verify /></ErrorBoundary>} />
-            <Route path="/verify-pack" element={<ErrorBoundary><Verify /></ErrorBoundary>} />
+            <Route
+              path="/verifier"
+              element={
+                <ErrorBoundary>
+                  <Verify />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/verify-pack"
+              element={
+                <ErrorBoundary>
+                  <Verify />
+                </ErrorBoundary>
+              }
+            />
             <Route
               path="/consent"
               element={
                 <RequireAuth>
-                  <ErrorBoundary><Consent /></ErrorBoundary>
+                  <ErrorBoundary>
+                    <Consent />
+                  </ErrorBoundary>
                 </RequireAuth>
               }
             />
@@ -36,7 +51,9 @@ export function App() {
               path="/packs"
               element={
                 <RequireAuth>
-                  <ErrorBoundary><MyPacks /></ErrorBoundary>
+                  <ErrorBoundary>
+                    <MyPacks />
+                  </ErrorBoundary>
                 </RequireAuth>
               }
             />
@@ -44,19 +61,55 @@ export function App() {
               path="/admin/consent"
               element={
                 <RequireAuth>
-                  <ErrorBoundary><AdminConsent /></ErrorBoundary>
+                  <ErrorBoundary>
+                    <AdminConsent />
+                  </ErrorBoundary>
                 </RequireAuth>
               }
             />
-            <Route path="/register" element={<ErrorBoundary><Register /></ErrorBoundary>} />
-            <Route path="/verify" element={<ErrorBoundary><VerifyEmail /></ErrorBoundary>} />
-            <Route path="/login" element={<ErrorBoundary><Login /></ErrorBoundary>} />
-            <Route path="/forgot-password" element={<ErrorBoundary><ForgotPassword /></ErrorBoundary>} />
-            <Route path="/reset-password" element={<ErrorBoundary><ResetPassword /></ErrorBoundary>} />
+            <Route
+              path="/register"
+              element={
+                <ErrorBoundary>
+                  <Register />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/verify"
+              element={
+                <ErrorBoundary>
+                  <VerifyEmail />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/login"
+              element={
+                <ErrorBoundary>
+                  <Login />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/forgot-password"
+              element={
+                <ErrorBoundary>
+                  <ForgotPassword />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/reset-password"
+              element={
+                <ErrorBoundary>
+                  <ResetPassword />
+                </ErrorBoundary>
+              }
+            />
           </Routes>
         </ErrorBoundary>
       </AuthProvider>
     </BrowserRouter>
   );
 }
-

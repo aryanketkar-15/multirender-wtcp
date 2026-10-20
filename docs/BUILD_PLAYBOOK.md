@@ -2062,9 +2062,9 @@ The security sweep is a checklist, not a judgement call: `git log -p | grep -iE 
 | T7.3.3 | Attack 1 end to end | System deployed | Alter text; verify old pack | `DIGEST_MISMATCH` | ✅ |
 | T7.3.4 | Attack 2 end to end | System deployed | Shrink and grey Reject; verify | `DIGEST_MISMATCH` on that node | ✅ |
 | T7.3.5 | Attack 3 end to end | System deployed | Edit pack; verify | `CLIENT_SIGNATURE_INVALID` | ✅ |
-| T7.3.6 | Coverage threshold | Suites run | Inspect reports | Every module above threshold | ✅ |
-| T7.3.7 | Cross-browser consent flow | — | Chrome, Firefox, Safari, Edge | Flow completes in all four | ✅ |
-| T7.3.8 | Load test | Verifier running | 100 concurrent attestations | No errors; no nonce collisions | ✅ |
+| T7.3.6 | Coverage threshold | Suites run | Inspect reports | Every module above threshold | ◐ client 83.9% statements; attestor, verifier and server not measurable here |
+| T7.3.7 | Cross-browser consent flow | — | Chrome, Firefox, Safari, Edge | Flow completes in all four | ◐ Chromium, Chrome and Edge pass; Firefox not run through the app; no Safari |
+| T7.3.8 | Load test | Verifier running | 100 concurrent attestations | No errors; no nonce collisions | ✅ real load test 2026-10-20 (first run found a locking bug, fixed) |
 | T7.3.9 | **No secrets in history** | — | Grep full git history | No credential found | ✅ |
 | T7.3.10 | **No plaintext PII** | Seeded data | Raw `SELECT` on every table | No readable personal data | ✅ |
 | T7.3.11 | Log grants correct | — | Attempt `UPDATE` and `DELETE` on log tables | Denied | ✅ |
@@ -2120,16 +2120,16 @@ Act 2's second variant — shrinking and greying the Reject button while leaving
 
 | Test Case ID | Test Scenario | Preconditions | Steps | Expected Result | Status |
 |---|---|---|---|---|---|
-| T7.4.1 | Reset returns clean state | Demo run once | Run reset | Identical starting state | ✅ |
-| T7.4.2 | Act 1 under 45s | System reset | Perform | `VERIFIED` within time | ✅ |
-| T7.4.3 | Act 2 text attack | Act 1 done | Perform | `DIGEST_MISMATCH`, node shown | ✅ |
-| T7.4.4 | Act 2 prominence attack | Text reverted | Perform | `DIGEST_MISMATCH` with bucket change shown | ✅ |
-| T7.4.5 | Act 3 user attack | Pack available | Perform | `CLIENT_SIGNATURE_INVALID` | ✅ |
-| T7.4.6 | Act 4 scoping attack | Admin access | Perform | `REGION_POLICY_VIOLATION` | ✅ |
-| T7.4.7 | Full demo under 3 min | — | Run all acts | Completes in time | ✅ |
-| T7.4.8 | Three consecutive runs | — | Reset and repeat ×3 | Identical results each time | ✅ |
-| T7.4.9 | Recording complete | — | Play it | All acts captured and legible | ✅ |
-| T7.4.10 | Deploy from docs | Fresh environment | Follow deployment doc | System runs without undocumented steps | ✅ |
+| T7.4.1 | Reset returns clean state | Demo run once | Run reset | Identical starting state | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.2 | Act 1 under 45s | System reset | Perform | `VERIFIED` within time | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.3 | Act 2 text attack | Act 1 done | Perform | `DIGEST_MISMATCH`, node shown | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.4 | Act 2 prominence attack | Text reverted | Perform | `DIGEST_MISMATCH` with bucket change shown | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.5 | Act 3 user attack | Pack available | Perform | `CLIENT_SIGNATURE_INVALID` | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.6 | Act 4 scoping attack | Admin access | Perform | `REGION_POLICY_VIOLATION` | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.7 | Full demo under 3 min | — | Run all acts | Completes in time | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.8 | Three consecutive runs | — | Reset and repeat ×3 | Identical results each time | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.9 | Recording complete | — | Play it | All acts captured and legible | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
+| T7.4.10 | Deploy from docs | Fresh environment | Follow deployment doc | System runs without undocumented steps | ✅ team-recorded 2026-10-18, not re-run 2026-10-20 |
 
 **7. Verification checklist.**
 - [x] Three consecutive clean runs with identical results
@@ -2163,12 +2163,12 @@ git push origin v1.0.0
 
 | Item | Detail |
 |---|---|
-| Milestones completed | 7.1, 7.2, 7.3, 7.4 |
-| Tests passed | T7.1.1–T7.4.10 (36 cases) |
-| Known issues | Per `docs/known-issues.md` |
-| Git commit | `v1.0.0` tag |
-| Phase verification | Assets original and documented; product states complete; accessibility AA; full regression green; demo rehearsed three times |
-| **Go / No-Go** | **Release** when T7.3.9, T7.3.10 and T7.4.8 pass |
+| Milestones completed | 7.1, 7.2, 7.3, 7.4 (7.3 re-done from measurements, PROJECT_LOG 26) |
+| Tests passed | 877 unit and integration tests, 0 skipped (PHP 431, attestor 235, verifier 35, client 176); end to end 21/21 and 20/20 in three Blink builds; axe-core 0 violations in 24 page states. T7.3.6 and T7.3.7 are partial; T7.4.x are team-recorded and were not re-run |
+| Known issues | `docs/known-issues.md`; coverage unmeasurable for three modules; Firefox and Safari not run through the app; no manual screen-reader pass; findings O-15 to O-18 |
+| Git commit | see git log; `v1.0.0` tag only after the branch is merged |
+| Phase verification | UI checked against the design-slop checklists (taste-skill lint 0 failures); real load test (found and fixed a log-locking bug); test report rewritten from measurements |
+| **Go / No-Go** | **Go for the viva and the paper.** Claims are limited as in `docs/test-report.md` section 7 and `docs/known-issues.md`. |
 
 ---
 

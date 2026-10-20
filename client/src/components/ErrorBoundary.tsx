@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<Props, State> {
     // Extract a safe message — never include a stack trace
     const message =
       error instanceof Error
-        ? error.message.slice(0, 120)   // cap at 120 chars; no stack
+        ? error.message.slice(0, 120) // cap at 120 chars; no stack
         : 'An unexpected error occurred.';
     return { hasError: true, message };
   }
@@ -61,22 +61,14 @@ export class ErrorBoundary extends Component<Props, State> {
       if (this.props.fallback) {
         return this.props.fallback;
       }
-      return (
-        <ErrorCard message={this.state.message} onRetry={this.handleRetry} />
-      );
+      return <ErrorCard message={this.state.message} onRetry={this.handleRetry} />;
     }
     return this.props.children;
   }
 }
 
 /** Standalone recoverable error card — also exported for use without the boundary. */
-export function ErrorCard({
-  message,
-  onRetry,
-}: {
-  message: string;
-  onRetry?: () => void;
-}) {
+export function ErrorCard({ message, onRetry }: { message: string; onRetry?: () => void }) {
   return (
     <div className="error-card" role="alert" aria-live="assertive">
       <div className="error-card-icon" aria-hidden="true">

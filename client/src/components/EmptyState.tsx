@@ -21,7 +21,11 @@ interface EmptyStateProps {
 export function EmptyState({ icon, heading, body, action }: EmptyStateProps) {
   return (
     <div className="empty-state" role="status" aria-live="polite">
-      {icon ? <div className="empty-state-icon" aria-hidden="true">{icon}</div> : null}
+      {icon ? (
+        <div className="empty-state-icon" aria-hidden="true">
+          {icon}
+        </div>
+      ) : null}
       <p className="empty-state-heading">{heading}</p>
       <p className="empty-state-body">{body}</p>
       {action ? <div className="empty-state-action">{action}</div> : null}

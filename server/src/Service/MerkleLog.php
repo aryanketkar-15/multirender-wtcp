@@ -67,6 +67,32 @@ final class MerkleLog extends BaseRepository
     }
 
     /**
+     * Runs `$fn` while holding the append lock. append() takes the same lock again (it is re-entrant
+     * on one connection) and releases it once, so the outer hold survives until `$fn` returns.
+     *
+     * A caller that wraps append() in its own transaction MUST use this and commit before it returns:
+     * otherwise the lock is released right after the leaf is inserted but before that transaction
+     * commits, and the next writer reads a stale log size and collides on the leaf index (found by
+     * the concurrent load test, server/bin/load_attest.php).
+     *
+     * @template T
+     * @param callable():T $fn
+     * @return T
+     */
+    public function whileLocked(callable $fn): mixed
+    {
+        $got = (int) $this->run('SELECT GET_LOCK(?, 30)', [self::LOCK])->fetchColumn();
+        if ($got !== 1) {
+            throw new RuntimeException('Could not acquire the log append lock.');
+        }
+        try {
+            return $fn();
+        } finally {
+            $this->run('SELECT RELEASE_LOCK(?)', [self::LOCK])->fetchColumn();
+        }
+    }
+
+    /**
      * Appends one record. `$build` receives the index the leaf will take and returns the record,
      * which must carry string members `kind` and `ref_hash`. It runs inside the append lock and the
      * transaction, so anything it writes commits or rolls back together with the leaf.

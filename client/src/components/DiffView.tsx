@@ -52,7 +52,12 @@ function NodeCard({ node }: { node: MismatchedNode }) {
         <p className="diff-node-summary">{node.summary}</p>
       </header>
 
-      <div className="diff-comparison-table-wrapper">
+      <div
+        className="diff-comparison-table-wrapper"
+        tabIndex={0}
+        role="region"
+        aria-label="Side-by-side comparison, scrollable"
+      >
         <table className="diff-comparison-table">
           <thead>
             <tr>
@@ -100,9 +105,10 @@ function NodeCard({ node }: { node: MismatchedNode }) {
 
       <footer className="diff-node-footer">
         <div className="diff-explainer-banner">
-          <strong>Non-expert summary:</strong> The browser attestation captures what was physically visible
-          on the user's screen at the moment of consent. The recomputed render reproduces the server's committed
-          bundle. The difference above proves the notice was rewritten after load or altered prior to interaction.
+          <strong>Non-expert summary:</strong> The browser attestation captures what was physically
+          visible on the user's screen at the moment of consent. The recomputed render reproduces
+          the server's committed bundle. The difference above shows that the page differed from the
+          committed notice when the user acted. It does not show who changed it or why.
         </div>
       </footer>
     </div>
@@ -122,8 +128,8 @@ export function DiffView({ diff }: DiffViewProps) {
           {diff.mismatchedNodes.length === 1 ? 'element' : 'elements'})
         </h3>
         <p className="diff-view-explanation">
-          The table below proves exactly what differed between the page the user signed and the
-          bundle the server committed into the log.
+          The table below shows what differed between the page the user signed and the bundle the
+          server committed to the log.
         </p>
       </header>
 

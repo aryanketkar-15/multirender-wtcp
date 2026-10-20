@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import type { ChangeEvent, DragEvent, KeyboardEvent } from 'react';
+import type { ChangeEvent, DragEvent } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { DiffView } from '../components/DiffView';
 import { Layout } from '../components/Layout';
+import { Mark } from '../components/Mark';
 import { StageList } from '../components/StageList';
 import { VerdictCard } from '../components/VerdictCard';
 import { uploadAndVerifyPack } from '../lib/verifierClient';
@@ -122,13 +123,6 @@ export function Verify() {
     }
   }
 
-  function handleDropzoneKeyDown(e: KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      fileInputRef.current?.click();
-    }
-  }
-
   async function handleLoadDemo(filename: string) {
     try {
       setErrorMessage(null);
@@ -204,7 +198,7 @@ export function Verify() {
           <p className="lede">
             Audit mutual render attestation evidence packs independently. Verify cryptographic
             commitments, inclusion in the transparency log, and headless browser re-render
-            invariance with zero trust required.
+            invariance without having to trust the server.
           </p>
         </header>
 
@@ -222,10 +216,8 @@ export function Verify() {
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              onKeyDown={handleDropzoneKeyDown}
-              tabIndex={0}
-              role="button"
-              aria-label="Upload evidence pack dropzone. Press Enter or Space to choose a file."
+              role="group"
+              aria-label="Evidence pack upload: drop a .zip file here or use the button"
             >
               <input
                 ref={fileInputRef}
@@ -259,7 +251,7 @@ export function Verify() {
                 {file ? (
                   <div className="file-info-selected">
                     <span className="badge badge-success" style={{ marginBottom: '6px' }}>
-                      ✓ Pack Loaded &amp; Ready
+                      <Mark kind="pass" label="" /> Pack loaded and ready
                     </span>
                     <p className="selected-filename">
                       <strong>{file.name}</strong>
@@ -299,7 +291,8 @@ export function Verify() {
             {/* Quick-test Demonstration Packs for Viva / Testing */}
             <div className="demo-packs-container">
               <p className="demo-packs-title">
-                <strong>Quick Demonstration Packs:</strong> Load pre-packaged test cases to verify instantly:
+                <strong>Quick Demonstration Packs:</strong> Load pre-packaged test cases to verify
+                instantly:
               </p>
               <div className="demo-packs-group">
                 <button
