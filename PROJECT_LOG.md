@@ -955,3 +955,15 @@ Checks: client 178 tests, ESLint, Prettier, `tsc`, `vite build` clean; axe-core 
 **Verification.** On the running stack through a real browser: leaving the page alone gave `VERIFIED` (11 of 11 stages), and altering it then accepting gave `DIGEST_MISMATCH` (10 of 11) with the changed paragraph named. Client: tsc, ESLint, Prettier, 197 tests (4 new), build.
 
 **Limits.** The attack is simulated by the page itself; it demonstrates detection, not a real extension. Needs the verifier service (port 8095) and Chromium.
+
+---
+
+## 30. Build record: a real attacker extension and a stored-records notice (2026-10-20)
+
+**D-70 `demo-extension/`: a real Chrome (Manifest V3) extension as the attacker.** Once armed (toolbar icon or its options page), a content script waits for the consent notice on the local demo site and, 1.5 s after it appears, rewrites the first sealed paragraph. It runs only on `localhost:5173` and `127.0.0.1:5173` at `/consent` and `/demo`. The page's own "Alter the page" button stays as a fallback. Install steps: `demo-extension/README.md`.
+
+**Verification.** Loaded into the installed Chrome through the DevTools protocol (current Chrome ignores `--load-extension`), armed through the extension's own control page, then the demo run with no click on the page's button: the paragraph changed by itself and the verifier returned `DIGEST_MISMATCH`. This used the real stack. It was run once, by hand-written script, and is not part of the automated suite.
+
+**D-71 Records notice on sign-in and sign-up.** A short note under both forms: choices are saved as signed evidence of what the browser displayed, and their fingerprint is added to an append-only log, so they cannot be quietly changed. Client: tsc, ESLint, Prettier, 198 tests, build clean.
+
+**Not done.** The extension is not packaged for the Chrome Web Store and was tested only in Chrome on Windows.

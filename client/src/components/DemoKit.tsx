@@ -56,7 +56,8 @@ export function DemoAttack({
       ) : (
         <p>
           Imagine malware or a browser extension rewriting the notice after it loaded. Press the
-          button to do that, or leave the page as it is and accept normally.
+          button to do that, arm the demo extension in this repository for a real one, or leave the
+          page as it is and accept normally.
         </p>
       )}
       <button

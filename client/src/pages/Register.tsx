@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FormField } from '../components/FormField';
 import { AuthLayout } from '../components/AuthLayout';
 import { GoogleSignIn } from '../components/GoogleSignIn';
+import { RecordsNotice } from '../components/RecordsNotice';
 import { api } from '../lib/api';
 import { validateRegistration } from '../lib/validation';
 import type { Errors } from '../lib/validation';
@@ -138,6 +139,7 @@ export function Register() {
           {submitting ? 'Creating account…' : 'Create account'}
         </button>
       </form>
+      <RecordsNotice />
       <div className="links">
         <span>
           Already registered? <Link to="/login">Sign in</Link>

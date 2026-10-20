@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "MRA demo: page rewriter",
+  "version": "1.0.0",
+  "description": "Demonstration only. Rewrites the consent notice after it loads so the verifier can be shown catching it. Works only on the local demo site.",
+  "permissions": ["storage"],
+  "options_page": "options.html",
+  "action": { "default_title": "MRA demo attack: off. Click to arm." },
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:5173/consent*",
+        "http://localhost:5173/demo*",
+        "http://127.0.0.1:5173/consent*",
+        "http://127.0.0.1:5173/demo*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MRA demo attack</title>
+    <style>
+      body { font: 16px/1.5 system-ui, sans-serif; max-width: 34rem; margin: 2rem auto; padding: 0 1rem; color: #14202b; }
+      button { font: inherit; padding: 10px 18px; border-radius: 8px; border: 1px solid #0b5d6b; background: #0b5d6b; color: #fff; cursor: pointer; }
+      button[aria-pressed="true"] { background: #b3261e; border-color: #b3261e; }
+    </style>
+  </head>
+  <body>
+    <h1>MRA demo attack</h1>
+    <p>When armed, the consent notice on the local demo site is rewritten a moment after it appears.</p>
+    <p id="state" role="status"></p>
+    <button id="toggle" type="button" aria-pressed="false">Arm the attack</button>
+    <script src="options.js"></script>
+  </body>
+</html>
