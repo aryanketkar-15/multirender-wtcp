@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Mark } from './Mark';
 import { checkRecordInLog } from '../lib/logProof';
+import { MerkleTreeView } from './MerkleTreeView';
 import type { LogCheck } from '../lib/logProof';
 
 interface Props {
@@ -9,6 +10,8 @@ interface Props {
   logLeafIndex: number | null;
   commitmentLeafIndex: number | null;
   packId?: string | null;
+  /** Run the log check as soon as the panel appears (the live demo does this). */
+  autoCheck?: boolean;
 }
 
 /** What happens after consent is recorded: the reference, a log check anyone can run, and a restart. */
@@ -18,6 +21,7 @@ export function RecordedPanel({
   logLeafIndex,
   commitmentLeafIndex,
   packId,
+  autoCheck = false,
 }: Props) {
   const [check, setCheck] = useState<LogCheck | 'running' | null>(null);
 
@@ -30,6 +34,11 @@ export function RecordedPanel({
       setCheck({ ok: false, steps: [], message: 'The check could not be completed.' });
     }
   }
+
+  useEffect(() => {
+    if (autoCheck) void run();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const targetPack = packId || 'honest_pack.zip';
 
@@ -106,6 +115,7 @@ export function RecordedPanel({
               </li>
             ))}
           </ul>
+          {check.tree ? <MerkleTreeView tree={check.tree} /> : null}
         </div>
       ) : null}
     </div>

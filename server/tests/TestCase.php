@@ -57,7 +57,8 @@ abstract class TestCase extends BaseTestCase
             $this->mailer,
             new KeyStore('test-k1', str_repeat("\x07", 32)),
             $google,
-            $googleClientId
+            // Tests never read the developer's .env: no client id passed means Google sign-in is off.
+            $googleClientId ?? ''
         );
     }
 

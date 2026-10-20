@@ -27,6 +27,8 @@ export interface LogCheck {
   ok: boolean;
   steps: Array<{ label: string; ok: boolean }>;
   message?: string;
+  /** What the tree picture draws: the walk the browser did and the root the log signed. */
+  tree?: { walk: InclusionWalk; signedRoot: string; leafIndex: number; treeSize: number };
 }
 
 const hex = (b: Uint8Array) => [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
@@ -54,17 +56,39 @@ export async function leafHashOf(canonical: string): Promise<string> {
   return hex(await sha(cat(Uint8Array.of(0), new TextEncoder().encode(canonical))));
 }
 
-/** RFC 9162 section 2.1.3.2. Returns true when the path leads from the leaf to `rootHex`. */
-export async function verifyInclusion(proof: InclusionProof, rootHex: string): Promise<boolean> {
+/** One level of the walk from a leaf to the root: the sibling the log supplied and the hash it produced. */
+export interface InclusionStep {
+  sibling: string;
+  /** Which side the log's sibling sits on, so the recomputed node sits on the other. */
+  side: 'left' | 'right';
+  hash: string;
+}
+
+export interface InclusionWalk {
+  leaf: string;
+  steps: InclusionStep[];
+  /** The hash reached at the top of the walk. */
+  root: string;
+  /** True when the path was exactly as long as the tree needs. */
+  complete: boolean;
+}
+
+/**
+ * RFC 9162 section 2.1.3.2, keeping every intermediate hash so it can be shown. Returns null for
+ * input that cannot be a proof (index outside the tree, or a path longer than the tree is deep).
+ */
+export async function walkInclusion(proof: InclusionProof): Promise<InclusionWalk | null> {
   let fn = proof.leaf_index;
   let sn = proof.tree_size - 1;
-  if (fn < 0 || fn > sn) return false;
+  if (fn < 0 || fn > sn) return null;
   let r: Uint8Array = unhex(proof.leaf_hash);
+  const steps: InclusionStep[] = [];
   for (const h of proof.path) {
     const p = unhex(h);
-    if (sn === 0) return false;
+    if (sn === 0) return null;
     if ((fn & 1) === 1 || fn === sn) {
       r = await nodeHash(p, r);
+      steps.push({ sibling: h, side: 'left', hash: hex(r) });
       if ((fn & 1) === 0) {
         while ((fn & 1) === 0 && fn !== 0) {
           fn >>= 1;
@@ -73,11 +97,18 @@ export async function verifyInclusion(proof: InclusionProof, rootHex: string): P
       }
     } else {
       r = await nodeHash(r, p);
+      steps.push({ sibling: h, side: 'right', hash: hex(r) });
     }
     fn >>= 1;
     sn >>= 1;
   }
-  return sn === 0 && hex(r) === rootHex;
+  return { leaf: proof.leaf_hash, steps, root: hex(r), complete: sn === 0 };
+}
+
+/** True when the path leads from the leaf to `rootHex`. */
+export async function verifyInclusion(proof: InclusionProof, rootHex: string): Promise<boolean> {
+  const walk = await walkInclusion(proof);
+  return walk !== null && walk.complete && walk.root === rootHex;
 }
 
 export async function checkRecordInLog(
@@ -99,9 +130,14 @@ export async function checkRecordInLog(
     (await leafHashOf(canonical)) === proof.leaf_hash,
   );
   step('The proof is for the signed tree head’s size', proof.tree_size === head.record.tree_size);
-  step(
-    'The proof leads to the signed tree head’s root',
-    await verifyInclusion(proof, head.record.root_hash.replace(/^sha256:/, '')),
-  );
-  return { ok: steps.every((s) => s.ok), steps };
+  const signedRoot = head.record.root_hash.replace(/^sha256:/, '');
+  step('The proof leads to the signed tree head’s root', await verifyInclusion(proof, signedRoot));
+  const walk = await walkInclusion(proof);
+  return {
+    ok: steps.every((s) => s.ok),
+    steps,
+    tree: walk
+      ? { walk, signedRoot, leafIndex: proof.leaf_index, treeSize: proof.tree_size }
+      : undefined,
+  };
 }
