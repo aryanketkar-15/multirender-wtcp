@@ -1,5 +1,7 @@
 # MRA Design System Specification
 
+> **Updated 2026-10-20.** The interface is a light theme again (an interim dark theme was replaced as too heavy for an audit product). The values in `client/src/styles/tokens.css` are authoritative; this table is a summary. Contrast was checked by an axe-core audit, not only by calculation (PROJECT_LOG section 26).
+
 **Project:** PS-3 Mutual Render Attestation  
 **Module:** Milestone 7.1 — Design System & Custom Assets  
 **Group:** TY-A9 · Department of Computer Engineering · VIT Pune  
@@ -27,7 +29,7 @@ All text/background combinations meet or exceed WCAG AA standards (minimum contr
 |---|---|---|---|
 | `--ink` | `hsl(210, 32%, 12%)` (`#14202b`) | Primary body text | 12.1:1 on `--paper` (AAA) |
 | `--ink-soft` | `hsl(210, 20%, 36%)` (`#46586a`) | Secondary text, captions | 5.1:1 on `--paper` (AA) |
-| `--paper` | `hsl(43, 20%, 95%)` (`#f6f4ef`) | Page background | — |
+| `--paper` | `#f5f7fa` | Page background (cool grey; the earlier warm cream was dropped as a default) | — |
 | `--card` | `hsl(0, 0%, 100%)` (`#ffffff`) | Card surface background | — |
 | `--brand` | `hsl(188, 80%, 23%)` (`#0b5c6b`) | Primary buttons, brand headers | 7.3:1 on `#ffffff` (AAA) |
 | `--brand-dark` | `hsl(188, 85%, 17%)` | Hover state for buttons | 9.8:1 on `#ffffff` (AAA) |
@@ -37,7 +39,7 @@ All text/background combinations meet or exceed WCAG AA standards (minimum contr
 | `--danger` | `hsl(358, 60%, 40%)` (`#a4262c`) | Attack detected, failure states | 5.6:1 on `#ffffff` (AA) |
 | `--danger-soft`| `hsl(358, 80%, 96%)` (`#fbe9ea`) | Failure notification background | — |
 | `--warn` | `hsl(36, 90%, 40%)` | Tamper alerts, warnings | 4.8:1 on `#ffffff` (AA) |
-| `--line` | `hsl(40, 22%, 84%)` (`#d9d4c8`) | Borders, dividers | 3.2:1 against surface |
+| `--line` | `#d8dee6` | Borders, dividers | 1.4:1 (decorative; controls use `--line-strong`) |
 
 ### 2.2 Typography Scale
 

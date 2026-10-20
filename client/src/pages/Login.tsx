@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FormField } from '../components/FormField';
-import { Layout } from '../components/Layout';
+import { AuthLayout } from '../components/AuthLayout';
 import { useAuth } from '../lib/auth';
 import { MESSAGES, validEmail } from '../lib/validation';
 import type { Errors } from '../lib/validation';
@@ -50,54 +50,59 @@ export function Login() {
   }
 
   return (
-    <Layout>
-      <div className="card">
-        <h1>Sign in</h1>
-        <p className="lede">Welcome back.</p>
-        {status === 'error' ? (
-          <div className="banner warn" role="alert">
-            We could not reach the server. Check your connection and reload the page.
-          </div>
-        ) : null}
-        {banner ? (
-          <div className="banner error" role="alert">
-            {banner.text}{' '}
-            {banner.verify ? (
-              <Link to="/verify" state={{ email: email.trim() }}>
-                Enter your code
-              </Link>
-            ) : null}
-          </div>
-        ) : null}
-        <form onSubmit={onSubmit} noValidate>
-          <FormField
-            label="Email"
-            name="email"
-            type="email"
-            autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={errors.email}
-          />
-          <FormField
-            label="Password"
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            error={errors.password}
-          />
-          <button type="submit" className="btn block" disabled={submitting || status === 'loading'}>
-            {submitting ? <span className="spinner" aria-hidden="true" /> : null}
-            {submitting ? 'Signing in…' : 'Sign in'}
-          </button>
-        </form>
-        <div className="links">
-          <Link to="/forgot-password">Forgot your password?</Link>
-          <Link to="/register">Create an account</Link>
+    <AuthLayout
+      title="Sign in"
+      lede="Welcome back."
+      asideTitle="Evidence you can check"
+      asidePoints={[
+        'Record your consent as signed evidence.',
+        'Download an evidence pack for any record.',
+        'Check a pack in the independent verifier.',
+      ]}
+    >
+      {status === 'error' ? (
+        <div className="banner warn" role="alert">
+          We could not reach the server. Check your connection and reload the page.
         </div>
+      ) : null}
+      {banner ? (
+        <div className="banner error" role="alert">
+          {banner.text}{' '}
+          {banner.verify ? (
+            <Link to="/verify" state={{ email: email.trim() }}>
+              Enter your code
+            </Link>
+          ) : null}
+        </div>
+      ) : null}
+      <form onSubmit={onSubmit} noValidate>
+        <FormField
+          label="Email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          error={errors.email}
+        />
+        <FormField
+          label="Password"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          error={errors.password}
+        />
+        <button type="submit" className="btn block" disabled={submitting || status === 'loading'}>
+          {submitting ? <span className="spinner" aria-hidden="true" /> : null}
+          {submitting ? 'Signing in…' : 'Sign in'}
+        </button>
+      </form>
+      <div className="links">
+        <Link to="/forgot-password">Forgot your password?</Link>
+        <Link to="/register">Create an account</Link>
       </div>
-    </Layout>
+    </AuthLayout>
   );
 }

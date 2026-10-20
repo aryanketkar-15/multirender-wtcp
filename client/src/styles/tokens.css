@@ -1,78 +1,77 @@
 /**
- * MRA Design System — tokens.css
+ * MRA design tokens.
  *
- * Swiss Cryptographic Precision (Trust & Authority + Technical Minimalism)
- * Hand-authored design tokens generated and verified using Impeccable and UI/UX Pro Max.
+ * A light, restrained interface for a trust and audit product: white surfaces on a cool grey canvas,
+ * dark ink, one deep-teal accent (the same hue the sealed consent notice uses for its own Accept
+ * button, so the notice looks native on the page), and three status colours used only for verdicts.
  *
- * Color Architecture:
- * - Palette: Deep Vault Slate (#0A0F1D) + Institutional Navy (#131B2E) + Cryptographic Emerald (#10B981) + Protocol Cobalt (#3B82F6)
- * - Contrast: Strict WCAG 2.1 AA compliance across all foreground/background pairings (minimum 4.5:1, typical 11:1).
- *
- * Typography:
- * - Sans: Precision system UI stack (Inter, San Francisco, Segoe UI, Roboto)
- * - Monospace: Cryptographic tabular figures for hashes, keys, hex nonces, and AST nodes
- *
- * Layout & Spacing:
- * - 4-point geometric scale (4, 8, 16, 24, 40, 64px) with high-density tabular alignments
+ * Every text and background pair below was chosen to meet WCAG AA (4.5:1 for text) and is checked by
+ * the axe-core audit described in PROJECT_LOG section 26. System fonts only: no download, no licence.
+ * Hand-written; no template or design library.
  */
 
 :root {
-  /* ── Core Surfaces & Canvas ───────────────────────────────────── */
-  --paper: #0a0f1d; /* Deep void canvas */
-  --bg-canvas: #0a0f1d;
-  --card: #131b2e; /* Layer 1 card surface */
-  --bg-card: #131b2e;
-  --card-elevated: #1a243b; /* Layer 2 elevated surface */
-  --bg-elevated: #1a243b;
-  --bg-hover: #1f2b45; /* Interactive hover surface */
-  --bg-input: #0f1728; /* Form input background */
+  /* Surfaces */
+  --paper: #f5f7fa;
+  --bg-canvas: #f5f7fa;
+  --card: #ffffff;
+  --bg-card: #ffffff;
+  --card-elevated: #f0f3f7;
+  --bg-elevated: #f0f3f7;
+  --bg-hover: #e9eef3;
+  --bg-input: #ffffff;
+  --code-bg: #eef2f6;
+  --tint: rgba(20, 32, 43, 0.04);
+  --tint-strong: rgba(20, 32, 43, 0.08);
 
-  /* ── Typography & Ink ────────────────────────────────────────── */
-  --ink: #f8fafc; /* Primary high-contrast text (14:1) */
-  --text-primary: #f8fafc;
-  --ink-soft: #94a3b8; /* Secondary legible slate (6.5:1) */
-  --text-secondary: #94a3b8;
-  --ink-muted: #8190a8; /* Tertiary metadata & hints: 6.0:1 on canvas, 4.8:1 on elevated surfaces */
-  --text-muted: #8190a8;
+  /* Ink: 15.3:1, 7.0:1 and 5.2:1 on white */
+  --ink: #14202b;
+  --text-primary: #14202b;
+  --ink-soft: #46586a;
+  --text-secondary: #46586a;
+  --ink-muted: #5b6b7d;
+  --text-muted: #5b6b7d;
 
-  /* ── Hairline Structural Borders ─────────────────────────────── */
-  --line: rgba(255, 255, 255, 0.09); /* Hairline card border */
-  --line-soft: rgba(255, 255, 255, 0.05); /* Subtle inner divider */
-  --line-strong: rgba(255, 255, 255, 0.18); /* Focus & active border */
+  /* Lines */
+  --line: #d8dee6;
+  --line-soft: #e6eaef;
+  --line-strong: #b3bfcb;
 
-  /* ── Brand & Protocol Accents (Cobalt) ───────────────────────── */
-  --brand: #3b82f6; /* Protocol cobalt */
-  --brand-dark: #2563eb; /* Hover / active state */
+  /* Accent: deep teal. White on the solid fill is 7.3:1; the accent as text on white is 7.3:1 */
+  --brand: #0b5c6b;
+  --brand-dark: #084552;
   --brand-ink: #ffffff;
-  /* Solid button fill. Cobalt #3b82f6 gives white text only 3.67:1, below the 4.5:1 AA minimum,
-     so filled buttons use a darker step: #2563eb gives 5.17:1, #1d4ed8 gives 6.7:1. */
-  --brand-solid: #2563eb;
-  --brand-solid-hover: #1d4ed8;
-  --brand-soft: rgba(59, 130, 246, 0.14); /* Ambient soft wash */
-  --brand-border: rgba(59, 130, 246, 0.35);
+  --brand-solid: #0b5c6b;
+  --brand-solid-hover: #084552;
+  --brand-text: #0b5c6b;
+  --brand-soft: #e1f0f3;
+  --brand-border: #a9ccd3;
 
-  /* ── Cryptographic Verdict: VERIFIED (Emerald) ────────────────── */
-  --ok: #10b981; /* Precision emerald */
-  --ok-dark: #059669;
+  /* Verdict: verified */
+  --ok: #1b6b3a;
+  --ok-dark: #14532d;
   --ok-ink: #ffffff;
-  --ok-soft: rgba(16, 185, 129, 0.12);
-  --ok-border: rgba(16, 185, 129, 0.3);
+  --ok-text: #14602f;
+  --ok-soft: #e7f4ec;
+  --ok-border: #a8d5b8;
 
-  /* ── Cryptographic Verdict: MISMATCH / TAMPER (Crimson) ───────── */
-  --danger: #ef4444; /* Adversarial alert red */
-  --danger-dark: #dc2626;
+  /* Verdict: mismatch or tamper */
+  --danger: #a4262c;
+  --danger-dark: #7f1d22;
   --danger-ink: #ffffff;
-  --danger-soft: rgba(239, 68, 68, 0.12);
-  --danger-border: rgba(239, 68, 68, 0.3);
+  --danger-text: #8f1f25;
+  --danger-soft: #fbeaea;
+  --danger-border: #e2a9ac;
 
-  /* ── Warning & Nonce States (Amber) ──────────────────────────── */
-  --warn: #f59e0b; /* Warning / expiration amber */
-  --warn-dark: #d97706;
+  /* Verdict: warning or invalid */
+  --warn: #9a6200;
+  --warn-dark: #7a4f00;
   --warn-ink: #ffffff;
-  --warn-soft: rgba(245, 158, 11, 0.12);
-  --warn-border: rgba(245, 158, 11, 0.3);
+  --warn-text: #7a4f00;
+  --warn-soft: #fdf3dc;
+  --warn-border: #e6c777;
 
-  /* ── Spacing Scale (4-point base) ────────────────────────────── */
+  /* Space (4-point base) */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 16px;
@@ -80,17 +79,17 @@
   --space-5: 40px;
   --space-6: 64px;
 
-  /* ── Typography Scale ────────────────────────────────────────── */
-  --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
-  --mono: ui-monospace, 'Cascadia Code', 'Fira Code', 'JetBrains Mono', Menlo, Consolas, monospace;
+  /* Type */
+  --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
 
-  --text-xs: 0.75rem; /* 12px — badges, timestamps, tags */
-  --text-sm: 0.875rem; /* 14px — labels, table cells, hints */
-  --text-base: 1rem; /* 16px — standard body text */
-  --text-lg: 1.125rem; /* 18px — card section headers */
-  --text-xl: 1.25rem; /* 20px — modal & panel titles */
-  --text-2xl: 1.625rem; /* 26px — page titles */
-  --text-3xl: 2.25rem; /* 36px — hero display titles */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.625rem;
+  --text-3xl: 2.25rem;
 
   --leading-tight: 1.2;
   --leading-normal: 1.5;
@@ -101,20 +100,20 @@
   --weight-semibold: 600;
   --weight-bold: 700;
 
-  /* ── Geometry & Radii ────────────────────────────────────────── */
+  /* Shape */
   --radius-sm: 4px;
-  --radius: 8px; /* Standard card & input radius */
+  --radius: 8px;
   --radius-md: 8px;
-  --radius-lg: 12px; /* Modal & container radius */
+  --radius-lg: 12px;
   --radius-pill: 9999px;
 
-  /* ── Motion & Animation (Gated on prefers-reduced-motion) ──────── */
+  /* Motion (gated on prefers-reduced-motion where used) */
   --duration-fast: 120ms;
   --duration-normal: 200ms;
   --duration-slow: 320ms;
-  --ease-default: cubic-bezier(0.16, 1, 0.3, 1); /* Apple / Radix spring-like ease */
+  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* ── Z-index Hierarchy ───────────────────────────────────────── */
+  /* Layers */
   --z-base: 0;
   --z-raised: 10;
   --z-header: 50;
@@ -122,8 +121,8 @@
   --z-modal: 200;
   --z-toast: 300;
 
-  /* ── Cryptographic Depth & Hairline Shadows ───────────────────── */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--line);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--line);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--line-strong);
+  /* Elevation: surfaces at rest have none (a line, not a shadow); only overlays lift */
+  --shadow-sm: 0 0 0 1px var(--line);
+  --shadow-md: 0 6px 18px rgba(20, 32, 43, 0.12);
+  --shadow-lg: 0 12px 32px rgba(20, 32, 43, 0.16);
 }

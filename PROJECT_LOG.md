@@ -899,3 +899,11 @@ Found on the branch: filled buttons white on `#3b82f6` (3.67:1, needs 4.5:1), mu
 ### 26.6 Still open
 
 Safari/WebKit and Firefox through the application; coverage for attestor, verifier and server; a manual accessibility review; a physical-phone measurement; the findings O-15 to O-18.
+
+### 26.7 Light theme, landing page, sign-in and sign-up (same day, at the user's request)
+
+The interim dark theme was replaced by a restrained light one: white surfaces on a cool grey canvas, dark ink, one deep-teal accent (the hue the sealed consent notice already uses for its Accept button, so the notice looks native), and status colours reserved for verdicts. All colours are tokens (`client/src/styles/tokens.css`); hard-coded dark-theme colours in the stylesheet were converted. A warm cream ground was avoided on purpose (it is a listed default).
+
+- **Landing page:** two columns where the content has two parts (headline and a drawn diagram of the four parties; section heading and its list), so no half of a row is empty. The diagram (`components/FlowDiagram.tsx`) is original inline SVG with a text alternative.
+- **Sign in and sign up:** a colour panel saying what the account is for, beside the form (`components/AuthLayout.tsx`). Field labels, ids and behaviour are unchanged.
+- **Checks after the change:** client 176 tests, ESLint, Prettier, `tsc` and `vite build` clean; axe-core 0 violations in 24 page states; taste-skill lint 0 failures; end to end 21 of 21 (honest) and 20 of 20 (page altered) in bundled Chromium, and 20 of 20 in Chrome 155 and Edge 155; the honest pack `VERIFIED` and the altered page `DIGEST_MISMATCH` naming the paragraph. The theme touches colours that feed the digest's contrast bucket, which is why the last two were re-run rather than assumed.

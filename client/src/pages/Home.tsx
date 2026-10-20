@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { FlowDiagram } from '../components/FlowDiagram';
 import { Layout } from '../components/Layout';
 import { Mark } from '../components/Mark';
 import { useAuth } from '../lib/auth';
@@ -67,58 +68,64 @@ export function Home() {
     <Layout wide>
       <div className="home-container">
         <section className="home-hero" aria-labelledby="home-hero-title">
-          <h1 id="home-hero-title" className="home-hero-title">
-            Mutual Render Attestation
-          </h1>
+          <div className="home-hero-copy">
+            <h1 id="home-hero-title" className="home-hero-title">
+              Mutual Render Attestation
+            </h1>
 
-          <p className="home-hero-lede">
-            Evidence, from both sides, of what a consent screen showed. The server commits to the
-            notice before you act, your browser attests to what it displayed when you did, and both
-            records are added to an append-only log that anyone can check.
-          </p>
+            <p className="home-hero-lede">
+              Evidence, from both sides, of what a consent screen showed. The server commits to the
+              notice before you act, your browser attests to what it displayed when you did, and
+              both records are added to an append-only log that anyone can check.
+            </p>
 
-          <div className="home-hero-actions">
-            {user ? (
-              <>
-                <Link to="/consent" className="btn primary" id="hero-consent-btn">
-                  Open Consent Notice
-                </Link>
-                <Link to="/verifier" className="btn secondary" id="hero-verifier-btn">
-                  Independent Verifier
-                </Link>
-                <Link to="/packs" className="btn secondary" id="hero-packs-btn">
-                  My Evidence Packs
-                </Link>
-                {user.admin && (
-                  <Link to="/admin/consent" className="btn secondary" id="hero-admin-btn">
-                    Edit Consent Notice (Admin)
+            <div className="home-hero-actions">
+              {user ? (
+                <>
+                  <Link to="/consent" className="btn primary" id="hero-consent-btn">
+                    Open Consent Notice
                   </Link>
-                )}
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="btn primary" id="hero-signin-btn">
-                  Try the Consent Flow
-                </Link>
-                <Link to="/verifier" className="btn secondary" id="hero-verifier-btn">
-                  Independent Verifier
-                </Link>
-                <Link to="/register" className="btn secondary" id="hero-register-btn">
-                  Create Demo Account
-                </Link>
-              </>
+                  <Link to="/verifier" className="btn secondary" id="hero-verifier-btn">
+                    Independent Verifier
+                  </Link>
+                  <Link to="/packs" className="btn secondary" id="hero-packs-btn">
+                    My Evidence Packs
+                  </Link>
+                  {user.admin && (
+                    <Link to="/admin/consent" className="btn secondary" id="hero-admin-btn">
+                      Edit Consent Notice (Admin)
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <>
+                  <Link to="/login" className="btn primary" id="hero-signin-btn">
+                    Try the Consent Flow
+                  </Link>
+                  <Link to="/verifier" className="btn secondary" id="hero-verifier-btn">
+                    Independent Verifier
+                  </Link>
+                  <Link to="/register" className="btn secondary" id="hero-register-btn">
+                    Create Demo Account
+                  </Link>
+                </>
+              )}
+            </div>
+
+            {user && (
+              <p className="home-signed-in-note">
+                Signed in as <strong>{user.email}</strong> ({user.name}).
+              </p>
             )}
           </div>
-
-          {user && (
-            <p className="home-signed-in-note">
-              Signed in as <strong>{user.email}</strong> ({user.name}).
-            </p>
-          )}
+          <FlowDiagram />
         </section>
 
-        <section className="home-section" aria-labelledby="architecture-title">
-          <h2 id="architecture-title">How it works</h2>
+        <section className="home-section split" aria-labelledby="architecture-title">
+          <div className="split-head">
+            <h2 id="architecture-title">How it works</h2>
+            <p>Four steps, from the notice being served to someone else checking the record.</p>
+          </div>
           <ol className="steps">
             {STEPS.map((s) => (
               <li key={s.title} className="step">
@@ -158,8 +165,18 @@ export function Home() {
           </div>
         </section>
 
-        <section className="home-section" aria-labelledby="scenarios-title">
-          <h2 id="scenarios-title">Three cases to try in the verifier</h2>
+        <section className="home-section split" aria-labelledby="scenarios-title">
+          <div className="split-head">
+            <h2 id="scenarios-title">Three cases to try in the verifier</h2>
+            <p>
+              The packs are real output of this system. Load one on the verifier page and run it.
+            </p>
+            <p>
+              <Link to="/verifier" className="btn primary">
+                Open the verifier
+              </Link>
+            </p>
+          </div>
           <ul className="scenarios">
             {SCENARIOS.map((s) => (
               <li key={s.title} className="scenario">
@@ -171,11 +188,6 @@ export function Home() {
               </li>
             ))}
           </ul>
-          <p>
-            <Link to="/verifier" className="btn primary">
-              Open the verifier
-            </Link>
-          </p>
         </section>
 
         <footer className="home-academic-footer">
