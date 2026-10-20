@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { CriticalRegion } from '../components/CriticalRegion';
 import type { ConsentAction } from '../components/CriticalRegion';
+import {
+  DemoAttack,
+  DemoSteps,
+  DemoVerification,
+  alterSealedParagraph,
+} from '../components/DemoKit';
 import { EvidencePanel } from '../components/EvidencePanel';
 import { RecordedPanel } from '../components/RecordedPanel';
 import { Layout } from '../components/Layout';
@@ -46,8 +52,9 @@ function describe(status: number): string {
   return 'We could not load the consent notice. Please try again.';
 }
 
-export function Consent() {
+function ConsentFlow({ demo }: { demo: boolean }) {
   const [state, setState] = useState<State>({ kind: 'loading' });
+  const [altered, setAltered] = useState(false);
   const loaded = useRef<Loaded | null>(null);
   const pending = useRef<{
     action: ConsentAction;
@@ -195,7 +202,20 @@ export function Consent() {
 
   return (
     <Layout>
-      <h1>Consent</h1>
+      <h1>{demo ? 'Live demo' : 'Consent'}</h1>
+      {demo ? (
+        <DemoSteps
+          current={
+            state.kind === 'recorded'
+              ? 4
+              : state.kind === 'submitting'
+                ? 3
+                : state.kind === 'ready'
+                  ? 2
+                  : 1
+          }
+        />
+      ) : null}
       {state.kind === 'loading' ? (
         <div className="empty" role="status">
           <span className="spinner" aria-hidden="true" /> Preparing your consent notice…
@@ -225,6 +245,13 @@ export function Consent() {
             onAction={act}
             locked={regionState.kind !== 'ready'}
           />
+          {demo ? (
+            <DemoAttack
+              altered={altered}
+              disabled={regionState.kind !== 'ready'}
+              onAlter={() => setAltered(alterSealedParagraph())}
+            />
+          ) : null}
           <EvidencePanel attestor={regionState.attestor} onFailure={attestationFailed} />
           {regionState.kind === 'submitting' ? (
             <div className="banner warn" role="status">
@@ -239,6 +266,9 @@ export function Consent() {
               commitmentLeafIndex={regionState.commitmentLeafIndex}
               packId={regionState.packId}
             />
+          ) : null}
+          {demo && regionState.kind === 'recorded' ? (
+            <DemoVerification packId={regionState.packId} />
           ) : null}
           {regionState.kind === 'failed' ? (
             <div className="banner error" role="alert">
@@ -258,4 +288,13 @@ export function Consent() {
       ) : null}
     </Layout>
   );
+}
+
+export function Consent() {
+  return <ConsentFlow demo={false} />;
+}
+
+/** The same real flow with the presenter's controls and an automatic independent check. */
+export function Demo() {
+  return <ConsentFlow demo />;
 }

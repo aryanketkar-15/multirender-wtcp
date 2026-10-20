@@ -4,7 +4,7 @@ import { ErrorBoundary } from './components/ErrorBoundary';
 import { RequireAuth } from './components/RequireAuth';
 import { AuthProvider } from './lib/auth';
 import { AdminConsent } from './pages/AdminConsent';
-import { Consent } from './pages/Consent';
+import { Consent, Demo } from './pages/Consent';
 import { ForgotPassword } from './pages/ForgotPassword';
 import { Login } from './pages/Login';
 import { MyPacks } from './pages/MyPacks';
@@ -18,6 +18,7 @@ import { Home } from './pages/Home';
 const TITLES: Record<string, string> = {
   '/': 'Mutual Render Attestation',
   '/consent': 'Consent',
+  '/demo': 'Live demo',
   '/packs': 'My evidence packs',
   '/verifier': 'Independent verifier',
   '/verify-pack': 'Independent verifier',
@@ -69,6 +70,16 @@ export function App() {
                 <RequireAuth>
                   <ErrorBoundary>
                     <Consent />
+                  </ErrorBoundary>
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/demo"
+              element={
+                <RequireAuth>
+                  <ErrorBoundary>
+                    <Demo />
                   </ErrorBoundary>
                 </RequireAuth>
               }

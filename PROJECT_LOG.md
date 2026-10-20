@@ -945,3 +945,13 @@ Checks: client 178 tests, ESLint, Prettier, `tsc`, `vite build` clean; axe-core 
 **Verification.** Client: tsc, ESLint, Prettier, 193 tests (8 new for the sidebar), `vite build` clean. Axe-core on the new layout: 0 violations, no overflow at 375 px. Checked visually expanded, collapsed, phone and open drawer.
 
 **Not done.** The committed `screenshots/` still show the old top bar and need regenerating.
+
+---
+
+## 29. Build record: live demo page (2026-10-20)
+
+**D-69 `/demo`: the real consent flow with a presenter's attack and an automatic check.** Signed-in users get four visible steps: open the notice, optionally press "Alter the page" (rewrites the first sealed paragraph in the browser after load, the case the system exists to catch), accept, then the page downloads the pack it just created and sends it to the independent verifier, showing the verdict, the node diff and the 11 stages in place. It reuses the real consent code path (`ConsentFlow`); `/consent` is unchanged. No fixtures are used.
+
+**Verification.** On the running stack through a real browser: leaving the page alone gave `VERIFIED` (11 of 11 stages), and altering it then accepting gave `DIGEST_MISMATCH` (10 of 11) with the changed paragraph named. Client: tsc, ESLint, Prettier, 197 tests (4 new), build.
+
+**Limits.** The attack is simulated by the page itself; it demonstrates detection, not a real extension. Needs the verifier service (port 8095) and Chromium.

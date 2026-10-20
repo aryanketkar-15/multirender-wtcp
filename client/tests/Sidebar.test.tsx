@@ -51,7 +51,7 @@ describe('sidebar navigation', () => {
       within(nav)
         .getAllByRole('link')
         .map((l) => l.textContent),
-    ).toEqual(['Home', 'Consent', 'Evidence packs', 'Verifier']);
+    ).toEqual(['Home', 'Consent', 'Live demo', 'Evidence packs', 'Verifier']);
     expect(screen.getByText('Asha Verma')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Sign out' })).toBeInTheDocument();
     unmount();
